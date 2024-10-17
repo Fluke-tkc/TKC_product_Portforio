@@ -21,13 +21,13 @@
   margin-right: 20%;
 }
 
-.circleWrapper {
+/* .circleWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   transition: transform 0.3s;
-  position: relative; /* ทำให้ซ้อนเนื้อหาได้ */
-}
+  position: relative; 
+} */
 
 .circleButton {
   width: 200px;
@@ -64,11 +64,11 @@
   transition: opacity 0.3s;
   text-align: center;
 }
-
+/* 
 .circleButton:hover img {
-  opacity: 0; /* ซ่อนรูปภาพเมื่อ hover */
+  opacity: 0; 
 }
 
 .circleButton:hover span {
-  opacity: 1; /* แสดงข้อความเมื่อ hover */
-}
+  opacity: 1; 
+} */
