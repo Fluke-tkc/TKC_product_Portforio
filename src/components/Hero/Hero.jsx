@@ -11,14 +11,13 @@ export const Hero = () => {
     { name: "Cyber Security", imgSrc: "/assets/image/cybersecurity.jpg" },
     { name: "Software Development", imgSrc: "/assets/image/softwaredevelopment.jpg" },
     { name: "Green Solution", imgSrc: "/assets/image/greensolution.jpg" },
-    { name: "Telecom and Network Infrastructure", imgSrc: "/assets/image/Telecom and Network Infrastructure.jpg" },
+    { name: "Telecom and Network Infrastructure", imgSrc: "/assets/image/Telecom-and-Network-Infrastructure.jpg" }, // เปลี่ยนชื่อไฟล์เพื่อหลีกเลี่ยงช่องว่าง
     { name: "ICT Infrastructure", imgSrc: "/assets/image/ICTInfrastructure.jpg" },
-    { name: "Public Safety", imgSrc: "/assets/image/public safety.jpg" },
+    { name: "Public Safety", imgSrc: "/assets/image/public-safety.jpg" }, // เปลี่ยนชื่อไฟล์เพื่อหลีกเลี่ยงช่องว่าง
     { name: "Logistics", imgSrc: "/assets/image/Logistics.jpg" },
     { name: "Edutech", imgSrc: "/assets/image/Edutech.jpg" },
-    { name: "Autonomous System", imgSrc: "/assets/image/Autonomous System.jpg" }
+    { name: "Autonomous System", imgSrc: "/assets/image/Autonomous-System.jpg" } // เปลี่ยนชื่อไฟล์เพื่อหลีกเลี่ยงช่องว่าง
   ];
-
   const handleButtonClick = (topic) => {
     if (topic.name === "Smart Solutions") {
       navigate("/smart-solutions"); // นำทางไปยังหน้า SmartSolutions.jsx

@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  base: '/', // หรือ '/TKC_product_Portforio/' ถ้าใช้ GitHub Pages
+  base: '/', // หรือไม่ต้องตั้งค่า base ก็ได้
   plugins: [react()],
   css: {
     modules: {
