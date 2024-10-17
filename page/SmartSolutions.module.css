@@ -1,50 +1,78 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    background-image: url("/assets/nav/services-solutions.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-  }
-  
-  /* เพิ่มสไตล์สำหรับหัวข้อ */
-  .header {
-    position: absolute;
-    top: 80px;
-    left: 80px;
-    font-size: 24px;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .gridContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
-    width: 80%;
-    height: auto;
-  }
-  
-  /* ปุ่มสี่เหลี่ยม */
-  button {
-    width: 300px; /* กำหนดขนาดของปุ่ม */
-    height: 300px;
-    background-color: #007bff; /* สีพื้นหลัง */
-    color: #fff; /* สีของข้อความ */
-    border: none; /* เอาเส้นขอบออก */
-    cursor: pointer; /* เปลี่ยน cursor เมื่อ hover */
-    font-size: 14px; /* ขนาดตัวอักษร */
-    transition: transform 0.3s, background-color 0.3s; /* เพิ่มเอฟเฟค */
-  }
-  
-  button:hover {
-    background-color: #0056b3; /* สีเมื่อ hover */
-    transform: scale(1.1); /* ขยายขนาดเมื่อ hover */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/assets/nav/services-solutions.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* เพิ่มสไตล์สำหรับหัวข้อ */
+.header {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+}
+
+.gridContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin: 20px;
+  flex-wrap: wrap;
+}
+
+/* ปรับสไตล์ของปุ่มให้เป็นสี่เหลี่ยม */
+button {
+  width: 150px;
+  height: 150px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+/* สไตล์สำหรับรูปภาพในปุ่ม */
+button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s;
+}
+
+/* ซ่อนรูปภาพเมื่อ hover */
+button:hover img {
+  opacity: 0;
+}
+
+/* สไตล์สำหรับข้อความ */
+button span {
+  position: absolute;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.3s;
+  text-align: center;
+}
+
+/* แสดงข้อความเมื่อ hover */
+button:hover span {
+  opacity: 1;
+}

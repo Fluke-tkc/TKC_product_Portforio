@@ -7,16 +7,16 @@ export const Hero = () => {
 
   const topics = [
     { name: "Smart Solutions", imgSrc: "/assets/image/AI.jpg" },
-    { name: "Cloud Solution", imgSrc: "/assets/image/cloud-solution.png" },
-    { name: "Cyber Security", imgSrc: "/assets/image/cyber-security.png" },
-    { name: "Software Development", imgSrc: "/assets/image/software-development.png" },
-    { name: "Green Solution", imgSrc: "/assets/image/green-solution.png" },
-    { name: "Telecom and Network Infrastructure", imgSrc: "/assets/image/telecom.png" },
-    { name: "ICT Infrastructure", imgSrc: "/assets/image/ict.png" },
-    { name: "Public Safety", imgSrc: "/assets/image/public-safety.png" },
-    { name: "Logistics", imgSrc: "/assets/image/logistics.png" },
-    { name: "Edutech", imgSrc: "/assets/image/edutech.png" },
-    { name: "Autonomous System", imgSrc: "/assets/image/autonomous-system.png" }
+    { name: "Cloud Solution", imgSrc: "/assets/image/AI.jpg" },
+    { name: "Cyber Security", imgSrc: "/assets/image/AI.jpg" },
+    { name: "Software Development", imgSrc: "/assets/image/AI.jpg" },
+    { name: "Green Solution", imgSrc: "/assets/image/AI.jpg" },
+    { name: "Telecom and Network Infrastructure", imgSrc: "/assets/image/AI.jpg" },
+    { name: "ICT Infrastructure", imgSrc: "/assets/image/AI.jpg" },
+    { name: "Public Safety", imgSrc: "/assets/image/AI.jpg" },
+    { name: "Logistics", imgSrc: "/assets/image/AI.jpg" },
+    { name: "Edutech", imgSrc: "/assets/image/AI.jpg" },
+    { name: "Autonomous System", imgSrc: "/assets/image/AI.jpg" }
   ];
 
   const handleButtonClick = (topic) => {
