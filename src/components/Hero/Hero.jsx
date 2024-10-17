@@ -6,17 +6,17 @@ export const Hero = () => {
   const navigate = useNavigate(); // ใช้ navigate
 
   const topics = [
-    { name: "Smart Solutions", imgSrc: "/assets/image/AI.jpg" },
-    { name: "Cloud Solution", imgSrc: "/assets/image/AI.jpg" },
-    { name: "Cyber Security", imgSrc: "/assets/image/AI.jpg" },
-    { name: "Software Development", imgSrc: "/assets/image/AI.jpg" },
-    { name: "Green Solution", imgSrc: "/assets/image/AI.jpg" },
-    { name: "Telecom and Network Infrastructure", imgSrc: "/assets/image/AI.jpg" },
-    { name: "ICT Infrastructure", imgSrc: "/assets/image/AI.jpg" },
+    { name: "Smart Solutions", imgSrc: "./assets/image/smartsolution.jpg" },
+    { name: "Cloud Solution", imgSrc: "./assets/image/cloudsolution.jpg" },
+    { name: "Cyber Security", imgSrc: "./assets/image/cybersecurity.jpg" },
+    { name: "Software Development", imgSrc: "./assets/image/softwaredevelopment.jpg" },
+    { name: "Green Solution", imgSrc: "./assets/image/greensolution.jpg" },
+    { name: "Telecom and Network Infrastructure", imgSrc: "./assets/image/AI.jpg" },
+    { name: "ICT Infrastructure", imgSrc: "./assets/image/AI.jpg" },
     { name: "Public Safety", imgSrc: "/assets/image/AI.jpg" },
-    { name: "Logistics", imgSrc: "/assets/image/AI.jpg" },
-    { name: "Edutech", imgSrc: "/assets/image/AI.jpg" },
-    { name: "Autonomous System", imgSrc: "/assets/image/AI.jpg" }
+    { name: "Logistics", imgSrc: "./assets/image/Logistics.jpg" },
+    { name: "Edutech", imgSrc: "./assets/image/Edutech.jpg" },
+    { name: "Autonomous System", imgSrc: "./assets/image/AI.jpg" }
   ];
 
   const handleButtonClick = (topic) => {
