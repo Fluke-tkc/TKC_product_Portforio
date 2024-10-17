@@ -3,17 +3,17 @@ import styles from "./SmartSolutions.module.css";
 
 export const SmartSolutions = () => {
   const buttons1 = [
-    { text: "AI", imgSrc: "/assets/image/AI.jpg" },
-    { text: "Big Data", imgSrc: "/assets/image/bigdata.jpg" },
-    { text: "Computer Vision", imgSrc: "/assets/image/computervision.jpg" },
+    { text: "AI", imgSrc: "/image/AI.jpg" },
+    { text: "Big Data", imgSrc: "/image/bigdata.jpg" },
+    { text: "Computer Vision", imgSrc: "/image/computervision.jpg" },
   ];
   const buttons2 = [
-    { text: "AR/VR/XR", imgSrc: "/assets/image/AR_VR_XR_MR.jpg" },
-    { text: "IOT", imgSrc: "/assets/image/IOT.jpg" },
-    { text: "Machine-to-Machine Communication", imgSrc: "/assets/image/Machine-to-Machine.jpg" },
+    { text: "AR/VR/XR", imgSrc: "/image/AR_VR_XR_MR.jpg" },
+    { text: "IOT", imgSrc: "/image/IOT.jpg" },
+    { text: "Machine-to-Machine Communication", imgSrc: "/image/Machine-to-Machine.jpg" },
   ];
   const buttons3 = [
-    { text: "mmWave", imgSrc: "/assets/image/MMwave.jpg" },
+    { text: "mmWave", imgSrc: "/image/MMwave.jpg" },
   ];
 
   return (
