@@ -3,7 +3,7 @@ import styles from "./SmartSolutions.module.css";
 
 export const SmartSolutions = () => {
   const buttons1 = [
-    { text: "AI", imgSrc: "/assets/image/AI.jpg" },
+    { text: "AI", imgSrc: "/assets/image/ai.jpg" },
     { text: "Big Data", imgSrc: "/assets/image/bigdata.jpg" },
     { text: "Computer Vision", imgSrc: "/assets/image/computervision.jpg" },
   ];
