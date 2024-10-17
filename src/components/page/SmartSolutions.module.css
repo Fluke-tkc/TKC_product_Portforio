@@ -69,6 +69,7 @@ button:hover img {
 button:hover {
   transform: scale(1.1); /* ขยายปุ่ม */
   z-index: 10; /* เพิ่มลำดับของปุ่มให้สูงขึ้นเพื่อไม่ให้ถูกทับ */
+  background-color: #063285;
 }
 /* สไตล์สำหรับข้อความ */
 button span {
@@ -82,4 +83,5 @@ button span {
 /* แสดงข้อความเมื่อ hover */
 button:hover span {
   opacity: 1;
+  
 }

@@ -21,13 +21,13 @@
   margin-right: 20%;
 }
 
-/* .circleWrapper {
+.circleWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   transition: transform 0.3s;
-  position: relative; 
-} */
+  position: relative; /* ทำให้ซ้อนเนื้อหาได้ */
+}
 
 .circleButton {
   width: 200px;
@@ -42,7 +42,7 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.3s, background-color 0.3s, opacity 0.3s;
-  overflow: hidden; /* ตัดส่วนที่ล้นออก */
+  overflow: hidden;
   position: relative;
 }
 
@@ -59,16 +59,24 @@
 
 .circleButton span {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
   opacity: 0;
   z-index: 2;
   transition: opacity 0.3s;
   text-align: center;
+  padding: 0 10px; /* เพิ่มการเว้นระยะ */
 }
-/* 
+
 .circleButton:hover img {
   opacity: 0; 
 }
 
 .circleButton:hover span {
   opacity: 1; 
-} */
+  background-color: #063285;
+
+}
