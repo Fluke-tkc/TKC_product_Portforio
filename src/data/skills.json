@@ -1,0 +1,82 @@
+[
+  {
+    "title": "Unity",
+    "imageSrc": "skills/unitylogo.png"
+  },
+  {
+    "title": "C#",
+    "imageSrc": "skills/C-LOGO.png"
+  },
+  {
+    "title": "Pun2",
+    "imageSrc": "skills/photon2logo.png"
+  },
+  {
+    "title": "FireBase",
+    "imageSrc": "skills/firebaselogo.png"
+  },
+  {
+    "title": "GitHub",
+    "imageSrc": "skills/GitHubLogo.png"
+  },
+  {
+    "title": "GitLab",
+    "imageSrc": "skills/Gitlab.png"
+  },
+  {
+    "title": "Golang",
+    "imageSrc": "skills/Go.png"
+  },
+  {
+    "title": "React",
+    "imageSrc": "skills/React-icon.png"
+  },
+  {
+    "title": "NodeJS",
+    "imageSrc": "skills/node-js-icon.png"
+  },
+  {
+    "title": "JavaScript",
+    "imageSrc": "skills/javascript-logo.png"
+  },
+  {
+    "title": "CSS",
+    "imageSrc": "skills/CSS3_logo.png"
+  },
+  {
+    "title": "MongoDB",
+    "imageSrc": "skills/mongodb.png"
+  },
+  {
+    "title": "MySQL",
+    "imageSrc": "skills/MySQL.png"
+  },
+  {
+    "title": "Linux",
+    "imageSrc": "skills/linux.png"
+  },
+  {
+    "title": "Google Cloud ",
+    "imageSrc": "skills/googlecloud.png"
+  },
+  {
+    "title": "Docker",
+    "imageSrc": "skills/DockerLogo.png"
+  },
+  {
+    "title": "Kubernetes",
+    "imageSrc": "skills/Kuberneteslogo.png"
+  },
+  {
+    "title": "Jenkins",
+    "imageSrc": "skills/jenkins_logo.png"
+  },
+  {
+    "title": "Grafana",
+    "imageSrc": "skills/grafanalogo.png"
+  },
+  {
+    "title": "Prometheus",
+    "imageSrc": "skills/Prometheuslogo.png"
+  }
+]

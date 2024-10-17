@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/assets/nav/services-solutions.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
+  width: 80%;
+  height: auto;
+  position: relative;
+}
+
+.circleWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s;
+  position: relative; /* ทำให้ซ้อนเนื้อหาได้ */
+}
+
+.circleButton {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; /* กลม */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s, background-color 0.3s, opacity 0.3s;
+  overflow: hidden; /* ตัดส่วนที่ล้นออก */
+  position: relative;
+}
+
+.circleButton img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s;
+  border-radius: 50%; /* ทำให้รูปภาพกลมเหมือนปุ่ม */
+}
+
+.circleButton span {
+  position: absolute;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 0.3s;
+  text-align: center;
+}
+
+.circleButton:hover img {
+  opacity: 0; /* ซ่อนรูปภาพเมื่อ hover */
+}
+
+.circleButton:hover span {
+  opacity: 1; /* แสดงข้อความเมื่อ hover */
+}

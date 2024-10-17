@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("/assets/nav/services-solutions.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  
+  /* เพิ่มสไตล์สำหรับหัวข้อ */
+  .header {
+    position: absolute;
+    top: 80px;
+    left: 80px;
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .gridContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    width: 80%;
+    height: auto;
+  }
+  
+  /* ปุ่มสี่เหลี่ยม */
+  button {
+    width: 300px; /* กำหนดขนาดของปุ่ม */
+    height: 300px;
+    background-color: #007bff; /* สีพื้นหลัง */
+    color: #fff; /* สีของข้อความ */
+    border: none; /* เอาเส้นขอบออก */
+    cursor: pointer; /* เปลี่ยน cursor เมื่อ hover */
+    font-size: 14px; /* ขนาดตัวอักษร */
+    transition: transform 0.3s, background-color 0.3s; /* เพิ่มเอฟเฟค */
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* สีเมื่อ hover */
+    transform: scale(1.1); /* ขยายขนาดเมื่อ hover */
+  }
+  
