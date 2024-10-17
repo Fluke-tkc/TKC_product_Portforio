@@ -3,9 +3,9 @@ import styles from "./SmartSolutions.module.css";
 
 export const SmartSolutions = () => {
   const buttons1 = [
-    { text: "AI", imgSrc: "/assets/nav/AI.jpg" },
-    { text: "Big Data", imgSrc: "/assets/nav/bigdata.jpg" },
-    { text: "Computer Vision", imgSrc: "/assets/nav/computervision.jpg" },
+    { text: "AI", imgSrc: "/assets/image/AI.jpg" },
+    { text: "Big Data", imgSrc: "/assets/image/bigdata.jpg" },
+    { text: "Computer Vision", imgSrc: "/assets/image/computervision.jpg" },
     // { text: "AR/VR/XR", imgSrc: "/assets/image/AR VR XR MR.jpg" },
     // { text: "IOT", imgSrc: "/assets/image/IOT.jpg" },
     // { text: "Machine-to-Machine Communication", imgSrc: "/assets/image/Machine-to-Machine.jpg" },
@@ -14,15 +14,15 @@ export const SmartSolutions = () => {
   ];
   const buttons2 = [
     
-    { text: "AR/VR/XR", imgSrc: "/assets/nav/AR VR XR MR.jpg" },
-    { text: "IOT", imgSrc: "/assets/nav/IOT.jpg" },
-    { text: "Machine-to-Machine Communication", imgSrc: "/assets/nav/Machine-to-Machine.jpg" },
+    { text: "AR/VR/XR", imgSrc: "/assets/image/AR VR XR MR.jpg" },
+    { text: "IOT", imgSrc: "/assets/image/IOT.jpg" },
+    { text: "Machine-to-Machine Communication", imgSrc: "/assets/image/Machine-to-Machine.jpg" },
   
 
   ];
   const buttons3 = [
    
-    { text: "mmWave", imgSrc: "/assets/nav/MMwave.jpg" },
+    { text: "mmWave", imgSrc: "/assets/image/MMwave.jpg" },
 
   ];
 

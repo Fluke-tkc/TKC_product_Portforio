@@ -6,17 +6,17 @@ export const Hero = () => {
   const navigate = useNavigate(); // ใช้ navigate
 
   const topics = [
-    { name: "Smart Solutions", imgSrc: "/assets/nav/smartsolution.jpg" },
-    { name: "Cloud Solution", imgSrc: "/assets/nav/cloudsolution.jpg" },
-    { name: "Cyber Security", imgSrc: "/assets/nav/cybersecurity.jpg" },
-    { name: "Software Development", imgSrc: "/assets/nav/softwaredevelopment.jpg" },
-    { name: "Green Solution", imgSrc: "/assets/nav/greensolution.jpg" },
-    { name: "Telecom and Network Infrastructure", imgSrc: "/assets/nav/Telecom and Network Infrastructure.jpg" },
-    { name: "ICT Infrastructure", imgSrc: "/assets/nav/ICTInfrastructure.jpg" },
-    { name: "Public Safety", imgSrc: "/assets/nav/public safety.jpg" },
-    { name: "Logistics", imgSrc: "/assets/nav/Logistics.jpg" },
-    { name: "Edutech", imgSrc: "/assets/nav/Edutech.jpg" },
-    { name: "Autonomous System", imgSrc: "/assets/nav/Autonomous System.jpg" }
+    { name: "Smart Solutions", imgSrc: "/assets/image/smartsolution.jpg" },
+    { name: "Cloud Solution", imgSrc: "/assets/image/cloudsolution.jpg" },
+    { name: "Cyber Security", imgSrc: "/assets/image/cybersecurity.jpg" },
+    { name: "Software Development", imgSrc: "/assets/image/softwaredevelopment.jpg" },
+    { name: "Green Solution", imgSrc: "/assets/image/greensolution.jpg" },
+    { name: "Telecom and Network Infrastructure", imgSrc: "/assets/image/Telecom and Network Infrastructure.jpg" },
+    { name: "ICT Infrastructure", imgSrc: "/assets/image/ICTInfrastructure.jpg" },
+    { name: "Public Safety", imgSrc: "/assets/image/public safety.jpg" },
+    { name: "Logistics", imgSrc: "/assets/image/Logistics.jpg" },
+    { name: "Edutech", imgSrc: "/assets/image/Edutech.jpg" },
+    { name: "Autonomous System", imgSrc: "/assets/image/Autonomous System.jpg" }
   ];
 
   const handleButtonClick = (topic) => {
