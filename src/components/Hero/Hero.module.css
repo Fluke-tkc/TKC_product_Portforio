@@ -125,7 +125,7 @@
 .BG1{
   
   width: 100vw;
-  background-image: url("/image/Reternofsoul_1.jpg");
+  background-image: url("/image/services-solutions.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -421,6 +421,7 @@
 html {
   scroll-behavior: smooth;
 }
+
 
 
 .learnMoreSection {
