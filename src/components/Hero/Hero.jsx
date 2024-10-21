@@ -35,8 +35,8 @@ export const Hero = () => {
         <div className={styles.topic2}>Our solutions are created with industry experts to help you modernize your.</div>
         <div className={styles.topic2}>business, save time, lower costs, and come together around your customers.</div>
         <div className={styles.buttonContainer}>
-         <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a>
-     </div>
+    <a href="#our-services" className={styles.primaryButtonTop}>Learn more</a>
+  </div>
       </div>
       
 
@@ -64,7 +64,7 @@ export const Hero = () => {
 </div>
 
 
-<div className={styles.solutionSection}>
+<div className={styles.solutionSection} id="our-services">
   <h2 className={styles.sectionTitle}>Our Services</h2>
   <div className={styles.threeColumnSolutions}>
     <div className={styles.solutionCard}>
