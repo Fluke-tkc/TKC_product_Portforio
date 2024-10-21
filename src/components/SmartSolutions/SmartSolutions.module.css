@@ -1,0 +1,342 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+  width: 100vw;
+  height: 60vh;
+  background-color: #f9f9f9;
+
+  /* padding-top: 100px;
+  padding-bottom: 100px;
+  padding-left: 0px;
+  padding-right: 0px; */
+
+  /* background-image: url("/image/services-solutions.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative; */
+}
+/* Left content (text and buttons) */
+.leftContent {
+  flex: 1; /* เพิ่มพื้นที่ให้กับข้อความทางซ้าย */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.leftContent h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.leftContent p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.primaryButton, .secondaryButton {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.primaryButton {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.secondaryButton {
+  background-color: transparent;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+
+/* Right content (image) */
+.rightContent {
+  flex: 0.5; /* ให้พื้นที่กับรูปภาพทางด้านขวา */
+  display: flex;
+  justify-content: center;
+}
+
+.rightContent img {
+  width: 100%;
+  height: auto;
+  max-width: 400px; /* จำกัดความกว้างของรูปภาพ */
+  border-radius: 10px;
+}
+
+.BG1 {
+  display: flex;
+  justify-content: space-between; /* กระจายพื้นที่ระหว่างข้อความและรูปภาพ */
+  align-items: center;
+  background-image: url("/image/services-solutions.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 60vh;
+  position: relative;
+  padding: 0 20px;
+}
+.BG1Text {
+  position: absolute;
+  top: 50%;
+  right: 50px; /* ตำแหน่งข้อความทางด้านขวา */
+  left: 1000px; /* ตำแหน่งข้อความทางด้านขวา */
+  transform: translateY(-50%); /* จัดให้อยู่ตรงกลางแนวตั้ง */
+  color: #fff;
+  font-size: 24px;
+  background-color: rgba(0, 0, 0, 0.5); /* เพิ่มพื้นหลังโปร่งแสงให้ข้อความ */
+ padding-top: 40px;
+ padding-bottom: 40px;
+ padding-left: 40px;
+ padding-right: 40px;
+
+  border-radius: 10px;
+  max-width: 1000px; /* จำกัดความกว้างของกล่องข้อความ */
+}
+
+.imageWrapper {
+ flex: 0.5;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* จัดกึ่งกลางในแนวตั้งด้วย */
+}
+
+.imageInBG1 {
+  width: 100%;  /* ทำให้รูปภาพมีขนาดเต็มตาม container */
+  max-width: 400px; /* กำหนดขนาดสูงสุดให้รูปภาพ */
+  height: auto; /* ให้ความสูงปรับตามสัดส่วน */
+  border-radius: 10px;
+}
+
+.productShowcase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  background-color: #fff; /* หรือสีที่คุณต้องการ */
+}
+
+.showcaseContent {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  align-items: center;
+  gap: 40px; /* ระยะห่างระหว่างรูปและข้อความ */
+}
+
+.imageContainer {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+.imageContainer1 img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  flex: 1;
+ 
+}
+.imageContainer2 img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+ 
+}
+.textContainer1 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 50%;
+}
+.textContainer1 h2 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.textContainer1 p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+.textContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.textContainer h2 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.textContainer p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.primaryButton, .secondaryButton {
+  padding: 12px 24px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primaryButton {
+  background-color: #007bff;
+  color: white;
+}
+
+.secondaryButton {
+  background-color: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+/******/
+/* สำหรับ .solutionSection */
+.solutionSection {
+  padding: 50px;
+  background-color: #f9f9f9;
+  margin-top: 0px;
+}
+
+.solutionContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.solutionContent .imageContainer {
+  flex: 1;
+  max-width: 600px; /* ปรับขนาดความกว้างได้อิสระ */
+  height: auto;
+  border-radius: 10px;
+}
+
+.solutionContent .textContainer {
+  flex: 1;
+  padding: 20px;
+}
+
+/* สำหรับ .stackedSolutionSection */
+.stackedSolutionSection {
+  padding: 50px;
+  background-color: #f9f9f9;
+  margin-top: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stackedSolutionSection .stackedImage {
+  width: 50%; /* ปรับขนาดรูปภาพ */
+  border-radius: 10px;
+  margin-left: 20px;
+}
+
+.stackedSolutionSection .textContainer {
+  flex: 1;
+  padding: 20px;
+}
+
+/* สำหรับ .gridSolutions */
+.gridSolutions {
+  padding: 50px;
+  background-color: #f9f9f9;
+  margin-top: 0px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* สามารถปรับให้เป็น 3 คอลัมน์หรือมากกว่านี้ได้ */
+  gap: 20px;
+}
+
+.gridSolutions .gridItem {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* สำหรับ .threeColumnSolutions */
+.threeColumnSolutions {
+  padding: 50px;
+  background-color: #f9f9f9;
+  margin-top: 0px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.threeColumnSolutions .solutionCard {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.threeColumnSolutions .solutionCard img {
+  max-width: 150px; /* ปรับขนาดรูปภาพ */
+  margin-bottom: 15px;
+}
+
+/* สำหรับ .overlaySolution */
+.overlaySolution {
+  padding: 50px;
+  background-color: #f9f9f9;
+  margin-top: 0px;
+  position: relative;
+}
+
+.overlaySolution .overlayImageContainer {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.overlaySolution .overlayImage {
+  width: 100%;
+  height: auto;
+}
+
+.overlaySolution .overlayText {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  transform: translateY(-50%);
+}

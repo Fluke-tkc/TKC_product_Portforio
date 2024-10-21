@@ -1,0 +1,95 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+  background-image: url("/image/services-solutions.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.contactDetails {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.contactDetails h2 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.contactDetails p {
+  font-size: 18px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.contactInfo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 40px;
+  width: 100%;
+}
+
+.infoSection {
+  flex: 1 1 200px;
+  max-width: 300px;
+}
+
+.infoSection h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.infoSection p,
+.infoSection ul {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.links {
+  list-style: none;
+  padding: 0;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.link img {
+  width: 24px;
+  height: 24px;
+}
+
+.link a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.link a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 830px) {
+  .contactInfo {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .infoSection {
+    text-align: center;
+  }
+}

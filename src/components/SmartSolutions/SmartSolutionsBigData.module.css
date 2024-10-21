@@ -85,3 +85,61 @@ button:hover span {
   opacity: 1;
   
 }
+
+.backgroundDiv_computervision {
+  background-image: url('/image/services-solutions.jpg'); /* ใส่ URL ของภาพพื้นหลังที่คุณต้องการ */
+  background-size: cover; /* ปรับขนาดภาพให้ครอบคลุมทั้ง div */
+  background-position: center; /* จัดภาพให้อยู่ตรงกลาง */
+  width: 100%; /* ปรับความกว้างตามที่คุณต้องการ */
+  height: 500px; /* คุณสามารถปรับความสูงได้ตามต้องการ */
+  margin: 0 auto; /* จัดให้อยู่ตรงกลาง */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white; /* เพิ่มสีของข้อความให้อ่านง่าย */
+  font-size: 24px;
+}
+
+.text h2 {
+  font-size: 80px;
+  font-weight: 700;
+  letter-spacing: 4px;
+
+  margin-top: 50px;
+  margin-left: 0%;
+  margin-right: 0%;
+  margin-bottom: 50px;
+
+  padding-top: 0px;
+  padding-bottom: px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.text p {
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  list-style: none;
+  gap: 26px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.link a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+}
