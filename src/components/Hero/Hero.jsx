@@ -30,10 +30,18 @@ export const Hero = () => {
     <>
       <Navbar />
       <div className={styles.BG1}>
-        <div className={styles.topic1}>Become a leading customer company in your industry.</div>
-        <div className={styles.topic1}>company in your industry.</div>
-        <div className={styles.topic2}>Our solutions are created with industry experts to help you modernize your.</div>
-        <div className={styles.topic2}>business, save time, lower costs, and come together around your customers.</div>
+        <div className={styles.topic1}>บริษัท เทิร์นคีย์ คอมมูนิเคชั่น เซอร์วิส จำกัด (มหาชน).</div>
+        {/* <div className={styles.topic1}>company in your industry.</div> */}
+        <div className={styles.topic2}>มีความยินดีเป็นอย่างยิ่งที่จะนำเสนอผลงานและบริการที่เราได้พัฒนาขึ้นเพื่อสนับสนุนความสำเร็จของลูกค้าและพันธมิตรทางธุรกิจ 
+                                       เรามุ่งมั่นในการนำเสนอโซลูชันที่ครบวงจรและตอบโจทย์การสื่อสารในยุคดิจิทัล ทั้งในด้านเทคโนโลยี การเชื่อมต่อ 
+                                       และการให้บริการด้วยมาตรฐานระดับสากล.
+        </div>
+        <div className={styles.topic2}>ในทุกขั้นตอนของการทำงาน เราให้ความสำคัญกับนวัตกรรม คุณภาพ และความเชื่อมั่นที่ลูกค้าสามารถไว้วางใจได้ 
+        ด้วยทีมงานที่มีความเชี่ยวชาญและประสบการณ์ยาวนาน 
+        เรามุ่งสู่การเป็นผู้นำด้านการสื่อสารครบวงจร เพื่อเสริมสร้างความแข็งแกร่งให้กับระบบโครงสร้างพื้นฐานการสื่อสารของประเทศ
+        เราหวังว่าผลงานที่นำเสนอในครั้งนี้ จะเป็นส่วนหนึ่งในการสร้างความมั่นใจ และส่งเสริมการพัฒนาทางธุรกิจร่วมกันต่อไป</div>
+
+        
         <div className={styles.buttonContainer}>
     <a href="#our-services" className={styles.primaryButtonTop}>Learn more</a>
   </div>
@@ -42,7 +50,7 @@ export const Hero = () => {
 
     
 
-    
+{/*     
 <div className={styles.productShowcase}>
   <div className={styles.showcaseContent}>
     <div className={styles.imageContainer2}>
@@ -61,18 +69,29 @@ export const Hero = () => {
       </div>
     </div>
   </div>
-</div>
+</div> */}
 
 
 <div className={styles.solutionSection} id="our-services">
+  
   <h2 className={styles.sectionTitle}>Our Services</h2>
   <div className={styles.threeColumnSolutions}>
-    <div className={styles.solutionCard}>
-      <img src="/image/smartsolution.jpg" className={styles.solutionImage} />
+    
+  <div
+  className={styles.solutionCard}
+  onClick={handleLearnMoreClick_smart_solutions} // ทำให้ทั้งการ์ดเป็นปุ่มที่คลิกได้
+  role="button" // เพิ่ม role เพื่อบ่งบอกว่าเป็นปุ่ม
+  tabIndex="0" // ทำให้สามารถโฟกัสได้โดยการกด Tab บนคีย์บอร์ด
+  onKeyDown={(e) => e.key === 'Enter' && handleLearnMoreClick_smart_solutions()} // รองรับการกด Enter เพื่อคลิก
+   >
+      
+      <img src="/image/smartsolution2.png" className={styles.solutionImage} />
       <h3>Smart Solutions</h3>
-      <p>Unleash the power of artificial intelligence to make sense of your data and drive decision-making.</p>
+      <br/>
+      <p>แนวทางหรือระบบที่ใช้เทคโนโลยีขั้นสูงและนวัตกรรมในการแก้ปัญหาหรือปรับปรุงกระบวนการต่างๆ เพื่อเพิ่มประสิทธิภาพ
+         ความสะดวกสบาย และประสบการณ์การใช้งาน โดยมุ่งเน้นการเชื่อมโยงข้อมูลและการทำงานร่วมกันระหว่างอุปกรณ์หรือระบบที่แตกต่างกัน</p>
       <div className={styles.buttonContainerOurservice}>
-      <a href="#learn-more" className={styles.primaryButtonTop}onClick={handleLearnMoreClick_smart_solutions} >Learn more</a>
+      {/* <a href="#learn-more" className={styles.primaryButtonTop}onClick={handleLearnMoreClick_smart_solutions} >Learn more</a> */}
         
       </div>
     </div>
@@ -82,7 +101,7 @@ export const Hero = () => {
       <h3>Cloud Solution</h3>
       <p>Protect your infrastructure with the latest in cybersecurity technology, ensuring your data stays safe.</p>
       <div className={styles.buttonContainerOurservice}>
-        <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a>
+        {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
       </div>
     </div>
 
@@ -91,7 +110,7 @@ export const Hero = () => {
       <h3>Cybersecurity Solutions</h3>
       <p>Transform your business with cloud solutions tailored to your unique needs.</p>
       <div className={styles.buttonContainerOurservice}>
-        <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a>
+        {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
       </div>
     </div>
   </div>
@@ -103,7 +122,7 @@ export const Hero = () => {
     <h3>Software Development</h3>
     <p>Unleash the power of artificial intelligence to make sense of your data and drive decision-making.</p>
     <div className={styles.buttonContainerOurservice}>
-    <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a>
+    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
     </div>
   </div>
   
@@ -112,7 +131,7 @@ export const Hero = () => {
     <h3>Green Solution</h3>
     <p>Protect your infrastructure with the latest in cybersecurity technology, ensuring your data stays safe.</p>
     <div className={styles.buttonContainerOurservice}>
-    <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a>
+    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
     </div>
   </div>
   <div className={styles.solutionCard}>
@@ -120,7 +139,7 @@ export const Hero = () => {
     <h3>Autonomous System</h3>
     <p>Transform your business with cloud solutions tailored to your unique needs.</p>
     <div className={styles.buttonContainerOurservice}>
-    <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a>
+    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
     </div>
   </div>
   
@@ -132,7 +151,7 @@ export const Hero = () => {
     <h3>Telecom and Network Infrastructure</h3>
     <p>Unleash the power of artificial intelligence to make sense of your data and drive decision-making.</p>
     <div className={styles.buttonContainerOurservice}>
-    <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a>
+    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
     </div>
   </div>
   
@@ -141,7 +160,7 @@ export const Hero = () => {
     <h3>ICT Infrastructure</h3>
     <p>Protect your infrastructure with the latest in cybersecurity technology, ensuring your data stays safe.</p>
     <div className={styles.buttonContainerOurservice}>
-    <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a>
+    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
     </div>
   </div>
   <div className={styles.solutionCard}>
@@ -149,7 +168,7 @@ export const Hero = () => {
     <h3>Public Safety</h3>
     <p>Transform your business with cloud solutions tailored to your unique needs.</p>
     <div className={styles.buttonContainerOurservice}>
-    <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a>
+    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
     </div>
   </div>
   
@@ -160,7 +179,7 @@ export const Hero = () => {
     <h3>Logistics</h3>
     <p>Unleash the power of artificial intelligence to make sense of your data and drive decision-making.</p>
     <div className={styles.buttonContainerOurservice}>
-    <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a>
+    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
     </div>
   </div>
   
@@ -169,7 +188,7 @@ export const Hero = () => {
     <h3>Edutech</h3>
     <p>Protect your infrastructure with the latest in cybersecurity technology, ensuring your data stays safe.</p>
     <div className={styles.buttonContainerOurservice}>
-    <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a>
+    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
     </div>
   </div>
  

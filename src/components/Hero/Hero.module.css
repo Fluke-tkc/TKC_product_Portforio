@@ -98,20 +98,20 @@
 
 }
 .topic1 {
-  font-size: 50px; /* ปรับขนาดตัวอักษร */
+  font-size: 46px; /* ปรับขนาดตัวอักษร */
   text-align: center; /* จัดข้อความให้อยู่ตรงกลางแนวนอน */
-  padding-top: 20px; /* เพิ่ม padding รอบๆ ข้อความ */
+  padding-top: 40px; /* เพิ่ม padding รอบๆ ข้อความ */
   font-weight: bold; /* ทำให้ตัวอักษรหนา */
   color: #3ca0f3; /* เปลี่ยนสีตัวอักษร (คุณสามารถเปลี่ยนค่าได้ตามต้องการ) */
 
 }
 .topic2 {
-  font-size: 25px; /* ปรับขนาดตัวอักษร */
+  font-size: 24px; /* ปรับขนาดตัวอักษร */
   text-align: center; /* จัดข้อความให้อยู่ตรงกลางแนวนอน */
-  padding-top: 20px; /* เพิ่ม padding รอบๆ ข้อความ */
-  
-  /* font-weight: bold;  */
-  color: #050505; /* เปลี่ยนสีตัวอักษร (คุณสามารถเปลี่ยนค่าได้ตามต้องการ) */
+  padding-top: 50px; /* เพิ่ม padding รอบๆ ข้อความ */
+  padding-left: 400px; /* font-weight: bold;  */
+  padding-right: 400px;
+  color: #ffffff; /* เปลี่ยนสีตัวอักษร (คุณสามารถเปลี่ยนค่าได้ตามต้องการ) */
 
 }
 .topic3 {
@@ -131,7 +131,7 @@
   background-repeat: no-repeat;
 
   padding-top: 50px;
-  padding-bottom: 200px;
+  padding-bottom: 300px;
   padding-left: 0px;
   padding-right: 0px;
 }
@@ -379,13 +379,21 @@
   flex: 1;
   background-color: #fff;
   border-radius: 10px;
-  padding: 20px;
+  padding-top: 80px;
+  padding-bottom: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  cursor: pointer; /* ทำให้การ์ดสามารถคลิกได้ */
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out; /* เพิ่ม transition สำหรับ background-color */
 }
-
+.threeColumnSolutions .solutionCard:hover {
+  transform: scale(1.05); /* เพิ่มเอฟเฟกต์ขยายเมื่อ hover */
+  background-color: #0279e0; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+}
 .threeColumnSolutions .solutionCard img {
-  max-width: 150px; /* ปรับขนาดรูปภาพ */
+  max-width: 200px; /* ปรับขนาดรูปภาพ */
   margin-bottom: 15px;
 }
 
