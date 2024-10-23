@@ -2,8 +2,16 @@ import React from "react";
 import styles from "./SmartSolutions_Hospital.module.css";
 import { Navbar } from "../Navbar/Navbar";
 import { Contact } from "../Contact/Contact";
+import { useNavigate } from "react-router-dom";
 
 export const SmartSolutions_Hospital = () => { // แก้ไขชื่อ component ให้ตรงกัน
+
+  const navigate = useNavigate();
+
+  const handleLearnMoreClick_smart_Hospital = () => {
+    navigate("/smart-solutions-hospital");
+  };
+
   return (
     <>
     
@@ -22,13 +30,10 @@ export const SmartSolutions_Hospital = () => { // แก้ไขชื่อ co
               <div className={styles.aboutItemText}>
                 <h3>Smart Hospital</h3>
                 <p>
-                  I'm a Unity programmer, I work on all kinds of gameplay
-                  development. Projects and learning includes how-to code and
-                  optimization tips. I learned a lot of ways to make games VR
-                  AR. I learn to work as a team and division of duties. I have
-                  studied and worked in FrontEnd and BackEnd development.
+                เป็นแนวคิดที่นำเทคโนโลยีมาประยุกต์ใช้ในโรงพยาบาลเพื่อปรับปรุงการดูแลผู้ป่วย เพิ่มประสิทธิภาพในการทำงาน 
+                และลดความผิดพลาดทางการแพทย์ โดยองค์ประกอบของ Smart Hospital ประกอบไปด้วย:​
                   <div className={styles.buttonContainer}>
-                  <a href="#learn-more" className={styles.primaryButton}>เพื่มเติม</a>
+                  <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Hospital} >เพื่มเติม</a>
                   </div>
                 </p>
 

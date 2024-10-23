@@ -26,9 +26,8 @@ export const SmartSolutions = () => {
         <div className={styles.content}>
           <h1 className={styles.title}>Smart Solutions</h1>
           <p className={styles.description}>
-            Hello My name is Aphichat Rungruang or call me Fluke. I am a Unity
-            Developer. I love games and am happy when everyone can play my
-            games. I feel like I haven't developed myself enough.
+          แนวทางหรือระบบที่ใช้เทคโนโลยีขั้นสูงและนวัตกรรมในการแก้ปัญหาหรือปรับปรุงกระบวนการต่างๆ เพื่อเพิ่มประสิทธิภาพ
+         ความสะดวกสบาย และประสบการณ์การใช้งาน โดยมุ่งเน้นการเชื่อมโยงข้อมูลและการทำงานร่วมกันระหว่างอุปกรณ์หรือระบบที่แตกต่างกัน
           </p>
         </div>
 

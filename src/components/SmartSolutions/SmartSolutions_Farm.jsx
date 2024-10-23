@@ -2,8 +2,16 @@ import React from "react";
 import styles from "./SmartSolutions_Farm.module.css";
 import { Navbar } from "../Navbar/Navbar";
 import { Contact } from "../Contact/Contact";
+import { useNavigate } from "react-router-dom";
 
 export const SmartSolutions_Farm = () => { // แก้ไขชื่อ component ให้ตรงกัน
+
+  const navigate = useNavigate();
+
+  const handleLearnMoreClick_smart_Farm = () => {
+    navigate("/smart-solutions-fram");
+  };
+
   return (
     <>
     
@@ -27,13 +35,11 @@ export const SmartSolutions_Farm = () => { // แก้ไขชื่อ compon
               <div className={styles.aboutItemText}>
                 <h3>Smart Farm</h3>
                 <p>
-                  I'm a Unity programmer, I work on all kinds of gameplay
-                  development. Projects and learning includes how-to code and
-                  optimization tips. I learned a lot of ways to make games VR
-                  AR. I learn to work as a team and division of duties. I have
-                  studied and worked in FrontEnd and BackEnd development.
+                ฟาร์มอัจฉริยะใช้เทคโนโลยี IoT (Internet of Things) และ Sensors ในการจัดการและปรับปรุงการทำงานในฟาร์มอย่างมีประสิทธิภาพมากขึ้น
+                 โดยมุ่งเน้นการประหยัดทรัพยากร ลดการใช้แรงงานและเพิ่มผลผลิตด้วยข้อมูลที่ได้รับจากเซ็นเซอร์และอุปกรณ์อัจฉริยะ 
+                 หลักการและการใช้งานของอุปกรณ์ IoT และเซ็นเซอร์ใน Smart Farm มีดังนี้:​
                   <div className={styles.buttonContainer}>
-                  <a href="#learn-more" className={styles.primaryButton}>เพื่มเติม</a>
+                  <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a>
                   </div>
                 </p>
 

@@ -30,13 +30,13 @@ export const SmartSolutions_Building = () => { // แก้ไขชื่อ co
               <div className={styles.aboutItemText}>
                 <h3>Smart Building</h3>
                 <p>
-                  I'm a Unity programmer, I work on all kinds of gameplay
-                  development. Projects and learning includes how-to code and
-                  optimization tips. I learned a lot of ways to make games VR
-                  AR. I learn to work as a team and division of duties. I have
-                  studied and worked in FrontEnd and BackEnd development.
+                Smart Building ช่วยให้การบริหารจัดการอาคารเป็นไปอย่างมีประสิทธิภาพ ทั้งในแง่การประหยัดพลังงาน การดูแลรักษาความปลอดภัย
+                 และการสร้างสภาพแวดล้อมที่น่าอยู่สำหรับผู้ใช้อาคาร​
+                เป็นอาคารที่ใช้เทคโนโลยีในการจัดการและควบคุมระบบต่าง ๆ ภายในอาคาร
+                 เพื่อเพิ่มประสิทธิภาพในการใช้พลังงาน เพิ่มความสะดวกสบาย ความปลอดภัย และความยั่งยืน
+                  องค์ประกอบสำคัญของ Smart Building ประกอบไปด้วย:​
                   <div className={styles.buttonContainer}>
-                  <a href="#learn-more" className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a>
+                  <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a>
                   </div>
                 </p>
 

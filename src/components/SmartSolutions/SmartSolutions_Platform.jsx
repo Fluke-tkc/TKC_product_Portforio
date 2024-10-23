@@ -2,8 +2,15 @@ import React from "react";
 import styles from "./SmartSolutions_Platform.module.css";
 import { Navbar } from "../Navbar/Navbar";
 import { Contact } from "../Contact/Contact";
+import { useNavigate } from "react-router-dom";
 
 export const SmartSolutions_Platform = () => { // แก้ไขชื่อ component ให้ตรงกัน
+
+  const navigate = useNavigate();
+
+  const handleLearnMoreClick_smart_Platform = () => {
+    navigate("/smart-solutions-platform");
+  };
   return (
     <>
     
@@ -22,13 +29,10 @@ export const SmartSolutions_Platform = () => { // แก้ไขชื่อ co
               <div className={styles.aboutItemText}>
                 <h3>Smart Platform</h3>
                 <p>
-                  I'm a Unity programmer, I work on all kinds of gameplay
-                  development. Projects and learning includes how-to code and
-                  optimization tips. I learned a lot of ways to make games VR
-                  AR. I learn to work as a team and division of duties. I have
-                  studied and worked in FrontEnd and BackEnd development.
+                โครงสร้างหรือระบบที่ผสมผสานเทคโนโลยีและเครื่องมือทางดิจิทัลเพื่อสร้างแพลตฟอร์มอัจฉริยะที่สามารถเชื่อมโยงการทำงาน
+                และข้อมูลเพื่อเพิ่มประสิทธิภาพและความสะดวกในการใช้งาน ปัจจัยหลักที่มักพบใน Smart Platform มีดังนี้:​
                   <div className={styles.buttonContainer}>
-                  <a href="#learn-more" className={styles.primaryButton}>เพื่มเติม</a>
+                  <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Platform} >เพื่มเติม</a>
                   </div>
                 </p>
 

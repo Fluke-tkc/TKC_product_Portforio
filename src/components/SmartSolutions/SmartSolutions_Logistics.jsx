@@ -2,8 +2,15 @@ import React from "react";
 import styles from "./SmartSolutions_Logistics.module.css";
 import { Navbar } from "../Navbar/Navbar";
 import { Contact } from "../Contact/Contact";
+import { useNavigate } from "react-router-dom";
 
 export const SmartSolutions_Logistics = () => { // แก้ไขชื่อ component ให้ตรงกัน
+
+  const navigate = useNavigate();
+
+  const handleLearnMoreClick_smart_Logistics = () => {
+    navigate("/smart-solutions-logistics");
+  };
   return (
     <>
     
@@ -22,13 +29,11 @@ export const SmartSolutions_Logistics = () => { // แก้ไขชื่อ c
               <div className={styles.aboutItemText}>
                 <h3>Smart Logistics</h3>
                 <p>
-                  I'm a Unity programmer, I work on all kinds of gameplay
-                  development. Projects and learning includes how-to code and
-                  optimization tips. I learned a lot of ways to make games VR
-                  AR. I learn to work as a team and division of duties. I have
-                  studied and worked in FrontEnd and BackEnd development.
+                เป็นการผสานเทคโนโลยีสมัยใหม่เข้ากับระบบโลจิสติกส์เพื่อเพิ่มประสิทธิภาพ ลดต้นทุน 
+                และสร้างความยืดหยุ่นในการจัดการสินค้าหรือข้อมูลในห่วงโซ่อุปทาน (supply chain) 
+                หลักๆ แล้ว Smart Logistics ประกอบไปด้วยองค์ประกอบดังนี้:​
                   <div className={styles.buttonContainer}>
-                  <a href="#learn-more" className={styles.primaryButton}>เพื่มเติม</a>
+                  <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Logistics} >เพื่มเติม</a>
                   </div>
                 </p>
 

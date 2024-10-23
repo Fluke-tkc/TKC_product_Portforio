@@ -2,8 +2,15 @@ import React from "react";
 import styles from "./SmartSolutions_Utility.module.css";
 import { Navbar } from "../Navbar/Navbar";
 import { Contact } from "../Contact/Contact";
+import { useNavigate } from "react-router-dom";
 
 export const SmartSolutions_Utility = () => { // แก้ไขชื่อ component ให้ตรงกัน
+
+  const navigate = useNavigate();
+
+  const handleLearnMoreClick_smart_Utility = () => {
+    navigate("/smart-solutions-utility");
+  };
   return (
     <>
     
@@ -27,13 +34,10 @@ export const SmartSolutions_Utility = () => { // แก้ไขชื่อ com
               <div className={styles.aboutItemText}>
                 <h3>Smart Organized Communication Cables</h3>
                 <p>
-                  I'm a Unity programmer, I work on all kinds of gameplay
-                  development. Projects and learning includes how-to code and
-                  optimization tips. I learned a lot of ways to make games VR
-                  AR. I learn to work as a team and division of duties. I have
-                  studied and worked in FrontEnd and BackEnd development.
+                ระบบโครงข่ายไฟฟ้าอัจฉริยะที่ผสมผสานเทคโนโลยีดิจิทัลเพื่อการผลิต การส่งจ่าย 
+                และการบริหารจัดการพลังงานอย่างมีประสิทธิภาพ มีองค์ประกอบหลักดังนี้:
                   <div className={styles.buttonContainer}>
-                  <a href="#learn-more" className={styles.primaryButton}>เพื่มเติม</a>
+                  <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Utility} >เพื่มเติม</a>
                   </div>
                 </p>
 

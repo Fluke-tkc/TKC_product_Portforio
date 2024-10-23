@@ -2,8 +2,15 @@ import React from "react";
 import styles from "./SmartSolutions_Organized_Communication_Cables.module.css";
 import { Navbar } from "../Navbar/Navbar";
 import { Contact } from "../Contact/Contact";
+import { useNavigate } from "react-router-dom";
 
 export const SmartSolutions_Organized_Communication_Cables = () => { // แก้ไขชื่อ component ให้ตรงกัน
+
+  const navigate = useNavigate();
+
+  const handleLearnMoreClick_smart_Organized_Communication_Cables = () => {
+    navigate("/smart-solutions-organized_communication_cables");
+  };
   return (
     <>
     
@@ -27,13 +34,10 @@ export const SmartSolutions_Organized_Communication_Cables = () => { // แก�
               <div className={styles.aboutItemText}>
                 <h3>Smart Organized Communication Cables</h3>
                 <p>
-                  I'm a Unity programmer, I work on all kinds of gameplay
-                  development. Projects and learning includes how-to code and
-                  optimization tips. I learned a lot of ways to make games VR
-                  AR. I learn to work as a team and division of duties. I have
-                  studied and worked in FrontEnd and BackEnd development.
+                ระบบสายสื่อสารอัจฉริยะที่มีการจัดการอย่างเป็นระบบ ประกอบด้วยองค์ประกอบต่างๆ 
+                ที่ช่วยให้การสื่อสารในระบบโครงข่ายมีความเสถียรและมีประสิทธิภาพ ซึ่งองค์ประกอบหลักมีดังนี้:​
                   <div className={styles.buttonContainer}>
-                  <a href="#learn-more" className={styles.primaryButton}>เพื่มเติม</a>
+                  <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Organized_Communication_Cables} >เพื่มเติม</a>
                   </div>
                 </p>
 
