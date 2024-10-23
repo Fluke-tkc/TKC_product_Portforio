@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./SmartSolutions.module.css";
 import { Navbar } from "../Navbar/Navbar";
 import { Contact } from "../Contact/Contact";
@@ -14,6 +14,14 @@ import SmartSolutionsUtility from "./SmartSolutions_Utility";
 export const SmartSolutions = () => {
   const navigate = useNavigate();
 
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto", // เลื่อนไปยังตำแหน่งทันทีโดยไม่มีการหน่วง
+    });
+  }, []);
   // ฟังก์ชันที่จะนำทางไปยังหน้า SmartSolutions_Building
   const handleLearnMoreClick_smart_Building = () => {
     navigate("/smart-solutions-building"); // URL ที่ต้องการนำทาง

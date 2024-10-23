@@ -43,7 +43,7 @@ export const Hero = () => {
 
         
         <div className={styles.buttonContainer}>
-    <a href="#our-services" className={styles.primaryButtonTop}>Learn more</a>
+    <a  className={styles.primaryButtonTop}>Learn more</a>
   </div>
       </div>
       
@@ -72,7 +72,7 @@ export const Hero = () => {
 </div> */}
 
 
-<div className={styles.solutionSection} id="our-services">
+<div className={styles.solutionSection}>
   
   <h2 className={styles.sectionTitle}>Our Services</h2>
   <div className={styles.threeColumnSolutions}>

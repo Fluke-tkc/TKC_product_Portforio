@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./SmartSolutions_Organized_Communication_Cables.module.css";
 import { Navbar } from "../Navbar/Navbar";
 import { Contact } from "../Contact/Contact";
@@ -7,6 +7,15 @@ import { useNavigate } from "react-router-dom";
 export const SmartSolutions_Organized_Communication_Cables = () => { // แก้ไขชื่อ component ให้ตรงกัน
 
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto", // เลื่อนไปยังตำแหน่งทันทีโดยไม่มีการหน่วง
+    });
+  }, []);
 
   const handleLearnMoreClick_smart_Organized_Communication_Cables = () => {
     navigate("/smart-solutions-organized_communication_cables");

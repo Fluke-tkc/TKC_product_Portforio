@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./SmartSolutions_Utility.module.css";
 import { Navbar } from "../Navbar/Navbar";
 import { Contact } from "../Contact/Contact";
 import { useNavigate } from "react-router-dom";
 
 export const SmartSolutions_Utility = () => { // แก้ไขชื่อ component ให้ตรงกัน
+
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto", // เลื่อนไปยังตำแหน่งทันทีโดยไม่มีการหน่วง
+    });
+  }, []);
 
   const navigate = useNavigate();
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./SmartSolutions_Hospital.module.css";
 import { Navbar } from "../Navbar/Navbar";
 import { Contact } from "../Contact/Contact";
@@ -8,6 +8,16 @@ export const SmartSolutions_Hospital = () => { // แก้ไขชื่อ co
 
   const navigate = useNavigate();
 
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto", // เลื่อนไปยังตำแหน่งทันทีโดยไม่มีการหน่วง
+    });
+  }, []);
+
+  
   const handleLearnMoreClick_smart_Hospital = () => {
     navigate("/smart-solutions-hospital");
   };
