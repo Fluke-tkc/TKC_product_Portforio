@@ -1,234 +1,250 @@
 
-.pageWrapper {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  background-color: rgb(14, 81, 180);
-  isolation: isolate; /* สร้าง stacking context ใหม่ */
-  z-index: 1;
-}
 .container {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  z-index: 2;
-
-  margin-top: 0px;
-  margin-left: 0%;
-  margin-right: 0%;
-  margin-bottom: 0%;
-
+  background-color: rgba(12, 12, 12, 0.6);
+  border-radius: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 0px;
+  padding-right: 0px;
+  /* margin-top: 9px; */
+  z-index: 1;
+  margin-left: 0%;
+  margin-right: 0%;
 
-  /* background-image: url("/image/services-solutions.jpg"); */
-  background-color: rgb(14, 81, 180);
+  
+  /* background-image: url("/image/Reternofsoul_2.jpg"); */
+   background-color: #285280;   
   background-position: center;
 
   background-size:     cover;                     
   background-repeat:   no-repeat;
   background-position: center center; 
 
+
 }
-.container_2 {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  z-index: 2;
+
+.title {
+  color: var(--color-text);
+  font-size: 35px;
+  font-weight: 700;
+  letter-spacing: 1.75px;
+  text-transform: uppercase;
+
   margin-top: 0px;
-  margin-left: 0%;
-  margin-right: 0%;
-  margin-bottom: 0%;
+  margin-left: 0px;
+  margin-right:0px;
+  margin-bottom: 50px;
 
   padding-top: 0px;
   padding-bottom: 0px;
-  padding-left: 160px;
-  padding-right: 30px;
-
-  /* background-image: url("/image/services-solutions.jpg"); */
-  background-color: rgb(14, 81, 180);
-  background-position: center;
-
-  background-size:     cover;                     
-  background-repeat:   no-repeat;
-  background-position: center center; 
-
+  padding-left: 120px;
+  padding-right: 0px;
 }
-
 
 .content {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
+}
+
+.aboutImage {
+  width: 40%;
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+.aboutItems {
   color: var(--color-text);
-  position: relative;
-  z-index: 3;
-  max-width: 1200px;
-}
-.title {
-  font-size: 62px;
-  font-weight: 900;
-  /* ปรับ margin-top ให้เท่ากับ padding-top ของ aboutImage */
-  margin-top: 100px; /* เปลี่ยนจาก 200px เป็น 100px */
-  margin-left: 33px;
-  margin-right: 33px;
-  margin-bottom: 33px;
-
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 100px;
-  padding-right: 0px;
-
-  font-family: var(--font-roboto);
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1) 70%,
-    rgba(255, 255, 255, 0) 120%
-  );
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-}
-.title2 {
-  font-size: 32px;
-  font-weight: 900;
-  /* ปรับ margin-top ให้เท่ากับ padding-top ของ aboutImage */
-  margin-top: 0px; /* เปลี่ยนจาก 200px เป็น 100px */
-  margin-left: 33px;
-  margin-right: 33px;
-  margin-bottom: 33px;
-
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 100px;
-  padding-right: 0px;
-
-  font-family: var(--font-roboto);
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1) 70%,
-    rgba(255, 255, 255, 0) 120%
-  );
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-}
-.description_1 {
-  font-size: 24px;
-  font-family: var(--font-roboto);
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
   
-  margin-top: 33px;
+}
+
+.aboutItem {
+  display: flex;
+  flex-direction: row;
+  
+  align-items: center;
+  /* border-radius: 20px; */
+  list-style: none;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-right: 0px;
+  padding-left: 0px;
+  /* background-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.42) 0%,
+    rgba(0, 0, 0, 0) 100%
+  ); */
+  background-size: 0 100%;
+  background-repeat: no-repeat;
+  transition: 0.4s;
+
+
+  
+}
+
+.topic {
+  font-size: 72px;
+  font-weight: 900;
+
+  margin-top: 100px;
   margin-left: 33px;
   margin-right: 33px;
+  margin-bottom: 33px;
+
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 50px;
+  padding-right: 0px;
+
+  font-family: var(--font-roboto);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 70%,
+    rgba(255, 255, 255, 0) 120%
+  );
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+
+.aboutItem:hover {
+  background-size: 100% 100%;
+}
+
+.aboutItem h3 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right:0px;
+  margin-bottom: 50px;
+
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 80px;
+  padding-right: 0px;
+  
+}
+
+.aboutItemp {
+  font-size: 25px;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right:100px;
   margin-bottom: 0px;
 
   padding-top: 0px;
   padding-bottom: 0px;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 80px;
+  padding-right: 0px;
 }
-.description_2 {
-  font-size: 24px;
-  font-family: var(--font-roboto);
+
+@media screen and (max-width: 830px) {
+  .container {
+    background-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .title {
+    color: var(--color-text);
+    font-size: 35px;
+    font-weight: 700;
+    letter-spacing: 1.75px;
+    text-transform: uppercase;
   
-  margin-top: 0px;
-  margin-left: 33px;
-  margin-right: 33px;
-  margin-bottom: 33px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right:0px;
+    margin-bottom: 10px;
+  
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 80px;
+    padding-right: 0px;
+  }
+  .aboutItem h3 {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right:0px;
+    margin-bottom: 50px;
+  
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 50px;
+    padding-right: 0px;
+    
+  }
+  .aboutItem p {
+    font-size: 18px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right:0px;
+    margin-bottom: 0px;
+  
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .content {
+    flex-direction: column;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right:0px;
+    margin-bottom: 50px;
+  
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 100px;
-  padding-right: 100px;
+  .aboutImage {
+    display: none;
+  }
+
+  .aboutItems {
+    margin-top: 29px;
+  }
+
+  .aboutItem {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
-.contactBtn {
+.buttonContainer
+{
+  display: flex;
+  justify-content:left ;  /* จัดปุ่มให้อยู่ตรงกลางในแนวนอน */
+  align-items: center;      /* จัดปุ่มให้อยู่ตรงกลางในแนวตั้ง */
+                        
+  
+  position: relative;       /* ใช้ position relative เพื่อให้การจัดวางภายใน */
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.primaryButton{
+  padding: 12px 24px;
+  border-radius: 5px;
   text-decoration: none;
-  background-color: var(--color-primary);
-  color: var(--color-text);
-  border-radius: 100px;
-  font-size: 30px;
+  font-size: 16px;
   font-weight: 600;
-  padding: 17px 26px;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 
 
-
-  margin-top: 33px;
-  margin-left: 133px;
-  margin-right: 33px;
-  margin-bottom: 33px;
-
+           
  
 }
-
-.heroImg {
-  width: 20%;
-  z-index: 1;
-
-  animation-name: floating;
-  animation-duration: 3s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-}
-
-@keyframes floating {
-  0% {
-    transform: translate(0, 0px);
-  }
-  50% {
-    transform: translate(0, 10px);
-  }
-  100% {
-    transform: translate(0, -0px);
-  }
-}
-
-/* .topBlur {
-  position: absolute;
-  width: 100vw;
-  height: 50vw;
-  min-width: 350px;
-  min-width: 350px;
-  top: -128px;
-  left: -10vw;
-  border-radius: 764px;
-  background: rgba(25, 55, 109, 0.7);
-  filter: blur(100px);
-  z-index: 0;
-}
-
-.bottomBlur {
-  position: absolute;
-  width: 100vw;
-  height: 50vw;
-  min-width: 350px;
-  min-width: 250px;
-  top: 246px;
-  right: -25vw;
-  border-radius: 764px;
-  background: rgba(25, 55, 109, 0.7);
-  filter: blur(100px);
-  z-index: 0;
-} */
-.textAndImageWrapper {
-  display: flex;
-  align-items: flex-start; /* เปลี่ยนจาก center เป็น flex-start */
-  gap: 20px;
-}
-
-.textContainer {
-  flex: 1; /* ให้พื้นที่กับ text เพื่อให้มันขยายได้ตามความกว้างของหน้าจอ */
-}
-
-.aboutImage {
-  width: 100%;
-  max-width: 800px;
-  padding-top: 100px; /* คงค่าเดิมไว้ */
-  padding-bottom: px;
-  padding-left:0px;
-  padding-right: 100px;
+.primaryButton {
+  background-color: #007bff;
+  color: white;
 }

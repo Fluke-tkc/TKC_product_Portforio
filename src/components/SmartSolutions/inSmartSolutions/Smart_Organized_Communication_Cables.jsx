@@ -2,281 +2,545 @@ import React, { useEffect } from "react";
 import styles from "./Smart_Organized_Communication_Cables.module.css";
 import { Navbar } from "../../Navbar/Navbar";
 import { Contact } from "../../Contact/Contact";
-import { useNavigate } from "react-router-dom"; // นำเข้า useNavigate
+import { useNavigate } from "react-router-dom";
 
-export const Smart_Organized_Communication_Cables = () => {
-//   const navigate = useNavigate();
+export const Smart_Organized_Communication_Cables = () => { // แก้ไขชื่อ component ให้ตรงกัน
 
-  // ฟังก์ชันที่จะนำทางไปยังหน้า SmartSolutions_Building
-//   const handleLearnMoreClick_smart_Building = () => {
-//     navigate("/smart-solutions-building"); // URL ที่ต้องการนำทาง
-//   };
-useEffect(() => {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: "auto", // เลื่อนไปยังตำแหน่งทันทีโดยไม่มีการหน่วง
-  });
-}, []);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto", // เลื่อนไปยังตำแหน่งทันทีโดยไม่มีการหน่วง
+    });
+  }, []);
+
+
+  
   return (
     <>
-      <Navbar />
+    <Navbar/>
+   
+    <section className={styles.container} >
+     
+  
+     
+     <div className={styles.content}>
+    
+
+       <ul className={styles.aboutItems}>
+         <li className={styles.aboutItem}>
+           <div className={styles.aboutItemText}>
+           <h1 className={styles.topic}>Smart Organized Communication Cables</h1>
+             <div className={styles.aboutItemp}>
+            
+             
+               </div>
+               </div>
+         </li>
+         
+       </ul>
+      
+     </div>
+
+
+   </section>
+
+
+
+      <section className={styles.container} >
+     
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+              <div className={styles.aboutItemText}>
+                <h3>1. Fiber Optic Cables</h3>
+                <div className={styles.aboutItemp}>
+                สายไฟเบอร์ออปติกเป็นส่วนสำคัญของโครงข่ายสื่อสารอัจฉริยะ 
+                เนื่องจากสามารถส่งข้อมูลด้วยความเร็วสูงและมีความสามารถในการรองรับปริมาณข้อมูลมากกว่าสายทองแดงทั่วไป​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Building.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+
+
+      </section>
+
+
+
+          <section className={styles.container}>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+            {/* <img
+          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+              <div className={styles.aboutItemText}>
+                <h3>2. Copper Cables (Coaxial/UTP)</h3>
+                <div className={styles.aboutItemp}>
+                สายทองแดงประเภทต่างๆ เช่น Coaxial หรือ UTP (Unshielded Twisted Pair) 
+                ยังถูกใช้อยู่ในบางสถานการณ์ เช่น การสื่อสารระยะสั้นหรือในระบบที่ไม่ต้องการความเร็วสูงมาก​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
+
+
+
+      <section className={styles.container} >
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+              <div className={styles.aboutItemText}>
+                <h3>3. Cable Management Systems</h3>
+                <div className={styles.aboutItemp}>
+                ระบบจัดการสายสื่อสาร เช่น cable trays, cable conduits, และ cable ties
+                 ที่ช่วยจัดระเบียบสายให้เป็นระบบ ลดความยุ่งเหยิงและลดโอกาสที่สายจะเสียหาย
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Building.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+
+
+      </section>
+
+       <section className={styles.container}>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+            {/* <img
+          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+              <div className={styles.aboutItemText}>
+                <h3>4. Power over Ethernet (PoE)</h3>
+                <div className={styles.aboutItemp}>
+                เทคโนโลยีที่ช่วยให้สาย Ethernet สามารถส่งทั้งข้อมูลและพลังงานผ่านสายเดียวกัน 
+                ทำให้ลดจำนวนสายที่ต้องใช้ในการติดตั้งอุปกรณ์ เช่น กล้องวงจรปิดหรือจุดเชื่อมต่อไร้สาย​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
+
+
+
+      <section className={styles.container} >
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+              <div className={styles.aboutItemText}>
+                <h3>5. Structured Cabling</h3>
+                <div className={styles.aboutItemp}>
+                การออกแบบและติดตั้งสายเคเบิลอย่างเป็นระบบ โดยมีการจัดการที่เป็นมาตรฐาน เช่น การแยกสายตามประเภทของข้อมูล 
+                (ข้อมูลเสียง วิดีโอ หรือข้อมูลทั่วไป) ทำให้การบำรุงรักษาและอัพเกรดระบบง่ายขึ้น​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Building.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+
+
+      </section>
+
       <section className={styles.container}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-      <div className={styles.textContainer}>
-        <h1 className={styles.title}>Smart Organized Communication Cables</h1>
-        <h1 className={styles.title2}> 1. Fiber Optic Cables​</h1>
-        <p className={styles.description_1}>
-        สายไฟเบอร์ออปติกเป็นส่วนสำคัญของโครงข่ายสื่อสารอัจฉริยะ 
-        เนื่องจากสามารถส่งข้อมูลด้วยความเร็วสูงและมีความสามารถในการรองรับปริมาณข้อมูลมากกว่าสายทองแดงทั่วไป​
-        </p>
-      </div>
-      {/* <img
-        src="/image/Building Automation System.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-    </div>
-  </div>
-</section>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
 
-<section className={styles.container_2}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-      {/* <img
-          src="/image/Energy Management System (EMS).jpg"
-          alt="Me sitting with a laptop"
-          className={styles.aboutImage}
-        /> */}
-      <div className={styles.textContainer}>
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+            {/* <img
+          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+              <div className={styles.aboutItemText}>
+                <h3>6. Network Switches & Hubs</h3>
+                <div className={styles.aboutItemp}>
+                อุปกรณ์เครือข่าย เช่น switch และ hub ช่วยในการเชื่อมต่อสายสื่อสารเข้าด้วยกันและจัดการการส่งข้อมูลระหว่างอุปกรณ์ต่างๆ ภายในเครือข่าย​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
 
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 2. Copper Cables (Coaxial/UTP) ​</h1>
-
-        <p className={styles.description_1}>
-        สายทองแดงประเภทต่างๆ เช่น Coaxial หรือ UTP (Unshielded Twisted Pair)
-         ยังถูกใช้อยู่ในบางสถานการณ์ เช่น การสื่อสารระยะสั้นหรือในระบบที่ไม่ต้องการความเร็วสูงมาก​
-        </p>
-
-      </div>
-       {/* <img
-        src="/image/Building Automation System.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      />  */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-      <div className={styles.textContainer}>
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}>3. Cable Management Systems​</h1>
-        <p className={styles.description_1}>
-        ระบบจัดการสายสื่อสาร เช่น cable trays, cable conduits, และ cable ties ที่ช่วยจัดระเบียบสายให้เป็นระบบ
-         ลดความยุ่งเหยิงและลดโอกาสที่สายจะเสียหาย​
-        </p>
-      </div>
-      {/* <img
-        src="/image/Smart_Lighting.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container_2}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-    {/* <img
-        src="/image/Smart HVAC (Heating, Ventilation, and Air Conditioning).jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-      <div className={styles.textContainer}>
-
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 4. Power over Ethernet (PoE)​</h1>
-
-        <p className={styles.description_1}>
-        เทคโนโลยีที่ช่วยให้สาย Ethernet สามารถส่งทั้งข้อมูลและพลังงานผ่านสายเดียวกัน 
-        ทำให้ลดจำนวนสายที่ต้องใช้ในการติดตั้งอุปกรณ์ เช่น กล้องวงจรปิดหรือจุดเชื่อมต่อไร้สาย​
-        </p>
-
-      </div>
-       {/* <img
-        src="/image/Building Automation System.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      />  */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-      <div className={styles.textContainer}>
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 5. Structured Cabling</h1>
-        <p className={styles.description_1}>
-        การออกแบบและติดตั้งสายเคเบิลอย่างเป็นระบบ โดยมีการจัดการที่เป็นมาตรฐาน เช่น การแยกสายตามประเภทของข้อมูล 
-          (ข้อมูลเสียง วิดีโอ หรือข้อมูลทั่วไป) ทำให้การบำรุงรักษาและอัพเกรดระบบง่ายขึ้น​
-        </p>
-      </div>
-      {/* <img
-        src="/image/IoT (Internet of Things)2.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container_2}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-    {/* <img
-        src="/image/Security System1.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-      <div className={styles.textContainer}>
-
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 6. Network Switches & Hubs​</h1>
-
-        <p className={styles.description_1}>
-        อุปกรณ์เครือข่าย เช่น switch และ hub ช่วยในการเชื่อมต่อสายสื่อสารเข้าด้วยกันและจัดการการส่งข้อมูลระหว่างอุปกรณ์ต่างๆ ภายในเครือข่าย​
-        </p>
-
-      </div>
-       {/* <img
-        src="/image/Building Automation System.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      />  */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-    {/* <img
-        src="/image/Security System1.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-      <div className={styles.textContainer}>
-
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 7. Wireless Integration​</h1>
-
-        <p className={styles.description_1}>
-        แม้ว่าสายสื่อสารยังคงมีความสำคัญ ระบบไร้สายที่เชื่อมต่อกับสายเคเบิลก็เป็นอีกองค์ประกอบที่เสริมประสิทธิภาพ
-         เช่น การใช้สายสื่อสารในการจัดการโครงข่ายไร้สายที่ครอบคลุมบริเวณกว้าง​​
-        </p>
-
-      </div>
-       {/* <img
-        src="/image/Building Automation System.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      />  */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container_2}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-    {/* <img
-        src="/image/Security System1.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-      <div className={styles.textContainer}>
-
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 8. Smart Monitoring & Diagnostics</h1>
-
-        <p className={styles.description_1}>
-        ระบบตรวจสอบและวิเคราะห์การทำงานของสายสื่อสารแบบอัตโนมัติ ช่วยให้สามารถตรวจจับปัญหา เช่น
-         การเสื่อมสภาพของสายหรือการเชื่อมต่อที่ผิดพลาดได้อย่างรวดเร็ว​
-        </p>
-
-      </div>
-       {/* <img
-        src="/image/Building Automation System.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      />  */}
-    </div>
-  </div>
-</section>
-<section className={styles.container}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-    {/* <img
-        src="/image/Security System1.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-      <div className={styles.textContainer}>
-
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 9. Redundancy and Backup Lines​</h1>
-
-        <p className={styles.description_1}>
-        การจัดการเครือข่ายที่มีสายสำรองในกรณีที่สายหลักเกิดปัญหา เพื่อให้การสื่อสารยังคงทำงานได้อย่างต่อเนื่อง​
-        </p>
-
-      </div>
-       {/* <img
-        src="/image/Building Automation System.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      />  */}
-    </div>
-  </div>
-</section>
-<section className={styles.container_2}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-      <div className={styles.textContainer}>  
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 10. Shielded Cables (STP/FTP)​</h1>
-        <p className={styles.description_1}>
-        สายเคเบิลที่มีการหุ้มป้องกันการรบกวนจากสัญญาณแม่เหล็กไฟฟ้า ช่วยลดปัญหาการสูญเสียข้อมูลในระหว่างการส่งข้อมูล​
-        </p>
-      </div>
-      {/* <img
-        src="/image/Smart Water Management2.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-    </div>
-    <br>
-</br><br>
-</br><br>
-</br>
-  </div>
-</section>
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
 
 
 
+      <section className={styles.container} >
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+              <div className={styles.aboutItemText}>
+                <h3>7. Wireless Integration</h3>
+                <div className={styles.aboutItemp}>
+                แม้ว่าสายสื่อสารยังคงมีความสำคัญ ระบบไร้สายที่เชื่อมต่อกับสายเคเบิลก็เป็นอีกองค์ประกอบที่เสริมประสิทธิภาพ 
+                เช่น การใช้สายสื่อสารในการจัดการโครงข่ายไร้สายที่ครอบคลุมบริเวณกว้าง​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Building.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+
+
+      </section>
+
+      
+      <section className={styles.container}>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+            {/* <img
+          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+              <div className={styles.aboutItemText}>
+                <h3>8. Smart Monitoring & Diagnostics</h3>
+                <div className={styles.aboutItemp}>
+                ระบบตรวจสอบและวิเคราะห์การทำงานของสายสื่อสารแบบอัตโนมัติ ช่วยให้สามารถตรวจจับปัญหา เช่น 
+                การเสื่อมสภาพของสายหรือการเชื่อมต่อที่ผิดพลาดได้อย่างรวดเร็ว
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
 
 
 
+      <section className={styles.container} >
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+              <div className={styles.aboutItemText}>
+                <h3>9. Redundancy and Backup Lines</h3>
+                <div className={styles.aboutItemp}>
+                การจัดการเครือข่ายที่มีสายสำรองในกรณีที่สายหลักเกิดปัญหา เพื่อให้การสื่อสารยังคงทำงานได้อย่างต่อเนื่อง​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Building.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
 
 
-      <Contact />
+      </section>
+
+      <section className={styles.container}>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+            {/* <img
+          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+              <div className={styles.aboutItemText}>
+                <h3>10. Shielded Cables (STP/FTP)</h3>
+                <div className={styles.aboutItemp}>
+                สายเคเบิลที่มีการหุ้มป้องกันการรบกวนจากสัญญาณแม่เหล็กไฟฟ้า ช่วยลดปัญหาการสูญเสียข้อมูลในระหว่างการส่งข้อมูล​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
+
+
+
+      <section className={styles.container} >
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+              <div className={styles.aboutItemText}>
+                <h3></h3>
+                <div className={styles.aboutItemp}>
+                ระบบ Smart Organized Communication Cables เหล่านี้ทำให้การสื่อสารในโครงข่ายมีประสิทธิภาพและมั่นคงมากขึ้น 
+                ทั้งในด้านความเร็ว ความน่าเชื่อถือ และการจัดการ​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Building.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+
+
+      </section>
+
+    
+
+
+      
+      <Contact/>
     </>
   );
 };
