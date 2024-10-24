@@ -73,11 +73,11 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
                 
               </div>
-              {/* <img
-          src="/image/Smart_Building.jpg" 
+              <img
+          src="/image/Building Automation System.jpg" 
             alt="Me sitting with a laptop"
             className={styles.aboutImage}
-         /> */}
+         />
             </li>
             
           </ul>
@@ -105,11 +105,11 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
           <ul className={styles.aboutItems}>
             <li className={styles.aboutItem}>
-            {/* <img
-          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            <img
+          src="/image/Energy Management System (EMS).jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
             alt="Me sitting with a laptop"
             className={styles.aboutImage}
-         /> */}
+         />
               <div className={styles.aboutItemText}>
                 <h3>2. Energy Management System (EMS)</h3>
                 <div className={styles.aboutItemp}>
@@ -164,11 +164,11 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
                 
               </div>
-              {/* <img
-          src="/image/Smart_Building.jpg" 
+              <img
+          src="/image/Smart_Learning.jpg" 
             alt="Me sitting with a laptop"
             className={styles.aboutImage}
-         /> */}
+         />
             </li>
             
           </ul>
@@ -194,11 +194,11 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
           <ul className={styles.aboutItems}>
             <li className={styles.aboutItem}>
-            {/* <img
-          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            <img
+          src="/image/Smart HVAC (Heating, Ventilation, and Air Conditioning).jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
             alt="Me sitting with a laptop"
             className={styles.aboutImage}
-         /> */}
+         />
               <div className={styles.aboutItemText}>
                 <h3>4. Smart HVAC (Heating, Ventilation, and Air Conditioning)</h3>
                 <div className={styles.aboutItemp}>
@@ -253,11 +253,11 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
                 
               </div>
-              {/* <img
-          src="/image/Smart_Building.jpg" 
+              <img
+          src="/image/IoT (Internet of Things)1.jpg" 
             alt="Me sitting with a laptop"
             className={styles.aboutImage}
-         /> */}
+         />
             </li>
             
           </ul>
@@ -283,11 +283,11 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
           <ul className={styles.aboutItems}>
             <li className={styles.aboutItem}>
-            {/* <img
-          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            <img
+          src="/image/Security System1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
             alt="Me sitting with a laptop"
             className={styles.aboutImage}
-         /> */}
+         />
               <div className={styles.aboutItemText}>
                 <h3>6. Security System</h3>
                 <div className={styles.aboutItemp}>
@@ -342,11 +342,11 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
                 
               </div>
-              {/* <img
-          src="/image/Smart_Building.jpg" 
+              <img
+          src="/image/Smart Water Management2.jpg" 
             alt="Me sitting with a laptop"
             className={styles.aboutImage}
-         /> */}
+         />
             </li>
             
           </ul>
@@ -360,95 +360,6 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
       </section>
 
-      
-      <section className={styles.container}>
-        {/* <h2 className={styles.title}>Smart Building</h2> */}
-        
-        <div className={styles.content}>
-        {/* <img
-          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
-            alt="Me sitting with a laptop"
-            className={styles.aboutImage}
-         /> */}
-
-          <ul className={styles.aboutItems}>
-            <li className={styles.aboutItem}>
-            {/* <img
-          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
-            alt="Me sitting with a laptop"
-            className={styles.aboutImage}
-         /> */}
-              <div className={styles.aboutItemText}>
-                <h3>6. Security System</h3>
-                <div className={styles.aboutItemp}>
-                ระบบรักษาความปลอดภัยอัจฉริยะ เช่น กล้องวงจรปิดที่เชื่อมต่อกับ AI ในการวิเคราะห์และตรวจจับความผิดปกติ
-                 ระบบควบคุมการเข้าถึงที่ใช้การสแกนใบหน้า ลายนิ้วมือ หรือการใช้คีย์การ์ด รวมถึงระบบตรวจจับและป้องกันอัคคีภัย​
-                  <div className={styles.buttonContainer}>
-                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
-                  </div>
-                  </div>
-
-                
-              </div>
-              {/* <img
-          src="/image/Smart_Farm1.jpg" 
-            alt="Me sitting with a laptop"
-            className={styles.aboutImage}
-         /> */}
-            </li>
-            
-          </ul>
-          {/* <img
-          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
-            alt="Me sitting with a laptop"
-            className={styles.aboutImage}
-         /> */}
-        </div>
-      </section>
-
-
-
-      <section className={styles.container} >
-        {/* <h2 className={styles.title}>Smart Building</h2> */}
-        
-        <div className={styles.content}>
-        {/* <img
-          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
-            alt="Me sitting with a laptop"
-            className={styles.aboutImage}
-         /> */}
-
-          <ul className={styles.aboutItems}>
-            <li className={styles.aboutItem}>
-              <div className={styles.aboutItemText}>
-                <h3>7. Smart Water Management</h3>
-                <div className={styles.aboutItemp}>
-                ระบบจัดการน้ำที่สามารถตรวจสอบและควบคุมการใช้น้ำภายในอาคาร ช่วยลดการใช้น้ำสิ้นเปลือง เช่น 
-                ระบบน้ำพุอัจฉริยะที่สามารถปรับการจ่ายน้ำตามความต้องการ​
-                  <div className={styles.buttonContainer}>
-                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
-                  </div>
-                  </div>
-
-                
-              </div>
-              {/* <img
-          src="/image/Smart_Building.jpg" 
-            alt="Me sitting with a laptop"
-            className={styles.aboutImage}
-         /> */}
-            </li>
-            
-          </ul>
-          {/* <img
-          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
-            alt="Me sitting with a laptop"
-            className={styles.aboutImage}
-         /> */}
-        </div>
-
-
-      </section>
 
       <section className={styles.container}>
         {/* <h2 className={styles.title}>Smart Building</h2> */}
@@ -462,11 +373,11 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
           <ul className={styles.aboutItems}>
             <li className={styles.aboutItem}>
-            {/* <img
-          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            <img
+          src="/image/Predictive Maintenance.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
             alt="Me sitting with a laptop"
             className={styles.aboutImage}
-         /> */}
+         />
               <div className={styles.aboutItemText}>
                 <h3>8. Predictive Maintenance</h3>
                 <div className={styles.aboutItemp}>
@@ -521,11 +432,11 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
                 
               </div>
-              {/* <img
-          src="/image/Smart_Building.jpg" 
+              <img
+          src="/image/Smart Metering1.jpg" 
             alt="Me sitting with a laptop"
             className={styles.aboutImage}
-         /> */}
+         />
             </li>
             
           </ul>
@@ -551,11 +462,11 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
           <ul className={styles.aboutItems}>
             <li className={styles.aboutItem}>
-            {/* <img
-          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            <img
+          src="/image/Renewable Energy Integration1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
             alt="Me sitting with a laptop"
             className={styles.aboutImage}
-         /> */}
+         />
               <div className={styles.aboutItemText}>
                 <h3>10. Renewable Energy Integration</h3>
                 <div className={styles.aboutItemp}>
@@ -610,11 +521,11 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
                 
               </div>
-              {/* <img
-          src="/image/Smart_Building.jpg" 
+              <img
+          src="/image/Data Analytics1.jpg" 
             alt="Me sitting with a laptop"
             className={styles.aboutImage}
-         /> */}
+         />
             </li>
             
           </ul>
@@ -640,16 +551,61 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
           <ul className={styles.aboutItems}>
             <li className={styles.aboutItem}>
+            <img
+          src="/image/Connectivity and 5G1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         />
+              <div className={styles.aboutItemText}>
+                <h3>12. Connectivity and 5G</h3>
+                <div className={styles.aboutItemp}>
+                ระบบการเชื่อมต่อที่มีประสิทธิภาพ เช่น อินเทอร์เน็ตความเร็วสูงและเครือข่าย 5G 
+                ซึ่งเป็นโครงสร้างพื้นฐานสำคัญสำหรับการทำงานของเทคโนโลยีอัจฉริยะในอาคาร​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                 
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
+
+      <section className={styles.container}>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
             {/* <img
           src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
             alt="Me sitting with a laptop"
             className={styles.aboutImage}
          /> */}
               <div className={styles.aboutItemText}>
-                <h3>12. Connectivity and 5G</h3>
+                <h3></h3>
                 <div className={styles.aboutItemp}>
-                ระบบการเชื่อมต่อที่มีประสิทธิภาพ เช่น อินเทอร์เน็ตความเร็วสูงและเครือข่าย 5G 
-                ซึ่งเป็นโครงสร้างพื้นฐานสำคัญสำหรับการทำงานของเทคโนโลยีอัจฉริยะในอาคาร​
+                Smart Building ช่วยให้การบริหารจัดการอาคารเป็นไปอย่างมีประสิทธิภาพ ทั้งในแง่การประหยัดพลังงาน 
+                การดูแลรักษาความปลอดภัย และการสร้างสภาพแวดล้อมที่น่าอยู่สำหรับผู้ใช้อาคาร​
                   <div className={styles.buttonContainer}>
                   {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
                   </div>

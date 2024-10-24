@@ -2,293 +2,723 @@ import React, { useEffect } from "react";
 import styles from "./Smart_Hospital.module.css";
 import { Navbar } from "../../Navbar/Navbar";
 import { Contact } from "../../Contact/Contact";
-import { useNavigate } from "react-router-dom"; // นำเข้า useNavigate
+import { useNavigate } from "react-router-dom";
 
-export const Smart_Hospital = () => {
-//   const navigate = useNavigate();
+export const Smart_Hospital = () => { // แก้ไขชื่อ component ให้ตรงกัน
 
-  // ฟังก์ชันที่จะนำทางไปยังหน้า SmartSolutions_Building
-//   const handleLearnMoreClick_smart_Building = () => {
-//     navigate("/smart-solutions-building"); // URL ที่ต้องการนำทาง
-//   };
-useEffect(() => {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: "auto", // เลื่อนไปยังตำแหน่งทันทีโดยไม่มีการหน่วง
-  });
-}, []);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto", // เลื่อนไปยังตำแหน่งทันทีโดยไม่มีการหน่วง
+    });
+  }, []);
+
+
+  
   return (
     <>
-      <Navbar />
+    <Navbar/>
+   
+    <section className={styles.container} >
+     
+  
+     
+     <div className={styles.content}>
+    
+
+       <ul className={styles.aboutItems}>
+         <li className={styles.aboutItem}>
+           <div className={styles.aboutItemText}>
+           <h1 className={styles.topic}>Smart Hospital</h1>
+             <div className={styles.aboutItemp}>
+            
+             
+               </div>
+               </div>
+         </li>
+         
+       </ul>
+      
+     </div>
+
+
+   </section>
+
+
+
+      <section className={styles.container} >
+     
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+              <div className={styles.aboutItemText}>
+                <h3>1. Internet of Things (IoT)</h3>
+                <div className={styles.aboutItemp}>
+                อุปกรณ์และเซนเซอร์ต่าง ๆ ที่ใช้ในการตรวจวัดสัญญาณชีพของผู้ป่วยแบบเรียลไทม์ เช่น เครื่องวัดความดันโลหิต เครื่องตรวจคลื่นหัวใจ
+                 หรืออุปกรณ์ติดตามการเคลื่อนไหว ซึ่งจะส่งข้อมูลไปยังแพทย์หรือพยาบาลทันทีหากเกิดเหตุผิดปกติ​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Building.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+
+
+      </section>
+
+
+
+          <section className={styles.container}>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+            {/* <img
+          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+              <div className={styles.aboutItemText}>
+                <h3>2. Artificial Intelligence (AI)</h3>
+                <div className={styles.aboutItemp}>
+                ใช้ในการวิเคราะห์ข้อมูลผู้ป่วยเพื่อช่วยวินิจฉัยโรค การทำนายความเสี่ยงของโรค หรือแนะนำแนวทางการรักษา AI
+                 ยังสามารถใช้ในการวิเคราะห์ภาพทางการแพทย์ เช่น การตรวจเอกซเรย์หรือ MRI​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
+
+
+
+      <section className={styles.container} >
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+              <div className={styles.aboutItemText}>
+                <h3>3. Robotics</h3>
+                <div className={styles.aboutItemp}>
+                ระบบไฟฟ้าที่สามารถปรับความสว่างได้ตามความต้องการโดยอัตโนมัติ เช่น การใช้เซนเซอร์ตรวจจับการเคลื่อนไหว 
+                หรือการใช้แสงธรรมชาติร่วมกับแสงไฟประดิษฐ์เพื่อประหยัดพลังงาน​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Building.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+
+
+      </section>
+
+       <section className={styles.container}>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+            {/* <img
+          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+              <div className={styles.aboutItemText}>
+                <h3>4. Smart HVAC (Heating, Ventilation, and Air Conditioning)</h3>
+                <div className={styles.aboutItemp}>
+                ระบบปรับอากาศอัจฉริยะที่สามารถปรับอุณหภูมิและการระบายอากาศตามสภาพอากาศหรือการใช้งานจริงของห้อง 
+                ช่วยเพิ่มความสะดวกสบายและลดการใช้พลังงาน
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
+
+
+
+      <section className={styles.container} >
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+              <div className={styles.aboutItemText}>
+                <h3>5. IoT (Internet of Things)</h3>
+                <div className={styles.aboutItemp}>
+                อุปกรณ์และเซนเซอร์ต่าง ๆ ที่เชื่อมต่อกันเพื่อเก็บและส่งข้อมูล เช่น เซนเซอร์ตรวจวัดอุณหภูมิ ความชื้น
+                 และคุณภาพอากาศในห้อง หรืออุปกรณ์ตรวจสอบการใช้พลังงานของเครื่องใช้ไฟฟ้า​​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Building.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+
+
+      </section>
+
       <section className={styles.container}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-      <div className={styles.textContainer}>
-        <h1 className={styles.title}>Smart Hospital</h1>
-        <h1 className={styles.title2}> 1. Internet of Things (IoT)</h1>
-        <p className={styles.description_1}>
-        อุปกรณ์และเซนเซอร์ต่าง ๆ ที่ใช้ในการตรวจวัดสัญญาณชีพของผู้ป่วยแบบเรียลไทม์ เช่น เครื่องวัดความดันโลหิต
-         เครื่องตรวจคลื่นหัวใจ หรืออุปกรณ์ติดตามการเคลื่อนไหว ซึ่งจะส่งข้อมูลไปยังแพทย์หรือพยาบาลทันทีหากเกิดเหตุผิดปกติ​
-        </p>
-      </div>
-      {/* <img
-        src="/image/Building Automation System.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-    </div>
-  </div>
-</section>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
 
-<section className={styles.container_2}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-      {/* <img
-          src="/image/Energy Management System (EMS).jpg"
-          alt="Me sitting with a laptop"
-          className={styles.aboutImage}
-        /> */}
-      <div className={styles.textContainer}>
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+            {/* <img
+          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+              <div className={styles.aboutItemText}>
+                <h3>6. Security System</h3>
+                <div className={styles.aboutItemp}>
+                ระบบรักษาความปลอดภัยอัจฉริยะ เช่น กล้องวงจรปิดที่เชื่อมต่อกับ AI ในการวิเคราะห์และตรวจจับความผิดปกติ
+                 ระบบควบคุมการเข้าถึงที่ใช้การสแกนใบหน้า ลายนิ้วมือ หรือการใช้คีย์การ์ด รวมถึงระบบตรวจจับและป้องกันอัคคีภัย​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
 
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}>  2. Artificial Intelligence (AI)</h1>
-
-        <p className={styles.description_1}>
-        ใช้ในการวิเคราะห์ข้อมูลผู้ป่วยเพื่อช่วยวินิจฉัยโรค การทำนายความเสี่ยงของโรค หรือแนะนำแนวทางการรักษา AI
-         ยังสามารถใช้ในการวิเคราะห์ภาพทางการแพทย์ เช่น การตรวจเอกซเรย์หรือ MRI​
-        </p>
-
-      </div>
-       {/* <img
-        src="/image/Building Automation System.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      />  */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-      <div className={styles.textContainer}>
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 3. Robotics</h1>
-        <p className={styles.description_1}>
-        หุ่นยนต์ที่ใช้ในงานทางการแพทย์ เช่น หุ่นยนต์ช่วยผ่าตัด หุ่นยนต์จัดส่งยา หรือหุ่นยนต์ทำความสะอาดในโรงพยาบาล
-         ซึ่งช่วยลดภาระงานและเพิ่มความปลอดภัย
-        </p>
-      </div>
-      {/* <img
-        src="/image/Smart_Lighting.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container_2}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-    {/* <img
-        src="/image/Smart HVAC (Heating, Ventilation, and Air Conditioning).jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-      <div className={styles.textContainer}>
-
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 4. Telemedicine</h1>
-
-        <p className={styles.description_1}>
-        การให้คำปรึกษาทางการแพทย์ผ่านระบบออนไลน์ ทำให้แพทย์สามารถดูแลผู้ป่วยจากระยะไกล
-         โดยเฉพาะในกรณีที่ผู้ป่วยอยู่ในพื้นที่ห่างไกล​
-        </p>
-
-      </div>
-       {/* <img
-        src="/image/Building Automation System.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      />  */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-      <div className={styles.textContainer}>
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 5. Electronic Health Records (EHR)</h1>
-        <p className={styles.description_1}>
-        ระบบจัดเก็บข้อมูลทางการแพทย์ของผู้ป่วยแบบดิจิทัล ทำให้สามารถเข้าถึงข้อมูลได้รวดเร็ว ลดความซ้ำซ้อนในการตรวจวินิจฉัย
-         และช่วยในการตัดสินใจทางการแพทย์ได้ดีขึ้น​
-        </p>
-      </div>
-      {/* <img
-        src="/image/IoT (Internet of Things)2.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container_2}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-    {/* <img
-        src="/image/Security System1.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-      <div className={styles.textContainer}>
-
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 6. Wearable Devices</h1>
-
-        <p className={styles.description_1}>
-        อุปกรณ์สวมใส่ที่ช่วยติดตามสุขภาพของผู้ป่วย เช่น สมาร์ทวอทช์ที่ตรวจวัดอัตราการเต้นของหัวใจ ระดับออกซิเจนในเลือด หรือจำนวนก้าวเดิน​
-        </p>
-
-      </div>
-       {/* <img
-        src="/image/Building Automation System.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      />  */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-      <div className={styles.textContainer}>
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 7. Smart Beds</h1>
-        <p className={styles.description_1}>
-        เตียงอัจฉริยะที่สามารถปรับตัวเองตามท่าทางของผู้ป่วยเพื่อลดการเกิดแผลกดทับ หรือติดตั้งเซ็นเซอร์เพื่อติดตามการเคลื่อนไหวและสัญญาณชีพ​
-        </p>
-      </div>
-      {/* <img
-        src="/image/Smart Water Management2.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container_2}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-    {/* <img
-        src="/image/Predictive Maintenance.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-      <div className={styles.textContainer}>
-
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}>  8. Pharmacy Automation</h1>
-
-        <p className={styles.description_1}>
-        ระบบอัตโนมัติในการจัดยา จ่ายยา และควบคุมสต็อกยาภายในโรงพยาบาล ช่วยลดความผิดพลาดในการจัดยาหรือจ่ายยาให้กับผู้ป่วย​
-        </p>
-
-      </div>
-       {/* <img
-        src="/image/Building Automation System.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      />  */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-      <div className={styles.textContainer}>
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 9. Mobile Health (mHealth)</h1>
-        <p className={styles.description_1}>
-        การใช้แอปพลิเคชันบนสมาร์ทโฟนในการติดตามสุขภาพของผู้ป่วย เช่น การตรวจติดตามระดับน้ำตาลในเลือด 
-        การวางแผนการออกกำลังกาย หรือการแจ้งเตือนเวลาทานยา​
-        </p>
-      </div>
-      {/* <img
-        src="/image/Smart Metering1.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-    </div>
-  </div>
-</section>
-
-
-<section className={styles.container_2}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-    {/* <img
-        src="/image/Renewable Energy Integration1.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-      <div className={styles.textContainer}>
-
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}>  10. Blockchain</h1>
-
-        <p className={styles.description_1}>
-        ใช้เพื่อเพิ่มความปลอดภัยและความโปร่งใสในการจัดเก็บข้อมูลทางการแพทย์ ทำให้ข้อมูลสามารถตรวจสอบได้และป้องกันการปลอมแปลง​
-        ใช้สำหรับจัดเก็บและประมวลผลข้อมูลขนาดใหญ่ในโรงพยาบาล ทำให้ข้อมูลทางการแพทย์สามารถเข้าถึงได้จากทุกที่โดยปลอดภัย
-        </p>
-
-      </div>
-       {/* <img
-        src="/image/Building Automation System.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      />  */}
-    </div>
-  </div>
-</section>
-
-<section className={styles.container}>
-  <div className={styles.content}>
-    <div className={styles.textAndImageWrapper}>
-      <div className={styles.textContainer}>
-        <h1 className={styles.title}></h1>
-        <h1 className={styles.title2}> 11. Augmented Reality (AR) และ Virtual Reality (VR)</h1>
-        <p className={styles.description_1}>
-        ใช้ในการฝึกอบรมแพทย์หรือการจำลองสถานการณ์ทางการแพทย์ เช่น การฝึกผ่าตัด การฝึกปฏิบัติการดูแลผู้ป่วย หรือการบำบัดรักษาผู้ป่วยทางจิต​
-        </p>
-      </div>
-      {/* <img
-        src="/image/Data Analytics1.jpg"
-        alt="Me sitting with a laptop"
-        className={styles.aboutImage}
-      /> */}
-    </div>
-    <br>
-</br><br>
-</br><br>
-</br>
-  </div>
-</section>
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
 
 
 
+      <section className={styles.container} >
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+              <div className={styles.aboutItemText}>
+                <h3>7. Smart Water Management</h3>
+                <div className={styles.aboutItemp}>
+                ระบบจัดการน้ำที่สามารถตรวจสอบและควบคุมการใช้น้ำภายในอาคาร ช่วยลดการใช้น้ำสิ้นเปลือง เช่น 
+                ระบบน้ำพุอัจฉริยะที่สามารถปรับการจ่ายน้ำตามความต้องการ​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Building.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+
+
+      </section>
+
+      
+      <section className={styles.container}>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+            {/* <img
+          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+              <div className={styles.aboutItemText}>
+                <h3>6. Security System</h3>
+                <div className={styles.aboutItemp}>
+                ระบบรักษาความปลอดภัยอัจฉริยะ เช่น กล้องวงจรปิดที่เชื่อมต่อกับ AI ในการวิเคราะห์และตรวจจับความผิดปกติ
+                 ระบบควบคุมการเข้าถึงที่ใช้การสแกนใบหน้า ลายนิ้วมือ หรือการใช้คีย์การ์ด รวมถึงระบบตรวจจับและป้องกันอัคคีภัย​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
 
 
 
-      <Contact />
+      <section className={styles.container} >
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+              <div className={styles.aboutItemText}>
+                <h3>7. Smart Water Management</h3>
+                <div className={styles.aboutItemp}>
+                ระบบจัดการน้ำที่สามารถตรวจสอบและควบคุมการใช้น้ำภายในอาคาร ช่วยลดการใช้น้ำสิ้นเปลือง เช่น 
+                ระบบน้ำพุอัจฉริยะที่สามารถปรับการจ่ายน้ำตามความต้องการ​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Building.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+
+
+      </section>
+
+      <section className={styles.container}>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+            {/* <img
+          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+              <div className={styles.aboutItemText}>
+                <h3>8. Predictive Maintenance</h3>
+                <div className={styles.aboutItemp}>
+                การบำรุงรักษาเชิงคาดการณ์ โดยใช้เซนเซอร์ตรวจจับสภาพของอุปกรณ์ต่าง ๆ เช่น เครื่องปรับอากาศ หรือลิฟต์ 
+                และวิเคราะห์ข้อมูลเพื่อตรวจสอบปัญหาที่อาจเกิดขึ้น ทำให้สามารถซ่อมบำรุงก่อนที่อุปกรณ์จะเสียหาย
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
+
+
+
+      <section className={styles.container} >
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+              <div className={styles.aboutItemText}>
+                <h3>9. Smart Metering</h3>
+                <div className={styles.aboutItemp}>
+                ปกรณ์ที่ใช้ในการวัดและตรวจสอบการใช้พลังงานไฟฟ้า น้ำ และแก๊ส แบบเรียลไทม์ 
+                ซึ่งช่วยให้เจ้าของอาคารสามารถวางแผนการใช้งานได้อย่างมีประสิทธิภาพมากขึ้น​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Building.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+
+
+      </section>
+
+      <section className={styles.container}>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+            {/* <img
+          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+              <div className={styles.aboutItemText}>
+                <h3>10. Renewable Energy Integration</h3>
+                <div className={styles.aboutItemp}>
+                การผสานพลังงานหมุนเวียน เช่น พลังงานแสงอาทิตย์และพลังงานลม เข้าไว้กับระบบอาคาร เช่น 
+                การติดตั้งแผงโซลาร์เซลล์บนหลังคา เพื่อลดการพึ่งพาพลังงานจากแหล่งอื่น​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
+
+
+
+      <section className={styles.container} >
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+              <div className={styles.aboutItemText}>
+                <h3>11. Data Analytics</h3>
+                <div className={styles.aboutItemp}>
+                การใช้ข้อมูลและการวิเคราะห์เพื่อปรับปรุงการทำงานของระบบต่าง ๆ ภายในอาคาร เช่น 
+                การวิเคราะห์การใช้พลังงานเพื่อหาวิธีลดการใช้ หรือการใช้ข้อมูลจากอุปกรณ์ IoT เพื่อปรับปรุงความสะดวกสบายของผู้ใช้อาคาร​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Building.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+
+
+      </section>
+
+      <section className={styles.container}>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+            {/* <img
+          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+              <div className={styles.aboutItemText}>
+                <h3>12. Connectivity and 5G</h3>
+                <div className={styles.aboutItemp}>
+                ระบบการเชื่อมต่อที่มีประสิทธิภาพ เช่น อินเทอร์เน็ตความเร็วสูงและเครือข่าย 5G 
+                ซึ่งเป็นโครงสร้างพื้นฐานสำคัญสำหรับการทำงานของเทคโนโลยีอัจฉริยะในอาคาร​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                 
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
+
+      <section className={styles.container}>
+        {/* <h2 className={styles.title}>Smart Building</h2> */}
+        
+        <div className={styles.content}>
+        {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+
+          <ul className={styles.aboutItems}>
+            <li className={styles.aboutItem}>
+            {/* <img
+          src="/image/Smart_Farm1.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+              <div className={styles.aboutItemText}>
+                <h3></h3>
+                <div className={styles.aboutItemp}>
+                Smart Building ช่วยให้การบริหารจัดการอาคารเป็นไปอย่างมีประสิทธิภาพ ทั้งในแง่การประหยัดพลังงาน 
+                การดูแลรักษาความปลอดภัย และการสร้างสภาพแวดล้อมที่น่าอยู่สำหรับผู้ใช้อาคาร​
+                  <div className={styles.buttonContainer}>
+                  {/* <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a> */}
+                  </div>
+                  </div>
+
+                
+              </div>
+              {/* <img
+          src="/image/Smart_Farm1.jpg" 
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+            </li>
+            
+          </ul>
+          {/* <img
+          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
+            alt="Me sitting with a laptop"
+            className={styles.aboutImage}
+         /> */}
+        </div>
+      </section>
+      
+      <Contact/>
     </>
   );
 };
