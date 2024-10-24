@@ -43,7 +43,7 @@ useEffect(() => {
   </div>
 </section>
 
-<section className={styles.container_2  }>
+<section className={styles.container_2}>
   <div className={styles.content}>
     <div className={styles.textAndImageWrapper}>
     <img
@@ -91,7 +91,7 @@ useEffect(() => {
   </div>
 </section>
 
-<section className={styles.container_2  }>
+<section className={styles.container_2}>
   <div className={styles.content}>
     <div className={styles.textAndImageWrapper}>
     <img
@@ -126,7 +126,7 @@ useEffect(() => {
         <h1 className={styles.title}></h1>
         <h1 className={styles.title2}> 5. IoT (Internet of Things) (BAS)</h1>
         <p className={styles.description_1}>
-        ปกรณ์และเซนเซอร์ต่าง ๆ ที่เชื่อมต่อกันเพื่อเก็บและส่งข้อมูล เช่น เซนเซอร์ตรวจวัดอุณหภูมิ ความชื้น 
+        อุปกรณ์และเซนเซอร์ต่าง ๆ ที่เชื่อมต่อกันเพื่อเก็บและส่งข้อมูล เช่น เซนเซอร์ตรวจวัดอุณหภูมิ ความชื้น 
         และคุณภาพอากาศในห้อง หรืออุปกรณ์ตรวจสอบการใช้พลังงานของเครื่องใช้ไฟฟ้า​
         </p>
       </div>
@@ -139,7 +139,7 @@ useEffect(() => {
   </div>
 </section>
 
-<section className={styles.container_2  }>
+<section className={styles.container_2}>
   <div className={styles.content}>
     <div className={styles.textAndImageWrapper}>
     <img  
@@ -187,7 +187,7 @@ useEffect(() => {
   </div>
 </section>
 
-<section className={styles.container_2  }>
+<section className={styles.container_2}>
   <div className={styles.content}>
     <div className={styles.textAndImageWrapper}>
     <img
@@ -236,7 +236,7 @@ useEffect(() => {
 </section>
       
 
-<section className={styles.container_2  }>
+<section className={styles.container_2}>
   <div className={styles.content}>
     <div className={styles.textAndImageWrapper}>
     <img
@@ -284,7 +284,7 @@ useEffect(() => {
   </div>
 </section>
       
-<section className={styles.container_2  }>
+<section className={styles.container_2}>
   <div className={styles.content}>
     <div className={styles.textAndImageWrapper}>
     <img

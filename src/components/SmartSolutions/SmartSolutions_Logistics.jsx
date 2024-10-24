@@ -40,7 +40,7 @@ export const SmartSolutions_Logistics = () => { // แก้ไขชื่อ c
                 <p>
                 เป็นการผสานเทคโนโลยีสมัยใหม่เข้ากับระบบโลจิสติกส์เพื่อเพิ่มประสิทธิภาพ ลดต้นทุน 
                 และสร้างความยืดหยุ่นในการจัดการสินค้าหรือข้อมูลในห่วงโซ่อุปทาน (supply chain) 
-                หลักๆ แล้ว Smart Logistics ประกอบไปด้วยองค์ประกอบดังนี้:​
+                หลักๆ แล้ว Smart Logistics ประกอบไปด้วยองค์ประกอบดังนี้
                   <div className={styles.buttonContainer}>
                   <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Logistics} >เพื่มเติม</a>
                   </div>

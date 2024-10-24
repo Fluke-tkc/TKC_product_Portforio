@@ -45,7 +45,7 @@ export const SmartSolutions_Building = () => { // แก้ไขชื่อ co
                  และการสร้างสภาพแวดล้อมที่น่าอยู่สำหรับผู้ใช้อาคาร​
                 เป็นอาคารที่ใช้เทคโนโลยีในการจัดการและควบคุมระบบต่าง ๆ ภายในอาคาร
                  เพื่อเพิ่มประสิทธิภาพในการใช้พลังงาน เพิ่มความสะดวกสบาย ความปลอดภัย และความยั่งยืน
-                  องค์ประกอบสำคัญของ Smart Building ประกอบไปด้วย:​
+                  องค์ประกอบสำคัญของ Smart Building ประกอบไปด้วย
                   <div className={styles.buttonContainer}>
                   <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a>
                   </div>

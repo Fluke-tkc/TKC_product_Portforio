@@ -41,7 +41,7 @@ export const SmartSolutions_Hospital = () => { // แก้ไขชื่อ co
                 <h3>Smart Hospital</h3>
                 <p>
                 เป็นแนวคิดที่นำเทคโนโลยีมาประยุกต์ใช้ในโรงพยาบาลเพื่อปรับปรุงการดูแลผู้ป่วย เพิ่มประสิทธิภาพในการทำงาน 
-                และลดความผิดพลาดทางการแพทย์ โดยองค์ประกอบของ Smart Hospital ประกอบไปด้วย:​
+                และลดความผิดพลาดทางการแพทย์ โดยองค์ประกอบของ Smart Hospital ประกอบไปด้วย
                   <div className={styles.buttonContainer}>
                   <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Hospital} >เพื่มเติม</a>
                   </div>

@@ -46,7 +46,7 @@ export const SmartSolutions_Farm = () => { // แก้ไขชื่อ compon
                 <p>
                 ฟาร์มอัจฉริยะใช้เทคโนโลยี IoT (Internet of Things) และ Sensors ในการจัดการและปรับปรุงการทำงานในฟาร์มอย่างมีประสิทธิภาพมากขึ้น
                  โดยมุ่งเน้นการประหยัดทรัพยากร ลดการใช้แรงงานและเพิ่มผลผลิตด้วยข้อมูลที่ได้รับจากเซ็นเซอร์และอุปกรณ์อัจฉริยะ 
-                 หลักการและการใช้งานของอุปกรณ์ IoT และเซ็นเซอร์ใน Smart Farm มีดังนี้:​
+                 หลักการและการใช้งานของอุปกรณ์ IoT และเซ็นเซอร์ใน Smart Farm มีดังนี้
                   <div className={styles.buttonContainer}>
                   <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Farm} >เพื่มเติม</a>
                   </div>

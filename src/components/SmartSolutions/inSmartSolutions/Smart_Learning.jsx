@@ -5,7 +5,7 @@ import { Contact } from "../../Contact/Contact";
 import { useNavigate } from "react-router-dom"; // นำเข้า useNavigate
 
 export const Smart_Learning = () => {
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // ฟังก์ชันที่จะนำทางไปยังหน้า SmartSolutions_Building
 //   const handleLearnMoreClick_smart_Building = () => {
@@ -15,7 +15,7 @@ useEffect(() => {
   window.scrollTo({
     top: 0,
     left: 0,
-    behavior: "auto", // เลื่อนไปยังตำแหน่งทันทีโดยไม่มีการหน่วง
+    behavior: "auto", 
   });
 }, []);
 
@@ -43,7 +43,7 @@ useEffect(() => {
   </div>
 </section>
 
-<section className={styles.container_2  }>
+<section className={styles.container_2}>
   <div className={styles.content}>
     <div className={styles.textAndImageWrapper}>
       {/* <img
@@ -92,7 +92,7 @@ useEffect(() => {
   </div>
 </section>
 
-<section className={styles.container_2  }>
+<section className={styles.container_2}>
   <div className={styles.content}>
     <div className={styles.textAndImageWrapper}>
     {/* <img
@@ -140,7 +140,7 @@ useEffect(() => {
   </div>
 </section>
 
-<section className={styles.container_2  }>
+<section className={styles.container_2}>
   <div className={styles.content}>
     <div className={styles.textAndImageWrapper}>
     {/* <img
@@ -189,14 +189,6 @@ useEffect(() => {
 </br>
   </div>
 </section>
-
-
-
-
-
-
-
-
       <Contact />
     </>
   );

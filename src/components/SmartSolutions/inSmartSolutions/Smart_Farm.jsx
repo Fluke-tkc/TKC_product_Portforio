@@ -43,7 +43,7 @@ useEffect(() => {
   </div>
 </section>
 
-<section className={styles.container_2  }>
+<section className={styles.container_2}>
   <div className={styles.content}>
     <div className={styles.textAndImageWrapper}>
       {/* <img
@@ -89,7 +89,7 @@ useEffect(() => {
   </div>
 </section>
 
-<section className={styles.container_2  }>
+<section className={styles.container_2}>
   <div className={styles.content}>
     <div className={styles.textAndImageWrapper}>
     {/* <img
@@ -135,7 +135,7 @@ useEffect(() => {
   </div>
 </section>
 
-<section className={styles.container_2  }>
+<section className={styles.container_2}>
   <div className={styles.content}>
     <div className={styles.textAndImageWrapper}>
     {/* <img
