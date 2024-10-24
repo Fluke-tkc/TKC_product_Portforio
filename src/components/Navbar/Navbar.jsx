@@ -11,7 +11,7 @@ export const Navbar = () => {
       <a className={styles.title} href="/">
        TKC Product Portfolio
       </a>
-      <div className={styles.menu}>
+      {/* <div className={styles.menu}>
         <img
           className={styles.menuBtn}
           src={
@@ -21,11 +21,11 @@ export const Navbar = () => {
           }
           alt="menu-button"
           onClick={() => setMenuOpen(!menuOpen)}
-        />
-        <ul
+        /> */}
+        {/* <ul
           className={`${styles.menuItems} ${menuOpen && styles.menuOpen}`}
           onClick={() => setMenuOpen(false)}
-        >
+        > */}
           {/* <li>
             <a href="#about">About</a>
           </li>
@@ -38,8 +38,8 @@ export const Navbar = () => {
           <li>
             <a href="#contact">Contact</a>
           </li> */}
-        </ul>
-      </div>
+        {/* </ul> */}
+      {/* </div> */}
     </nav>
   );
 };

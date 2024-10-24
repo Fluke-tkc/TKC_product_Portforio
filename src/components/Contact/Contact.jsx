@@ -26,10 +26,12 @@ export const Contact = () => {
         </div>
         <div className={styles.infoSection}>
           <h3>Social Media</h3>
+       
           <ul className={styles.links}>
             <li className={styles.link}>
               {/* <img src={getImageUrl("/image/githubIcon.png")} alt="GitHub icon" /> */}
-              <a href="https://www.tkc-services.com/th/home">tkc-services.com</a>
+              
+              <a href="https://www.facebook.com/TurnkeyCommunicationServices">facebook</a>
             </li>
             
           </ul>
