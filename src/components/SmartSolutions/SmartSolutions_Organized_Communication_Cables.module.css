@@ -13,8 +13,8 @@
   margin-right: 0%;
 
   
-  /* background-image: url("/assets/image/Reternofsoul_2.jpg"); */
-  background-color: #285280;   
+  /* background-image: url("/image/Reternofsoul_2.jpg"); */
+   background-color: #285280;   
   background-position: center;
 
   background-size:     cover;                     
@@ -50,7 +50,7 @@
 
 .aboutImage {
   width: 40%;
-    padding-right: 50px;
+  padding-right: 50px;
   padding-left: 50px;
 }
 
@@ -65,27 +65,31 @@
 .aboutItem {
   display: flex;
   flex-direction: row;
+  
   align-items: center;
+  /* border-radius: 20px; */
   list-style: none;
   padding-top: 50px;
   padding-bottom: 50px;
   padding-right: 0px;
   padding-left: 0px;
   background-image: linear-gradient(
-    to left,
+    90deg,
     rgba(0, 0, 0, 0.42) 0%,
     rgba(0, 0, 0, 0) 100%
   );
-  background-size: 0% 100%; /* เริ่มต้นที่ 0% คือไม่มีการไล่สี */
+  background-size: 0 100%;
   background-repeat: no-repeat;
-  background-position: right; /* กำหนดตำแหน่งเริ่มต้นที่ด้านขวา */
-  transition: background-size 0.4s ease-out;
+  transition: 0.4s;
+
+
+  
 }
+
 
 .aboutItem:hover {
-  background-size: 100% 100%; /* เมื่อ hover ขยายเต็มพื้นที่ */
+  background-size: 100% 100%;
 }
-
 
 .aboutItem h3 {
   font-size: 40px;
@@ -102,7 +106,7 @@
   
 }
 
-.aboutItem p {
+.aboutItemp {
   font-size: 25px;
   margin-top: 0px;
   margin-left: 0px;

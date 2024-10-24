@@ -42,13 +42,13 @@ export const SmartSolutions_Organized_Communication_Cables = () => { // แก�
          />
               <div className={styles.aboutItemText}>
                 <h3>Smart Organized Communication Cables</h3>
-                <p>
+                <div className={styles.aboutItemp}>
                 ระบบสายสื่อสารอัจฉริยะที่มีการจัดการอย่างเป็นระบบ ประกอบด้วยองค์ประกอบต่างๆ 
                 ที่ช่วยให้การสื่อสารในระบบโครงข่ายมีความเสถียรและมีประสิทธิภาพ ซึ่งองค์ประกอบหลักมีดังนี้
                   <div className={styles.buttonContainer}>
                   <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Organized_Communication_Cables} >เพื่มเติม</a>
                   </div>
-                </p>
+                  </div>
 
                 
               </div>

@@ -12,41 +12,31 @@ export const Contact = () => {
       <div className={styles.contactInfo}>
         <div className={styles.infoSection}>
           <h3>Address</h3>
-          <p>1234 Innovation Drive,<br /> Tech City, 56789</p>
+          <p>44/44 ซอยวิภาวดีรังสิต 60 แยก 18-1-2 <br />แขวงตลาดบางเขน เขตหลักสี่, Bangkok, Bangkok,</p>
         </div>
         <div className={styles.infoSection}>
           <h3>Email</h3>
           <ul className={styles.links}>
             <li className={styles.link}>
-              <img src={getImageUrl("/image/emailIcon.png")} alt="Email icon" />
-              <a href="mailto:Aphichatrungruang@gmail.com">Aphichatrungruang@gmail.com</a>
+              {/* <img src={getImageUrl("/image/emailIcon.png")} alt="Email icon" /> */}
+              <a href="mailto:Aphichatrungruang@gmail.com">info@tkc-services.com</a>
             </li>
-            <li className={styles.link}>
-              <img src={getImageUrl("/image/supportIcon.png")} alt="Support Email" />
-              <a href="mailto:support@techcompany.com">support@techcompany.com</a>
-            </li>
+           
           </ul>
         </div>
         <div className={styles.infoSection}>
           <h3>Social Media</h3>
           <ul className={styles.links}>
             <li className={styles.link}>
-              <img src={getImageUrl("/image/githubIcon.png")} alt="GitHub icon" />
-              <a href="https://github.com/your-profile">github.com/your-profile</a>
+              {/* <img src={getImageUrl("/image/githubIcon.png")} alt="GitHub icon" /> */}
+              <a href="https://www.tkc-services.com/th/home">tkc-services.com</a>
             </li>
-            <li className={styles.link}>
-              <img src={getImageUrl("/image/linkedinIcon.png")} alt="LinkedIn icon" />
-              <a href="https://linkedin.com/in/your-profile">linkedin.com/in/your-profile</a>
-            </li>
-            <li className={styles.link}>
-              <img src={getImageUrl("/image/twitterIcon.png")} alt="Twitter icon" />
-              <a href="https://twitter.com/your-profile">@your-profile</a>
-            </li>
+            
           </ul>
         </div>
         <div className={styles.infoSection}>
           <h3>Phone</h3>
-          <p>+1 234 567 8900</p>
+          <p>(+66) 0-2401-8222</p>
         </div>
       </div>
     </footer>

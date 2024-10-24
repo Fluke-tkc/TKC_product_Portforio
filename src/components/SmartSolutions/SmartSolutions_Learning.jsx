@@ -42,14 +42,14 @@ export const SmartSolutions_Learning = () => { // แก้ไขชื่อ co
          />
               <div className={styles.aboutItemText}>
                 <h3>Smart Learning</h3>
-                <p>
+                <div className={styles.aboutItemp}>
                 เป็นแนวคิดในการเรียนรู้ที่ผสมผสานเทคโนโลยีสมัยใหม่เข้ากับกระบวนการเรียนการสอน 
                 เพื่อเพิ่มประสิทธิภาพในการเรียนรู้ของผู้เรียนและการสอนของผู้สอน โดยสามารถปรับเปลี่ยนตามความต้องการและรูปแบบการเรียนรู้เฉพาะบุคคลได้
                  ส่วนประกอบหลักของ Smart Learning ประกอบไปด้วย
                   <div className={styles.buttonContainer}>
                   <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Learning} >เพื่มเติม</a>
                   </div>
-                </p>
+                  </div>
 
                 
               </div>

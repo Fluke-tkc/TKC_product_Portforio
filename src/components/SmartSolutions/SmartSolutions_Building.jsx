@@ -40,7 +40,7 @@ export const SmartSolutions_Building = () => { // แก้ไขชื่อ co
             <li className={styles.aboutItem}>
               <div className={styles.aboutItemText}>
                 <h3>Smart Building</h3>
-                <p>
+                <div className={styles.aboutItemp}>
                 Smart Building ช่วยให้การบริหารจัดการอาคารเป็นไปอย่างมีประสิทธิภาพ ทั้งในแง่การประหยัดพลังงาน การดูแลรักษาความปลอดภัย
                  และการสร้างสภาพแวดล้อมที่น่าอยู่สำหรับผู้ใช้อาคาร​
                 เป็นอาคารที่ใช้เทคโนโลยีในการจัดการและควบคุมระบบต่าง ๆ ภายในอาคาร
@@ -49,7 +49,7 @@ export const SmartSolutions_Building = () => { // แก้ไขชื่อ co
                   <div className={styles.buttonContainer}>
                   <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Building} >เพื่มเติม</a>
                   </div>
-                </p>
+                  </div>
 
                 
               </div>

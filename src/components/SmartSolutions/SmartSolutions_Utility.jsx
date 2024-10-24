@@ -42,13 +42,13 @@ export const SmartSolutions_Utility = () => { // แก้ไขชื่อ com
          />
               <div className={styles.aboutItemText}>
                 <h3>Smart Organized Communication Cables</h3>
-                <p>
+                <div className={styles.aboutItemp}>
                 ระบบโครงข่ายไฟฟ้าอัจฉริยะที่ผสมผสานเทคโนโลยีดิจิทัลเพื่อการผลิต การส่งจ่าย 
                 และการบริหารจัดการพลังงานอย่างมีประสิทธิภาพ มีองค์ประกอบหลักดังนี้
                   <div className={styles.buttonContainer}>
                   <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Utility} >เพื่มเติม</a>
                   </div>
-                </p>
+                  </div>
 
                 
               </div>

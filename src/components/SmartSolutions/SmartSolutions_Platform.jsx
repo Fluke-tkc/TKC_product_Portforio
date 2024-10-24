@@ -37,13 +37,13 @@ export const SmartSolutions_Platform = () => { // แก้ไขชื่อ co
             <li className={styles.aboutItem}>
               <div className={styles.aboutItemText}>
                 <h3>Smart Platform</h3>
-                <p>
+                <div className={styles.aboutItemp}>
                 โครงสร้างหรือระบบที่ผสมผสานเทคโนโลยีและเครื่องมือทางดิจิทัลเพื่อสร้างแพลตฟอร์มอัจฉริยะที่สามารถเชื่อมโยงการทำงาน
                 และข้อมูลเพื่อเพิ่มประสิทธิภาพและความสะดวกในการใช้งาน ปัจจัยหลักที่มักพบใน Smart Platform มีดังนี้
                   <div className={styles.buttonContainer}>
                   <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Platform} >เพื่มเติม</a>
                   </div>
-                </p>
+                  </div>
 
                 
               </div>

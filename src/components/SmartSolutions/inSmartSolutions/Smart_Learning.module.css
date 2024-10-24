@@ -1,11 +1,19 @@
 
+.pageWrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgb(14, 81, 180);
+  isolation: isolate; /* สร้าง stacking context ใหม่ */
+  z-index: 1;
+}
 .container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
-  z-index: 1;
+  width: 100%;
+  z-index: 2;
 
   margin-top: 0px;
   margin-left: 0%;
@@ -31,9 +39,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
-  z-index: 1;
-
+  width: 100%;
+  z-index: 2;
   margin-top: 0px;
   margin-left: 0%;
   margin-right: 0%;
@@ -60,7 +67,9 @@
   flex-direction: column;
   align-items: flex-start;
   color: var(--color-text);
-  z-index: 1;
+  position: relative;
+  z-index: 3;
+  max-width: 1200px;
 }
 .title {
   font-size: 62px;

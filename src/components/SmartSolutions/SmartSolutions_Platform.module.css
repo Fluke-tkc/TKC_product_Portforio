@@ -13,8 +13,8 @@
   margin-right: 0%;
 
   
-  /* background-image: url("/assets/image/Reternofsoul_2.jpg"); */
-  background-color: #285280;   
+  /* background-image: url("/image/Reternofsoul_2.jpg"); */
+   background-color: #285280;   
   background-position: center;
 
   background-size:     cover;                     
@@ -106,7 +106,7 @@
   
 }
 
-.aboutItem p {
+.aboutItemp {
   font-size: 25px;
   margin-top: 0px;
   margin-left: 0px;

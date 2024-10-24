@@ -239,13 +239,6 @@ useEffect(() => {
   </div>
 </section>
 
-
-
-
-
-
-
-
       <Contact />
     </>
   );
