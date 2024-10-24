@@ -165,7 +165,7 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
                 
               </div>
               <img
-          src="/image/Smart_Learning.jpg" 
+          src="/image/Smart_Lighting.jpg" 
             alt="Me sitting with a laptop"
             className={styles.aboutImage}
          />
