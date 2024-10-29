@@ -3,7 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Hero } from "./components/Hero/Hero";
 import { SmartSolutions } from "./components/SmartSolutions/SmartSolutions";
-
+import { GreenSolutions } from "./components/GreenSolution/GreenSolutions";
 
 import {Smart_Building }from "./components/SmartSolutions/inSmartSolutions/Smart_Building";
 import {Smart_Farm }from "./components/SmartSolutions/inSmartSolutions/Smart_Farm";
@@ -13,6 +13,10 @@ import {Smart_Logistics }from "./components/SmartSolutions/inSmartSolutions/Smar
 import {Smart_Organized_Communication_Cables }from "./components/SmartSolutions/inSmartSolutions/Smart_Organized_Communication_Cables";
 import {Smart_Platform }from "./components/SmartSolutions/inSmartSolutions/Smart_Platform";
 import {Smart_Utility }from "./components/SmartSolutions/inSmartSolutions/Smart_Utility";
+
+
+// import {GreenSolutionsDiscription }from "./components/GreenSolution/GreenSolutions_Discription";
+
 
 function App() {
   return (
@@ -28,6 +32,8 @@ function App() {
              <Route path="/smart-solutions-organized_communication_cables" element={<Smart_Organized_Communication_Cables />} />
              <Route path="/smart-solutions-platform" element={<Smart_Platform />} />
              <Route path="/smart-solutions-utility" element={<Smart_Utility />} />
+        <Route path="/green-solutions" element={<GreenSolutions />} />
+             {/* <Route path="/green-solutions-discription" element={<GreenSolutionsDiscription />} /> */}
       </Routes>
     </Router>
   );

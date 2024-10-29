@@ -1,0 +1,454 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  
+  padding-top: 80px;
+  padding-bottom: 50px;
+  padding-left: 0px;
+  padding-right: 0px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-color: #285280;   
+
+  
+}
+
+.BG2{
+  background-image: url("/image/services-solutions.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 80vh;
+}
+.BG3{
+  background-image: url("/image/services-solutions.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+}
+/* จัดการ container ของไอคอน */
+.gridContainer {
+  display: flex;
+  flex-wrap: wrap; /* ทำให้ไอคอนแยกแถวเมื่อครบจำนวน */
+  justify-content: center; /* จัดแถวไอคอนให้อยู่ตรงกลางในแนวนอน */
+  gap: 50px;
+  width: 80%; /* กำหนดความกว้างของ container */
+  margin: 0 auto; /* จัดให้อยู่ตรงกลางหน้าจอ */
+  
+}
+
+/* จัดการกลุ่มของปุ่มไอคอน */
+.circleWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s;
+  width: calc(100% / 6); /* กำหนดขนาดกว้างของแต่ละไอคอนให้เท่ากัน 1 ใน 6 */
+  max-width: 180px; /* กำหนดขนาดสูงสุดของไอคอน */
+  position: relative; /* สำหรับการจัดวางเนื้อหา */
+}
+
+.circleButton {
+  width: 180px; /* ปรับขนาดปุ่มได้ตามต้องการ */
+  height: 180px;
+  border-radius: 50%; /* ทำให้ปุ่มเป็นวงกลม */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s, background-color 0.3s, opacity 0.3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.circleButton img {
+  width: 100%; /* ปรับขนาดภาพให้อยู่ภายในปุ่ม */
+  height: 100%;
+  object-fit: cover; /* ทำให้ภาพครอบคลุมพื้นที่ปุ่ม */
+  border-radius: 50%; /* ทำให้รูปภาพกลมเหมือนปุ่ม */
+  transition: opacity 0.3s;
+}
+
+
+.circleButton span {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 0.3s;
+  text-align: center;
+  padding: 0 10px; /* เพิ่มการเว้นระยะ */
+}
+
+.circleButton:hover img {
+  opacity: 0; 
+}
+
+.circleButton:hover span {
+  opacity: 1; 
+  background-color: #063285;
+
+}
+.topic1 {
+  font-size: 46px; /* ปรับขนาดตัวอักษร */
+  text-align: center; /* จัดข้อความให้อยู่ตรงกลางแนวนอน */
+  padding-top: 40px; /* เพิ่ม padding รอบๆ ข้อความ */
+  font-weight: bold; /* ทำให้ตัวอักษรหนา */
+  color: #3ca0f3; /* เปลี่ยนสีตัวอักษร (คุณสามารถเปลี่ยนค่าได้ตามต้องการ) */
+
+}
+.topic2 {
+  font-size: 24px; /* ปรับขนาดตัวอักษร */
+  text-align: center; /* จัดข้อความให้อยู่ตรงกลางแนวนอน */
+  padding-top: 50px; /* เพิ่ม padding รอบๆ ข้อความ */
+  padding-left: 400px; /* font-weight: bold;  */
+  padding-right: 400px;
+  color: #ffffff; /* เปลี่ยนสีตัวอักษร (คุณสามารถเปลี่ยนค่าได้ตามต้องการ) */
+
+}
+.topic3 {
+  font-size: 35px; /* ปรับขนาดตัวอักษร */
+  text-align: center; /* จัดข้อความให้อยู่ตรงกลางแนวนอน */
+  padding-top: 80px; /* เพิ่ม padding รอบๆ ข้อความ */
+   font-weight: bold;
+  color: #050505; /* เปลี่ยนสีตัวอักษร (คุณสามารถเปลี่ยนค่าได้ตามต้องการ) */
+
+}
+.BG1{
+  
+  width: 100vw;
+  background-image: url("/image/services-solutions.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  padding-top: 50px;
+  padding-bottom: 300px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+
+/******/
+/* สำหรับ .solutionSection */
+
+.productShowcase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  padding-left: 0px;
+  padding-right: 0px;
+  background-color: #fff; /* หรือสีที่คุณต้องการ */
+}
+
+.showcaseContent {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  align-items: center;
+  gap: 40px; /* ระยะห่างระหว่างรูปและข้อความ */
+}
+
+.imageContainer {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+.imageContainer1 img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  flex: 1;
+ 
+}
+.imageContainer2 img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+ 
+}
+.textContainer1 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 50%;
+}
+.textContainer1 h2 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.textContainer1 p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+.textContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.textContainer h2 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.textContainer p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+.buttonContainerOurservice
+{
+  display: flex;
+  justify-content: center;  /* จัดปุ่มให้อยู่ตรงกลางในแนวนอน */
+  align-items: center;      /* จัดปุ่มให้อยู่ตรงกลางในแนวตั้ง */
+                        
+  
+  position: relative;       /* ใช้ position relative เพื่อให้การจัดวางภายใน */
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: center;  /* จัดปุ่มให้อยู่ตรงกลางในแนวนอน */
+  align-items: center;      /* จัดปุ่มให้อยู่ตรงกลางในแนวตั้ง */
+                        /* ตั้งความสูงให้เต็มหน้าจอ */
+  width: 100vw;             /* ตั้งความกว้างให้เต็มหน้าจอ */
+  position: relative;       /* ใช้ position relative เพื่อให้การจัดวางภายใน */
+  padding-top: 50px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.primaryButtonTop{
+  padding: 12px 24px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+
+
+           
+ 
+}
+.primaryButtonTop {
+  background-color: #007bff;
+  color: white;
+}
+
+.secondaryButton {
+  background-color: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+.primaryButton, .secondaryButton {
+  padding: 12px 24px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primaryButton {
+  background-color: #007bff;
+  color: white;
+  
+}
+
+.secondaryButton {
+  background-color: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+.solutionSection {
+ padding-top: 100px;
+ padding-bottom: 100px;
+ padding-right: 100px;
+ padding-left: 100px;
+  background-color: #f9f9f9;
+  margin-top: 0px;
+  text-align: center; /* จัดให้ข้อความและคอนเทนต์ทั้งหมดอยู่ตรงกลาง */
+   /* เพิ่มระยะห่างด้านล่าง */
+   background-color: #285280;
+  
+}
+.sectionTitle {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 30px; /* ระยะห่างระหว่างหัวเรื่องกับเนื้อหา */
+  color: #333; /* เปลี่ยนสีหัวเรื่องถ้าต้องการ */
+
+}
+
+.solutionContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.solutionContent .imageContainer {
+  flex: 1;
+  max-width: 600px; /* ปรับขนาดความกว้างได้อิสระ */
+  height: auto;
+  border-radius: 10px;
+}
+
+.solutionContent .textContainer {
+  flex: 1;
+  padding: 20px;
+}
+
+/* สำหรับ .stackedSolutionSection */
+.stackedSolutionSection {
+  padding: 50px;
+  background-color: #f9f9f9;
+  margin-top: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+.stackedSolutionSection .stackedImage {
+  width: 50%; /* ปรับขนาดรูปภาพ */
+  border-radius: 10px;
+  margin-left: 20px;
+}
+
+.stackedSolutionSection .textContainer {
+  flex: 1;
+  padding: 20px;
+}
+
+/* สำหรับ .gridSolutions */
+.gridSolutions {
+  padding: 50px;
+  background-color: #f9f9f9;
+  margin-top: 0px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* สามารถปรับให้เป็น 3 คอลัมน์หรือมากกว่านี้ได้ */
+  gap: 20px;
+  
+}
+
+.gridSolutions .gridItem {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  
+}
+
+/* สำหรับ .threeColumnSolutions */
+.threeColumnSolutions {
+  padding-top: 50px;
+  padding-bottom: 0px;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: #f9f9f9;
+  margin-top: 0px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: #285280;
+}
+
+.threeColumnSolutions .solutionCard {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 10px;
+  padding-top: 80px;
+  padding-bottom: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer; /* ทำให้การ์ดสามารถคลิกได้ */
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out; /* เพิ่ม transition สำหรับ background-color */
+}
+.threeColumnSolutions .solutionCard:hover {
+  transform: scale(1.05); /* เพิ่มเอฟเฟกต์ขยายเมื่อ hover */
+  background-color: #ffffff; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+}
+.threeColumnSolutions .solutionCard img {
+  max-width: 200px; /* ปรับขนาดรูปภาพ */
+  margin-bottom: 15px;
+}
+
+/* สำหรับ .overlaySolution */
+.overlaySolution {
+  padding: 50px;
+  background-color: #f9f9f9;
+  margin-top: 0px;
+  position: relative;
+}
+
+.overlaySolution .overlayImageContainer {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.overlaySolution .overlayImage {
+  width: 100%;
+  height: auto;
+}
+
+.overlaySolution .overlayText {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  transform: translateY(-50%);
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+.learnMoreSection {
+  padding: 100px;
+  background-color: #f0f0f0;
+}
+
+
+

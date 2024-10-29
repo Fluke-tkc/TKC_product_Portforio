@@ -26,6 +26,10 @@ export const Hero = () => {
   const handleLearnMoreClick_smart_solutions = () => {
     navigate("/smart-solutions");
   };
+  
+  const handleLearnMoreClick_green_solutions = () => {
+    navigate("/green-solutions");
+  };
   return (
     <>
       <Navbar />
@@ -126,8 +130,14 @@ export const Hero = () => {
     </div>
   </div>
   
-  <div className={styles.solutionCard}>
-    <img src="/image/greensolution.jpg"  className={styles.solutionImage} />
+  <div
+  className={styles.solutionCard}
+  onClick={handleLearnMoreClick_green_solutions} // ทำให้ทั้งการ์ดเป็นปุ่มที่คลิกได้
+  role="button" // เพิ่ม role เพื่อบ่งบอกว่าเป็นปุ่ม
+  tabIndex="0" // ทำให้สามารถโฟกัสได้โดยการกด Tab บนคีย์บอร์ด
+  onKeyDown={(e) => e.key === 'Enter' && handleLearnMoreClick_green_solutions()} // รองรับการกด Enter เพื่อคลิก
+   >
+    <img src="/image/greensolution.png"  className={styles.solutionImage} />
     <h3>Green Solution</h3>
     <p>Protect your infrastructure with the latest in cybersecurity technology, ensuring your data stays safe.</p>
     <div className={styles.buttonContainerOurservice}>
