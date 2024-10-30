@@ -30,18 +30,18 @@ export const SmartSolutions = () => {
   return (
     <>
       <Navbar />
-      <section className={styles.container}>
-        <div className={styles.content}>
+      {/* <section className={styles.container}> */}
+        {/* <div className={styles.content}>
           <h1 className={styles.title}>Smart Solutions</h1>
           <p className={styles.description}>
           แนวทางหรือระบบที่ใช้เทคโนโลยีขั้นสูงและนวัตกรรมในการแก้ปัญหาหรือปรับปรุงกระบวนการต่างๆ เพื่อเพิ่มประสิทธิภาพความสะดวกสบาย
            และประสบการณ์การใช้งาน โดยมุ่งเน้นการเชื่อมโยงข้อมูลและการทำงานร่วมกันระหว่างอุปกรณ์หรือระบบที่แตกต่างกัน
           </p>
-        </div>
+        </div> */}
 
         {/* แทรก component SmartSolutions_Building */}
         
-      </section>
+      {/* </section> */}
       
       <SmartSolutionsBuilding />
      <SmartSolutionsFram/>
