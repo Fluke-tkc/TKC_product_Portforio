@@ -72,7 +72,7 @@ export const SmartSolutions_Building = () => { // แก้ไขชื่อ co
                           onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}>
                         <div className={styles.redDot_RenewableEnergyIntegration}></div>
                         <div className={styles.redDot_inRenewableEnergyIntegration}></div>
-                        <div className={styles.tooltipText}>Solarcell</div>
+                        <div className={styles.tooltipText}>RenewableEnergyIntegration</div>
 
                         
                 </div>
