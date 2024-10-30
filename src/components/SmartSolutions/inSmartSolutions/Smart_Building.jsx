@@ -12,10 +12,12 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
       const targetId = location.state.scrollTo;
       const element = document.getElementById(targetId);
       if (element) {
-        window.scrollTo({
-          top: element.offsetTop,
-          behavior: 'smooth',
-        });
+        setTimeout(() => {
+          window.scrollTo({
+            top: element.getBoundingClientRect().top + window.pageYOffset - 50, // -50 เพื่อเลื่อนให้ถูกตำแหน่ง
+            behavior: 'smooth',
+          });
+        }, 300); // ดีเลย์การเลื่อน 300 มิลลิวินาที
       }
     } else {
       window.scrollTo({
@@ -24,6 +26,7 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
       });
     }
   }, [location]);
+  
   
   return (
     <>
