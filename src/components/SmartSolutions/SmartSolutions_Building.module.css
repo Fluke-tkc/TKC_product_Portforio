@@ -273,3 +273,31 @@
     opacity: 1;
   }
 }
+
+
+.tooltipText {
+  visibility: hidden; /* ซ่อนข้อความเริ่มต้น */
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  font-size: 20px; /* ปรับขนาดฟอนต์ */
+  bottom: 125%; /* ปรับตำแหน่งของ tooltip */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+
+  width: auto; /* กำหนดความกว้าง */
+  height: auto; /* ความสูงอัตโนมัติ หรือกำหนดเองได้ */
+  white-space: normal; /* ให้ข้อความแสดงหลายบรรทัด */
+}
+
+.redDot_RenewableEnergyIntegration:hover .tooltipText,
+.redDot_Lighting:hover .tooltipText {
+  visibility: visible; /* แสดงข้อความเมื่อ hover */
+  opacity: 1; /* ปรับความโปร่งใส */
+}

@@ -67,10 +67,25 @@ export const SmartSolutions_Building = () => { // แก้ไขชื่อ co
                           alt="Smart Building"
                            className={styles.aboutImage}
                           />
-                   <div className={styles.redDot_RenewableEnergyIntegration} onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}
-                     title="Solar cell"></div>
-                   <div className={styles.redDot_Lighting} onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}
-                    title="Smart Lighting"></div>
+                   <div className={styles.redDot_RenewableEnergyIntegration} onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}>
+                         <div className={styles.tooltipText}>Solarcell</div>
+                   </div>
+                   <div className={styles.redDot_Lighting} onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}>
+                          <div className={styles.tooltipText}>SmartLighting</div>
+                   </div>
+                    {/* <div className={styles.tooltip}>
+                        <div className={styles.redDot_RenewableEnergyIntegration} 
+                            onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}>
+                            <span className={styles.tooltiptext}>Solar cell</span>
+                        </div>
+                    </div>
+
+                    <div className={styles.tooltip}>
+                         <div className={styles.redDot_Lighting} 
+                              onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}>
+                             <span className={styles.tooltiptext}>Smart Lighting</span>
+                          </div>
+                      </div> */}
                 </div>
           </li>
         </ul>
