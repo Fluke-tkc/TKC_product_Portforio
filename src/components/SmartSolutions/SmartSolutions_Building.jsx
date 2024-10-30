@@ -63,12 +63,14 @@ export const SmartSolutions_Building = () => { // แก้ไขชื่อ co
                 
                   <div className={styles.imageContainer}>
                         <img
-                          src="/image/Smart_Building.jpg"
+                          src="/image/SmartBuilding.jpg"
                           alt="Smart Building"
                            className={styles.aboutImage}
                           />
-                   <div className={styles.redDot_RenewableEnergyIntegration} onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}></div>
-                   <div className={styles.redDot_Lighting} onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}></div>
+                   <div className={styles.redDot_RenewableEnergyIntegration} onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}
+                     title="RenewableEnergyIntegration"></div>
+                   <div className={styles.redDot_Lighting} onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}
+                    title="Smart Lighting"></div>
                 </div>
           </li>
         </ul>

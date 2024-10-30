@@ -229,7 +229,7 @@
 
 .imageContainer {
   position: relative;
-  width: 150%; /* ปรับขนาด container ให้ตรงกับขนาดภาพ */
+  width: 300%; /* ปรับขนาด container ให้ตรงกับขนาดภาพ */
   
   height: auto;
 }
@@ -237,7 +237,7 @@
 .redDot_RenewableEnergyIntegration {
   position: absolute;
   top: 8%; /* ปรับตำแหน่งในแนวตั้ง */
-  right: 45%; /* ปรับตำแหน่งในแนวนอน */
+  right: 40%; /* ปรับตำแหน่งในแนวนอน */
   width: 20px;
   height: 20px;
   background-color: red;
@@ -249,7 +249,7 @@
 .redDot_Lighting {
   position: absolute;
   top: 25%; /* ปรับตำแหน่งในแนวตั้ง */
-  right: 73%; /* ปรับตำแหน่งในแนวนอน */
+  right: 47%; /* ปรับตำแหน่งในแนวนอน */
   width: 20px;
   height: 20px;
   background-color: red;
