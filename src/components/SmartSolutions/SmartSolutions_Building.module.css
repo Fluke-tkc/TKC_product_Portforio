@@ -234,22 +234,57 @@
   height: auto;
 }
 
-.redDot_RenewableEnergyIntegration {
+.redDot_RenewableEnergyIntegrationWrapper {
+  position: absolute;
+  top: 8%;
+  right: 40%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+  z-index: 2;
+}
+ .redDot_RenewableEnergyIntegration {
+  position: absolute;
+  top: 8%; 
+  right: 40%; 
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+  z-index: 2; 
+} 
+.redDot_inRenewableEnergyIntegration {
   position: absolute;
   top: 8%; /* ปรับตำแหน่งในแนวตั้ง */
   right: 40%; /* ปรับตำแหน่งในแนวนอน */
   width: 20px;
   height: 20px;
-  background-color: red;
-  border-radius: 50%;
+  
+  background-color: transparent; /* ทำให้พื้นหลังโปร่งใส */
+  border: 2px solid white; /* เพิ่มกรอบสีขาว */
+  border-radius: 50%; /* ทำให้เป็นวงกลม */
   cursor: pointer;
   animation: pulse 2s infinite;
   z-index: 2; /* ทำให้จุดอยู่บนภาพ */
 }
+
+.redDot_LightingWrapper {
+  position: absolute;
+  top: 25%;
+  right: 46%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+  z-index: 2;
+}
 .redDot_Lighting {
   position: absolute;
   top: 25%; /* ปรับตำแหน่งในแนวตั้ง */
-  right: 47%; /* ปรับตำแหน่งในแนวนอน */
+  right: 46%; /* ปรับตำแหน่งในแนวนอน */
   width: 20px;
   height: 20px;
   background-color: red;
@@ -258,6 +293,21 @@
   animation: pulse 2s infinite;
   z-index: 2; /* ทำให้จุดอยู่บนภาพ */
 }
+.redDot_inLighting {
+  position: absolute;
+  top: 25%; /* ปรับตำแหน่งในแนวตั้ง */
+  right: 46%; /* ปรับตำแหน่งในแนวนอน */
+  width: 20px;
+  height: 20px;
+  
+  background-color: transparent; /* ทำให้พื้นหลังโปร่งใส */
+  border: 2px solid white; /* เพิ่มกรอบสีขาว */
+  border-radius: 50%; /* ทำให้เป็นวงกลม */
+  cursor: pointer;
+  animation: pulse 2s infinite;
+  z-index: 2; /* ทำให้จุดอยู่บนภาพ */
+}
+
 
 @keyframes pulse {
   0% {
@@ -275,17 +325,18 @@
 }
 
 
+
 .tooltipText {
-  visibility: hidden; /* ซ่อนข้อความเริ่มต้น */
+  visibility: hidden;
   background-color: black;
   color: #fff;
   text-align: center;
   border-radius: 5px;
   padding: 10px;
   position: absolute;
-  z-index: 1;
-  font-size: 20px; /* ปรับขนาดฟอนต์ */
-  bottom: 125%; /* ปรับตำแหน่งของ tooltip */
+  z-index: 3;
+  font-size: 20px;
+  bottom: 125%;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
@@ -296,8 +347,12 @@
   white-space: normal; /* ให้ข้อความแสดงหลายบรรทัด */
 }
 
-.redDot_RenewableEnergyIntegration:hover .tooltipText,
-.redDot_Lighting:hover .tooltipText {
+.redDot_RenewableEnergyIntegrationWrapper:hover .tooltipText {
+  visibility: visible;
+  opacity: 1;
+}
+.redDot_LightingWrapper:hover .tooltipText {
   visibility: visible; /* แสดงข้อความเมื่อ hover */
   opacity: 1; /* ปรับความโปร่งใส */
 }
+
