@@ -8,28 +8,19 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
   const location = useLocation();
 
   useEffect(() => {
-    if (location.state && location.state.scrollTo === 'renewableEnergy') {
-      const element = document.getElementById('renewableEnergy');
+    if (location.state && location.state.scrollTo) {
+      const targetId = location.state.scrollTo;
+      const element = document.getElementById(targetId);
       if (element) {
         window.scrollTo({
           top: element.offsetTop,
-          behavior: 'smooth' // เลื่อนลงอย่างนุ่มนวล
-        });
-      }
-    }
-   else if (location.state && location.state.scrollTo === 'Lighting') {
-      const element = document.getElementById('Lighting');
-      if (element) {
-        window.scrollTo({
-          top: element.offsetTop,
-          behavior: 'smooth' // เลื่อนลงอย่างนุ่มนวล
+          behavior: 'smooth',
         });
       }
     } else {
       window.scrollTo({
         top: 0,
-        left: 0,
-        behavior: 'auto', // เลื่อนไปที่ด้านบนสุดของหน้า
+        behavior: 'auto',
       });
     }
   }, [location]);
