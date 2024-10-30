@@ -2,20 +2,37 @@ import React, { useEffect } from "react";
 import styles from "./Smart_Building.module.css";
 import { Navbar } from "../../Navbar/Navbar";
 import { Contact } from "../../Contact/Contact";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export const Smart_Building = () => { // แก้ไขชื่อ component ให้ตรงกัน
-
+  const location = useLocation();
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "auto", // เลื่อนไปยังตำแหน่งทันทีโดยไม่มีการหน่วง
-    });
-  }, []);
-
-
+    if (location.state && location.state.scrollTo === 'renewableEnergy') {
+      const element = document.getElementById('renewableEnergy');
+      if (element) {
+        window.scrollTo({
+          top: element.offsetTop,
+          behavior: 'smooth' // เลื่อนลงอย่างนุ่มนวล
+        });
+      }
+    }
+   else if (location.state && location.state.scrollTo === 'Lighting') {
+      const element = document.getElementById('Lighting');
+      if (element) {
+        window.scrollTo({
+          top: element.offsetTop,
+          behavior: 'smooth' // เลื่อนลงอย่างนุ่มนวล
+        });
+      }
+    } else {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'auto', // เลื่อนไปที่ด้านบนสุดของหน้า
+      });
+    }
+  }, [location]);
   
   return (
     <>
@@ -140,7 +157,7 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
 
 
-      <section className={styles.container} >
+      <section id="Lighting" className={styles.container} >
         {/* <h2 className={styles.title}>Smart Building</h2> */}
         
         <div className={styles.content}>
@@ -450,7 +467,7 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
       </section>
 
-      <section className={styles.container}>
+      <section id="renewableEnergy" className={styles.container}>
         {/* <h2 className={styles.title}>Smart Building</h2> */}
         
         <div className={styles.content}>

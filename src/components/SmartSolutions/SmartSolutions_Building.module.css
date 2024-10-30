@@ -49,9 +49,10 @@
 }
 
 .aboutImage {
-  width: 40%;
+  width: 100%;
   padding-right: 50px;
   padding-left: 50px;
+  height: auto;
 }
 
 .aboutItems {
@@ -223,4 +224,52 @@
 .primaryButton {
   background-color: #007bff;
   color: white;
+}
+
+
+.imageContainer {
+  position: relative;
+  width: 150%; /* ปรับขนาด container ให้ตรงกับขนาดภาพ */
+  
+  height: auto;
+}
+
+.redDot_RenewableEnergyIntegration {
+  position: absolute;
+  top: 8%; /* ปรับตำแหน่งในแนวตั้ง */
+  right: 45%; /* ปรับตำแหน่งในแนวนอน */
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+  z-index: 2; /* ทำให้จุดอยู่บนภาพ */
+}
+.redDot_Lighting {
+  position: absolute;
+  top: 25%; /* ปรับตำแหน่งในแนวตั้ง */
+  right: 73%; /* ปรับตำแหน่งในแนวนอน */
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+  z-index: 2; /* ทำให้จุดอยู่บนภาพ */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

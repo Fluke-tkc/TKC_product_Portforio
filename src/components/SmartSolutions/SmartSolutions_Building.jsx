@@ -23,6 +23,13 @@ export const SmartSolutions_Building = () => { // แก้ไขชื่อ co
   const handleLearnMoreClick_smart_Building = () => {
     navigate("/smart-solutions-building");
   };
+
+  const handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration= () => {
+    navigate("/smart-solutions-building", { state: { scrollTo: 'renewableEnergy' } });
+  };
+  const handleLearnMoreClick_smart_BuildingTo_Lighting= () => {
+    navigate("/smart-solutions-building", { state: { scrollTo: 'Lighting' } });
+  };
   return (
     <>
     
@@ -52,22 +59,21 @@ export const SmartSolutions_Building = () => { // แก้ไขชื่อ co
                   </div>
 
                 
-              </div>
-              <img
-          src="/image/Smart_Building.jpg" 
-            alt="Me sitting with a laptop"
-            className={styles.aboutImage}
-         />
-            </li>
-            
-          </ul>
-          {/* <img
-          src="/image/Smart_Hospital.jpg"  // แก้ไขตรงนี้เป็น path ของรูปภาพที่ถูกต้อง
-            alt="Me sitting with a laptop"
-            className={styles.aboutImage}
-         /> */}
-        </div>
-      </section>
+                  </div>
+                
+                  <div className={styles.imageContainer}>
+                        <img
+                          src="/image/Smart_Building.jpg"
+                          alt="Smart Building"
+                           className={styles.aboutImage}
+                          />
+                   <div className={styles.redDot_RenewableEnergyIntegration} onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}></div>
+                   <div className={styles.redDot_Lighting} onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}></div>
+                </div>
+          </li>
+        </ul>
+      </div>
+    </section>
     
     </>
   );
