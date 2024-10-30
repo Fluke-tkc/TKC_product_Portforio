@@ -68,7 +68,7 @@ export const SmartSolutions_Building = () => { // แก้ไขชื่อ co
                            className={styles.aboutImage}
                           />
                    <div className={styles.redDot_RenewableEnergyIntegration} onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}
-                     title="RenewableEnergyIntegration"></div>
+                     title="Solar cell"></div>
                    <div className={styles.redDot_Lighting} onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}
                     title="Smart Lighting"></div>
                 </div>
