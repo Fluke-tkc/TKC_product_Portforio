@@ -207,25 +207,6 @@ export const Hero = () => {
 </div>
 
 
-
-
-
-     
-      {/* <div className={styles.BG3}>
-        <div className={styles.topic3}>Our Service</div>
-        <section className={styles.container}>
-          <div className={styles.gridContainer}>
-            {topics.map((topic, index) => (
-              <div key={index} className={`${styles.circleWrapper} ${styles[`circle${index + 1}`]}`}>
-                <button className={styles.circleButton} onClick={() => handleButtonClick(topic)}>
-                  <img src={topic.imgSrc} alt={topic.name} />
-                  <span>{topic.name}</span>
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
-      </div> */}
       <Contact />
     </>
   );

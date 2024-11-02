@@ -1,95 +1,145 @@
+.footer {
+  background: linear-gradient(195deg, #42424a 0%, #191919 100%);
+  color: #ffffff;
+  padding: 4rem 0 0 0;
+}
+
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 50px;
-  background-color: var(--color-secondary);
-  color: var(--color-text);
-  background-image: url("/image/services-solutions.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-.contactDetails {
+.headerSection {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 4rem;
 }
 
-.contactDetails h2 {
-  font-size: 40px;
+.title {
+  font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 20px;
+  color: #ffffff;
+  margin-bottom: 1rem;
 }
 
-.contactDetails p {
-  font-size: 18px;
-  line-height: 1.5;
-  margin: 0;
+.titleUnderline {
+  width: 80px;
+  height: 4px;
+  background: #ffffff;
+  margin: 0 auto;
+  border-radius: 2px;
 }
 
-.contactInfo {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 40px;
-  width: 100%;
+.contactGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
 }
 
-.infoSection {
-  flex: 1 1 200px;
-  max-width: 300px;
+.contactCard {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
-.infoSection h3 {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 10px;
+.contactCard:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.15);
 }
 
-.infoSection p,
-.infoSection ul {
-  font-size: 18px;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.links {
-  list-style: none;
-  padding: 0;
-}
-
-.link {
+.iconWrapper {
+  width: 60px;
+  height: 60px;
+  background: #ffffff;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
 }
 
-.link img {
-  width: 24px;
-  height: 24px;
+.symbol {
+  font-size: 24px;
+  line-height: 1;
 }
 
-.link a {
-  color: var(--color-text);
+.contactTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.contactText,
+.contactLink {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.contactLink {
   text-decoration: none;
-  font-size: 18px;
-  font-weight: 400;
+  transition: color 0.3s ease;
+  display: inline-block;
 }
 
-.link a:hover {
-  text-decoration: underline;
+.contactLink:hover {
+  color: #ffffff;
 }
 
-@media screen and (max-width: 830px) {
-  .contactInfo {
-    flex-direction: column;
-    gap: 30px;
+.footerBottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 2rem;
+}
+
+.copyright {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .contactGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
   }
   
-  .infoSection {
-    text-align: center;
+  .contactGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .contactCard {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .iconWrapper {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .symbol {
+    font-size: 20px;
   }
 }

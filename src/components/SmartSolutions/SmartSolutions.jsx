@@ -44,13 +44,13 @@ export const SmartSolutions = () => {
       {/* </section> */}
       
       <SmartSolutionsBuilding />
-     <SmartSolutionsFram/>
+     {/* <SmartSolutionsFram/>
       <SmartSolutionsHospital/>
      <SmartSolutionsLearning/>
      <SmartSolutionsLogistics/>
      <SmartSolutionsOrganizedCommunicationCables/>
      <SmartSolutionsPlatform/>
-     <SmartSolutionsUtility/>
+     <SmartSolutionsUtility/> */}
       <div className={styles.productShowcase_left}></div>
 
       <Contact />

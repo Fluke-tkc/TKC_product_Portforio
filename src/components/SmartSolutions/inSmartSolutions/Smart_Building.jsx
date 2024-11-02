@@ -240,7 +240,7 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
 
 
-      <section className={styles.container} >
+      <section id="Iot" className={styles.container} >
         {/* <h2 className={styles.title}>Smart Building</h2> */}
         
         <div className={styles.content}>
@@ -282,7 +282,7 @@ export const Smart_Building = () => { // แก้ไขชื่อ component �
 
       </section>
 
-      <section className={styles.container}>
+      <section id="Surveillance and Security System" className={styles.container}>
         {/* <h2 className={styles.title}>Smart Building</h2> */}
         
         <div className={styles.content}>

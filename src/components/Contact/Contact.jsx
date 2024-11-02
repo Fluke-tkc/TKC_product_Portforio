@@ -1,45 +1,69 @@
 import React from "react";
 import styles from "./Contact.module.css";
-import { getImageUrl } from "../../utils"; // ถ้ามี utility ที่เกี่ยวข้อง
 
 export const Contact = () => {
+  const contactInfo = {
+    address: {
+      title: "ที่อยู่",
+      details: "44/44 ซอยวิภาวดีรังสิต 60 แยก 18-1-2 แขวงตลาดบางเขน เขตหลักสี่, Bangkok, Bangkok",
+      symbol: "📍"
+    },
+    email: {
+      title: "อีเมล",
+      details: "info@tkc-services.com",
+      link: "mailto:info@tkc-services.com",
+      symbol: "✉️"
+    },
+    phone: {
+      title: "โทรศัพท์",
+      details: "(+66) 0-2401-8222",
+      link: "tel:+66024018222",
+      symbol: "📞"
+    },
+    social: {
+      title: "โซเชียลมีเดีย",
+      details: "Facebook",
+      link: "https://www.facebook.com/TurnkeyCommunicationServices",
+      symbol: "👥"
+    }
+  };
+
   return (
-    <footer id="contact" className={styles.container}>
-      <div className={styles.contactDetails}>
-        <h2>Contact Us</h2>
-        {/* <p>We'd love to hear from you! Reach out to us through any of the following channels:</p> */}
+    <footer className={styles.footer} id="contact">
+      <div className={styles.container}>
+        <div className={styles.headerSection}>
+          <h2 className={styles.title}>ติดต่อเรา</h2>
+          <div className={styles.titleUnderline}></div>
+        </div>
+
+        <div className={styles.contactGrid}>
+          {Object.entries(contactInfo).map(([key, info]) => (
+            <div key={key} className={styles.contactCard}>
+              <div className={styles.iconWrapper}>
+                <span className={styles.symbol}>{info.symbol}</span>
+              </div>
+              <h3 className={styles.contactTitle}>{info.title}</h3>
+              {info.link ? (
+                <a 
+                  href={info.link} 
+                  className={styles.contactLink}
+                  target={key === 'social' ? '_blank' : undefined}
+                  rel={key === 'social' ? 'noopener noreferrer' : undefined}
+                >
+                  {info.details}
+                </a>
+              ) : (
+                <p className={styles.contactText}>{info.details}</p>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-      <div className={styles.contactInfo}>
-        <div className={styles.infoSection}>
-          <h3>Address</h3>
-          <p>44/44 ซอยวิภาวดีรังสิต 60 แยก 18-1-2 <br />แขวงตลาดบางเขน เขตหลักสี่, Bangkok, Bangkok,</p>
-        </div>
-        <div className={styles.infoSection}>
-          <h3>Email</h3>
-          <ul className={styles.links}>
-            <li className={styles.link}>
-              {/* <img src={getImageUrl("/image/emailIcon.png")} alt="Email icon" /> */}
-              <a href="mailto:Aphichatrungruang@gmail.com">info@tkc-services.com</a>
-            </li>
-           
-          </ul>
-        </div>
-        <div className={styles.infoSection}>
-          <h3>Social Media</h3>
-       
-          <ul className={styles.links}>
-            <li className={styles.link}>
-              {/* <img src={getImageUrl("/image/githubIcon.png")} alt="GitHub icon" /> */}
-              
-              <a href="https://www.facebook.com/TurnkeyCommunicationServices">facebook</a>
-            </li>
-            
-          </ul>
-        </div>
-        <div className={styles.infoSection}>
-          <h3>Phone</h3>
-          <p>(+66) 0-2401-8222</p>
-        </div>
+      
+      <div className={styles.footerBottom}>
+        <p className={styles.copyright}>
+          © {new Date().getFullYear()} TKC Services. All rights reserved.
+        </p>
       </div>
     </footer>
   );

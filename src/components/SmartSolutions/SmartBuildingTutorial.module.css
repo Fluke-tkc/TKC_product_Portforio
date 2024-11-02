@@ -1,0 +1,192 @@
+.tutorialContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .spotlight {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1001;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .messageBox {
+    position: absolute;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1002;
+    max-width: 300px;
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  .messageTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .messageContent {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  .continueText {
+    font-size: 12px;
+    color: #999;
+    margin-top: 12px;
+    font-style: italic;
+  }
+  
+  .clickableArea {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1003;
+    cursor: pointer;
+  }
+  
+  .redDot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+  }
+  
+  .redDotHighlight {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid white;
+    border-radius: 50%;
+    animation: highlight 2s infinite;
+  }
+  
+  /* Animations */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes highlight {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.3);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Media Queries */
+  @media screen and (max-width: 768px) {
+    .messageBox {
+      max-width: 250px;
+      padding: 15px;
+    }
+  
+    .messageTitle {
+      font-size: 16px;
+    }
+  
+    .messageContent {
+      font-size: 13px;
+    }
+  
+    .spotlight {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  
+  /* ปรับแต่ง position สำหรับแต่ละ step */
+  .spotlightStep1 {
+    top: 20px;
+    right:39%;
+    
+  }
+  
+  .messageBoxStep1 {
+    top: 15%;
+    right: 45%;
+  }
+  
+  .spotlightStep2 {
+    top: 25%;
+    right: 46%;
+  }
+  
+  .messageBoxStep2 {
+    top: 32%;
+    right: 51%;
+  }
+  
+  /* Skip button */
+  .skipButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 4px;
+    color: #333;
+    cursor: pointer;
+    z-index: 1004;
+    transition: all 0.2s ease;
+  }
+  
+  .skipButton:hover {
+    background-color: white;
+    transform: translateY(-1px);
+  }

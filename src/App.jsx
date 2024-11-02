@@ -2,6 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Hero } from "./components/Hero/Hero";
+import { Hero_New } from "./components/Hero/Hero_New";
 import { SmartSolutions } from "./components/SmartSolutions/SmartSolutions";
 import { GreenSolutions } from "./components/GreenSolution/GreenSolutions";
 

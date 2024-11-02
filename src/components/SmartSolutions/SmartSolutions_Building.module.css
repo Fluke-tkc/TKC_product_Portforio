@@ -1,45 +1,8 @@
-
+/* Container Styles */
 .container {
   position: relative;
-  background-color: rgba(12, 12, 12, 0.6);
-  border-radius: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
-  /* margin-top: 9px; */
-  z-index: 1;
-  margin-left: 0%;
-  margin-right: 0%;
-
-  
-  /* background-image: url("/image/Reternofsoul_2.jpg"); */
-   background-color: #285280;   
-  background-position: center;
-
-  background-size:     cover;                     
-  background-repeat:   no-repeat;
-  background-position: center center; 
-
-
-}
-
-.title {
-  color: var(--color-text);
-  font-size: 35px;
-  font-weight: 700;
-  letter-spacing: 1.75px;
-  text-transform: uppercase;
-
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-right:0px;
-  margin-bottom: 50px;
-
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 120px;
-  padding-right: 0px;
+  background-color: #285280;
+  width: 100%;
 }
 
 .content {
@@ -48,311 +11,487 @@
   align-items: center;
 }
 
-.aboutImage {
-  width: 100%;
-  padding-right: 50px;
-  padding-left: 50px;
-  height: auto;
-}
-
-.aboutItems {
-  color: var(--color-text);
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  
-}
-
-.aboutItem {
-  display: flex;
-  flex-direction: row;
-  
-  align-items: center;
-  /* border-radius: 20px; */
-  list-style: none;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  padding-right: 0px;
-  padding-left: 0px;
-  background-image: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.42) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  background-size: 0 100%;
-  background-repeat: no-repeat;
-  transition: 0.4s;
-
-
-  
-}
-
-
-.aboutItem:hover {
-  background-size: 100% 100%;
-}
-
-.aboutItem h3 {
-  font-size: 40px;
-  font-weight: 600;
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-right:0px;
-  margin-bottom: 50px;
-
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 80px;
-  padding-right: 0px;
-  
-}
-
-.aboutItemp {
-  font-size: 25px;
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-right:100px;
-  margin-bottom: 0px;
-
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 80px;
-  padding-right: 0px;
-}
-
-@media screen and (max-width: 830px) {
-  .container {
-    background-color: transparent;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .title {
-    color: var(--color-text);
-    font-size: 35px;
-    font-weight: 700;
-    letter-spacing: 1.75px;
-    text-transform: uppercase;
-  
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right:0px;
-    margin-bottom: 10px;
-  
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 80px;
-    padding-right: 0px;
-  }
-  .aboutItem h3 {
-    font-size: 30px;
-    font-weight: 600;
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right:0px;
-    margin-bottom: 50px;
-  
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 50px;
-    padding-right: 0px;
-    
-  }
-  .aboutItem p {
-    font-size: 18px;
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right:0px;
-    margin-bottom: 0px;
-  
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .content {
-    flex-direction: column;
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right:0px;
-    margin-bottom: 50px;
-  
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-
-  .aboutImage {
-    display: none;
-  }
-
-  .aboutItems {
-    margin-top: 29px;
-  }
-
-  .aboutItem {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-.buttonContainer
-{
-  display: flex;
-  justify-content:left ;  /* จัดปุ่มให้อยู่ตรงกลางในแนวนอน */
-  align-items: center;      /* จัดปุ่มให้อยู่ตรงกลางในแนวตั้ง */
-                        
-  
-  position: relative;       /* ใช้ position relative เพื่อให้การจัดวางภายใน */
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-.primaryButton{
-  padding: 12px 24px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-
-
-           
- 
-}
-.primaryButton {
-  background-color: #007bff;
-  color: white;
-}
-
-
 .imageContainer {
   position: relative;
-  width: 300%; /* ปรับขนาด container ให้ตรงกับขนาดภาพ */
-  
+  width: 100%;
   height: auto;
 }
 
-.redDot_RenewableEnergyIntegrationWrapper {
-  position: absolute;
-  top: 8%;
-  right: 40%;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  animation: pulse 2s infinite;
-  z-index: 2;
-}
- .redDot_RenewableEnergyIntegration {
-  position: absolute;
-  top: 8%; 
-  right: 40%; 
-  width: 20px;
-  height: 20px;
-  background-color: red;
-  border-radius: 50%;
-  cursor: pointer;
-  animation: pulse 2s infinite;
-  z-index: 2; 
-} 
-.redDot_inRenewableEnergyIntegration {
-  position: absolute;
-  top: 8%; /* ปรับตำแหน่งในแนวตั้ง */
-  right: 40%; /* ปรับตำแหน่งในแนวนอน */
-  width: 20px;
-  height: 20px;
-  
-  background-color: transparent; /* ทำให้พื้นหลังโปร่งใส */
-  border: 2px solid white; /* เพิ่มกรอบสีขาว */
-  border-radius: 50%; /* ทำให้เป็นวงกลม */
-  cursor: pointer;
-  animation: pulse 2s infinite;
-  z-index: 2; /* ทำให้จุดอยู่บนภาพ */
+.aboutImage {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.redDot_LightingWrapper {
-  position: absolute;
-  top: 25%;
-  right: 46%;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  animation: pulse 2s infinite;
-  z-index: 2;
-}
-.redDot_Lighting {
-  position: absolute;
-  top: 25%; /* ปรับตำแหน่งในแนวตั้ง */
-  right: 46%; /* ปรับตำแหน่งในแนวนอน */
-  width: 20px;
-  height: 20px;
-  background-color: red;
-  border-radius: 50%;
-  cursor: pointer;
-  animation: pulse 2s infinite;
-  z-index: 2; /* ทำให้จุดอยู่บนภาพ */
-}
-.redDot_inLighting {
-  position: absolute;
-  top: 25%; /* ปรับตำแหน่งในแนวตั้ง */
-  right: 46%; /* ปรับตำแหน่งในแนวนอน */
-  width: 20px;
-  height: 20px;
-  
-  background-color: transparent; /* ทำให้พื้นหลังโปร่งใส */
-  border: 2px solid white; /* เพิ่มกรอบสีขาว */
-  border-radius: 50%; /* ทำให้เป็นวงกลม */
-  cursor: pointer;
-  animation: pulse 2s infinite;
-  z-index: 2; /* ทำให้จุดอยู่บนภาพ */
-}
-
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-
-
+/* Tooltip Styles */
 .tooltipText {
   visibility: hidden;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 10px;
+  background-color: white;
+  color: black;
+  text-align: left;
+  padding: 20px;
+  border-radius: 12px;
   position: absolute;
-  z-index: 3;
-  font-size: 20px;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   opacity: 0;
   transition: opacity 0.3s, visibility 0.3s;
-
-  width: auto; /* กำหนดความกว้าง */
-  height: auto; /* ความสูงอัตโนมัติ หรือกำหนดเองได้ */
-  white-space: normal; /* ให้ข้อความแสดงหลายบรรทัด */
+  width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  white-space: normal;
+  z-index: 1000;
+}
+.tooltipText h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
 }
 
-.redDot_RenewableEnergyIntegrationWrapper:hover .tooltipText {
+.tooltipText p {
+  font-size: 14px;
+  margin: 0 0 16px 0;
+  color: #666;
+}
+
+.tooltipButton {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  float: right;
+}
+
+.tooltipButton:hover {
+  background-color: #0056b3;
+}
+
+/* Individual Tooltip Positions - matching messageBox positions */
+.redDot_RenewableEnergyIntegrationWrapper .tooltipText {
+  top: calc(10% + 0px);
+  left: 70%;
+}
+
+.redDot_IotWrapper .tooltipText {
+  top: calc(32% + 0px);
+  left: 30%;
+}
+
+.redDot_AccessControlSystemsWrapper .tooltipText {
+  top: calc(30% + 0px);
+  left: 65%;
+}
+
+.redDot_SurveillanceSecurityWrapper .tooltipText {
+  top: calc(57% + 0px);
+  left: 78%;
+}
+
+.redDot_LightingWrapper .tooltipText {
+  top: calc(57% + 0px);
+  left: 55%;
+}
+
+.redDot_BuildingAutomationWrapper .tooltipText {
+  top: calc(88% - 0px);
+  left: 35%;
+}
+
+.redDot_MotionSensorsWrapper .tooltipText {
+  top: calc(82% - 0px);
+  left: 45%;
+}
+
+.redDot_SmartParkingWrapper .tooltipText {
+  top: calc(85% - 0px);
+  left: 70%;
+}
+/* Update hover effects for all red dots */
+[class*="redDot_"][class*="Wrapper"]:hover .tooltipText {
   visibility: visible;
   opacity: 1;
 }
-.redDot_LightingWrapper:hover .tooltipText {
-  visibility: visible; /* แสดงข้อความเมื่อ hover */
-  opacity: 1; /* ปรับความโปร่งใส */
+
+/* Common Red Dot Styles */
+[class*="redDot_"][class*="Wrapper"] {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
+
+/* Ripple Effect for all dots */
+[class*="redDot_"][class*="Wrapper"]::before,
+[class*="redDot_"][class*="Wrapper"]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: -1;
+}
+
+[class*="redDot_"][class*="Wrapper"]::before {
+  animation: ripple 2s infinite;
+}
+
+[class*="redDot_"][class*="Wrapper"]::after {
+  animation: ripple 2s infinite 1s;
+}
+
+/* Individual Red Dot Styles */
+/* Renewable Energy Integration */
+.redDot_RenewableEnergyIntegrationWrapper {
+  top: 10%;
+  left: 60%;
+  background-image: url("/image/SolarFarm.png");
+}
+
+.redDot_RenewableEnergyIntegrationWrapper::before,
+.redDot_RenewableEnergyIntegrationWrapper::after {
+  background: rgba(0, 255, 0, 0.2);
+}
+
+/* IoT */
+.redDot_IotWrapper {
+  top: 32%;
+  left: 18%;
+  background-image: url("/image/Picture6.svg");
+}
+
+.redDot_IotWrapper::before,
+.redDot_IotWrapper::after {
+  background: rgba(0, 150, 255, 0.2);
+}
+
+/* Access Control Systems */
+.redDot_AccessControlSystemsWrapper {
+  top: 30%;
+  left: 52%;
+  background-image: url("/image/AccessControlSystems.png");
+}
+
+.redDot_AccessControlSystemsWrapper::before,
+.redDot_AccessControlSystemsWrapper::after {
+  background: rgba(255, 165, 0, 0.2);
+}
+
+/* Surveillance and Security */
+.redDot_SurveillanceSecurityWrapper {
+  top: 57%;
+  left: 91%;
+  background-image: url("/image/SurveillanceSecurity.png");
+}
+
+.redDot_SurveillanceSecurityWrapper::before,
+.redDot_SurveillanceSecurityWrapper::after {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+/* Smart Lighting */
+.redDot_LightingWrapper {
+  top: 57%;
+  left: 40%;
+  background-image: url("/image/SolarFarm.png");
+}
+
+.redDot_LightingWrapper::before,
+.redDot_LightingWrapper::after {
+  background: rgba(255, 255, 0, 0.2);
+}
+
+/* Building Automation */
+.redDot_BuildingAutomationWrapper {
+  top: 88%;
+  left: 20%;
+  background-image: url("/image/Picture7.svg");
+}
+
+.redDot_BuildingAutomationWrapper::before,
+.redDot_BuildingAutomationWrapper::after {
+  background: rgba(128, 0, 128, 0.2);
+}
+
+/* Motion Sensors */
+.redDot_MotionSensorsWrapper {
+  top: 82%;
+  left: 60%;
+  background-image: url("/image/Picture4.png");
+}
+
+.redDot_MotionSensorsWrapper::before,
+.redDot_MotionSensorsWrapper::after {
+  background: rgba(255, 192, 203, 0.2);
+}
+
+/* Smart Parking */
+.redDot_SmartParkingWrapper {
+  top: 85%;
+  left: 83%;
+  background-image: url("/image/Picture3.svg");
+}
+
+.redDot_SmartParkingWrapper::before,
+.redDot_SmartParkingWrapper::after {
+  background: rgba(0, 0, 255, 0.2);
+}
+
+/* Hover Effects */
+.redDot_RenewableEnergyIntegrationWrapper:hover .tooltipText,
+.redDot_IotWrapper:hover .tooltipText,
+.redDot_AccessControlSystemsWrapper:hover .tooltipText,
+.redDot_SurveillanceSecurityWrapper:hover .tooltipText,
+.redDot_LightingWrapper:hover .tooltipText,
+.redDot_BuildingAutomationWrapper:hover .tooltipText,
+.redDot_MotionSensorsWrapper:hover .tooltipText,
+.redDot_SmartParkingWrapper:hover .tooltipText {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Tutorial Elements */
+.tutorialContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.messageTitle {
+  font-size: clamp(16px, 1.8vw, 24px);
+  margin-bottom: 0.8vw;
+  font-weight: 600;
+}
+
+.messageContent {
+  font-size: clamp(14px, 1.4vw, 18px);
+  margin-bottom: 0.8vw;
+  line-height: 1.4;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(245, 5, 5, 0);
+}
+
+.messageBox {
+  position: absolute;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  transform: translate(-50%, -50%);
+}
+
+.spotlight {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
+}
+
+/* Spotlight Positions */
+.spotlightStep1 { top: 10%; left: 60%; }
+.spotlightStep2 { top: 32%; left: 18%; }
+.spotlightStep3 { top: 30%; left: 52%; }
+.spotlightStep4 { top: 57%; left: 91%; }
+.spotlightStep5 { top: 57%; left: 40%; }
+.spotlightStep6 { top: 88%; left: 20%; }
+.spotlightStep7 { top: 82%; left: 60%; }
+.spotlightStep8 { top: 85%; left: 83%; }
+
+/* Message Box Positions */
+.messageBoxStep1 { top: calc(10% + 0px); left: 75%; }
+.messageBoxStep2 { top: calc(32% + 0px); left: 30%; }
+.messageBoxStep3 { top: calc(30% + 0px); left: 65%; }
+.messageBoxStep4 { top: calc(57% + 0px); left: 78%; }
+.messageBoxStep5 { top: calc(57% + 0px); left: 55%; }
+.messageBoxStep6 { top: calc(88% - 0px); left: 35%; }
+.messageBoxStep7 { top: calc(82% - 0px); left: 45%; }
+.messageBoxStep8 { top: calc(85% - 0px); left: 70%; }
+
+/* Button Styles */
+.buttonContainer {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  position: relative;
+  padding: 0;
+}
+
+.primaryButton {
+  background-color: #007bff;
+  color: white;
+  padding: clamp(6px, 0.8vw, 12px) clamp(12px, 1.5vw, 24px);
+  border: none;
+  border-radius: clamp(4px, 0.4vw, 8px);
+  font-size: clamp(12px, 1vw, 16px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-block;
+  text-align: center;
+  min-width: clamp(60px, 8vw, 100px);
+  user-select: none;
+  font-weight: 600;
+}
+
+.primaryButton:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.skipButton {
+  position: absolute;
+  top: clamp(10px, 1.5vw, 20px);
+  right: clamp(10px, 1.5vw, 20px);
+  padding: clamp(6px, 0.8vw, 12px) clamp(12px, 1.5vw, 24px);
+  background-color: white;
+  border: none;
+  border-radius: clamp(4px, 0.4vw, 8px);
+  font-size: clamp(12px, 1vw, 16px);
+  cursor: pointer;
+  font-weight: 500;
+  z-index: 1001;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.skipButton:hover {
+  background-color: #f8f8f8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+
+  /* Rest of your existing styles */
+.tooltipText h3 {
+font-size: 20px;
+font-weight: bold;
+margin: 0 0 8px 0;
+}
+
+.tooltipText p {
+font-size: 14px;
+margin: 0 0 16px 0;
+color: #666;
+}
+
+.tooltipButton {
+background-color: #007bff;
+color: white;
+padding: 8px 24px;
+border: none;
+border-radius: 4px;
+font-size: 14px;
+cursor: pointer;
+float: right;
+}
+
+.tooltipButton:hover {
+background-color: #0056b3;
+}
+
+/* Hover effects */
+[class*="redDot_"][class*="Wrapper"]:hover .tooltipText {
+visibility: visible;
+opacity: 1;
+}
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 30px;
+    height: 30px;
+  }
+
+  .spotlight {
+    width: 40px;
+    height: 40px;
+  }
+
+  .messageBox {
+    width: 250px;
+    padding: 15px;
+  }
+
+  .messageBoxStep1 {
+    left: 80%;
+  }
+
+  .messageBoxStep2,
+  .messageBoxStep3,
+  .messageBoxStep4,
+  .messageBoxStep5,
+  .messageBoxStep6,
+  .messageBoxStep7,
+  .messageBoxStep8 {
+    left: 50%;
+  }
+
+  .tooltipText {
+    width: 200px;
+    padding: 15px;
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.4;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(2);
+      opacity: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  /* Add specific styles for larger screens if needed */
+}
+
 
