@@ -18,7 +18,7 @@ export const SmartSolutions_Utility = () => { // แก้ไขชื่อ com
   const navigate = useNavigate();
 
   const handleLearnMoreClick_smart_Utility_New = () => {
-    navigate("/smart-solutions-utility_new");
+    navigate("/smart-solutions-utility");
   };
   return (
     <>

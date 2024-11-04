@@ -10,6 +10,22 @@
   flex-direction: row;
   align-items: center;
 }
+.imageContainer {
+  position: relative;
+  width: 100%;
+}
+
+.overlayText {
+  position: absolute;
+  top: 20px; /* ปรับระยะห่างจากด้านบนได้ตามต้องการ */
+  left: 20%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 36px; /* ปรับขนาดตัวอักษรได้ตามต้องการ */
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* เพิ่มเงาเพื่อให้อ่านง่ายขึ้น */
+  z-index: 1; /* ให้อยู่ด้านบนสุด */
+}
 
 .imageContainer {
   position: relative;

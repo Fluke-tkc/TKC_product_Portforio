@@ -114,10 +114,13 @@ export const SmartSolutions_Building = () => {
   return (
     <>
      <Navbar />
+     
     <section className={styles.container} id="about">
       
       <div className={styles.content}>
+        
         <div className={styles.imageContainer}>
+        <div className={styles.overlayText}>Efficient Building Management</div>
           <img
             src="/image/SmartBuilding.jpg"
             alt="Smart Building"

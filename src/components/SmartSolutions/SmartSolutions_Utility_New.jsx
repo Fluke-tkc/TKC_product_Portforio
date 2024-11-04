@@ -115,7 +115,8 @@ export const SmartSolutions_Utility_New = () => {
       
       <div className={styles.content}>
         <div className={styles.imageContainer}>
-          
+        <div className={styles.overlayText}>Intelligent Grid</div>
+        <div className={styles.overlayText_1}>Technology-driven system that optimizes energy management through sensors, data analytics, and smart communication​</div>
           <img
             src="/image/Smart_UtilityBackground.png"
             alt="Smart Building"
