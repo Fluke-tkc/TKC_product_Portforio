@@ -15,7 +15,8 @@ import {Smart_Organized_Communication_Cables }from "./components/SmartSolutions/
 import {Smart_Platform }from "./components/SmartSolutions/inSmartSolutions/Smart_Platform";
 import {Smart_Utility }from "./components/SmartSolutions/inSmartSolutions/Smart_Utility";
 
-
+import Smart_Building_New from "./components/SmartSolutions/SmartSolutions_Building_New";
+import Smart_Utility_New from "./components/SmartSolutions/SmartSolutions_Utility_New";
 // import {GreenSolutionsDiscription }from "./components/GreenSolution/GreenSolutions_Discription";
 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<Hero />} />
         <Route path="/smart-solutions" element={<SmartSolutions />} />
              <Route path="/smart-solutions-building" element={<Smart_Building />} />
+                    <Route path="/smart-solutions-building_new" element={<Smart_Building_New />} />
              <Route path="/smart-solutions-fram" element={<Smart_Farm />} />
              <Route path="/smart-solutions-hospital" element={<Smart_Hospital />} />
              <Route path="/smart-solutions-learning" element={<Smart_Learning />} />
@@ -33,8 +35,12 @@ function App() {
              <Route path="/smart-solutions-organized_communication_cables" element={<Smart_Organized_Communication_Cables />} />
              <Route path="/smart-solutions-platform" element={<Smart_Platform />} />
              <Route path="/smart-solutions-utility" element={<Smart_Utility />} />
+                    <Route path="/smart-solutions-utility_new" element={<Smart_Utility_New />} />
         <Route path="/green-solutions" element={<GreenSolutions />} />
              {/* <Route path="/green-solutions-discription" element={<GreenSolutionsDiscription />} /> */}
+
+
+             
       </Routes>
     </Router>
   );

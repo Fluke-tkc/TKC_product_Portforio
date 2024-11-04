@@ -17,8 +17,8 @@ export const SmartSolutions_Utility = () => { // แก้ไขชื่อ com
 
   const navigate = useNavigate();
 
-  const handleLearnMoreClick_smart_Utility = () => {
-    navigate("/smart-solutions-utility");
+  const handleLearnMoreClick_smart_Utility_New = () => {
+    navigate("/smart-solutions-utility_new");
   };
   return (
     <>
@@ -41,12 +41,12 @@ export const SmartSolutions_Utility = () => { // แก้ไขชื่อ com
             className={styles.aboutImage}
          />
               <div className={styles.aboutItemText}>
-                <h3>Smart Organized Communication Cables</h3>
+                <h3>Smart Utility</h3>
                 <div className={styles.aboutItemp}>
                 ระบบโครงข่ายไฟฟ้าอัจฉริยะที่ผสมผสานเทคโนโลยีดิจิทัลเพื่อการผลิต การส่งจ่าย 
                 และการบริหารจัดการพลังงานอย่างมีประสิทธิภาพ มีองค์ประกอบหลักดังนี้
                   <div className={styles.buttonContainer}>
-                  <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Utility} >เพื่มเติม</a>
+                  <a className={styles.primaryButton}onClick={handleLearnMoreClick_smart_Utility_New} >เพื่มเติม</a>
                   </div>
                   </div>
 

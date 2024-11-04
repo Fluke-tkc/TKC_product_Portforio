@@ -3,6 +3,9 @@ import styles from "./SmartSolutions.module.css";
 import { Navbar } from "../Navbar/Navbar";
 import { Contact } from "../Contact/Contact";
 import { useNavigate } from "react-router-dom"; // นำเข้า useNavigate
+import SmartSolutionsBuilding_New from "./SmartSolutions_Building_New"; 
+
+
 import SmartSolutionsBuilding from "./SmartSolutions_Building"; 
 import SmartSolutionsFram from "./SmartSolutions_Farm"; 
 import SmartSolutionsHospital from "./SmartSolutions_Hospital"; 
@@ -44,13 +47,13 @@ export const SmartSolutions = () => {
       {/* </section> */}
       
       <SmartSolutionsBuilding />
-     {/* <SmartSolutionsFram/>
+      <SmartSolutionsFram/>
       <SmartSolutionsHospital/>
      <SmartSolutionsLearning/>
      <SmartSolutionsLogistics/>
      <SmartSolutionsOrganizedCommunicationCables/>
      <SmartSolutionsPlatform/>
-     <SmartSolutionsUtility/> */}
+     <SmartSolutionsUtility/> 
       <div className={styles.productShowcase_left}></div>
 
       <Contact />
