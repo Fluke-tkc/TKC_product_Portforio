@@ -71,7 +71,15 @@ export const Hero = () => {
 
 <div className={styles.solutionSection}>
   
-  <h2 className={styles.sectionTitle}>Smart Solution</h2>
+{/* <h2 className={styles.sectionTitle}>Smart Solution</h2> */}
+<div className={styles.imageContainer_icon}>
+  <img
+    src="/image/icon_smart_solution.png"
+    alt="Smart Solution"
+    className={styles.aboutImage}
+  />
+</div>
+
   <div className={styles.threeColumnSolutions}>
     
   <div
@@ -84,43 +92,38 @@ export const Hero = () => {
       
       <img src="/image/smartsolution2.png" className={styles.solutionImage} />
       <h3>Smart Building</h3>
-      <br/>
+     
+           
+          {/* Red Dots with Enhanced Tooltips */}
+      
       <p></p>
-      <div className={styles.buttonContainerOurservice}>
-      {/* <a href="#learn-more" className={styles.primaryButtonTop}onClick={handleLearnMoreClick_smart_solutions} >Learn more</a> */}
-        
-      </div>
+      
     </div>
 
     <div className={styles.solutionCard}>
       <img src="/image/cloudsolution.jpg"  className={styles.solutionImage} />
       <h3>Smart Hospital</h3>
       <p></p>
-      <div className={styles.buttonContainerOurservice}>
-        {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
-      </div>
+      
     </div>
 
     <div className={styles.solutionCard}>
       <img src="/image/cybersecurity.jpg"  className={styles.solutionImage} />
       <h3>Smart Platform</h3>
-      <p></p>
-      <div className={styles.buttonContainerOurservice}>
-        {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
-      </div>
+      <p></p> 
     </div>
+    
+    <div className={styles.solutionCard}>
+    <img src="/image/softwaredevelopment.jpg"  className={styles.solutionImage} />
+    <h3>Smart Learning</h3>
+    <p></p>
+    
+  </div>
+    
   </div>
 
 
   <div className={styles.threeColumnSolutions}>
-  <div className={styles.solutionCard}>
-    <img src="/image/softwaredevelopment.jpg"  className={styles.solutionImage} />
-    <h3>Smart Learning</h3>
-    <p></p>
-    <div className={styles.buttonContainerOurservice}>
-    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
-    </div>
-  </div>
   
   <div
   className={styles.solutionCard}
@@ -132,72 +135,58 @@ export const Hero = () => {
     <img src="/image/greensolution.png"  className={styles.solutionImage} />
     <h3>Smart Logistics</h3>
     <p></p>
-    <div className={styles.buttonContainerOurservice}>
-    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
-    </div>
+   
   </div>
   <div className={styles.solutionCard}>
     <img src="/image/Autonomous-System.jpg" className={styles.solutionImage} />
     <h3>Smart Organized Communication Cables</h3>
     <p></p>
-    <div className={styles.buttonContainerOurservice}>
-    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
-    </div>
+    
   </div>
-  
-   </div>
-
-   <div className={styles.threeColumnSolutions}>
   <div className={styles.solutionCard}>
     <img src="/image/Telecom-and-Network-Infrastructure.jpg"  className={styles.solutionImage} />
     <h3>Autonomous Solution</h3>
     <p></p>
-    <div className={styles.buttonContainerOurservice}>
-    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
-    </div>
+   
   </div>
   
   <div className={styles.solutionCard}>
     <img src="/image/ICTInfrastructure.jpg"  className={styles.solutionImage} />
     <h3>Cyber Security</h3>
     <p></p>
-    <div className={styles.buttonContainerOurservice}>
-    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
-    </div>
-  </div>
-  <div className={styles.solutionCard}>
-    <img src="/image/public-safety.jpg" className={styles.solutionImage} />
-    <h3>Smart Farming</h3>
-    <p></p>
-    <div className={styles.buttonContainerOurservice}>
-    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
-    </div>
+    
   </div>
   
    </div>
+
+   
    <div className={styles.threeColumnSolutions}>
+   <div className={styles.solutionCard}>
+    <img src="/image/public-safety.jpg" className={styles.solutionImage} />
+    <h3>Smart Farming</h3>
+    <p></p>
+   
+  </div>
    <div
   className={styles.solutionCard}
   onClick={handleLearnMoreClick_smart_Utility} // ทำให้ทั้งการ์ดเป็นปุ่มที่คลิกได้
   role="button" // เพิ่ม role เพื่อบ่งบอกว่าเป็นปุ่ม
   tabIndex="0" // ทำให้สามารถโฟกัสได้โดยการกด Tab บนคีย์บอร์ด
   onKeyDown={(e) => e.key === 'Enter' && handleLearnMoreClick_smart_Utility()} // รองรับการกด Enter เพื่อคลิก
+  
    >
+    
     <img src="/image/Logistics.jpg"  className={styles.solutionImage} />
     <h3>Smart Utility(Grid)</h3>
     <p></p>
-    <div className={styles.buttonContainerOurservice}>
-    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
-    </div>
+    
   </div>
   
   <div className={styles.solutionCard}>
     <img src="/image/Edutech.jpg"  className={styles.solutionImage} />
     <h3>Cloud Service</h3>
     <p></p>
-    <div className={styles.buttonContainerOurservice}>
-    {/* <a href="#learn-more" className={styles.primaryButtonTop}>Learn more</a> */}
-    </div>
+    
   </div>
  
   

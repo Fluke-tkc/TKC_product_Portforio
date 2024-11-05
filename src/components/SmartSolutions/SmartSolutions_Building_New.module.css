@@ -38,6 +38,71 @@
   
   
 }
+.imageModal {
+  position: absolute;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 8px;
+ 
+  z-index: 1000;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.modalContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: auto;
+  background: transparent; /* เพิ่มเพื่อให้แน่ใจว่าไม่มีพื้นหลัง */
+}
+
+.modalImageWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background: transparent; /* เพิ่มเพื่อให้แน่ใจว่าไม่มีพื้นหลัง */
+}
+
+.modalImageWrapper:last-child {
+  margin-bottom: 0;
+}
+
+.modalImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.closeModalButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  transition: all 0.2s ease;
+}
+
+.closeModalButton:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
 
 .aboutImage {
   width: 100%;
@@ -110,7 +175,57 @@
   padding-left: 80px;
   padding-right: 0px;
 }
+/* Post-Tutorial Image Styles */
+.postTutorialOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
 
+.postTutorialContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.postTutorialImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Ensure the close button is visible on the post-tutorial image */
+.postTutorialContent .closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+.postTutorialContent .closeButton:hover {
+  background-color: #f0f0f0;
+}
 /* Tooltip Styles */
 .tooltipText {
   visibility: hidden;
@@ -492,9 +607,132 @@
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
 
+
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.closeButton:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 2;
+}
+
+.closeButton:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.resizeHandles {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  cursor: se-resize;
+}
+
+.resizeHandle {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #666;
+  border-bottom: 2px solid #666;
+}
+
+.resizeHandles {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  cursor: se-resize;
+}
+
+.resizeHandle {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #666;
+  border-bottom: 2px solid #666;
+}
+
+
+
+/* สำหรับหน้าจอที่เล็กมาก (มือถือ) */
+@media (max-width: 480px) {
+  .overlayText {
+    font-size: 12px; /* ขนาดเล็กลงสำหรับมือถือ */
+    top: 5px; /* ระยะห่างน้อยลง */
+    left: 25%
+  }
+}
+/* สำหรับหน้าจอที่เล็กมาก (มือถือ) */
+@media (max-width: 1200px) {
+  .overlayText {
+    font-size: 18px; /* ขนาดเล็กลงสำหรับมือถือ */
+    top: 5px; /* ระยะห่างน้อยลง */
+    left: 25%
+  }
+}
+
+@media (max-width: 1400px) {
+  .overlayText {
+    font-size: 28px; /* ขนาดเล็กลงสำหรับมือถือ */
+    top: 5px; /* ระยะห่างน้อยลง */
+    left: 25%
+  }
+}/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .overlayText {
+    font-size: 1px; /* ลดขนาดตัวอักษร */
+    top: 10px; /* ลดระยะห่างจากด้านบน */
+    left: 25%;
+  }
+  .imageModal {
+    width: 90vw !important;
+    height: auto !important;
+    max-height: 80vh;
+  }
+
+  
   /* Rest of your existing styles */
 .tooltipText h3 {
 font-size: 20px;
@@ -577,9 +815,3 @@ opacity: 1;
     }
   }
 }
-
-@media screen and (max-width: 1600px) {
-  /* Add specific styles for larger screens if needed */
-}
-
-

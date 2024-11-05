@@ -573,8 +573,220 @@ opacity: 1;
   }
 }
 
-@media screen and (max-width: 1600px) {
-  /* Add specific styles for larger screens if needed */
+
+/* สำหรับหน้าจอที่เล็กมาก (มือถือ) */
+@media (max-width: 480px) {
+  .overlayText {
+    font-size: 12px; /* ขนาดเล็กลงสำหรับมือถือ */
+    top: 5px; /* ระยะห่างน้อยลง */
+    left: 25%
+  }
+}
+/* สำหรับหน้าจอที่เล็กมาก (มือถือ) */
+@media (max-width: 720px) {
+  .overlayText {
+    font-size: 3px; /* ขนาดเล็กลงสำหรับมือถือ */
+    top: 5px; /* ระยะห่างน้อยลง */
+    left: 20%
+
+  }
+  .overlayText_1 {
+    position: absolute;
+    top: 80px; /* ปรับระยะห่างจากด้านบนได้ตามต้องการ */
+    left: 5%;
+    padding-left: 20px;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 18px; /* ปรับขนาดตัวอักษรได้ตามต้องการ */
+    /* font-weight: bold; */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* เพิ่มเงาเพื่อให้อ่านง่ายขึ้น */
+    /* ให้อยู่ด้านบนสุด */
+  }
+}
+/* สำหรับหน้าจอที่เล็กมาก (มือถือ) */
+@media (max-width: 1000px) {
+  .overlayText {
+    font-size: 13px; /* ขนาดเล็กลงสำหรับมือถือ */
+    top: 5px; /* ระยะห่างน้อยลง */
+    left: 20%
+
+  }
+  .overlayText_1 {
+    position: absolute;
+    top: 80px; /* ปรับระยะห่างจากด้านบนได้ตามต้องการ */
+    left: 5%;
+    padding-left: 20px;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 18px; /* ปรับขนาดตัวอักษรได้ตามต้องการ */
+    /* font-weight: bold; */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* เพิ่มเงาเพื่อให้อ่านง่ายขึ้น */
+    /* ให้อยู่ด้านบนสุด */
+  }
+}
+/* สำหรับหน้าจอที่เล็กมาก (มือถือ) */
+@media (max-width: 1200px) {
+  .overlayText {
+    font-size: 18px; /* ขนาดเล็กลงสำหรับมือถือ */
+    top: 5px; /* ระยะห่างน้อยลง */
+    left: 25%
+  }
 }
 
+@media (max-width: 1400px) {
+  .overlayText {
+    font-size: 28px; /* ขนาดเล็กลงสำหรับมือถือ */
+    top: 20px; /* ระยะห่างน้อยลง */
+    left: 12%
+  }
+  .overlayText_1 {
+    position: absolute;
+    top: 80px; /* ปรับระยะห่างจากด้านบนได้ตามต้องการ */
+    left: 35%;
+    padding-left: 20px;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 18px; /* ปรับขนาดตัวอักษรได้ตามต้องการ */
+    /* font-weight: bold; */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* เพิ่มเงาเพื่อให้อ่านง่ายขึ้น */
+    /* ให้อยู่ด้านบนสุด */
+  }
+}/* Responsive Design */
+@media (max-width: 1800px) {
+  .overlayText {
+    font-size: 28px; /* ขนาดเล็กลงสำหรับมือถือ */
+    top: 20px; /* ระยะห่างน้อยลง */
+    left: 12%
+  }
+  .overlayText_1 {
+    position: absolute;
+    top: 80px; /* ปรับระยะห่างจากด้านบนได้ตามต้องการ */
+    left: 35%;
+    padding-left: 20px;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 18px; /* ปรับขนาดตัวอักษรได้ตามต้องการ */
+    /* font-weight: bold; */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* เพิ่มเงาเพื่อให้อ่านง่ายขึ้น */
+    /* ให้อยู่ด้านบนสุด */
+  }
+}/* Responsive Design */
+@media (max-width: 1800px) {
+  .overlayText {
+    font-size: 28px; /* ขนาดเล็กลงสำหรับมือถือ */
+    top: 20px; /* ระยะห่างน้อยลง */
+    left: 12%
+  }
+  .overlayText_1 {
+    position: absolute;
+    top: 80px; /* ปรับระยะห่างจากด้านบนได้ตามต้องการ */
+    left: 35%;
+    padding-left: 20px;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 18px; /* ปรับขนาดตัวอักษรได้ตามต้องการ */
+    /* font-weight: bold; */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* เพิ่มเงาเพื่อให้อ่านง่ายขึ้น */
+    /* ให้อยู่ด้านบนสุด */
+  }
+}/* Responsive Design */
+@media screen and (max-width: 2000px) {
+  .overlayText {
+    font-size: 24px; /* ลดขนาดตัวอักษร */
+    top: 25px; /* ลดระยะห่างจากด้านบน */
+    left: 10%;
+  }
+  .overlayText_1 {
+    position: absolute;
+    top: 80px; /* ปรับระยะห่างจากด้านบนได้ตามต้องการ */
+    left: 35%;
+    padding-left: 20px;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 18px; /* ปรับขนาดตัวอักษรได้ตามต้องการ */
+    /* font-weight: bold; */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* เพิ่มเงาเพื่อให้อ่านง่ายขึ้น */
+    /* ให้อยู่ด้านบนสุด */
+  }
+  /* Rest of your existing styles */
+.tooltipText h3 {
+font-size: 20px;
+font-weight: bold;
+margin: 0 0 8px 0;
+}
 
+.tooltipText p {
+font-size: 14px;
+margin: 0 0 16px 0;
+color: #666;
+}
+
+.tooltipButton {
+background-color: #007bff;
+color: white;
+padding: 8px 24px;
+border: none;
+border-radius: 4px;
+font-size: 14px;
+cursor: pointer;
+float: right;
+}
+
+.tooltipButton:hover {
+background-color: #0056b3;
+}
+
+/* Hover effects */
+[class*="redDot_"][class*="Wrapper"]:hover .tooltipText {
+visibility: visible;
+opacity: 1;
+}
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 30px;
+    height: 30px;
+  }
+
+  .spotlight {
+    width: 40px;
+    height: 40px;
+  }
+
+  .messageBox {
+    width: 250px;
+    padding: 15px;
+  }
+
+  .messageBoxStep1 {
+    left: 80%;
+  }
+
+  .messageBoxStep2,
+  .messageBoxStep3,
+  .messageBoxStep4,
+  .messageBoxStep5,
+  .messageBoxStep6,
+  .messageBoxStep7,
+  .messageBoxStep8 {
+    left: 50%;
+  }
+
+  .tooltipText {
+    width: 200px;
+    padding: 15px;
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.4;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(2);
+      opacity: 0;
+    }
+  }
+}

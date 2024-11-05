@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useRef } from "react";
 import styles from "./SmartSolutions_Building_New.module.css";
 import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
@@ -7,7 +7,87 @@ export const SmartSolutions_Building = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [showTutorial, setShowTutorial] = useState(true);
+  const [showPostTutorialImage, setShowPostTutorialImage] = useState(false);
 
+  const [modalConfig, setModalConfig] = useState({
+    isOpen: false,
+    images: [],
+    position: { x: 0, y: 0 },
+    customClass: '', // For custom positioning classes
+    size: { width: 800, height: 600 } // Default size
+  });
+
+  const containerRef = useRef(null);
+
+  // Example position configurations for different sections
+  const modalPositions = {
+    renewableEnergy: {
+      x: 70,  // percentage from left
+      y: 60,  // percentage from top
+      size: { width: 1000, height: 1000 }
+    },
+    iot: {
+      x: 30,
+      y: 40,
+      size: { width: 700, height: 400 }
+    },
+    security: {
+      x: 60,
+      y: 60,
+      size: { width: 900, height: 600 }
+    },
+    // Add more position configurations as needed
+  };
+
+  const handleCloseModal = () => {
+ 
+    setModalConfig(prev => ({ ...prev, isOpen: false }));
+  };
+
+  // Updated click handler with position configuration
+  const handleSectionClick = (section, images) => {
+    const positionConfig = modalPositions[section];
+    
+    setModalConfig({
+      isOpen: true,
+      images: images,
+      position: {
+        x: positionConfig.x,
+        y: positionConfig.y
+      },
+      size: positionConfig.size
+    });
+  };
+
+  // Example handlers for different sections
+  const handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration = () => {
+    handleSectionClick('renewableEnergy', [
+      {
+        src: "/image/DataRenewableEnergyIntegration.png",
+        alt: "Solar Farm"
+      }
+      
+    ]);
+  };
+
+  const handleLearnMoreClick_smart_BuildingTo_Iot = () => {
+    handleSectionClick('iot', [
+      {
+        src: "/image/IoTDiagram.png",
+        alt: "IoT System"
+      }
+    ]);
+  };
+
+  const handleLearnMoreClick_smart_BuildingTo_Security = () => {
+    handleSectionClick('security', [
+      {
+        src: "/image/SecuritySystem.png",
+        alt: "Security System"
+      }
+    ]);
+  };
+ 
   const tutorialSteps = [
     {
       target: 'RenewableEnergy',
@@ -50,32 +130,37 @@ export const SmartSolutions_Building = () => {
       content: 'Efficient Parking Management and Availability Tracking​​'
     },
   ];
+  const handleTutorialEnd = () => {
+    setShowTutorial(false);
+    setShowPostTutorialImage(true);
+  };
 
   const handleTutorialClick = (e) => {
     if (e.target.classList.contains(styles.skipButton) || 
         e.target.classList.contains(styles.primaryButton)) {
       return;
     }
-    
     if (currentStep < tutorialSteps.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      setShowTutorial(false);
+      handleTutorialEnd(); 
     }
   };
-
+  const handleClosePostTutorialImage = () => {
+    setShowPostTutorialImage(false);
+  };
   const handleNext = (e) => {
     e.stopPropagation();
     if (currentStep < tutorialSteps.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      setShowTutorial(false);
+      handleTutorialEnd();
     }
   };
 
-  const handleSkip = (e) => {
+   const handleSkip = (e) => {
     e.stopPropagation();
-    setShowTutorial(false);
+    handleTutorialEnd();
   };
 
   useEffect(() => {
@@ -86,184 +171,210 @@ export const SmartSolutions_Building = () => {
     });
   }, []);
 
-  const handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration = () => {
-    navigate("/smart-solutions-building", { state: { scrollTo: 'renewableEnergy' } });
-  };
-  const handleLearnMoreClick_smart_BuildingTo_Iot = () => {
-    navigate("/smart-solutions-building", { state: { scrollTo: 'Iot' } });
-  };
+
+ 
+ 
+  
+  
   const handleLearnMoreClick_smart_BuildingTo_AccessControlSystems = () => {
-    navigate("/smart-solutions-building", { state: { scrollTo: 'Access Control Systems' } });
+    // navigate("/smart-solutions-building", { state: { scrollTo: 'Access Control Systems' } });
   };
   const handleLearnMoreClick_smart_BuildingTo_SurveillanceandSecuritySystem = () => {
-    navigate("/smart-solutions-building", { state: { scrollTo: 'Surveillance and Security System' } });
+    // navigate("/smart-solutions-building", { state: { scrollTo: 'Surveillance and Security System' } });
   };
   const handleLearnMoreClick_smart_BuildingTo_Lighting = () => {
-    navigate("/smart-solutions-building", { state: { scrollTo: 'Lighting' } });
+    // navigate("/smart-solutions-building", { state: { scrollTo: 'Lighting' } });
   };
   const handleLearnMoreClick_smart_BuildingTo_BuildingAutomationSystem = () => {
-    navigate("/smart-solutions-building", { state: { scrollTo: 'Building Automation System' } });
+    // navigate("/smart-solutions-building", { state: { scrollTo: 'Building Automation System' } });
   };
   const handleLearnMoreClick_smart_BuildingTo_MotionSensors = () => {
-    navigate("/smart-solutions-building", { state: { scrollTo: 'Motion Sensors' } });
+    // navigate("/smart-solutions-building", { state: { scrollTo: 'Motion Sensors' } });
   };
   const handleLearnMoreClick_smart_BuildingTo_SmartParkingManagement = () => {
-    navigate("/smart-solutions-building", { state: { scrollTo: 'Smart Parking Management' } });
+    // navigate("/smart-solutions-building", { state: { scrollTo: 'Smart Parking Management' } });
   };
 
-  return (
-    <>
-     <Navbar />
-     
+// Add function to handle image resize
+const handleImageResize = (e) => {
+  const image = e.target;
+  const container = image.parentElement;
+  const rect = container.getBoundingClientRect();
+  
+  const maxWidth = window.innerWidth * 0.8;
+  const maxHeight = window.innerHeight * 0.8;
+  
+  if (rect.width > maxWidth) {
+    container.style.width = `${maxWidth}px`;
+  }
+  if (rect.height > maxHeight) {
+    container.style.height = `${maxHeight}px`;
+  }
+};
+
+return (
+  <>
+    <Navbar />
     <section className={styles.container} id="about">
-      
       <div className={styles.content}>
-        
         <div className={styles.imageContainer}>
-        <div className={styles.overlayText}>Efficient Building Management</div>
+          {/* Main Title Overlay Text */}
+          <div className={styles.overlayText}>Efficient Building Management</div>
+          
+          {/* Main Background Image */}
           <img
             src="/image/SmartBuilding.jpg"
             alt="Smart Building"
             className={styles.aboutImage}
           />
-           
-          {/* Red Dots with Enhanced Tooltips */}
-          <div 
-            id="RenewableEnergy"
-            className={styles.redDot_RenewableEnergyIntegrationWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}
-          >
-            <div className={styles.tooltipText}>
-              <h3>Renewable Energy Integration</h3>
-              <p>Integrating Renewable Energy into Building Systems</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}>
-                ต่อไป
+          
+          {/* Red Dots with Enhanced Tooltips - Only show when post tutorial image is not showing */}
+          {!showPostTutorialImage && (
+            <>
+              {/* Renewable Energy Integration Dot */}
+              <div 
+                id="RenewableEnergy"
+                className={styles.redDot_RenewableEnergyIntegrationWrapper}
+                onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}
+              >
+                <div className={styles.tooltipText}>
+                  <h3>Renewable Energy Integration</h3>
+                  <p>Integrating Renewable Energy into Building Systems</p>
+                </div>
+              </div>
+
+              {/* IoT Dot */}
+              <div 
+                id="Iot"
+                className={styles.redDot_IotWrapper}
+                onClick={handleLearnMoreClick_smart_BuildingTo_Iot}
+              >
+                <div className={styles.tooltipText}>
+                  <h3>IoT</h3>
+                  <p>Connected Devices and Sensors for Data Collection and Transmission</p>
+                </div>
+              </div>
+
+              {/* Access Control Systems Dot */}
+              <div 
+                id="AccessControlSystems"
+                className={styles.redDot_AccessControlSystemsWrapper}
+                onClick={handleLearnMoreClick_smart_BuildingTo_AccessControlSystems}
+              >
+                <div className={styles.tooltipText}>
+                  <h3>Access Control Systems</h3>
+                  <p>Technologies for Secure Access Management</p>
+                </div>
+              </div>
+
+              {/* Surveillance and Security Dot */}
+              <div 
+                id="SurveillanceAndSecurity"
+                className={styles.redDot_SurveillanceSecurityWrapper}
+                onClick={handleLearnMoreClick_smart_BuildingTo_SurveillanceandSecuritySystem}
+              >
+                <div className={styles.tooltipText}>
+                  <h3>Surveillance and Security System</h3>
+                  <p>AI-Enhanced Surveillance, Biometric Access Control, and Advanced Fire Detection</p>
+                </div>
+              </div>
+
+              {/* Smart Lighting Dot */}
+              <div 
+                id="Lighting"
+                className={styles.redDot_LightingWrapper}
+                onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}
+              >
+                <div className={styles.tooltipText}>
+                  <h3>Smart Lighting</h3>
+                  <p>Adaptive Lighting System</p>
+                </div>
+              </div>
+
+              {/* Building Automation Dot */}
+              <div 
+                id="BuildingAutomation"
+                className={styles.redDot_BuildingAutomationWrapper}
+                onClick={handleLearnMoreClick_smart_BuildingTo_BuildingAutomationSystem}
+              >
+                <div className={styles.tooltipText}>
+                  <h3>Building Automation System</h3>
+                  <p>Efficient Control of HVAC, Electrical, Security, and Water Management</p>
+                </div>
+              </div>
+
+              {/* Motion Sensors Dot */}
+              <div 
+                id="MotionSensors"
+                className={styles.redDot_MotionSensorsWrapper}
+                onClick={handleLearnMoreClick_smart_BuildingTo_MotionSensors}
+              >
+                <div className={styles.tooltipText}>
+                  <h3>Motion Sensors</h3>
+                  <p>Future Trends in Motion Detection</p>
+                </div>
+              </div>
+
+              {/* Smart Parking Dot */}
+              <div 
+                id="SmartParking"
+                className={styles.redDot_SmartParkingWrapper}
+                onClick={handleLearnMoreClick_smart_BuildingTo_SmartParkingManagement}
+              >
+                <div className={styles.tooltipText}>
+                  <h3>Smart Parking Management</h3>
+                  <p>Efficient Parking Management and Availability Tracking</p>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Post Tutorial Image Overlay - Shows after tutorial ends */}
+          {showPostTutorialImage && (
+            <div className={styles.postTutorialOverlay}>
+              <img
+                src="/image/SmatOverlay.png"
+                alt="Smart Building Features Overview"
+                className={styles.postTutorialImage}
+              />  
+              <button 
+                className={styles.closeButton} 
+                onClick={handleClosePostTutorialImage}
+                aria-label="Close overview"
+              >
+                ×
               </button>
             </div>
-          </div>
+          )}
 
-          <div 
-            id="Iot"
-            className={styles.redDot_IotWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_Iot}
-          >
-            <div className={styles.tooltipText}>
-              <h3>IoT</h3>
-              <p>Connected Devices and Sensors for Data Collection and Transmission</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_Iot}>
-                ต่อไป
-              </button>
-            </div>
-          </div>
-
-          <div 
-            id="AccessControlSystems"
-            className={styles.redDot_AccessControlSystemsWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_AccessControlSystems}
-          >
-            <div className={styles.tooltipText}>
-              <h3>Access Control Systems</h3>
-              <p>Technologies for Secure Access Management</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_AccessControlSystems}>
-                ต่อไป
-              </button>
-            </div>
-          </div>
-
-          <div 
-            id="SurveillanceAndSecurity"
-            className={styles.redDot_SurveillanceSecurityWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_SurveillanceandSecuritySystem}
-          >
-            <div className={styles.tooltipText}>
-              <h3>Surveillance and Security System</h3>
-              <p>AI-Enhanced Surveillance, Biometric Access Control, and Advanced Fire Detection</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_SurveillanceandSecuritySystem}>
-                ต่อไป
-              </button>
-            </div>
-          </div>
-
-          <div 
-            id="Lighting"
-            className={styles.redDot_LightingWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}
-          >
-            <div className={styles.tooltipText}>
-              <h3>Smart Lighting</h3>
-              <p>Adaptive Lighting System</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}>
-                ต่อไป
-              </button>
-            </div>
-          </div>
-
-          <div 
-            id="BuildingAutomation"
-            className={styles.redDot_BuildingAutomationWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_BuildingAutomationSystem}
-          >
-            <div className={styles.tooltipText}>
-              <h3>Building Automation System</h3>
-              <p>Efficient Control of HVAC, Electrical, Security, and Water Management</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_BuildingAutomationSystem}>
-                ต่อไป
-              </button>
-            </div>
-          </div>
-
-          <div 
-            id="MotionSensors"
-            className={styles.redDot_MotionSensorsWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_MotionSensors}
-          >
-            <div className={styles.tooltipText}>
-              <h3>Motion Sensors</h3>
-              <p>Future Trends in Motion Detection</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_MotionSensors}>
-                ต่อไป
-              </button>
-            </div>
-          </div>
-
-          <div 
-            id="SmartParking"
-            className={styles.redDot_SmartParkingWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_SmartParkingManagement}
-          >
-            <div className={styles.tooltipText}>
-              <h3>Smart Parking Management</h3>
-              <p>Efficient Parking Management and Availability Tracking</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_SmartParkingManagement}>
-                ต่อไป
-              </button>
-            </div>
-          </div>
-
-          {/* Tutorial Overlay */}
+          {/* Tutorial Overlay - Shows during tutorial */}
           {showTutorial && (
             <div 
               className={styles.tutorialContainer}
               onClick={handleTutorialClick}
             >
+              {/* Dark overlay background */}
               <div className={styles.overlay} />
               
+              {/* Spotlight effect */}
               <div 
                 className={`${styles.spotlight} ${
                   styles[`spotlightStep${currentStep + 1}`]
-                }`} 
+                }`}
               />
               
-              <div className={`${styles.messageBox} ${
-                styles[`messageBoxStep${currentStep + 1}`]
-              }`}>
+              {/* Tutorial message box */}
+              <div 
+                className={`${styles.messageBox} ${
+                  styles[`messageBoxStep${currentStep + 1}`]
+                }`}
+              >
                 <h3 className={styles.messageTitle}>
                   {tutorialSteps[currentStep].title}
                 </h3>
                 <p className={styles.messageContent}>
                   {tutorialSteps[currentStep].content}
                 </p>
-                
                 <div className={styles.buttonContainer}>
                   <button 
                     className={styles.primaryButton}
@@ -273,7 +384,8 @@ export const SmartSolutions_Building = () => {
                   </button>
                 </div>
               </div>
-            
+
+              {/* Skip tutorial button */}
               <button 
                 className={styles.skipButton} 
                 onClick={handleSkip}
@@ -282,15 +394,53 @@ export const SmartSolutions_Building = () => {
               </button>
             </div>
           )}
-        </div>
-      </div>
-     
-    </section>
-    <Contact />
-    </>
-    
-  );
-  
-};
 
+          
+            {/* Modal */}
+            {modalConfig.isOpen && (
+  <div 
+    className={styles.modalOverlay} 
+    onClick={handleCloseModal}  // คลิกที่ไหนก็ได้จะทำงาน
+  >
+    <div 
+      className={styles.imageModal}
+      
+      style={{
+        left: `${modalConfig.position.x}%`,
+        top: `${modalConfig.position.y}%`,
+        width: `${modalConfig.size.width}px`,
+        height: `${modalConfig.size.height}px`,
+        transform: 'translate(-50%, -50%)'
+      }}
+    >
+      <button 
+        className={styles.closeModalButton}
+        onClick={handleCloseModal}
+      >
+        ×
+      </button>
+      <div className={styles.modalContent}>
+        {modalConfig.images.map((image, index) => (
+          <div 
+            key={index} 
+            className={styles.modalImageWrapper}
+          >
+            <img
+              src={image.src}
+              alt={image.alt}
+              className={styles.modalImage}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
+</div>
+</div>
+</section>
+<Contact />
+</>
+);
+}
 export default SmartSolutions_Building;

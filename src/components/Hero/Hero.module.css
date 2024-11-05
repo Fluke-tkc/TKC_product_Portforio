@@ -27,6 +27,19 @@
   background-repeat: no-repeat;
   width: 100vw;
 }
+.imageContainer_icon {
+  display: flex;
+  justify-content: center; /* จัดกึ่งกลางในแนวนอน */
+  align-items: center; /* จัดกึ่งกลางในแนวตั้ง */
+  width: 100%; /* กำหนดให้ครอบคลุมทั้งหน้าจอ */
+  margin-top: 0px; /* ระยะห่างจากด้านบน */
+}
+
+.aboutImage {
+  width: 10%;
+  height: auto;
+  display: block;
+}
 /* จัดการ container ของไอคอน */
 .gridContainer {
   display: flex;
@@ -283,19 +296,25 @@
 
 .secondaryButton {
   background-color: transparent;
-  color: #007bff;
+  color: #578ac2;
   border: 2px solid #007bff;
 }
 
 .solutionSection {
- padding-top: 100px;
+ padding-top:   20px;
  padding-bottom: 100px;
  padding-right: 100px;
  padding-left: 100px;
-  background-color: #f9f9f9;
+  /* background-color: #aa1414; */
   margin-top: 0px;
   text-align: center; /* จัดให้ข้อความและคอนเทนต์ทั้งหมดอยู่ตรงกลาง */
    /* เพิ่มระยะห่างด้านล่าง */
+
+   background-image: url("/image/BG_Smart_Solutions.jpeg");
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+ 
   
 }
 .sectionTitle {
@@ -368,7 +387,7 @@
   padding-bottom: 0px;
   padding-left: 30%;
   padding-right: 30%;
-  background-color: #f9f9f9;
+  background-color: #0059ff00;
   margin-top: 0px;
   display: flex;
   justify-content: space-between;
@@ -390,7 +409,9 @@
 }
 .threeColumnSolutions .solutionCard:hover {
   transform: scale(1.05); /* เพิ่มเอฟเฟกต์ขยายเมื่อ hover */
-  background-color: #0279e0; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+  /*background-color: #0279e0; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+  background: linear-gradient(to bottom, #8c00ff, #0c24ff, #00aaff);
+
 }
 .threeColumnSolutions .solutionCard img {
   max-width: 100px; /* ปรับขนาดรูปภาพ */
