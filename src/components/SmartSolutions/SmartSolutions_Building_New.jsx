@@ -46,42 +46,42 @@ export const SmartSolutions_Building = () => {
     {
       id: 'renewableEnergy',
       src: "/image/P_1.png",
-      alt: "Solar Farm"
+      
     },
     {
       id: 'iot',
       src: "/image/P_2.png",
-      alt: "IoT System"
+    
     },
     {
       id: 'Access Control Systems',
       src: "/image/P_3.png",
-      alt: "Security System"
+    
     },
     {
-      id: ' Security System',
+      id: 'Security System',
       src: "/image/P_4.png",
-      alt: "Security System"
+     
     },
     {
       id: 'Smart Lighting',
       src: "/image/P_5.png",
-      alt: "Security System"
+     
     },
     {
       id: 'Building Automation System',
       src: "/image/P_6.png",
-      alt: "Security System"
+      
     },
     {
       id: 'Motion Sensors',
       src: "/image/P_7.png",
-      alt: "Security System"
+      
     },
     {
       id: 'Smart Parking Management',
       src: "/image/P_8.png",
-      alt: "Security System"
+     
     }
     // เพิ่มรูปภาพอื่นๆ ตามต้องการ
   ];
