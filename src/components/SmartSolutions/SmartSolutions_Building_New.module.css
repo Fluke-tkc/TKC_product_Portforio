@@ -183,7 +183,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -241,7 +241,7 @@
   width: 400px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   white-space: normal;
-  z-index: 1000;
+  z-index: 0;
 }
 .tooltipText h3 {
   font-size: 20px;
@@ -357,7 +357,7 @@
 .redDot_RenewableEnergyIntegrationWrapper {
   top: 10%;
   left: 60%;
-  background-image: url("/image/SolarFarm.png");
+  /* background-image: url("/image/SolarFarm.png"); */
 }
 
 .redDot_RenewableEnergyIntegrationWrapper::before,
@@ -369,7 +369,7 @@
 .redDot_IotWrapper {
   top: 32%;
   left: 18%;
-  background-image: url("/image/SmartBuildingPicture1.svg");
+  /* background-image: url("/image/SmartBuildingPicture1.svg"); */
 }
 
 .redDot_IotWrapper::before,
@@ -381,7 +381,7 @@
 .redDot_AccessControlSystemsWrapper {
   top: 30%;
   left: 52%;
-  background-image: url("/image/AccessControlSystems.png");
+  /* background-image: url("/image/AccessControlSystems.png"); */
 }
 
 .redDot_AccessControlSystemsWrapper::before,
@@ -393,7 +393,7 @@
 .redDot_SurveillanceSecurityWrapper {
   top: 57%;
   left: 91%;
-  background-image: url("/image/SurveillanceSecurity.png");
+  /* background-image: url("/image/SurveillanceSecurity.png"); */
 }
 
 .redDot_SurveillanceSecurityWrapper::before,
@@ -405,7 +405,7 @@
 .redDot_LightingWrapper {
   top: 57%;
   left: 40%;
-  background-image: url("/image/SolarFarm.png");
+  /* background-image: url("/image/SolarFarm.png"); */
 }
 
 .redDot_LightingWrapper::before,
@@ -417,7 +417,7 @@
 .redDot_BuildingAutomationWrapper {
   top: 88%;
   left: 20%;
-  background-image: url("/image/SmartBuildingPicture7.svg");
+  /* background-image: url("/image/SmartBuildingPicture7.svg"); */
 }
 
 .redDot_BuildingAutomationWrapper::before,
@@ -429,7 +429,7 @@
 .redDot_MotionSensorsWrapper {
   top: 82%;
   left: 60%;
-  background-image: url("/image/SmartBuildingPicture4.png");
+  /* background-image: url("/image/SmartBuildingPicture4.png"); */
 }
 
 .redDot_MotionSensorsWrapper::before,
@@ -441,7 +441,7 @@
 .redDot_SmartParkingWrapper {
   top: 85%;
   left: 83%;
-  background-image: url("/image/SmartBuildingPicture3.svg");
+  /* background-image: url("/image/SmartBuildingPicture3.svg"); */
 }
 
 .redDot_SmartParkingWrapper::before,
@@ -693,7 +693,47 @@
   border-right: 2px solid #666;
   border-bottom: 2px solid #666;
 }
+.imageViewerOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
 
+.viewerImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.navigationButtons {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.navButton {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.navButton:hover {
+  background-color: #0056b3;
+}
 
 
 /* สำหรับหน้าจอที่เล็กมาก (มือถือ) */
