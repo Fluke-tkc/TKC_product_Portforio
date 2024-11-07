@@ -1,9 +1,9 @@
 import React, { useState, useEffect ,useRef } from "react";
-import styles from "./SmartSolutions_Building_New.module.css";
+import styles from "./SmartSolutions_Building_New_ver02.module.css";
 import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
-export const SmartSolutions_Building = () => {
+export const SmartSolutions_Building_New_ver02 = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [showTutorial, setShowTutorial] = useState(true);
@@ -171,7 +171,7 @@ const handleSectionClick_Ver2 = (section) => {
     },
   ];
   const handleTutorialEnd = () => {
-    setShowTutorial(false);
+    // setShowTutorial(false);
     //setShowPostTutorialImage(true);
   };
 
@@ -334,7 +334,7 @@ return (
           
           {/* Main Background Image */}
           <img
-            src="/image/SmartBuilding.jpg"
+            src="/image/SmatOverlay.png"
             alt="Smart Building"
             className={styles.aboutImage}
           />
@@ -348,10 +348,10 @@ return (
                 className={styles.redDot_RenewableEnergyIntegrationWrapper}
                 onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}
               >
-                 <div className={styles.tooltipText}>
+                 {/* <div className={styles.tooltipText}>
                   <h3>Renewable Energy Integration</h3>
                   <p>Integrating Renewable Energy into Building Systems</p>
-                </div> 
+                </div>  */}
               </div>
 
               {/* IoT Dot */}
@@ -360,10 +360,10 @@ return (
                 className={styles.redDot_IotWrapper}
                 onClick={handleLearnMoreClick_smart_BuildingTo_Iot}
               >
-                 <div className={styles.tooltipText}>
+                 {/* <div className={styles.tooltipText}>
                   <h3>IoT</h3>
                   <p>Connected Devices and Sensors for Data Collection and Transmission</p>
-                </div> 
+                </div>  */}
               </div>
 
               {/* Access Control Systems Dot */}
@@ -372,10 +372,10 @@ return (
                 className={styles.redDot_AccessControlSystemsWrapper}
                 onClick={handleLearnMoreClick_smart_BuildingTo_AccessControlSystems}
               >
-                 <div className={styles.tooltipText}>
+                 {/* <div className={styles.tooltipText}>
                   <h3>Access Control Systems</h3>
                   <p>Technologies for Secure Access Management</p>
-                </div> 
+                </div>  */}
               </div>
 
               {/* Surveillance and Security Dot */}
@@ -384,10 +384,10 @@ return (
                 className={styles.redDot_SurveillanceSecurityWrapper}
                 onClick={handleLearnMoreClick_smart_BuildingTo_SurveillanceandSecuritySystem}
               >
-                 <div className={styles.tooltipText}>
+                 {/* <div className={styles.tooltipText}>
                   <h3>Surveillance and Security System</h3>
                   <p>AI-Enhanced Surveillance, Biometric Access Control, and Advanced Fire Detection</p>
-                </div> 
+                </div>  */}
               </div>
 
               {/* Smart Lighting Dot */}
@@ -396,10 +396,10 @@ return (
                 className={styles.redDot_LightingWrapper}
                 onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}
               >
-                 <div className={styles.tooltipText}>
+                 {/* <div className={styles.tooltipText}>
                   <h3>Smart Lighting</h3>
                   <p>Adaptive Lighting System</p>
-                </div> 
+                </div>  */}
               </div>
 
               {/* Building Automation Dot */}
@@ -408,10 +408,10 @@ return (
                 className={styles.redDot_BuildingAutomationWrapper}
                 onClick={handleLearnMoreClick_smart_BuildingTo_BuildingAutomationSystem}
               >
-                 <div className={styles.tooltipText}>
+                 {/* <div className={styles.tooltipText}>
                   <h3>Building Automation System</h3>
                   <p>Efficient Control of HVAC, Electrical, Security, and Water Management</p>
-                </div> 
+                </div>  */}
               </div>
 
               {/* Motion Sensors Dot */}
@@ -420,10 +420,10 @@ return (
                 className={styles.redDot_MotionSensorsWrapper}
                 onClick={handleLearnMoreClick_smart_BuildingTo_MotionSensors}
               >
-                 <div className={styles.tooltipText}>
+                 {/* <div className={styles.tooltipText}>
                   <h3>Motion Sensors</h3>
                   <p>Future Trends in Motion Detection</p>
-                </div> 
+                </div>  */}
               </div>
 
               {/* Smart Parking Dot */}
@@ -432,10 +432,10 @@ return (
                 className={styles.redDot_SmartParkingWrapper}
                 onClick={handleLearnMoreClick_smart_BuildingTo_SmartParkingManagement}
               >
-                 <div className={styles.tooltipText}>
+                 {/* <div className={styles.tooltipText}>
                   <h3>Smart Parking Management</h3>
                   <p>Efficient Parking Management and Availability Tracking</p>
-                </div> 
+                </div>  */}
               </div>
             </>
           )}  
@@ -459,22 +459,22 @@ return (
               )}
 
           {/* Tutorial Overlay - Shows during tutorial */}
-          {showTutorial && (
+          {/* {showTutorial && (
             <div 
               className={styles.tutorialContainer}
               onClick={handleTutorialClick}
             >
-              {/* Dark overlay background */}
+              
               <div className={styles.overlay} />
               
-              {/* Spotlight effect */}
+          
               <div 
                 className={`${styles.spotlight} ${
                   styles[`spotlightStep${currentStep + 1}`]
                 }`}
               />
               
-              {/* Tutorial message box */}
+             
               <div 
                 className={`${styles.messageBox} ${
                   styles[`messageBoxStep${currentStep + 1}`]
@@ -496,7 +496,6 @@ return (
                 </div>
               </div>
 
-              {/* Skip tutorial button */}
               <button 
                 className={styles.skipButton} 
                 onClick={handleSkip}
@@ -504,7 +503,7 @@ return (
                 Skip Tutorial
               </button>
             </div>
-          )}
+          )} */}
 
           
             {/* Modal */}
@@ -578,4 +577,4 @@ return (
 </>
 );
 }
-export default SmartSolutions_Building;
+export default SmartSolutions_Building_New_ver02;

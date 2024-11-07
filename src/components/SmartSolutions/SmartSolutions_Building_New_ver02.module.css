@@ -355,98 +355,98 @@
 /* Individual Red Dot Styles */
 /* Renewable Energy Integration */
 .redDot_RenewableEnergyIntegrationWrapper {
-  top: 10%;
-  left: 60%;
-   background-image: url("/image/SolarFarm.png"); 
+  top: 11%;
+  left: 59%;
+   /* background-image: url("/image/SolarFarm.png");  */
 }
 
 .redDot_RenewableEnergyIntegrationWrapper::before,
 .redDot_RenewableEnergyIntegrationWrapper::after {
-  background: rgba(0, 255, 0, 0.6);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* IoT */
 .redDot_IotWrapper {
   top: 32%;
-  left: 18%;
- background-image: url("/image/SmartBuildingPicture1.svg"); 
+  left: 16.7%;
+ /* background-image: url("/image/SmartBuildingPicture1.svg");  */
 }
 
 .redDot_IotWrapper::before,
 .redDot_IotWrapper::after {
-  background: rgba(0, 150, 255, 0.6);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Access Control Systems */
 .redDot_AccessControlSystemsWrapper {
-  top: 30%;
-  left: 52%;
-   background-image: url("/image/AccessControlSystems.png"); 
+  top: 32%;
+  left: 51%;
+   /* background-image: url("/image/AccessControlSystems.png");  */
 }
 
 .redDot_AccessControlSystemsWrapper::before,
 .redDot_AccessControlSystemsWrapper::after {
-  background: rgba(255, 165, 0, 0.6);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Surveillance and Security */
 .redDot_SurveillanceSecurityWrapper {
-  top: 57%;
-  left: 91%;
-   background-image: url("/image/SurveillanceSecurity.png"); 
+  top: 58%;
+  left: 90%;
+   /* background-image: url("/image/SurveillanceSecurity.png");  */
 }
 
 .redDot_SurveillanceSecurityWrapper::before,
 .redDot_SurveillanceSecurityWrapper::after {
-  background: rgba(255, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Smart Lighting */
 .redDot_LightingWrapper {
-  top: 57%;
+  top: 60%;
   left: 40%;
-   background-image: url("/image/SolarFarm.png"); 
+   /* background-image: url("/image/SolarFarm.png");  */
 }
 
 .redDot_LightingWrapper::before,
 .redDot_LightingWrapper::after {
-  background: rgba(255, 255, 0, 0.6);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Building Automation */
 .redDot_BuildingAutomationWrapper {
-  top: 88%;
-  left: 20%;
-   background-image: url("/image/SmartBuildingPicture7.svg"); 
+  top: 92%;
+  left: 19%;
+   /* background-image: url("/image/SmartBuildingPicture7.svg");  */
 }
 
 .redDot_BuildingAutomationWrapper::before,
 .redDot_BuildingAutomationWrapper::after {
-  background: rgba(128, 0, 128, 0.6);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Motion Sensors */
 .redDot_MotionSensorsWrapper {
-  top: 82%;
+  top: 89%;
   left: 60%;
-  background-image: url("/image/SmartBuildingPicture4.png");
+  /* background-image: url("/image/SmartBuildingPicture4.png"); */
 }
 
 .redDot_MotionSensorsWrapper::before,
 .redDot_MotionSensorsWrapper::after {
-  background: rgba(255, 192, 203, 0.6);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Smart Parking */
 .redDot_SmartParkingWrapper {
   top: 85%;
-  left: 83%;
-   background-image: url("/image/SmartBuildingPicture3.svg"); 
+  left: 88.2%;
+   /* background-image: url("/image/SmartBuildingPicture3.svg");  */
 }
 
 .redDot_SmartParkingWrapper::before,
 .redDot_SmartParkingWrapper::after {
-  background: rgba(0, 0, 255, 0.6);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Hover Effects */
@@ -685,7 +685,7 @@
 }
 
 .resizeHandle {
-  position: relative;
+  position: absolute;
   bottom: 5px;
   right: 5px;
   width: 10px;

@@ -29,6 +29,9 @@ export const Hero = () => {
   const handleLearnMoreClick_smart_building = () => {
     navigate("/smart-solutions-building_new");
   };
+  const handleLearnMoreClick_smart_building_ver02 = () => {
+    navigate("/smart-solutions-building_new_ver02");
+  };
 
   const handleLearnMoreClick_smart_Utility = () => {
     navigate("/smart-solutions-utility_new");

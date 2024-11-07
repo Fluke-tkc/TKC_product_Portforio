@@ -16,6 +16,7 @@ import {Smart_Platform }from "./components/SmartSolutions/inSmartSolutions/Smart
 import {Smart_Utility }from "./components/SmartSolutions/inSmartSolutions/Smart_Utility";
 
 import Smart_Building_New from "./components/SmartSolutions/SmartSolutions_Building_New";
+import Smart_Building_New_Ver02 from "./components/SmartSolutions/SmartSolutions_Building_New_ver02";
 import Smart_Utility_New from "./components/SmartSolutions/SmartSolutions_Utility_New";
 // import {GreenSolutionsDiscription }from "./components/GreenSolution/GreenSolutions_Discription";
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/smart-solutions" element={<SmartSolutions />} />
              <Route path="/smart-solutions-building" element={<Smart_Building />} />
                     <Route path="/smart-solutions-building_new" element={<Smart_Building_New />} />
+                    <Route path="/smart-solutions-building_new_ver02" element={<Smart_Building_New_Ver02 />} />
              <Route path="/smart-solutions-fram" element={<Smart_Farm />} />
              <Route path="/smart-solutions-hospital" element={<Smart_Hospital />} />
              <Route path="/smart-solutions-learning" element={<Smart_Learning />} />
