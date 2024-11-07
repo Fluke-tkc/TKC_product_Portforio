@@ -104,20 +104,20 @@ export const Hero = () => {
     </div>
 
     <div className={styles.solutionCard}>
-      <img src="/image/cloudsolution.jpg"  className={styles.solutionImage} />
+      <img src="/image/Smart Hospital.jpg"  className={styles.solutionImage} />
       <h3>Smart Hospital</h3>
       <p></p>
       
     </div>
 
     <div className={styles.solutionCard}>
-      <img src="/image/cybersecurity.jpg"  className={styles.solutionImage} />
+      <img src="/image/Samrt Platform.jpg"  className={styles.solutionImage} />
       <h3>Smart Platform</h3>
       <p></p> 
     </div>
     
     <div className={styles.solutionCard}>
-    <img src="/image/softwaredevelopment.jpg"  className={styles.solutionImage} />
+    <img src="/image/Smart Learning.jpg"  className={styles.solutionImage} />
     <h3>Smart Learning</h3>
     <p></p>
     
@@ -135,7 +135,7 @@ export const Hero = () => {
   tabIndex="0" // ทำให้สามารถโฟกัสได้โดยการกด Tab บนคีย์บอร์ด
   onKeyDown={(e) => e.key === 'Enter' && handleLearnMoreClick_green_solutions()} // รองรับการกด Enter เพื่อคลิก
    >
-    <img src="/image/greensolution.png"  className={styles.solutionImage} />
+    <img src="/image/Smart Logistics.jpg"  className={styles.solutionImage} />
     <h3>Smart Logistics</h3>
     <p></p>
    
@@ -147,14 +147,14 @@ export const Hero = () => {
     
   </div>
   <div className={styles.solutionCard}>
-    <img src="/image/Telecom-and-Network-Infrastructure.jpg"  className={styles.solutionImage} />
+    <img src="/image/Autonomous Solution.jpg"  className={styles.solutionImage} />
     <h3>Autonomous Solution</h3>
     <p></p>
    
   </div>
   
   <div className={styles.solutionCard}>
-    <img src="/image/ICTInfrastructure.jpg"  className={styles.solutionImage} />
+    <img src="/image/Cyber Security.jpg"  className={styles.solutionImage} />
     <h3>Cyber Security</h3>
     <p></p>
     
@@ -165,7 +165,7 @@ export const Hero = () => {
    
    <div className={styles.threeColumnSolutions}>
    <div className={styles.solutionCard}>
-    <img src="/image/public-safety.jpg" className={styles.solutionImage} />
+    <img src="/image/Smart Farming.jpg" className={styles.solutionImage} />
     <h3>Smart Farming</h3>
     <p></p>
    
@@ -179,14 +179,14 @@ export const Hero = () => {
   
    >
     
-    <img src="/image/Logistics.jpg"  className={styles.solutionImage} />
+    <img src="/image/Smart Utility (Grid).jpg"  className={styles.solutionImage} />
     <h3>Smart Utility(Grid)</h3>
     <p></p>
     
   </div>
   
   <div className={styles.solutionCard}>
-    <img src="/image/Edutech.jpg"  className={styles.solutionImage} />
+    <img src="/image/Cloud Services.jpg"  className={styles.solutionImage} />
     <h3>Cloud Service</h3>
     <p></p>
     
