@@ -187,7 +187,8 @@ const handleSectionClick_Ver2 = (section) => {
     }
   };
   const handleClosePostTutorialImage = () => {
-    setShowPostTutorialImage(false);
+    // setShowPostTutorialImage(false);
+    navigate("/smart-solutions-building_new_ver02");
   };
   const handleNext = (e) => {
     e.stopPropagation();
@@ -338,6 +339,13 @@ return (
             alt="Smart Building"
             className={styles.aboutImage}
           />
+            <button 
+                 className={styles.closeButton} 
+                 onClick={handleClosePostTutorialImage}
+                 aria-label="Close overview"
+                 >
+                   ×
+                </button>
           
           {/* Red Dots with Enhanced Tooltips - Only show when post tutorial image is not showing */}
           { (
@@ -441,7 +449,7 @@ return (
           )}  
 
           {/* Post Tutorial Image Overlay - Shows after tutorial ends */}
-          {showPostTutorialImage && (
+          {/* {showPostTutorialImage && (
               <div className={styles.postTutorialOverlay}>
                 <img
                  src="/image/SmatOverlay.png"
@@ -456,25 +464,25 @@ return (
                    ×
                 </button>
                 </div>
-              )}
+              )} */}
 
           {/* Tutorial Overlay - Shows during tutorial */}
-          {showTutorial && (
+          {/* {showTutorial && (
             <div 
               className={styles.tutorialContainer}
               onClick={handleTutorialClick}
             >
-              {/* Dark overlay background */}
+              
               <div className={styles.overlay} />
               
-              {/* Spotlight effect */}
+             
               <div 
                 className={`${styles.spotlight} ${
                   styles[`spotlightStep${currentStep + 1}`]
                 }`}
               />
               
-              {/* Tutorial message box */}
+              
               <div 
                 className={`${styles.messageBox} ${
                   styles[`messageBoxStep${currentStep + 1}`]
@@ -496,7 +504,7 @@ return (
                 </div>
               </div>
 
-              {/* Skip tutorial button */}
+             
               <button 
                 className={styles.skipButton} 
                 onClick={handleSkip}
@@ -504,7 +512,7 @@ return (
                 Skip Tutorial
               </button>
             </div>
-          )}
+          )} */}
 
           
             {/* Modal */}

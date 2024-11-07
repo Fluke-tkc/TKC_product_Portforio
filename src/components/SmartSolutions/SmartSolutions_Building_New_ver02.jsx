@@ -187,7 +187,8 @@ const handleSectionClick_Ver2 = (section) => {
     }
   };
   const handleClosePostTutorialImage = () => {
-    setShowPostTutorialImage(false);
+    // setShowPostTutorialImage(false);
+    navigate("/smart-solutions-building_new");
   };
   const handleNext = (e) => {
     e.stopPropagation();
@@ -338,6 +339,13 @@ return (
             alt="Smart Building"
             className={styles.aboutImage}
           />
+            <button 
+                 className={styles.closeButton} 
+                 onClick={handleClosePostTutorialImage}
+                 aria-label="Close overview"
+                 >
+                   ×
+                </button>
           
           {/* Red Dots with Enhanced Tooltips - Only show when post tutorial image is not showing */}
           { (
