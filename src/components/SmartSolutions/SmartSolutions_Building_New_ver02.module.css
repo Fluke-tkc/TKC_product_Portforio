@@ -319,8 +319,8 @@
 /* Common Red Dot Styles */
 [class*="redDot_"][class*="Wrapper"] {
   position: absolute;
-  width: 50px;
-  height: 50px;
+  width: 80px !important;
+  height: 80px !important;
   transform: translate(-50%, -50%);
   cursor: pointer;
   z-index: 2;
@@ -357,12 +357,14 @@
 .redDot_RenewableEnergyIntegrationWrapper {
   top: 11%;
   left: 59%;
+  
    /* background-image: url("/image/SolarFarm.png");  */
 }
 
 .redDot_RenewableEnergyIntegrationWrapper::before,
 .redDot_RenewableEnergyIntegrationWrapper::after {
   background: rgba(255, 255, 255, 0.8);
+  
 }
 
 /* IoT */
@@ -743,6 +745,7 @@
     top: 5px; /* ระยะห่างน้อยลง */
     left: 25%
   }
+  
 }
 /* สำหรับหน้าจอที่เล็กมาก (มือถือ) */
 @media (max-width: 1200px) {
@@ -771,6 +774,19 @@
     height: auto !important;
     max-height: 80vh;
   }
+  [class*="redDot_"][class*="Wrapper"] {
+    position: absolute;
+    width: 30px !important;
+    height: 30px !important;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 2;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  
 
   
   /* Rest of your existing styles */
