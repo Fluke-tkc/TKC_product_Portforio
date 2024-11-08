@@ -141,7 +141,7 @@ export const Hero = () => {
    
   </div>
   <div className={styles.solutionCard}>
-    <img src="/image/Autonomous-System.jpg" className={styles.solutionImage} />
+    <img src="/image/SmartSolutions_Organized_Communication_Cables.jpg" className={styles.solutionImage} />
     <h3>Smart Organized Communication Cables</h3>
     <p></p>
     
