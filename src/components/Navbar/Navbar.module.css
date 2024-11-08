@@ -15,14 +15,18 @@
   background-color: #1f4a79;
   /* background-image: url("/assets/image/Reternofsoul_2.jpg"); */
 }
+.homeIcon {
+  width: 24px; /* Adjust width as needed */
+  height: 24px; /* Adjust height as needed */
+  margin-right: 8px; /* Optional: space between icon and text */
 
+}
 .title {
   font-size: 24px;
   font-weight: 600;
   text-decoration: none;
   color: var(--color-text);
 }
-
 
 .menuBtn {
   display: none;
