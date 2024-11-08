@@ -9,6 +9,16 @@ export const SmartSolutions_Building = () => {
   const [showTutorial, setShowTutorial] = useState(true);
   const [showPostTutorialImage, setShowPostTutorialImage] = useState(false);
 
+    // เพิ่ม useEffect สำหรับการนับเวลา 5 วินาที
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        navigate("/smart-solutions-building_new_ver02");
+      }, 5000); // รอ 5 วินาที
+  
+      // เคลียร์ตัวจับเวลาหากผู้ใช้ออกจากหน้านี้ก่อน 5 วินาที
+      return () => clearTimeout(timer);
+    }, [navigate]);
+  
   const [modalConfig, setModalConfig] = useState({
     isOpen: false,
     images: [],
