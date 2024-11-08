@@ -232,13 +232,13 @@
   background-color: white;
   color: black;
   text-align: left;
-  padding: 20px;
+  padding: 0px;
   border-radius: 12px;
   position: absolute;
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: opacity 0.3s, visibility 0.3s;
-  width: 400px;
+  width: 00px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   white-space: normal;
   z-index: 0;
@@ -319,8 +319,8 @@
 /* Common Red Dot Styles */
 [class*="redDot_"][class*="Wrapper"] {
   position: absolute;
-  width: 80px !important;
-  height: 80px !important;
+  width: 50px !important;
+  height: 50px !important;
   transform: translate(-50%, -50%);
   cursor: pointer;
   z-index: 2;
@@ -363,7 +363,7 @@
 
 .redDot_RenewableEnergyIntegrationWrapper::before,
 .redDot_RenewableEnergyIntegrationWrapper::after {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.6);
   
 }
 
@@ -376,7 +376,7 @@
 
 .redDot_IotWrapper::before,
 .redDot_IotWrapper::after {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Access Control Systems */
@@ -388,7 +388,7 @@
 
 .redDot_AccessControlSystemsWrapper::before,
 .redDot_AccessControlSystemsWrapper::after {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Surveillance and Security */
@@ -400,7 +400,7 @@
 
 .redDot_SurveillanceSecurityWrapper::before,
 .redDot_SurveillanceSecurityWrapper::after {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Smart Lighting */
@@ -412,7 +412,7 @@
 
 .redDot_LightingWrapper::before,
 .redDot_LightingWrapper::after {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Building Automation */
@@ -424,7 +424,7 @@
 
 .redDot_BuildingAutomationWrapper::before,
 .redDot_BuildingAutomationWrapper::after {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Motion Sensors */
@@ -436,7 +436,7 @@
 
 .redDot_MotionSensorsWrapper::before,
 .redDot_MotionSensorsWrapper::after {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Smart Parking */
@@ -448,7 +448,7 @@
 
 .redDot_SmartParkingWrapper::before,
 .redDot_SmartParkingWrapper::after {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Hover Effects */

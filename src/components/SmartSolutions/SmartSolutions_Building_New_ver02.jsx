@@ -73,9 +73,9 @@ export const SmartSolutions_Building_New_ver02 = () => {
     const dotConfigurations = {
       'renewableEnergy': [
         {
-          id: 'solar-panels',
+          // id: 'solar-panels',
           className: styles.redDot_RenewableEnergyIntegrationWrapper,
-          // tooltip: 'แผงโซลาร์เซลล์',
+        //   tooltip: 'แผงโซลาร์เซลล์',
           // description: 'ระบบผลิตพลังงานแสงอาทิตย์สำหรับอาคาร',
           position: { top: '11%', left: '59%' }
         },
@@ -169,7 +169,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
             key={dot.id}
             className={dot.className}
             style={dot.position}
-            // onMouseEnter={() => setActiveTooltip(dot.id)}
+             onMouseEnter={() => setActiveTooltip(dot.id)}
             // onMouseLeave={() => setActiveTooltip(null)}
           >
             {activeTooltip === dot.id && (
@@ -231,42 +231,50 @@ export const SmartSolutions_Building_New_ver02 = () => {
             <div 
               id="RenewableEnergy"
               className={styles.redDot_RenewableEnergyIntegrationWrapper}
-              onClick={() => handleSectionClick('renewableEnergy')}
+              // onClick={() => handleSectionClick('renewableEnergy')}
+              onMouseEnter={() => handleSectionClick('renewableEnergy')}
             />
             <div 
               id="Iot"
               className={styles.redDot_IotWrapper}
-              onClick={() => handleSectionClick('iot')}
+              // onClick={() => handleSectionClick('iot')}
+              onMouseEnter={() => handleSectionClick('iot')}
             />
             <div 
               id="Access Control Systems"
               className={styles.redDot_AccessControlSystemsWrapper}
-              onClick={() => handleSectionClick('Access Control Systems')}
+              // onClick={() => handleSectionClick('Access Control Systems')}
+              onMouseEnter={() => handleSectionClick('Access Control Systems')}
             />
             <div 
               id="Security System"
               className={styles.redDot_SurveillanceSecurityWrapper}
-              onClick={() => handleSectionClick('Security System')}
+              // onClick={() => handleSectionClick('Security System')}
+              onMouseEnter={() => handleSectionClick('Security System')}
             />
              <div 
               id="Smart Lighting"
               className={styles.redDot_LightingWrapper}
-              onClick={() => handleSectionClick('Smart Lighting')}
+              // onClick={() => handleSectionClick('Smart Lighting')}
+              onMouseEnter={() => handleSectionClick('Smart Lighting')}
             />
              <div 
               id="Building Automation System"
               className={styles.redDot_BuildingAutomationWrapper}
-              onClick={() => handleSectionClick('Building Automation System')}
+              // onClick={() => handleSectionClick('Building Automation System')}
+              onMouseEnter={() => handleSectionClick('Building Automation System')}
             />
                  <div 
               id="Motion Sensors"
               className={styles.redDot_MotionSensorsWrapper}
-              onClick={() => handleSectionClick('Motion Sensors')}
+              // onClick={() => handleSectionClick('Motion Sensors')}
+              onMouseEnter={() => handleSectionClick('Motion Sensors')}
             />
                 <div 
               id="Smart Parking Management"
               className={styles.redDot_SmartParkingWrapper}
-              onClick={() => handleSectionClick('Motion Sensors')}
+              // onClick={() => handleSectionClick('Motion Sensors')}
+              onMouseEnter={() => handleSectionClick('Smart Parking Management')}
             />
            
            
