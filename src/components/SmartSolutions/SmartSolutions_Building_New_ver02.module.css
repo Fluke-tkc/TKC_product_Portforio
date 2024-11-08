@@ -362,7 +362,7 @@
 
 .redDot_RenewableEnergyIntegrationWrapper::before,
 .redDot_RenewableEnergyIntegrationWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* IoT */
@@ -374,7 +374,7 @@
 
 .redDot_IotWrapper::before,
 .redDot_IotWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* Access Control Systems */
@@ -386,7 +386,7 @@
 
 .redDot_AccessControlSystemsWrapper::before,
 .redDot_AccessControlSystemsWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* Surveillance and Security */
@@ -398,7 +398,7 @@
 
 .redDot_SurveillanceSecurityWrapper::before,
 .redDot_SurveillanceSecurityWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* Smart Lighting */
@@ -410,7 +410,7 @@
 
 .redDot_LightingWrapper::before,
 .redDot_LightingWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* Building Automation */
@@ -422,7 +422,7 @@
 
 .redDot_BuildingAutomationWrapper::before,
 .redDot_BuildingAutomationWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* Motion Sensors */
@@ -434,7 +434,7 @@
 
 .redDot_MotionSensorsWrapper::before,
 .redDot_MotionSensorsWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* Smart Parking */
@@ -446,7 +446,7 @@
 
 .redDot_SmartParkingWrapper::before,
 .redDot_SmartParkingWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* Hover Effects */

@@ -87,10 +87,10 @@ export const Hero = () => {
     
   <div
   className={styles.solutionCard}
-  onClick={handleLearnMoreClick_smart_building_ver02} // ทำให้ทั้งการ์ดเป็นปุ่มที่คลิกได้
+  onClick={handleLearnMoreClick_smart_building} // ทำให้ทั้งการ์ดเป็นปุ่มที่คลิกได้
   role="button" // เพิ่ม role เพื่อบ่งบอกว่าเป็นปุ่ม
   tabIndex="0" // ทำให้สามารถโฟกัสได้โดยการกด Tab บนคีย์บอร์ด
-  onKeyDown={(e) => e.key === 'Enter' && handleLearnMoreClick_smart_building_ver02()} // รองรับการกด Enter เพื่อคลิก
+  onKeyDown={(e) => e.key === 'Enter' && handleLearnMoreClick_smart_building()} // รองรับการกด Enter เพื่อคลิก
    >
       
       <img src="/image/smartsolution2.png" className={styles.solutionImage} />

@@ -335,17 +335,18 @@ return (
           
           {/* Main Background Image */}
           <img
-            src="/image/SmartBuilding.jpg"
+            src="/image/SmartBuilding.png"
+            onClick={handleClosePostTutorialImage}
             alt="Smart Building"
             className={styles.aboutImage}
           />
-            <button 
+            {/* <button 
                  className={styles.closeButton} 
                  onClick={handleClosePostTutorialImage}
                  aria-label="Close overview"
                  >
                    ×
-                </button>
+                </button> */}
           
           {/* Red Dots with Enhanced Tooltips - Only show when post tutorial image is not showing */}
           { (
@@ -405,8 +406,8 @@ return (
                 onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Smart Lighting</h3>
-                  <p>Adaptive Lighting System</p>
+                  <h3>Smart Digital Signage and Lighting​</h3>
+                  <p>Dynamic and campaign launches content, Adaptive Lighting System ​</p>
                 </div> 
               </div>
 
