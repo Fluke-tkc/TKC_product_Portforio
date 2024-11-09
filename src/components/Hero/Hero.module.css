@@ -318,7 +318,7 @@
   
 }
 .solutionImage{
-  border-radius: 10px;
+  border-radius: 20px;
 }
 .sectionTitle {
   font-size: 36px;
@@ -395,6 +395,13 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
+
+
+  
+  justify-content: center; /* จัดกึ่งกลางในแนวนอน */
+  align-items: center; /* จัดกึ่งกลางในแนวตั้ง */
+  width: 100%; /* กำหนดให้ครอบคลุมทั้งหน้าจอ */
+  
 }
 
 .threeColumnSolutions .solutionCard {
