@@ -168,7 +168,7 @@ export const Hero = () => {
   </div>
   <div className={styles.solutionCard}>
     <img src="/image/SmartSolutions_Organized_Communication_Cables.jpg" className={styles.solutionImage} />
-    <h3>Smart Organized Communication Cables</h3>
+    <h3>SmartOrganized CommunicationCables</h3>
     <p></p>
     
   </div>
