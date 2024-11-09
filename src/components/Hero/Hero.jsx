@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Hero.module.css";
 import {Navbar} from "../Navbar/Navbar"; 
 import { Contact } from "../Contact/Contact";
 export const Hero = () => {
   const navigate = useNavigate();
+
+  const backgroundImages = [
+    "/image/banner-security.jpg", // เปลี่ยนเป็น URL ของภาพพื้นหลังของคุณ
+    "/image/banner-software.jpg",
+    "/image/banner-telecom.jpg",
+  ];  
+
+  const [currentBackgroundIndex, setCurrentBackgroundIndex] = useState(0);
+
 
   const topics = [
     { name: "Smart Building;", imgSrc: "/image/smartsolution.jpg" },
@@ -42,6 +51,19 @@ export const Hero = () => {
   const handleLearnMoreClick_green_solutions = () => {
     navigate("/green-solutions");
   };
+
+
+
+  useEffect(() => {
+    // เปลี่ยนภาพพื้นหลังทุก ๆ 5 วินาที
+    const interval = setInterval(() => {
+      setCurrentBackgroundIndex((prevIndex) =>
+        prevIndex === backgroundImages.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
+
+    return () => clearInterval(interval); // ทำความสะอาดเมื่อ component ถูกยกเลิก
+  }, [backgroundImages.length]);
   return (
     <>
       <Navbar />
@@ -72,7 +94,11 @@ export const Hero = () => {
 </div> */}
 
 
-<div className={styles.solutionSection}>
+<div className={styles.solutionSection}  style={{
+          backgroundImage: `url(${backgroundImages[currentBackgroundIndex]})`,
+          transition: "background-image 1s ease-in-out", // เอฟเฟกต์เฟด
+        }}
+      >
   
 {/* <h2 className={styles.sectionTitle}>Smart Solution</h2> */}
 <div className={styles.imageContainer_icon}>
