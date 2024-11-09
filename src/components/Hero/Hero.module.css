@@ -317,6 +317,9 @@
  
   
 }
+.solutionImage{
+  border-radius: 10px;
+}
 .sectionTitle {
   font-size: 36px;
   font-weight: bold;
