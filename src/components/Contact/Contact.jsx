@@ -32,7 +32,7 @@ export const Contact = () => {
     <footer className={styles.footer} id="contact">
       <div className={styles.container}>
         <div className={styles.headerSection}>
-          <h2 className={styles.title}>ติดต่อเรา</h2>
+          <h2 className={styles.title}>Contact Us</h2>
           <div className={styles.titleUnderline}></div>
         </div>
 
