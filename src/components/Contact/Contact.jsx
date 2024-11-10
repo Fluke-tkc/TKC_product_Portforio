@@ -4,24 +4,24 @@ import styles from "./Contact.module.css";
 export const Contact = () => {
   const contactInfo = {
     address: {
-      title: "ที่อยู่",
-      details: "44/44 ซอยวิภาวดีรังสิต 60 แยก 18-1-2 แขวงตลาดบางเขน เขตหลักสี่, Bangkok, Bangkok",
+      title: "Address",
+      details: "44/44 Vibhavadi-Rangsit 60 Yake 18-1-2, Talad Bangkhen, Laksi, Bangkok 10210 ",
       symbol: "📍"
     },
     email: {
-      title: "อีเมล",
+      title: "E-mail",
       details: "info@tkc-services.com",
       link: "mailto:info@tkc-services.com",
       symbol: "✉️"
     },
     phone: {
-      title: "โทรศัพท์",
+      title: "Telephone",
       details: "(+66) 0-2401-8222",
       link: "tel:+66024018222",
       symbol: "📞"
     },
     social: {
-      title: "โซเชียลมีเดีย",
+      title: "Social Media",
       details: "Facebook",
       link: "https://www.facebook.com/TurnkeyCommunicationServices",
       symbol: "👥"
