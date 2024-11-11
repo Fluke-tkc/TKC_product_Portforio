@@ -1,135 +1,102 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./Hero_New.module.css";
 import { Contact } from "../Contact/Contact";
 import { Features } from "../Allmodule/Features";
 import { Team } from "../Allmodule/Team";
 import { BlogPosts } from "../Allmodule/BlogPosts";
-// import { Documentation } from "../Allmodule/Documentation";
+import { Navbar } from "../Navbar/Navbar";
+import styles from "./Hero_New.module.css";
+
+const SliderItem = ({ image, position, total }) => (
+  <div 
+    className={styles.item} 
+    style={{ 
+      '--position': position,
+      '--quantity': total
+    }}
+  >
+    <img src={image} alt={`Slider item ${position}`} />
+  </div>
+);
+
+const ServiceCard = ({ name, description, image, onClick }) => (
+  <div className={styles.serviceCard} onClick={onClick}>
+    <img src={image} alt={name} className={styles.serviceImage} />
+    <h3>{name}</h3>
+    <p>{description}</p>
+  </div>
+);
+
 export const Hero_New = () => {
   const navigate = useNavigate();
+  const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
 
-  // ฟังก์ชันสำหรับนำทางไปยังหน้า Smart Solutions
-  const handleLearnMoreClick_smart_solutions = () => {
-    navigate("/smart-solutions");
-  };
-  
-  // ฟังก์ชันสำหรับนำทางไปยังหน้า Green Solutions
-  const handleLearnMoreClick_green_solutions = () => {
-    navigate("/green-solutions");
-  };
-
-  // ข้อมูลบริการต่างๆ
-  const services = [
-    {
-      name: "Smart Solutions",
-      description: "แนวทางหรือระบบที่ใช้เทคโนโลยีขั้นสูงและนวัตกรรมในการแก้ปัญหาหรือปรับปรุงกระบวนการต่างๆ",
-      image: "/image/smartsolution2.png",
-      link: "/smart-solutions"
-    },
-    {
-      name: "Cloud Solution",
-      description: "บริการระบบคลาวด์ที่ปรับแต่งตามความต้องการของธุรกิจคุณ",
-      image: "/image/cloudsolution.jpg"
-    },
-    {
-      name: "Cyber Security",
-      description: "ปกป้องโครงสร้างพื้นฐานของคุณด้วยเทคโนโลยีความปลอดภัยล่าสุด",
-      image: "/image/cybersecurity.jpg"
-    }
-    ,
-    {
-      name: "Cyber Security",
-      description: "ปกป้องโครงสร้างพื้นฐานของคุณด้วยเทคโนโลยีความปลอดภัยล่าสุด",
-      image: "/image/cybersecurity.jpg"
-    }
-    ,
-    {
-      name: "Cyber Security",
-      description: "ปกป้องโครงสร้างพื้นฐานของคุณด้วยเทคโนโลยีความปลอดภัยล่าสุด",
-      image: "/image/cybersecurity.jpg"
-    }
-    ,
-    {
-      name: "Cyber Security",
-      description: "ปกป้องโครงสร้างพื้นฐานของคุณด้วยเทคโนโลยีความปลอดภัยล่าสุด",
-      image: "/image/cybersecurity.jpg"
-    }
-    ,
-    {
-      name: "Cyber Security",
-      description: "ปกป้องโครงสร้างพื้นฐานของคุณด้วยเทคโนโลยีความปลอดภัยล่าสุด",
-      image: "/image/cybersecurity.jpg"
-    }
-    ,
-    {
-      name: "Cyber Security",
-      description: "ปกป้องโครงสร้างพื้นฐานของคุณด้วยเทคโนโลยีความปลอดภัยล่าสุด",
-      image: "/image/cybersecurity.jpg"
-    }
-    ,
-    {
-      name: "Cyber Security",
-      description: "ปกป้องโครงสร้างพื้นฐานของคุณด้วยเทคโนโลยีความปลอดภัยล่าสุด",
-      image: "/image/cybersecurity.jpg"
-    }
-    ,
-    {
-      name: "Cyber Security",
-      description: "ปกป้องโครงสร้างพื้นฐานของคุณด้วยเทคโนโลยีความปลอดภัยล่าสุด",
-      image: "/image/cybersecurity.jpg"
-    }
-    ,
-    {
-      name: "Cyber Security",
-      description: "ปกป้องโครงสร้างพื้นฐานของคุณด้วยเทคโนโลยีความปลอดภัยล่าสุด",
-      image: "/image/cybersecurity.jpg"
-    }
+  const sliderImages = [
+    '/image/smartsolution2.png',
+    '/image/Smart Hospital.jpg',
+    '/image/Samrt Platform.jpg',
+    '/image/Smart Learning.jpg',
+    '/image/Smart Logistics.jpg',
+    '/image/SmartSolutions_Organized_Communication_Cables.jpg',
+    '/image/Autonomous Solution.jpg',
+    '/image/Cyber Security.jpg',
+    '/image/Smart Farming.jpg',
+    '/image/Smart Utility (Grid).jpg',
+    '/image/Cloud Services.jpg',
   ];
+
+  
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBannerIndex((prev) => 
+        prev === sliderImages.length - 1 ? 0 : prev + 1
+      );
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
-      <div className={styles.heroBackground}>
-        <div className={styles.heroContent}>
-          <h1 className={styles.mainTitle}>
-            บริษัท เทิร์นคีย์ คอมมูนิเคชั่น เซอร์วิส จำกัด (มหาชน)
-          </h1>
-          <div className={styles.description}>
-            <p>
-              มีความยินดีเป็นอย่างยิ่งที่จะนำเสนอผลงานและบริการที่เราได้พัฒนาขึ้นเพื่อสนับสนุนความสำเร็จของลูกค้าและพันธมิตรทางธุรกิจ 
-              เรามุ่งมั่นในการนำเสนอโซลูชันที่ครบวงจรและตอบโจทย์การสื่อสารในยุคดิจิทัล
-            </p>
-            <p>
-              ในทุกขั้นตอนของการทำงาน เราให้ความสำคัญกับนวัตกรรม คุณภาพ และความเชื่อมั่นที่ลูกค้าสามารถไว้วางใจได้
-            </p>
+      {/* <Navbar /> */}
+      <div className={styles.slider_section}>
+        <div className={styles.banner}>
+          {/* 3D Slider */}
+          
+          <div className={styles.slider}>
+            {sliderImages.map((image, index) => (
+              <SliderItem 
+                key={index}
+                image={image}
+                position={index + 1}
+                total={sliderImages.length}
+              />
+            ))}
+          </div>
+
+          {/* Content */}
+          <div className={styles.content}>
+            <h1 data-content="SMART SOLUTIONS">SMART SOLUTIONS</h1>
+         
+            <div className={styles.author}>
+              <h2></h2>
+              <p>Transform your business with our innovative smart solutions</p>
+            </div>
           </div>
         </div>
+
+        {/* Services Section */}
+       
+       
       </div>
 
-      <div className={styles.servicesSection}>
-        <h2 className={styles.sectionTitle}>Our Services</h2>
-        <div className={styles.servicesGrid}>
-          {services.map((service, index) => (
-            <div 
-              key={index}
-              className={styles.serviceCard}
-              onClick={() => service.link && navigate(service.link)}
-              role={service.link ? "button" : undefined}
-              tabIndex={service.link ? "0" : undefined}
-            >
-              <img src={service.image} alt={service.name} className={styles.serviceImage} />
-              <h3>{service.name}</h3>
-              <p>{service.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <Features />
+      {/* <Features />
       <Team />
       <BlogPosts />
-      {/* <Documentation /> */}
-      <Contact />
+      <Contact /> */}
     </>
   );
 };
+
+export default Hero_New;

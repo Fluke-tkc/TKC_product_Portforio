@@ -1,53 +1,115 @@
-/* พื้นหลังส่วน Hero */
-.heroBackground {
-  background: linear-gradient(195deg, rgba(66, 66, 74, 0.6), rgba(25, 25, 25, 0.6));
+/* Hero_New.module.css */
+@import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+
+.slider_section {
+  position: relative;
+  width: 100%;
+  background-color: #D2D2D2;
+  background-image: url("/image/services-solutions.jpg");
   background-size: cover;
   background-position: center;
-  min-height: 100vh;
-  padding: 8rem 1rem;
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
+  background-repeat: no-repeat;
+  /* background-image:
+    repeating-linear-gradient(to right, transparent 0 100px, #25283b22 100px 101px),
+    repeating-linear-gradient(to bottom, transparent 0 100px, #25283b22 100px 101px); */
 }
 
-/* ส่วนเนื้อหาหลัก */
-.heroContent {
-  max-width: 1200px;
-  margin: 0 auto;
+.banner {
+  width: 100%;
+  height: 100vh;
   text-align: center;
-  color: #ffffff;
-  padding: 2rem;
+  overflow: hidden;
+  position: relative;
 }
 
-/* สไตล์หัวข้อหลัก */
-.mainTitle {
-  font-size: 3.5rem;
-  font-weight: 700;
+.slider {
+  position: absolute;
+  width: 150px;
+  height: 200px;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%) perspective(1000px) rotateX(-16deg);
+  transform-style: preserve-3d;
+  animation: autoRun 60s linear infinite;
+  z-index: 2;
+}
+
+@keyframes autoRun {
+  from {
+    transform: translateX(-50%) perspective(1000px) rotateX(0deg) rotateY(0deg);
+  }
+  to {
+    transform: translateX(-50%) perspective(1000px) rotateX(0deg) rotateY(360deg);
+  }
+}
+
+.item {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(550px);
+  transition: transform 0.5s ease;
+}
+
+.item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.content {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1400px, 90vw);
+  text-align: center;
+  z-index: 1;
+}
+
+.content h1 {
+  font-family: 'ICA Rubrik', sans-serif;
+  font-size: clamp(3rem, 5vw, 16rem);
+  line-height: 1em;
+  color: #25283B;
+  position: relative;
   margin-bottom: 2rem;
-  line-height: 1.2;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-/* สไตล์ข้อความอธิบาย */
-.description {
-  font-size: 1.25rem;
-  max-width: 800px;
+.content h1::after {
+  position: absolute;
+  inset: 0;
+  content: attr(data-content);
+  z-index: 2;
+  -webkit-text-stroke: 2px #d2d2d2;
+  color: transparent;
+}
+
+.author {
+  font-family: 'Poppins', sans-serif;
+  color: #f8f9fa;
+  max-width: 600px;
   margin: 0 auto;
-  line-height: 1.6;
+  padding: 0 1rem;
+}
+.author {
+  font-family: 'Poppins', sans-serif;
+  color: #f8f9fa;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.description p {
-  margin-bottom: 1.5rem;
-}
-
-/* ส่วนแสดงบริการ */
 .servicesSection {
   padding: 6rem 2rem;
   background: #f8f9fa;
 }
 
-/* หัวข้อส่วนบริการ */
 .sectionTitle {
   text-align: center;
   font-size: 2.5rem;
@@ -56,7 +118,6 @@
   font-weight: 600;
 }
 
-/* กริดแสดงบริการ */
 .servicesGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -65,7 +126,6 @@
   margin: 0 auto;
 }
 
-/* การ์ดแสดงบริการ */
 .serviceCard {
   background: #ffffff;
   border-radius: 1rem;
@@ -81,42 +141,39 @@
   box-shadow: 0 30px 37px 0 rgba(0, 0, 0, 0.1);
 }
 
-/* รูปภาพในการ์ดบริการ */
-.serviceImage {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-/* ส่วนหัวข้อในการ์ด */
-.serviceCard h3 {
-  color: #344767;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 1rem;
-  text-align: center;
-}
-
-/* ส่วนข้อความในการ์ด */
-.serviceCard p {
-  color: #67748e;
-  padding: 0 1rem;
-  text-align: center;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-/* การตอบสนองบนหน้าจอขนาดเล็ก */
-@media (max-width: 768px) {
-  .mainTitle {
-    font-size: 2.5rem;
+/* Responsive styles */
+@media screen and (max-width: 1023px) {
+  .slider {
+    width: 160px;
+    height: 200px;
   }
   
-  .description {
-    font-size: 1.1rem;
+  .item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+              translateZ(300px);
   }
   
-  .servicesGrid {
-    grid-template-columns: 1fr;
+  .content {
+    bottom: 5%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .slider {
+    width: 80px;
+    height: 120px;
+    top: 20%;
+  }
+  @keyframes autoRun {
+    from {
+      transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(0deg);
+    }
+    to {
+      transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(360deg);
+    }
+  }
+  .item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+              translateZ(200px);
   }
 }
