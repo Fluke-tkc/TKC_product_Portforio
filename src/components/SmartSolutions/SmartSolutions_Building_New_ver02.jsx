@@ -12,7 +12,9 @@ export const SmartSolutions_Building_New_ver02 = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageViewer, setShowImageViewer] = useState(false);
   const containerRef = useRef(null);
+  const timeoutRef = useRef(null);
 
+  
   // ข้อมูลรูปภาพทั้งหมด
   const allImages = [
     {
@@ -169,7 +171,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
             key={dot.id}
             className={dot.className}
             style={dot.position}
-             onMouseEnter={() => setActiveTooltip(dot.id)}
+            //  onMouseEnter={() => setActiveTooltip(dot.id)}
             // onMouseLeave={() => setActiveTooltip(null)}
           >
             {activeTooltip === dot.id && (
@@ -206,6 +208,24 @@ export const SmartSolutions_Building_New_ver02 = () => {
       setShowImageViewer(true);
     }
   };
+  const handleMouseEnterWithDelay = (section) => {
+    // ยกเลิก timeout เดิมถ้ามี
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    
+    // ตั้ง timeout ใหม่
+    timeoutRef.current = setTimeout(() => {
+      handleSectionClick(section);
+    }, 3000);
+  };
+
+  // ฟังก์ชันจัดการเมื่อเมาส์ออก
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  };
 
   // แสดงผลส่วนหลัก
   return (
@@ -228,53 +248,70 @@ export const SmartSolutions_Building_New_ver02 = () => {
             </button>
 
             {/* Red Dots */}
-            <div 
-              id="RenewableEnergy"
-              className={styles.redDot_RenewableEnergyIntegrationWrapper}
-              // onClick={() => handleSectionClick('renewableEnergy')}
-              onMouseEnter={() => handleSectionClick('renewableEnergy')}
-            />
+            <div
+                   id="RenewableEnergy"
+                   className={styles.redDot_RenewableEnergyIntegrationWrapper}
+                   onMouseEnter={() => handleMouseEnterWithDelay("renewableEnergy")}
+                   onMouseLeave={handleMouseLeave}
+                   onClick={() => handleSectionClick("renewableEnergy")} // เพิ่ม onClick กลับมา
+                 
+               />
+ 
             <div 
               id="Iot"
               className={styles.redDot_IotWrapper}
-              // onClick={() => handleSectionClick('iot')}
-              onMouseEnter={() => handleSectionClick('iot')}
+               onClick={() => handleSectionClick('iot')}
+               onMouseEnter={() => handleMouseEnterWithDelay("iot")}
+               onMouseLeave={handleMouseLeave}
+             // onMouseEnter={() => handleSectionClick('iot')}
             />
             <div 
               id="Access Control Systems"
               className={styles.redDot_AccessControlSystemsWrapper}
-              // onClick={() => handleSectionClick('Access Control Systems')}
-              onMouseEnter={() => handleSectionClick('Access Control Systems')}
+               onClick={() => handleSectionClick('Access Control Systems')}
+               onMouseEnter={() => handleMouseEnterWithDelay("Access Control Systems")}
+               onMouseLeave={handleMouseLeave}
+            //  onMouseEnter={() => handleSectionClick('Access Control Systems')}
             />
             <div 
               id="Security System"
               className={styles.redDot_SurveillanceSecurityWrapper}
-              // onClick={() => handleSectionClick('Security System')}
-              onMouseEnter={() => handleSectionClick('Security System')}
+               onClick={() => handleSectionClick('Security System')}
+               onMouseEnter={() => handleMouseEnterWithDelay("Security System")}
+               onMouseLeave={handleMouseLeave}
+            //  onMouseEnter={() => handleSectionClick('Security System')}
             />
              <div 
               id="Smart Lighting"
               className={styles.redDot_LightingWrapper}
-              // onClick={() => handleSectionClick('Smart Lighting')}
-              onMouseEnter={() => handleSectionClick('Smart Lighting')}
+               onClick={() => handleSectionClick('Smart Lighting')}
+               onMouseEnter={() => handleMouseEnterWithDelay("Smart Lighting")}
+               onMouseLeave={handleMouseLeave}
+            //  onMouseEnter={() => handleSectionClick('Smart Lighting')}
             />
              <div 
               id="Building Automation System"
               className={styles.redDot_BuildingAutomationWrapper}
-              // onClick={() => handleSectionClick('Building Automation System')}
-              onMouseEnter={() => handleSectionClick('Building Automation System')}
+               onClick={() => handleSectionClick('Building Automation System')}
+               onMouseEnter={() => handleMouseEnterWithDelay("Building Automation System")}
+               onMouseLeave={handleMouseLeave}
+             // onMouseEnter={() => handleSectionClick('Building Automation System')}
             />
                  <div 
               id="Motion Sensors"
               className={styles.redDot_MotionSensorsWrapper}
-              // onClick={() => handleSectionClick('Motion Sensors')}
-              onMouseEnter={() => handleSectionClick('Motion Sensors')}
+               onClick={() => handleSectionClick('Motion Sensors')}
+               onMouseEnter={() => handleMouseEnterWithDelay("Motion Sensors")}
+               onMouseLeave={handleMouseLeave}
+           //   onMouseEnter={() => handleSectionClick('Motion Sensors')}
             />
                 <div 
               id="Smart Parking Management"
               className={styles.redDot_SmartParkingWrapper}
-              // onClick={() => handleSectionClick('Motion Sensors')}
-              onMouseEnter={() => handleSectionClick('Smart Parking Management')}
+               onClick={() => handleSectionClick('Smart Parking Management')}
+               onMouseEnter={() => handleMouseEnterWithDelay("Smart Parking Management")}
+               onMouseLeave={handleMouseLeave}
+            //  onMouseEnter={() => handleSectionClick('Smart Parking Management')}
             />
            
            
