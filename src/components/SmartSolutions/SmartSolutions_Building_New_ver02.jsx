@@ -226,7 +226,22 @@ export const SmartSolutions_Building_New_ver02 = () => {
       clearTimeout(timeoutRef.current);
     }
   };
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        navigate("/");
+      }
+    };
 
+    // เพิ่ม event listener สำหรับ keydown
+    document.addEventListener('keydown', handleKeyDown);
+
+    // ลบ event listener เมื่อ component ถูก unmount
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [navigate]
+  )
   // แสดงผลส่วนหลัก
   return (
     <>
@@ -241,7 +256,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
             />
             <button 
               className={styles.closeButton} 
-              onClick={() => navigate("/smart-solutions-building_new")}
+              onClick={() => navigate("/")}
               aria-label="Close overview"
             >
               ×
