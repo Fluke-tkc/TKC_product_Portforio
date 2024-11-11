@@ -162,7 +162,9 @@ export const Hero = () => {
   onKeyDown={(e) => e.key === 'Enter' && handleLearnMoreClick_green_solutions()} // รองรับการกด Enter เพื่อคลิก
    >
     <img src="/image/Smart Logistics.jpg"  className={styles.solutionImage} />
-    <h3>Smart Logistics</h3>
+    <h3>Smart  <br></br> Logistics</h3>
+    
+    
     <p></p>
    
   </div>
@@ -174,14 +176,14 @@ export const Hero = () => {
   </div>
   <div className={styles.solutionCard}>
     <img src="/image/Autonomous Solution.jpg"  className={styles.solutionImage} />
-    <h3>Autonomous Solution</h3>
+    <h3>Autonomous <br></br> Solution</h3>
     <p></p>
    
   </div>
   
   <div className={styles.solutionCard}>
     <img src="/image/Cyber Security.jpg"  className={styles.solutionImage} />
-    <h3>Cyber Security</h3>
+    <h3>Cyber   <br></br> Security</h3>
     <p></p>
     
   </div>

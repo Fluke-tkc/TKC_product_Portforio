@@ -412,6 +412,7 @@
   padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
+  
   /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
   text-align: center;
   cursor: pointer; /* ทำให้การ์ดสามารถคลิกได้ */
@@ -424,7 +425,7 @@
 
 }
 .threeColumnSolutions .solutionCard img {
-  max-width: 100px; /* ปรับขนาดรูปภาพ */
+  max-width: 200px; /* ปรับขนาดรูปภาพ */
   margin-bottom: 15px;
 }
 .threeColumnSolutions .solutionCard h3 {
