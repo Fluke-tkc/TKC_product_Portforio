@@ -7,9 +7,10 @@ import { BlogPosts } from "../Allmodule/BlogPosts";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./Hero_New.module.css";
 
-const SliderItem = ({ image, position, total }) => (
+
+const SliderItem = ({ image, position, total, isRunning }) => (
   <div 
-    className={styles.item} 
+    className={`${styles.item} ${!isRunning ? styles.pausedAnimation : ''}`}
     style={{ 
       '--position': position,
       '--quantity': total
@@ -31,6 +32,9 @@ export const Hero_New = () => {
   const navigate = useNavigate();
   const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
 
+  const [isAnimationRunning, setIsAnimationRunning] = useState(true);
+
+
   const sliderImages = [
     '/image/smartsolution2.png',
     '/image/Smart Hospital.jpg',
@@ -48,53 +52,65 @@ export const Hero_New = () => {
   
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBannerIndex((prev) => 
-        prev === sliderImages.length - 1 ? 0 : prev + 1
-      );
-    }, 5000);
-
+    let interval;
+    if (isAnimationRunning) {
+      interval = setInterval(() => {
+        setCurrentBannerIndex((prev) => 
+          prev === sliderImages.length - 1 ? 0 : prev + 1
+        );
+      }, 5000);
+    }
     return () => clearInterval(interval);
-  }, []);
+  }, [isAnimationRunning]);
+
+  const handleMouseEnter = () => {
+    setIsAnimationRunning(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsAnimationRunning(true);
+  };
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className={styles.slider_section}>
         <div className={styles.banner}>
-          {/* 3D Slider */}
-          
-          <div className={styles.slider}>
+          <div 
+            className={`${styles.slider} ${!isAnimationRunning ? styles.pausedAnimation : ''}`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
             {sliderImages.map((image, index) => (
               <SliderItem 
                 key={index}
                 image={image}
                 position={index + 1}
                 total={sliderImages.length}
+                isRunning={isAnimationRunning}
               />
             ))}
           </div>
 
-          {/* Content */}
           <div className={styles.content}>
             <h1 data-content="SMART SOLUTIONS">SMART SOLUTIONS</h1>
-         
             <div className={styles.author}>
               <h2></h2>
               <p>Transform your business with our innovative smart solutions</p>
             </div>
           </div>
         </div>
+      </div>
 
         {/* Services Section */}
        
        
-      </div>
+ 
 
-      {/* <Features />
+      <Features />
       <Team />
       <BlogPosts />
-      <Contact /> */}
+      <Contact />
     </>
   );
 };
