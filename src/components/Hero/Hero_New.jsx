@@ -7,15 +7,22 @@ import { BlogPosts } from "../Allmodule/BlogPosts";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./Hero_New.module.css";
 
-const SliderItem = ({ image, position, total, isRunning }) => (
+const SliderItem = ({ image, position, total, isRunning, onClick, title }) => (
   <div 
     className={`${styles.item} ${!isRunning ? styles.pausedAnimation : ''}`}
     style={{ 
       '--position': position,
       '--quantity': total
     }}
+    onClick={onClick}
+    role="button"
+    tabIndex={0}
+    aria-label={`Navigate to ${title}`}
   >
-    <img src={image} alt={`Slider item ${position}`} />
+    <img src={image} alt={title} />
+    <div className={styles.itemOverlay}>
+      <span className={styles.itemTitle}>{title}</span>
+    </div>
   </div>
 );
 
@@ -23,6 +30,7 @@ export const Hero_New = () => {
   const navigate = useNavigate();
   const [isAnimationRunning, setIsAnimationRunning] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
+  const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
   
   const sliderRef = useRef(null);
   const resumeTimerRef = useRef(null);
@@ -37,6 +45,67 @@ export const Hero_New = () => {
     timestamp: 0
   });
 
+
+  
+  const imageRoutes = [
+    { 
+      image: '/image/smartsolution2.png',
+      route: '/smart-solutions-building_new',
+      title: 'Smart Solutions'
+    },
+    { 
+      image: '/image/Smart Hospital.jpg',
+      route: '/smart-hospital',
+      title: 'Smart Hospital'
+    },
+    { 
+      image: '/image/Samrt Platform.jpg',
+      route: '/smart-platform',
+      title: 'Smart Platform'
+    },
+    { 
+      image: '/image/Smart Learning.jpg',
+      route: '/smart-learning',
+      title: 'Smart Learning'
+    },
+    { 
+      image: '/image/Smart Logistics.jpg',
+      route: '/smart-logistics',
+      title: 'Smart Logistics'
+    },
+    { 
+      image: '/image/SmartSolutions_Organized_Communication_Cables.jpg',
+      route: '/communication-solutions',
+      title: 'SmartOrganized Communication Cables'
+      
+
+    },
+    { 
+      image: '/image/Autonomous Solution.jpg',
+      route: '/autonomous-solutions',
+      title: 'Autonomous'
+    },
+    { 
+      image: '/image/Cyber Security.jpg',
+      route: '/cyber-security',
+      title: 'Cyber Security'
+    },
+    { 
+      image: '/image/Smart Farming.jpg',
+      route: '/smart-farming',
+      title: 'Smart Farming'
+    },
+    { 
+      image: '/image/Smart Utility (Grid).jpg',
+      route: '/smart-solutions-utility_new',
+      title: 'Smart Utility'
+    },
+    { 
+      image: '/image/Cloud Services.jpg',
+      route: '/cloud-services',
+      title: 'Cloud Services'
+    }
+  ];
   const sliderImages = [
     '/image/smartsolution2.png',
     '/image/Smart Hospital.jpg',
@@ -50,6 +119,15 @@ export const Hero_New = () => {
     '/image/Smart Utility (Grid).jpg',
     '/image/Cloud Services.jpg',
   ];
+
+    // Handle navigation
+    const handleImageClick = (route ,event) => {
+       // Only navigate if we haven't dragged
+    if (!isDragging) {
+      event.stopPropagation();
+      navigate(route);
+      }
+    };
 
   useEffect(() => {
     // Initialize slider rotation on mount
@@ -119,10 +197,12 @@ useEffect(() => {
   };
  
 
-  const handleStart = (clientX) => {
+  const handleStart = (clientX, clientY) => {
     clearResumeTimer();
     setIsAnimationRunning(false);
     setIsDragging(true);
+    setStartPosition({ x: clientX, y: clientY });
+
 
     dragRef.current = {
       startX: clientX,
@@ -135,10 +215,13 @@ useEffect(() => {
   };
   
 
-  const handleMove = (clientX) => {
+  const handleMove = (clientX, clientY) => {
+    
     if (!isDragging || !sliderRef.current) return;
 
     const deltaX = clientX - dragRef.current.lastX;
+
+    
     const now = Date.now();
     const deltaTime = Math.max(1, now - dragRef.current.timestamp);
     
@@ -165,7 +248,7 @@ useEffect(() => {
     const velocity = dragRef.current.velocity;
     if (Math.abs(velocity) > 0.1) {
        // ลดความเร็ว momentum
-      let momentum = velocity * 2;
+      let momentum = velocity * 1;
       let currentRotation = dragRef.current.currentRotation;
       
       const animate = () => {
@@ -228,7 +311,7 @@ useEffect(() => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className={styles.slider_section}>
         <div className={styles.banner}>
           <div 
@@ -242,13 +325,15 @@ useEffect(() => {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            {sliderImages.map((image, index) => (
+            {imageRoutes.map((item, index) => (
               <SliderItem 
                 key={index}
-                image={image}
+                image={item.image}
                 position={index + 1}
-                total={sliderImages.length}
+                total={imageRoutes.length}
                 isRunning={isAnimationRunning}
+                onClick={(e) => handleImageClick(item.route, e)}
+                title={item.title}
               />
             ))}
           </div>
@@ -261,11 +346,10 @@ useEffect(() => {
           </div>
         </div>
       </div>
-
-      <Features />
+      {/* <Features />
       <Team />
       <BlogPosts />
-      <Contact />
+      <Contact /> */}
     </>
   );
 };

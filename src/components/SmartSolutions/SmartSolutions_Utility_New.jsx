@@ -82,7 +82,10 @@ export const SmartSolutions_Utility_New = () => {
       behavior: "auto",
     });
   }, []);
-
+  const handleClosePostTutorialImage = () => {
+    // setShowPostTutorialImage(false);
+    navigate("/smart-solutions-utility_new_ver02");
+  };
   const handleLearnMoreClick_smart_BuildingTo_DemandResponse = () => {
     navigate("/smart-solutions-building", { state: { scrollTo: 'DemandResponse' } });
   };
@@ -115,111 +118,113 @@ export const SmartSolutions_Utility_New = () => {
       
       <div className={styles.content}>
         <div className={styles.imageContainer}>
-        <div className={styles.overlayText}>Intelligent Grid</div>
-        <div className={styles.overlayText_1}>Technology-driven system that optimizes energy management through sensors, data analytics, and smart communication​</div>
+        {/* <div className={styles.overlayText}>Intelligent Grid</div>
+        <div className={styles.overlayText_1}>Technology-driven system that optimizes energy management through sensors, data analytics, and smart communication​</div> */}
           <img
-            src="/image/Smart_UtilityBackground.png"
+            src="/image/U_1.png"
             alt="Smart Building"
             className={styles.aboutImage}
+            onClick={handleClosePostTutorialImage}
           />
            
+       
           {/* Red Dots with Enhanced Tooltips */}
           <div 
             id="DemandResponse"
             className={styles.redDot_DemandResponseWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_DemandResponse}
+            // onClick={handleLearnMoreClick_smart_BuildingTo_DemandResponse}
           >
             
             <div className={styles.tooltipText}>
               
               <h3>Demand Response(DR)</h3>
               <p>Optimizes energy use by reducing consumption during peak times, easing grid load and cutting costs</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_DemandResponse}>
+              {/* <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_DemandResponse}>
                 ต่อไป
-              </button>
+              </button> */}
             </div>
           </div>
 
           <div 
             id="Energy Management System(EMS)"
             className={styles.redDot_EnergyManagementSystemWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_EnergyManagementSystem}
+            // onClick={handleLearnMoreClick_smart_BuildingTo_EnergyManagementSystem}
           >
             <div className={styles.tooltipText}>
               <h3>Energy Management System(EMS)</h3>
               <p>Optimizes energy use with real-time data, improving efficiency and cutting costs.</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_EnergyManagementSystem}>
+              {/* <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_EnergyManagementSystem}>
                 ต่อไป
-              </button>
+              </button> */}
             </div>
           </div>
 
           <div 
             id="Renewable Energy​"
             className={styles.redDot_RenewableEnergyWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergy}
+            // onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergy}
           >
             <div className={styles.tooltipText}>
               <h3>Renewable Energy</h3>
               <p>Integrating renewable energy into the grid enhances clean energy share</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergy}>
+              {/* <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergy}>
                 ต่อไป
-              </button>
+              </button> */}
             </div>
           </div>
 ss
           <div 
             id="Advanced Metering Infrastructure (AMI)"
             className={styles.redDot_AdvancedMeteringInfrastructureWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_AdvancedMeteringInfrastructure}
+            // onClick={handleLearnMoreClick_smart_BuildingTo_AdvancedMeteringInfrastructure}
           >
             <div className={styles.tooltipText}>
               <h3>Advanced Metering Infrastructure (AMI)</h3>
               <p>Technology deploying smart meters that seamlessly relay real-time energy usage between consumers and providers.</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_AdvancedMeteringInfrastructure}>
+              {/* <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_AdvancedMeteringInfrastructure}>
                 ต่อไป
-              </button>
+              </button> */}
             </div>
           </div>
 
           <div 
             id="Microgrid & Prosumer​"
             className={styles.redDot_MicrogridProsumerWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_MicrogridProsumer}
+            // onClick={handleLearnMoreClick_smart_BuildingTo_MicrogridProsumer}
           >
             <div className={styles.tooltipText}>
               <h3>Microgrid & Prosumer</h3>
               <p>Efficient Local Energy Management and independently from the main grid</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_MicrogridProsumer}>
+              {/* <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_MicrogridProsumer}>
                 ต่อไป
-              </button>
+              </button> */}
             </div>
           </div>
           <div 
             id="EV Integration"
             className={styles.redDot_EVIntegrationWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_EVIntegration}
+            // onClick={handleLearnMoreClick_smart_BuildingTo_EVIntegration}
           >
             <div className={styles.tooltipText}>
               <h3>EV Integration</h3>
               <p>Elegantly connects electric vehicles to the grid</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_EVIntegration}>
+              {/* <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_EVIntegration}>
                 ต่อไป
-              </button>
+              </button> */}
             </div>
           </div>
 
           <div 
             id="Energy Storage System"
             className={styles.redDot_EnergyStorageSystemWrapper} 
-            onClick={handleLearnMoreClick_smart_BuildingTo_EnergyStorageSystem}
+            // onClick={handleLearnMoreClick_smart_BuildingTo_EnergyStorageSystem}
           >
             <div className={styles.tooltipText}>
               <h3>Energy Storage System</h3>
               <p>Ensuring Stable Electricity Supply.</p>
-              <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_EnergyStorageSystem}>
+              {/* <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_EnergyStorageSystem}>
                 ต่อไป
-              </button>
+              </button> */}
             </div>
           </div>
 
