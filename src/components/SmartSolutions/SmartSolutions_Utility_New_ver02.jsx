@@ -62,13 +62,13 @@ export const SmartSolutions_Utility_New_ver02 = () => {
 
     // กำหนดตำแหน่งและข้อความสำหรับจุดแต่ละจุดในแต่ละรูปภาพ
     const dotConfigurations = {
-      'renewableEnergy': [
+      'Demand Response(DR)Energy Management System(EMS)': [
         {
           // id: 'solar-panels',
           className: styles.redDot_RenewableEnergyIntegrationWrapper,
         //   tooltip: 'แผงโซลาร์เซลล์',
           // description: 'ระบบผลิตพลังงานแสงอาทิตย์สำหรับอาคาร',
-          position: { top: '11%', left: '59%' }
+          position: { top: '53%', left: '52%' }
         },
         {
           id: 'energy-storage',
@@ -78,13 +78,13 @@ export const SmartSolutions_Utility_New_ver02 = () => {
           position: { top: '45%', left: '90%' }
         }
       ],
-      'iot': [
+      'Renewable Energy': [
         {
-          id: 'iot-sensors',
+          id: 'Renewable Energy',
           className: styles.redDot_IotWrapper,
           // tooltip: 'เซ็นเซอร์ IoT',
           // description: 'ตรวจวัดสภาพแวดล้อมภายในอาคาร',
-          position: { top: '25%', left: '86%' }
+          position: { top: '32%', left: '96%' }
         },
         {
           id: 'data-hub',
@@ -95,40 +95,40 @@ export const SmartSolutions_Utility_New_ver02 = () => {
         }
       ],
       
-      'Access Control Systems': [
+      'Advanced Mtering Infrastructure(AMI)': [
         {
           id: 'access-control',
           className: styles.redDot_AccessControlSystemsWrapper,
           // tooltip: 'ระบบควบคุมการเข้าออก',
           // description: 'เทคโนโลยีการควบคุมการเข้าถึงที่ปลอดภัย',
-          position: { top: '8%', left: '65.5%' }
+          position: { top: '64%', left: '74.8%' }
         }
       ],
-      'Security System': [
+      'Microgrid Prosumer': [
         {
           id: 'security-system',
           className: styles.redDot_SurveillanceSecurityWrapper,
           // tooltip: 'ระบบรักษาความปลอดภัย',
           // description: 'กล้องวงจรปิดและระบบเฝ้าระวัง',
-          position: { top: '21%', left: '94%' }
+          position: { top: '95%', left: '80%' }
         }
       ],
-      'Smart Lighting': [
+      'EV Integration': [
         {
           id: 'smart-lighting',
           className: styles.redDot_LightingWrapper,
           // tooltip: 'ระบบไฟอัจฉริยะ',
           // description: 'ระบบควบคุมแสงสว่างอัตโนมัติ',
-          position: { top: '4%', left: '68.5%' }
+          position: { top: '65%', left: '43%' }
         }
       ],
-      'Building Automation System': [
+      'EnergyStorageSysem': [
         {
           id: 'building-automation',
           className: styles.redDot_BuildingAutomationWrapper,
           // tooltip: 'ระบบอาคารอัตโนมัติ',
           // description: 'ควบคุมระบบอาคารอัตโนมัติทั้งหมด',
-          position: { top: '92%', left: '19%' }
+          position: { top: '85%', left: '19%' }
         }
       ],
      
@@ -236,7 +236,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
 
             {/* Red Dots */}
             <div
-                   id="RenewableEnergy"
+                   id="Demand Response(DR)Energy Management System(EMS)"
                    className={styles.redDot_RenewableEnergyIntegrationWrapper}
                    onMouseEnter={() => handleMouseEnterWithDelay("Demand Response(DR)Energy Management System(EMS)")}
                    onMouseLeave={handleMouseLeave}
@@ -245,7 +245,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
                />
  
             <div 
-              id="Iot"
+              id="Renewable Energy"
               className={styles.redDot_IotWrapper}
                onClick={() => handleSectionClick('Renewable Energy')}
                onMouseEnter={() => handleMouseEnterWithDelay("Renewable Energy")}
@@ -253,7 +253,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
              // onMouseEnter={() => handleSectionClick('iot')}
             />
             <div 
-              id="Access Control Systems"
+              id="Advanced Mtering Infrastructure(AMI)"
               className={styles.redDot_AccessControlSystemsWrapper}
                onClick={() => handleSectionClick('Advanced Mtering Infrastructure(AMI)')}
                onMouseEnter={() => handleMouseEnterWithDelay("Advanced Mtering Infrastructure(AMI)")}
@@ -261,7 +261,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
             //  onMouseEnter={() => handleSectionClick('Access Control Systems')}
             />
             <div 
-              id="Security System"
+              id="Microgrid Prosumer"
               className={styles.redDot_SurveillanceSecurityWrapper}
                onClick={() => handleSectionClick('Microgrid Prosumer')}
                onMouseEnter={() => handleMouseEnterWithDelay("Microgrid Prosumer")}
@@ -269,7 +269,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
             //  onMouseEnter={() => handleSectionClick('Security System')}
             />
              <div 
-              id="Smart Lighting"
+              id="EV Integration"
               className={styles.redDot_LightingWrapper}
                onClick={() => handleSectionClick('EV Integration')}
                onMouseEnter={() => handleMouseEnterWithDelay("EV Integration")}
@@ -277,7 +277,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
             //  onMouseEnter={() => handleSectionClick('Smart Lighting')}
             />
              <div 
-              id="Building Automation System"
+              id="EnergyStorageSysem"
               className={styles.redDot_BuildingAutomationWrapper}
                onClick={() => handleSectionClick('EnergyStorageSysem')}
                onMouseEnter={() => handleMouseEnterWithDelay("EnergyStorageSysem")}
