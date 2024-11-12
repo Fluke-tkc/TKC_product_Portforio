@@ -235,7 +235,7 @@ ss
           
 
           {/* Tutorial Overlay */}
-          {showTutorial && (
+          {/* {showTutorial && (
             <div 
               className={styles.tutorialContainer}
               onClick={handleTutorialClick}
@@ -275,7 +275,7 @@ ss
                 ข้าม Tutorial
               </button>
             </div>
-          )}
+          )} */}
         </div>
       </div>
      

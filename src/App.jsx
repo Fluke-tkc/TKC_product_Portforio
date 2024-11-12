@@ -26,7 +26,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Hero />} />
+        <Route path="/" element={<Hero_New />} />
         <Route path="/smart-solutions" element={<SmartSolutions />} />
              <Route path="/smart-solutions-building" element={<Smart_Building />} />
                     <Route path="/smart-solutions-building_new" element={<Smart_Building_New />} />
