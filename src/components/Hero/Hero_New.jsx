@@ -51,7 +51,7 @@ export const Hero_New = () => {
     { 
       image: '/image/smartsolution2.png',
       route: '/smart-solutions-building_new',
-      title: 'Smart Solutions'
+      title: 'Smart Building'
     },
     { 
       image: '/image/Smart Hospital.jpg',
@@ -316,7 +316,7 @@ useEffect(() => {
         <div className={styles.banner}>
           <div 
             ref={sliderRef}
-            className={`${styles.slider} ${!isAnimationRunning ? styles.pausedAnimation : ''}`}
+            className={`${styles.slider} ${!isAnimationRunning }`}//? styles.pausedAnimation : ''
             onMouseDown={handleMouseDown}
             onMouseMove={isDragging ? handleMouseMove : undefined}
             onMouseUp={handleMouseUp}
