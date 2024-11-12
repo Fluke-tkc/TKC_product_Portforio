@@ -29,12 +29,25 @@
   height: 200px;
   top: 20%;
   left: 50%;
-  transform: translateX(-50%) perspective(1000px) rotateX(-16deg);
+  transform: translateX(-50%) perspective(1000px) rotateX(0deg);
   transform-style: preserve-3d;
-  animation: autoRun 60s linear infinite;
   z-index: 2;
+  user-select: none;
+  cursor: grab;
+  will-change: transform;
+  touch-action: none;
+}
+.slider:active {
+  cursor: grabbing; /* Show grabbing cursor while dragging */
+}
+.slider:not(.pausedAnimation) {
+  animation: autoRun 60s linear infinite;
 }
 
+.pausedAnimation {
+  animation: none;
+  transition: transform 0.3s ease-out;
+}
 @keyframes autoRun {
   from {
     transform: translateX(-50%) perspective(1000px) rotateX(0deg) rotateY(0deg);
@@ -42,9 +55,6 @@
   to {
     transform: translateX(-50%) perspective(1000px) rotateX(0deg) rotateY(360deg);
   }
-}
-.slider.pausedAnimation {
-  animation-play-state: paused;
 }
 
 .item {
@@ -54,6 +64,7 @@
             translateZ(550px);
   transition: transform 0.5s ease;
 }
+
 .item.pausedAnimation {
   animation-play-state: paused;
 }
@@ -168,6 +179,7 @@
     width: 80px;
     height: 120px;
     top: 20%;
+    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(0deg);
   }
   @keyframes autoRun {
     from {
@@ -180,5 +192,9 @@
   .item {
     transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
               translateZ(200px);
+  }
+   /* เพิ่ม style สำหรับ slider เมื่อหยุด animation */
+   .slider.pausedAnimation {
+    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));
   }
 }
