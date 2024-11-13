@@ -7,19 +7,37 @@ import { BlogPosts } from "../Allmodule/BlogPosts";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./Hero_New.module.css";
 
-const SliderItem = ({ image, position, total, isRunning, onClick, title }) => (
+// Constants for drag settings
+const DRAG_SETTINGS = {
+  sensitivity: 0.1,          // ความไวในการลาก
+  momentumMultiplier: 1,    // ความแรงของ momentum
+  momentumDampening: 0.97,   // การชะลอตัว
+  minimumVelocity: 0.05,     // ความเร็วขั้นต่ำที่จะเริ่ม momentum
+  rotationSpeed: 2,         // ความเร็วในการหมุนอัตโนมัติ
+};
+
+// SliderItem Component
+const SliderItem = ({ image, position, total, onClick, title, onMouseEnter, onMouseLeave, onMouseDown }) => (
   <div 
-    className={`${styles.item} ${!isRunning ? styles.pausedAnimation : ''}`}
+    className={styles.item}
     style={{ 
       '--position': position,
       '--quantity': total
     }}
     onClick={onClick}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+    onMouseDown={onMouseDown}
     role="button"
     tabIndex={0}
     aria-label={`Navigate to ${title}`}
   >
-    <img src={image} alt={title} />
+    <img 
+      src={image} 
+      alt={title}
+      draggable={false}
+      className={styles.itemImage}
+    />
     <div className={styles.itemOverlay}>
       <span className={styles.itemTitle}>{title}</span>
     </div>
@@ -28,25 +46,23 @@ const SliderItem = ({ image, position, total, isRunning, onClick, title }) => (
 
 export const Hero_New = () => {
   const navigate = useNavigate();
-  const [isAnimationRunning, setIsAnimationRunning] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
-  const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
+  const [isRotating, setIsRotating] = useState(true);
+  const [currentRotation, setCurrentRotation] = useState(0);
+  const [activeImageIndex, setActiveImageIndex] = useState(null);
   
   const sliderRef = useRef(null);
+  const animationFrameRef = useRef(null);
   const resumeTimerRef = useRef(null);
-  const frameRef = useRef(null);
   const dragRef = useRef({
     startX: 0,
-    startY: 0,
     lastX: 0,
     currentRotation: 0,
-    lastRotation: 0,
     velocity: 0,
     timestamp: 0
   });
 
-
-  
+  // Image routes data
   const imageRoutes = [
     { 
       image: '/image/smartsolution2.png',
@@ -77,8 +93,6 @@ export const Hero_New = () => {
       image: '/image/SmartSolutions_Organized_Communication_Cables.jpg',
       route: '/communication-solutions',
       title: 'SmartOrganized Communication Cables'
-      
-
     },
     { 
       image: '/image/Autonomous Solution.jpg',
@@ -106,52 +120,51 @@ export const Hero_New = () => {
       title: 'Cloud Services'
     }
   ];
-  const sliderImages = [
-    '/image/smartsolution2.png',
-    '/image/Smart Hospital.jpg',
-    '/image/Samrt Platform.jpg',
-    '/image/Smart Learning.jpg',
-    '/image/Smart Logistics.jpg',
-    '/image/SmartSolutions_Organized_Communication_Cables.jpg',
-    '/image/Autonomous Solution.jpg',
-    '/image/Cyber Security.jpg',
-    '/image/Smart Farming.jpg',
-    '/image/Smart Utility (Grid).jpg',
-    '/image/Cloud Services.jpg',
-  ];
 
-    // Handle navigation
-    const handleImageClick = (route ,event) => {
-       // Only navigate if we haven't dragged
-    if (!isDragging) {
-      event.stopPropagation();
-      navigate(route);
+  // Automatic rotation effect
+  useEffect(() => {
+    let lastTimestamp = 0;
+
+    const animateRotation = (timestamp) => {
+      if (!lastTimestamp) {
+        lastTimestamp = timestamp;
       }
+
+      const deltaTime = (timestamp - lastTimestamp) / 1000;
+      lastTimestamp = timestamp;
+
+      if (isRotating && !isDragging) {
+        setCurrentRotation(prev => {
+          const newRotation = prev + DRAG_SETTINGS.rotationSpeed * deltaTime;
+          return newRotation % 360;
+        });
+      }
+
+      animationFrameRef.current = requestAnimationFrame(animateRotation);
     };
 
+    if (isRotating && !isDragging) {
+      animationFrameRef.current = requestAnimationFrame(animateRotation);
+    }
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [isRotating, isDragging]);
+
+  // Cleanup effect
   useEffect(() => {
-    // Initialize slider rotation on mount
-    if (sliderRef.current) {
-      const isMobile = window.innerWidth <= 767;
-      sliderRef.current.style.transform = isMobile 
-        ? 'translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(0deg)'
-        : 'translateX(-50%) perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    return () => {
+      clearResumeTimer();
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
     }
+    };
   }, []);
-// เพิ่ม event listener สำหรับการ resize
-useEffect(() => {
-  const handleResize = () => {
-    if (sliderRef.current) {
-      const isMobile = window.innerWidth <= 767;
-      const currentRotation = getCurrentRotation();
-      applyRotation(currentRotation);
-    }
-  };
 
-  window.addEventListener('resize', handleResize);
-  return () => window.removeEventListener('resize', handleResize);
-}, []);
-
+  // Utility functions
   const clearResumeTimer = () => {
     if (resumeTimerRef.current) {
       clearTimeout(resumeTimerRef.current);
@@ -159,171 +172,131 @@ useEffect(() => {
     }
   };
 
-  const getCurrentRotation = () => {
-    if (!sliderRef.current) return 0;
-    const transform = sliderRef.current.style.transform;
-    const match = transform.match(/rotateY\(([-\d.]+)deg\)/);
-    return match ? parseFloat(match[1]) : 0;
-  };
-
-  const applyRotation = (rotation) => {
-    if (!sliderRef.current) return;
-    sliderRef.current.style.transform = `
-      translateX(-50%) 
-      perspective(1000px) 
-      rotateX(0deg) 
-      rotateY(${rotation}deg)
-    `;
-
-    const isMobile = window.innerWidth <= 767;
-  
-    if (isMobile) {
-      sliderRef.current.style.transform = `
-        translateX(-50%) 
-        perspective(1000px) 
-        rotateX(-16deg) 
-        rotateY(${rotation}deg)
-      `;
-      // เก็บค่า rotation ปัจจุบันไว้ใน CSS variable
-      sliderRef.current.style.setProperty('--current-rotation', `${rotation}deg`);
-    } else {
-      sliderRef.current.style.transform = `
-        translateX(-50%) 
-        perspective(1000px) 
-        rotateX(0deg) 
-        rotateY(${rotation}deg)
-      `;
-    }
-  };
- 
-
-  const handleStart = (clientX, clientY) => {
+  // Event handlers
+  const handleImageMouseEnter = (index) => {
+    setIsRotating(false);
+    setActiveImageIndex(index);
     clearResumeTimer();
-    setIsAnimationRunning(false);
-    setIsDragging(true);
-    setStartPosition({ x: clientX, y: clientY });
-
-
-    dragRef.current = {
-      startX: clientX,
-      lastX: clientX,
-      currentRotation: getCurrentRotation(),
-      lastRotation: getCurrentRotation(),
-      velocity: 0,
-      timestamp: Date.now()
-    };
   };
-  
 
-  const handleMove = (clientX, clientY) => {
+  const handleImageMouseLeave = (index) => {
+    setActiveImageIndex(null); // ลบเช็คเงื่อนไข activeImageIndex
     
-    if (!isDragging || !sliderRef.current) return;
+    if (!isDragging) {  // เช็คแค่ว่าไม่ได้กำลังลากอยู่
+        clearResumeTimer(); // เคลียร์ timer เก่าก่อน
+        resumeTimerRef.current = setTimeout(() => {
+            setIsRotating(true);
+        }, 5000);
+    }
+};
 
-    const deltaX = clientX - dragRef.current.lastX;
+  const handleImageMouseMove = (e) => {
+    if (!isDragging) return;
 
+    e.preventDefault();
+    const touch = e.touches ? e.touches[0] : e;
+    const deltaX = touch.clientX - dragRef.current.lastX;
     
+    setCurrentRotation(prev => {
+      const newRotation = prev + deltaX * DRAG_SETTINGS.sensitivity;
+      return newRotation % 360;
+    });
+
     const now = Date.now();
-    const deltaTime = Math.max(1, now - dragRef.current.timestamp);
-    
-    dragRef.current.velocity = deltaX / deltaTime;
-    // ลดความเร็วในการปัดโดยลดค่า sensitivity
-    const sensitivity = 0.2;
-    const newRotation = dragRef.current.currentRotation + (deltaX * sensitivity);
-    
-    applyRotation(newRotation);
-    
     dragRef.current = {
       ...dragRef.current,
-      lastX: clientX,
-      currentRotation: newRotation,
+      lastX: touch.clientX,
+      velocity: deltaX / (now - dragRef.current.timestamp),
       timestamp: now
     };
   };
 
-  const handleEnd = () => {
+  const handleMouseUpGlobal = () => {
     if (!isDragging) return;
     
     setIsDragging(false);
 
+    document.removeEventListener('mousemove', handleImageMouseMove);
+    document.removeEventListener('mouseup', handleMouseUpGlobal);
+    document.removeEventListener('touchmove', handleImageMouseMove);
+    document.removeEventListener('touchend', handleMouseUpGlobal);
+    
     const velocity = dragRef.current.velocity;
-    if (Math.abs(velocity) > 0.1) {
-       // ลดความเร็ว momentum
-      let momentum = velocity * 1;
-      let currentRotation = dragRef.current.currentRotation;
-      
-      const animate = () => {
-        // เพิ่มความหน่วงในการหยุด
-        if (Math.abs(momentum) < 0.01) {
-          cancelAnimationFrame(frameRef.current);
-          startResumeTimer();
-          return;
-        }
+    if (Math.abs(velocity) > DRAG_SETTINGS.minimumVelocity) {
+        let momentum = velocity * DRAG_SETTINGS.momentumMultiplier;
+        let currentVelocity = momentum;
 
-        currentRotation += momentum;
-        applyRotation(currentRotation);
-        // เพิ่มความหน่วงให้มากขึ้น
-        momentum *= 0.95;
-        frameRef.current = requestAnimationFrame(animate);
-      };
-      
-      frameRef.current = requestAnimationFrame(animate);
+        const applyMomentum = () => {
+            if (Math.abs(currentVelocity) < DRAG_SETTINGS.minimumVelocity) {
+                cancelAnimationFrame(animationFrameRef.current);
+                // เริ่มนับเวลาใหม่หลังจาก momentum หยุด
+                clearResumeTimer();
+                resumeTimerRef.current = setTimeout(() => {
+                    setIsRotating(true);
+                }, 5000);
+                return;
+            }
+
+            setCurrentRotation(prev => {
+                const newRotation = prev + currentVelocity;
+                return newRotation % 360;
+            });
+
+            currentVelocity *= DRAG_SETTINGS.momentumDampening;
+            animationFrameRef.current = requestAnimationFrame(applyMomentum);
+        };
+
+        animationFrameRef.current = requestAnimationFrame(applyMomentum);
     } else {
-      startResumeTimer();
+        // เริ่มนับเวลาใหม่ทันทีถ้าไม่มี momentum
+        clearResumeTimer();
+        resumeTimerRef.current = setTimeout(() => {
+            setIsRotating(true);
+        }, 5000);
     }
-  };
+};
 
-  const startResumeTimer = () => {
+  const handleImageMouseDown = (e, index) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    setIsRotating(false);
+    setIsDragging(true);
+    setActiveImageIndex(index);
     clearResumeTimer();
-    if (!sliderRef.current?.matches(':hover')) {
-      resumeTimerRef.current = setTimeout(() => {
-        setIsAnimationRunning(true);
-      }, 10000);
+
+    const touch = e.touches ? e.touches[0] : e;
+    dragRef.current = {
+      startX: touch.clientX,
+      lastX: touch.clientX,
+      currentRotation: currentRotation,
+      velocity: 0,
+      timestamp: Date.now()
+    };
+
+    document.addEventListener('mousemove', handleImageMouseMove);
+    document.addEventListener('mouseup', handleMouseUpGlobal);
+    document.addEventListener('touchmove', handleImageMouseMove, { passive: false });
+    document.addEventListener('touchend', handleMouseUpGlobal);
+  };
+
+  const handleImageClick = (route, event, index) => {
+    if (!isDragging) {
+      event.stopPropagation();
+      navigate(route);
     }
-  };
-
-  const handleMouseDown = (e) => {
-    e.preventDefault();
-    handleStart(e.clientX);
-  };
-
-  const handleMouseMove = (e) => {
-    handleMove(e.clientX);
-  };
-
-  const handleMouseUp = () => {
-    handleEnd();
-  };
-
-  const handleTouchStart = (e) => {
-    e.preventDefault();
-    const touch = e.touches[0];
-    handleStart(touch.clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    const touch = e.touches[0];
-    handleMove(touch.clientX);
-  };
-
-  const handleTouchEnd = () => {
-    handleEnd();
   };
 
   return (
     <>
-      {/* <Navbar /> */}
       <div className={styles.slider_section}>
         <div className={styles.banner}>
           <div 
             ref={sliderRef}
-            className={`${styles.slider} ${!isAnimationRunning }`}//? styles.pausedAnimation : ''
-            onMouseDown={handleMouseDown}
-            onMouseMove={isDragging ? handleMouseMove : undefined}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            className={styles.slider}
+            style={{
+              transform: `translateX(-50%) perspective(1000px) rotateX(${window.innerWidth <= 767 ? '-16deg' : '0deg'}) rotateY(${currentRotation}deg)`
+            }}
           >
             {imageRoutes.map((item, index) => (
               <SliderItem 
@@ -331,8 +304,10 @@ useEffect(() => {
                 image={item.image}
                 position={index + 1}
                 total={imageRoutes.length}
-                isRunning={isAnimationRunning}
-                onClick={(e) => handleImageClick(item.route, e)}
+                onClick={(e) => handleImageClick(item.route, e, index)}
+                onMouseEnter={() => handleImageMouseEnter(index)}
+                onMouseLeave={() => handleImageMouseLeave(index)}
+                onMouseDown={(e) => handleImageMouseDown(e, index)}
                 title={item.title}
               />
             ))}
@@ -346,10 +321,7 @@ useEffect(() => {
           </div>
         </div>
       </div>
-      {/* <Features />
-      <Team />
-      <BlogPosts />
-      <Contact /> */}
+      <Contact />
     </>
   );
 };
