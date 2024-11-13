@@ -356,7 +356,7 @@ return (
               <div 
                 id="RenewableEnergy"
                 className={styles.redDot_RenewableEnergyIntegrationWrapper}
-                onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}
+                // onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration}
               >
                  <div className={styles.tooltipText}>
                   <h3>Renewable Energy Integration</h3>
@@ -368,7 +368,7 @@ return (
               <div 
                 id="Iot"
                 className={styles.redDot_IotWrapper}
-                onClick={handleLearnMoreClick_smart_BuildingTo_Iot}
+                // onClick={handleLearnMoreClick_smart_BuildingTo_Iot}
               >
                  <div className={styles.tooltipText}>
                   <h3>IoT</h3>
@@ -380,7 +380,7 @@ return (
               <div 
                 id="AccessControlSystems"
                 className={styles.redDot_AccessControlSystemsWrapper}
-                onClick={handleLearnMoreClick_smart_BuildingTo_AccessControlSystems}
+                // onClick={handleLearnMoreClick_smart_BuildingTo_AccessControlSystems}
               >
                  <div className={styles.tooltipText}>
                   <h3>Access Control Systems</h3>
@@ -392,7 +392,7 @@ return (
               <div 
                 id="SurveillanceAndSecurity"
                 className={styles.redDot_SurveillanceSecurityWrapper}
-                onClick={handleLearnMoreClick_smart_BuildingTo_SurveillanceandSecuritySystem}
+                // onClick={handleLearnMoreClick_smart_BuildingTo_SurveillanceandSecuritySystem}
               >
                  <div className={styles.tooltipText}>
                   <h3>Surveillance and Security System</h3>
@@ -404,7 +404,7 @@ return (
               <div 
                 id="Lighting"
                 className={styles.redDot_LightingWrapper}
-                onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}
+                // onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}
               >
                  <div className={styles.tooltipText}>
                   <h3>Smart Digital Signage and Lighting​</h3>
@@ -416,7 +416,7 @@ return (
               <div 
                 id="BuildingAutomation"
                 className={styles.redDot_BuildingAutomationWrapper}
-                onClick={handleLearnMoreClick_smart_BuildingTo_BuildingAutomationSystem}
+                // onClick={handleLearnMoreClick_smart_BuildingTo_BuildingAutomationSystem}
               >
                  <div className={styles.tooltipText}>
                   <h3>Building Automation System</h3>
@@ -428,7 +428,7 @@ return (
               <div 
                 id="MotionSensors"
                 className={styles.redDot_MotionSensorsWrapper}
-                onClick={handleLearnMoreClick_smart_BuildingTo_MotionSensors}
+                // onClick={handleLearnMoreClick_smart_BuildingTo_MotionSensors}
               >
                  <div className={styles.tooltipText}>
                   <h3>Motion Sensors</h3>
@@ -440,7 +440,7 @@ return (
               <div 
                 id="SmartParking"
                 className={styles.redDot_SmartParkingWrapper}
-                onClick={handleLearnMoreClick_smart_BuildingTo_SmartParkingManagement}
+                // onClick={handleLearnMoreClick_smart_BuildingTo_SmartParkingManagement}
               >
                  <div className={styles.tooltipText}>
                   <h3>Smart Parking Management</h3>

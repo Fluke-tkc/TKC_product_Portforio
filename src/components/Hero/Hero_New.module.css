@@ -210,7 +210,41 @@
     bottom: 5%;
   }
 }
+.slider_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f9f9f9; /* สีพื้นหลัง */
+}
 
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 15px;
+}
+
+.image_container {
+  width: 100%; /* ความกว้างของกล่องที่ใส่รูป */
+  max-width: 100px; /* จำกัดความกว้างสูงสุดของรูป */
+  overflow: hidden;
+  
+  border-radius: 10px; /* ให้มุมโค้งมน */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาสำหรับความลึก */
+}
+
+.image {
+  width: 100%; /* ทำให้รูปเต็มกล่อง */
+  height: auto; /* ปรับความสูงอัตโนมัติให้สัดส่วนถูกต้อง */
+  transition: transform 0.3s ease; /* เพิ่มเอฟเฟกต์การขยาย */
+}
+
+.image:hover {
+  transform: scale(1.05); /* ขยายรูปภาพเล็กน้อยเมื่อเลื่อนเมาส์ */
+}
 @media screen and (max-width: 767px) {
   .slider {
     width: 80px;

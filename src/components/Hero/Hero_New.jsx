@@ -289,9 +289,21 @@ export const Hero_New = () => {
 
   return (
     <>
+    {/* <Navbar/> */}
+   
       <div className={styles.slider_section}>
+         {/* <div> */}
+              {/* <a className={styles.title} href="/">
+                 ชื่อหัวข้อ
+               </a> */}
+           {/* </div> */}
+           {/* <div className={styles.image_container}>
+           <img src="image/AI.jpg" alt="" className={styles.image} />
+       </div> */}
+     
         <div className={styles.banner}>
           <div 
+          
             ref={sliderRef}
             className={styles.slider}
             style={{
@@ -321,7 +333,7 @@ export const Hero_New = () => {
           </div>
         </div>
       </div>
-      <Contact />
+      {/* <Contact /> */}
     </>
   );
 };
