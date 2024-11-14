@@ -319,6 +319,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
           </div>
         </div>
       </section>
+      <Contact />
     </>
   );
 };

@@ -363,6 +363,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
           </div>
         </div>
       </section>
+      <Contact />
     </>
   );
 };

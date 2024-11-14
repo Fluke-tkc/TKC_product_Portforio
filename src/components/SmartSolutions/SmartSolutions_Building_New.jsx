@@ -584,6 +584,7 @@ return (
 </div>
 </div>
 </section>
+<Contact />
 {/* <Contact /> */}
 </>
 );
