@@ -192,7 +192,10 @@ export const Hero_New = () => {
     lastTimestamp: 0,
     isMoved: false
   });
-
+// ฟังก์ชันที่เรียกใช้งานเมื่อกดปุ่ม
+const handleButtonClick = () => {
+  window.location.href = "https://www.tkc-services.com/th/home";
+};
   const clearAllTimers = () => {
     if (autoRotateTimeoutRef.current) {
       clearTimeout(autoRotateTimeoutRef.current);
@@ -431,6 +434,9 @@ export const Hero_New = () => {
 
   return (
     <div className={styles.slider_section}>
+       <button className={styles.topLeftButton} onClick={handleButtonClick}>
+        {/* ไปยังเว็บไซต์ */}
+      </button>
       <div className={styles.banner}>
         <div 
           ref={sliderRef}
