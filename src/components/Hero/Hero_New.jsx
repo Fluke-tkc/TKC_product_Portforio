@@ -9,7 +9,7 @@ const DRAG_SETTINGS = {
   momentumDampening: 0.97,   // ค่าหน่วงความเฉื่อย
   minimumVelocity: 0.05,     // ความเร็วขั้นต่ำสำหรับความเฉื่อย
   rotationSpeed: 2,          // ความเร็วในการหมุนอัตโนมัติ
-  autoRotateDelay: 5000,     // ระยะเวลารอก่อนหมุนอัตโนมัติ
+  autoRotateDelay: 3000,     // ระยะเวลารอก่อนหมุนอัตโนมัติ
   clickThreshold: {
     duration: 200,           // ระยะเวลาสูงสุดที่ถือว่าเป็นการคลิก (ms)
     movement: 5              // ระยะทางสูงสุดที่ถือว่าเป็นการคลิก (px)
