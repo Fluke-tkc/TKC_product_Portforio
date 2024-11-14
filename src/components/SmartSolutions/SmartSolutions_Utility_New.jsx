@@ -132,7 +132,8 @@ export const SmartSolutions_Utility_New = () => {
           <div 
             id="DemandResponse"
             className={styles.redDot_DemandResponseWrapper} 
-            // onClick={handleLearnMoreClick_smart_BuildingTo_DemandResponse}
+            // onClick={handleLearnMoreClick_smart_BuildingTo_DemandResponse}handleClosePostTutorialImage
+            onClick={handleClosePostTutorialImage}
           >
             
             <div className={styles.tooltipText}>
@@ -142,6 +143,7 @@ export const SmartSolutions_Utility_New = () => {
               {/* <button className={styles.tooltipButton} onClick={handleLearnMoreClick_smart_BuildingTo_DemandResponse}>
                 ต่อไป
               </button> */}
+              
             </div>
           </div>
 
@@ -149,6 +151,7 @@ export const SmartSolutions_Utility_New = () => {
             id="Energy Management System(EMS)"
             className={styles.redDot_EnergyManagementSystemWrapper} 
             // onClick={handleLearnMoreClick_smart_BuildingTo_EnergyManagementSystem}
+            onClick={handleClosePostTutorialImage}
           >
             <div className={styles.tooltipText}>
               <h3>Energy Management System(EMS)</h3>
@@ -163,6 +166,7 @@ export const SmartSolutions_Utility_New = () => {
             id="Renewable Energy​"
             className={styles.redDot_RenewableEnergyWrapper} 
             // onClick={handleLearnMoreClick_smart_BuildingTo_RenewableEnergy}
+            onClick={handleClosePostTutorialImage}
           >
             <div className={styles.tooltipText}>
               <h3>Renewable Energy</h3>
@@ -177,6 +181,7 @@ ss
             id="Advanced Metering Infrastructure (AMI)"
             className={styles.redDot_AdvancedMeteringInfrastructureWrapper} 
             // onClick={handleLearnMoreClick_smart_BuildingTo_AdvancedMeteringInfrastructure}
+            onClick={handleClosePostTutorialImage}
           >
             <div className={styles.tooltipText}>
               <h3>Advanced Metering Infrastructure (AMI)</h3>
@@ -191,6 +196,7 @@ ss
             id="Microgrid & Prosumer​"
             className={styles.redDot_MicrogridProsumerWrapper} 
             // onClick={handleLearnMoreClick_smart_BuildingTo_MicrogridProsumer}
+            onClick={handleClosePostTutorialImage}
           >
             <div className={styles.tooltipText}>
               <h3>Microgrid & Prosumer</h3>
@@ -204,6 +210,7 @@ ss
             id="EV Integration"
             className={styles.redDot_EVIntegrationWrapper} 
             // onClick={handleLearnMoreClick_smart_BuildingTo_EVIntegration}
+            onClick={handleClosePostTutorialImage}
           >
             <div className={styles.tooltipText}>
               <h3>EV Integration</h3>
@@ -218,6 +225,7 @@ ss
             id="Energy Storage System"
             className={styles.redDot_EnergyStorageSystemWrapper} 
             // onClick={handleLearnMoreClick_smart_BuildingTo_EnergyStorageSystem}
+            onClick={handleClosePostTutorialImage}
           >
             <div className={styles.tooltipText}>
               <h3>Energy Storage System</h3>
