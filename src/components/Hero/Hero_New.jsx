@@ -223,12 +223,9 @@ export const Hero_New = () => {
       
       return;
     }
-
-    setCurrentRotation(prev => {
-      const newRotation = prev + (wheelVelocityRef.current * DRAG_SETTINGS.wheel.sensitivity);
-      return newRotation % 360;
-    });
-
+  
+    setCurrentRotation(prev => prev + (wheelVelocityRef.current * DRAG_SETTINGS.wheel.sensitivity)); // ลบ modulo ออก
+  
     wheelVelocityRef.current *= DRAG_SETTINGS.momentumDampening;
     wheelMomentumRef.current = requestAnimationFrame(handleWheelMomentum);
   };
@@ -238,17 +235,14 @@ export const Hero_New = () => {
     
     setIsRotating(false);
     clearAllTimers();
-
+  
     const delta = Math.sign(e.deltaY || e.deltaX);
     const wheelDelta = delta * DRAG_SETTINGS.wheel.sensitivity;
-
-    setCurrentRotation(prev => {
-      const newRotation = prev + wheelDelta;
-      return newRotation % 360;
-    });
-
+  
+    setCurrentRotation(prev => prev + wheelDelta); // ลบ modulo ออก
+  
     wheelVelocityRef.current = wheelDelta;
-
+  
     if (DRAG_SETTINGS.wheel.momentum) {
       if (wheelMomentumRef.current) {
         cancelAnimationFrame(wheelMomentumRef.current);
@@ -260,7 +254,6 @@ export const Hero_New = () => {
       }, DRAG_SETTINGS.wheel.debounceTime);
     }
   };
-
   const handleDragStart = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -293,18 +286,18 @@ export const Hero_New = () => {
 
   const handleDragMove = (e) => {
     if (!dragState.current.isDragging) return;
-
+  
     e.preventDefault();
     const point = e.touches ? e.touches[0] : e;
     
     const deltaX = point.clientX - dragState.current.lastX;
     const absDeltaX = Math.abs(deltaX);
-
+  
     if (absDeltaX > DRAG_SETTINGS.clickThreshold.movement) {
       dragState.current.isMoved = true;
       setIsDragging(true);
     }
-
+  
     if (dragState.current.isMoved) {
       const now = Date.now();
       const deltaTime = now - dragState.current.lastTimestamp;
@@ -312,11 +305,8 @@ export const Hero_New = () => {
       dragState.current.velocity = deltaX / deltaTime;
       dragState.current.lastX = point.clientX;
       dragState.current.lastTimestamp = now;
-
-      setCurrentRotation(prev => {
-        const newRotation = prev + (deltaX * DRAG_SETTINGS.sensitivity);
-        return newRotation % 360;
-      });
+  
+      setCurrentRotation(prev => prev + (deltaX * DRAG_SETTINGS.sensitivity)); // ลบ modulo ออก
     }
   };
   const handleDragEnd = () => {
@@ -352,7 +342,7 @@ export const Hero_New = () => {
 
           setCurrentRotation(prev => {
             const newRotation = prev + (currentVelocity * DRAG_SETTINGS.sensitivity);
-            return newRotation % 360;
+            return newRotation; //%360
           });
 
           currentVelocity *= DRAG_SETTINGS.momentumDampening;
@@ -376,17 +366,25 @@ export const Hero_New = () => {
   };
 
   // Add wheel event listener effect
-  useEffect(() => {
-    const sliderElement = sliderRef.current;
+  // useEffect(() => {
+  //   const sliderElement = sliderRef.current;
     
-    if (sliderElement) {
-      sliderElement.addEventListener('wheel', handleWheel, { passive: false });
-    }
+  //   if (sliderElement) {
+  //     sliderElement.addEventListener('wheel', handleWheel, { passive: false });
+  //   }
 
+  //   return () => {
+  //     if (sliderElement) {
+  //       sliderElement.removeEventListener('wheel', handleWheel);
+  //     }
+  //     clearAllTimers();
+  //   };
+  // }, []);
+  useEffect(() => {
+    document.addEventListener('wheel', handleWheel, { passive: false });
+  
     return () => {
-      if (sliderElement) {
-        sliderElement.removeEventListener('wheel', handleWheel);
-      }
+      document.removeEventListener('wheel', handleWheel);
       clearAllTimers();
     };
   }, []);
@@ -406,7 +404,7 @@ export const Hero_New = () => {
       if (isRotating && !dragState.current.isDragging) {
         setCurrentRotation(prev => {
           const newRotation = prev + DRAG_SETTINGS.rotationSpeed * deltaTime;
-          return newRotation % 360;
+          return newRotation;//% 360
         });
       }
 
