@@ -68,7 +68,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
           className: styles.redDot_RenewableEnergyIntegrationWrapper,
         //   tooltip: 'แผงโซลาร์เซลล์',
           // description: 'ระบบผลิตพลังงานแสงอาทิตย์สำหรับอาคาร',
-          position: { top: '53%', left: '52%' }
+          position: { top: '25%', left: '10%' }
         },
         {
           id: 'energy-storage',
@@ -84,7 +84,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
           className: styles.redDot_IotWrapper,
           // tooltip: 'เซ็นเซอร์ IoT',
           // description: 'ตรวจวัดสภาพแวดล้อมภายในอาคาร',
-          position: { top: '32%', left: '96%' }
+          position: { top: '12%', left: '96%' }
         },
         {
           id: 'data-hub',
@@ -101,7 +101,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
           className: styles.redDot_AccessControlSystemsWrapper,
           // tooltip: 'ระบบควบคุมการเข้าออก',
           // description: 'เทคโนโลยีการควบคุมการเข้าถึงที่ปลอดภัย',
-          position: { top: '64%', left: '74.8%' }
+          position: { top: '14%', left: '94.5%' }
         }
       ],
       'Microgrid Prosumer': [
@@ -119,7 +119,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
           className: styles.redDot_LightingWrapper,
           // tooltip: 'ระบบไฟอัจฉริยะ',
           // description: 'ระบบควบคุมแสงสว่างอัตโนมัติ',
-          position: { top: '65%', left: '43%' }
+          position: { top: '78%', left: '50%' }
         }
       ],
       'EnergyStorageSysem': [
