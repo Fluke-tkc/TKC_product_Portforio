@@ -360,8 +360,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Renewable Energy Integration</h3>
-                  <p>Integrating Renewable Energy into Building Systems</p>
+                  <h3>Cloud Data Center Solutions </h3>
+                  <p>Provide scalable, secure storage and management.</p>
                 </div> 
               </div>
 
@@ -373,8 +373,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>IoT</h3>
-                  <p>Connected Devices and Sensors for Data Collection and Transmission</p>
+                  <h3>Big Data Analytics on Cloud </h3>
+                  <p>Large datasets for quick analysis, reducing infrastructure costs and supporting smarter business decisions.</p>
                 </div> 
               </div>
 
@@ -386,8 +386,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Access Control Systems</h3>
-                  <p>Technologies for Secure Access Management</p>
+                  <h3>AI Services on Cloud ​</h3>
+                  <p>Aimed at enhancing efficiency in organizations through data processing, analysis, and automation</p>
                 </div> 
               </div>
 
@@ -399,8 +399,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Surveillance and Security System</h3>
-                  <p>AI-Enhanced Surveillance, Biometric Access Control, and Advanced Fire Detection</p>
+                  <h3>Security and Compliance Services ​</h3>
+                  <p>Protect data through encryption, access management, and monitoring.</p>
                 </div> 
               </div>
 
@@ -412,8 +412,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Smart Digital Signage and Lighting​</h3>
-                  <p>Dynamic and campaign launches content, Adaptive Lighting System ​</p>
+                  <h3>ERP on Cloud ​</h3>
+                  <p>Systems seamlessly integrate business functions. ​</p>
                 </div> 
               </div>
 
@@ -425,8 +425,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Building Automation System</h3>
-                  <p>Efficient Control of HVAC, Electrical, Security, and Water Management</p>
+                  <h3>Cloud-Based Call Center / Chatbot </h3>
+                  <p>Offer 24/7 customer service, handling inquiries in real-time and responsive support.</p>
                 </div> 
               </div>
 
@@ -438,13 +438,13 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Motion Sensors</h3>
-                  <p>Future Trends in Motion Detection</p>
+                  <h3>Blockchain​</h3>
+                  <p>Decentralized data storage technology where information is stored in linked blocks, making it difficult to alter and enhancing trust in transactions.​</p>
                 </div> 
               </div>
 
               {/* Smart Parking Dot */}
-              <div 
+              {/* <div 
                 id="SmartParking"
                 className={styles.redDot_SmartParkingWrapper}
                 // onClick={handleLearnMoreClick_smart_BuildingTo_SmartParkingManagement}
@@ -454,7 +454,7 @@ return (
                   <h3>Smart Parking Management</h3>
                   <p>Efficient Parking Management and Availability Tracking</p>
                 </div> 
-              </div>
+              </div> */}
             </>
           )}  
 

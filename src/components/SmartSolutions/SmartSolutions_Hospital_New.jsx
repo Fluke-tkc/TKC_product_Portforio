@@ -360,8 +360,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Renewable Energy Integration</h3>
-                  <p>Integrating Renewable Energy into Building Systems</p>
+                  <h3>Data Analytics & Knowledge Management</h3>
+                  <p>Leveraging Data to Drive Informed Decisions and Organizational</p>
                 </div> 
               </div>
 
@@ -373,8 +373,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>IoT</h3>
-                  <p>Connected Devices and Sensors for Data Collection and Transmission</p>
+                  <h3>Smart Diagnostics & Treatment​</h3>
+                  <p>Advanced AI tools assist in precise diagnostics and treatment, improving speed and accuracy in patient care.​</p>
                 </div> 
               </div>
 
@@ -386,8 +386,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Access Control Systems</h3>
-                  <p>Technologies for Secure Access Management</p>
+                  <h3>Smart Safety & Convenience Systems</h3>
+                  <p>Enhancing Safety, Security, and Comfort through Technology</p>
                 </div> 
               </div>
 
@@ -399,8 +399,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Surveillance and Security System</h3>
-                  <p>AI-Enhanced Surveillance, Biometric Access Control, and Advanced Fire Detection</p>
+                  <h3>Integrated Patient Care</h3>
+                  <p>A Coordinated, Technology-Driven Approach to Comprehensive Healthcare</p>
                 </div> 
               </div>
 
@@ -412,8 +412,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Smart Digital Signage and Lighting​</h3>
-                  <p>Dynamic and campaign launches content, Adaptive Lighting System ​</p>
+                  <h3>Smart Hospital Management Systems​</h3>
+                  <p>Digital Solutions for Enhanced Patient Service, Data Management, Appointment Scheduling, and Hospital Navigation ​</p>
                 </div> 
               </div>
 
