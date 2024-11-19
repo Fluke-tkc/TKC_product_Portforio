@@ -101,7 +101,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
           className: styles.redDot_AccessControlSystemsWrapper,
           // tooltip: 'ระบบควบคุมการเข้าออก',
           // description: 'เทคโนโลยีการควบคุมการเข้าถึงที่ปลอดภัย',
-          position: { top: '14%', left: '94.5%' }
+          position: { top: '14%', left: '93.2%' }
         }
       ],
       'Microgrid Prosumer': [

@@ -434,8 +434,8 @@ const handleButtonClick = () => {
 
   return (
     <div className={styles.slider_section}>
-       <button className={styles.topLeftButton} onClick={handleButtonClick}>
-        {/* ไปยังเว็บไซต์ */}
+       <button /* data-content="TKC"*/ className={styles.topLeftButton} onClick={handleButtonClick}>
+        {/* TKC */}
       </button>
       <div className={styles.banner}>
         <div 

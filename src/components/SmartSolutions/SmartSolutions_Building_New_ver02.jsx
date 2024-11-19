@@ -79,7 +79,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
           className: styles.redDot_RenewableEnergyIntegrationWrapper,
         //   tooltip: 'แผงโซลาร์เซลล์',
           // description: 'ระบบผลิตพลังงานแสงอาทิตย์สำหรับอาคาร',
-          position: { top: '11%', left: '59%' }
+          position: { top: '15%', left: '59%' }
         },
         {
           id: 'energy-storage',
@@ -95,7 +95,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
           className: styles.redDot_IotWrapper,
           // tooltip: 'เซ็นเซอร์ IoT',
           // description: 'ตรวจวัดสภาพแวดล้อมภายในอาคาร',
-          position: { top: '25%', left: '86%' }
+          position: { top: '25%', left: '84%' }
         },
         {
           id: 'data-hub',
@@ -112,7 +112,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
           className: styles.redDot_AccessControlSystemsWrapper,
           // tooltip: 'ระบบควบคุมการเข้าออก',
           // description: 'เทคโนโลยีการควบคุมการเข้าถึงที่ปลอดภัย',
-          position: { top: '8%', left: '65.5%' }
+          position: { top: '20%', left: '91.5%' }
         }
       ],
       'Security System': [
@@ -121,7 +121,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
           className: styles.redDot_SurveillanceSecurityWrapper,
           // tooltip: 'ระบบรักษาความปลอดภัย',
           // description: 'กล้องวงจรปิดและระบบเฝ้าระวัง',
-          position: { top: '21%', left: '94%' }
+          position: { top: '25%', left: '92%' }
         }
       ],
       'Smart Lighting': [
@@ -130,7 +130,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
           className: styles.redDot_LightingWrapper,
           // tooltip: 'ระบบไฟอัจฉริยะ',
           // description: 'ระบบควบคุมแสงสว่างอัตโนมัติ',
-          position: { top: '4%', left: '68.5%' }
+          position: { top: '22%', left: '93.5%' }
         }
       ],
       'Building Automation System': [
@@ -139,7 +139,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
           className: styles.redDot_BuildingAutomationWrapper,
           // tooltip: 'ระบบอาคารอัตโนมัติ',
           // description: 'ควบคุมระบบอาคารอัตโนมัติทั้งหมด',
-          position: { top: '92%', left: '19%' }
+          position: { top: '87%', left: '20%' }
         }
       ],
       'Motion Sensors': [
@@ -148,7 +148,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
           className: styles.redDot_MotionSensorsWrapper,
           // tooltip: 'เซ็นเซอร์ตรวจจับการเคลื่อนไหว',
           // description: 'ระบบตรวจจับการเคลื่อนไหวอัจฉริยะ',
-          position: { top: '16%', left: '96.5%' }
+          position: { top: '20%', left: '94%' }
         }
       ],
       'Smart Parking Management': [
@@ -157,7 +157,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
           className: styles.redDot_SmartParkingWrapper,
           // tooltip: 'ระบบจอดรถอัจฉริยะ',
           // description: 'ระบบบริหารจัดการที่จอดรถอัตโนมัติ',
-          position: { top: '85%', left: '88%' }
+          position: { top: '82%', left: '86%' }
         }
       ]
     };
