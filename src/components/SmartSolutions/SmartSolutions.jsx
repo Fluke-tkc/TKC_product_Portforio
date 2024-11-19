@@ -14,6 +14,7 @@ import SmartSolutionsLogistics from "./SmartSolutions_Logistics";
 import SmartSolutionsOrganizedCommunicationCables from "./SmartSolutions_Organized_Communication_Cables"; 
 import SmartSolutionsPlatform from "./SmartSolutions_Platform"; 
 import SmartSolutionsUtility from "./SmartSolutions_Utility"; 
+
 export const SmartSolutions = () => {
   const navigate = useNavigate();
 

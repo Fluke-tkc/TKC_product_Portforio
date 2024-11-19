@@ -30,7 +30,7 @@ const IMAGE_ROUTES = [
   },
   { 
     image: '/image/Smart Hospital.jpg',
-    route: '/smart-hospital',
+    route: '/smart-solutions-hospital_new',
     title: 'Smart Hospital'
   },
   { 
@@ -75,7 +75,7 @@ const IMAGE_ROUTES = [
   },
   { 
     image: '/image/Cloud Services.jpg',
-    route: '/cloud-services',
+    route: '/smart-solutions-cloudservice_new',
     title: 'Cloud Services'
   }
 ];
