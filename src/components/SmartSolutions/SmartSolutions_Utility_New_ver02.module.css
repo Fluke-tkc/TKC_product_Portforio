@@ -369,8 +369,8 @@
 
 /* IoT */
 .redDot_IotWrapper {
-  top: 32%;
-  left: 96%;
+  top: 25%;
+  left: 95%;
  /* background-image: url("/image/SmartBuildingPicture1.svg");  */
 }
 
@@ -382,7 +382,7 @@
 /* Access Control Systems */
 .redDot_AccessControlSystemsWrapper {
   top: 65%;
-  left: 75%;
+  left: 74.5%;
    /* background-image: url("/image/AccessControlSystems.png");  */
 }
 
@@ -418,7 +418,7 @@
 /* Building Automation */
 .redDot_BuildingAutomationWrapper {
   top: 85%;
-  left: 19%;
+  left: 21%;
    /* background-image: url("/image/SmartBuildingPicture7.svg");  */
 }
 

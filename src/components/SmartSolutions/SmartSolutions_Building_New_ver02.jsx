@@ -157,7 +157,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
           className: styles.redDot_SmartParkingWrapper,
           // tooltip: 'ระบบจอดรถอัจฉริยะ',
           // description: 'ระบบบริหารจัดการที่จอดรถอัตโนมัติ',
-          position: { top: '82%', left: '86%' }
+          position: { top: '82%', left: '85.8%' }
         }
       ]
     };

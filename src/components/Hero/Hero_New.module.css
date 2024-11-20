@@ -274,6 +274,14 @@
     top: 5px;
     left: 25%;
   }
+  .topLeftButton {
+
+    
+    width: 150px; /* กำหนดความกว้างของปุ่ม */
+    height: 120px; /* กำหนดความสูงของปุ่ม */
+    
+    
+  }
 }
 
 @media (max-width: 480px) {

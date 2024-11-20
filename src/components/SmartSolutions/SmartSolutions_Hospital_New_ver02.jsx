@@ -130,7 +130,7 @@ export const SmartSolutions_Hospital_New_ver02 = () => {
           className: styles.redDot_LightingWrapper,
           // tooltip: 'ระบบไฟอัจฉริยะ',
           // description: 'ระบบควบคุมแสงสว่างอัตโนมัติ',
-          position: { top: '55%', left: '80%' }
+          position: { top: '36%', left: '63.5%' }
         }
       ],
       'Building Automation System': [

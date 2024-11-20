@@ -112,7 +112,7 @@ export const SmartSolutions_CloudService_New_ver02 = () => {
           className: styles.redDot_AccessControlSystemsWrapper,
           // tooltip: 'ระบบควบคุมการเข้าออก',
           // description: 'เทคโนโลยีการควบคุมการเข้าถึงที่ปลอดภัย',
-          position: { top: '10%', left: '33%' }
+          position: { top: '12%', left: '34%' }
         }
       ],
       'Security System': [
@@ -121,7 +121,7 @@ export const SmartSolutions_CloudService_New_ver02 = () => {
           className: styles.redDot_SurveillanceSecurityWrapper,
           // tooltip: 'ระบบรักษาความปลอดภัย',
           // description: 'กล้องวงจรปิดและระบบเฝ้าระวัง',
-          position: { top: '34%', left: '83.5%' }
+          position: { top: '34.5%', left: '83.8%' }
         }
       ],
       'Smart Lighting': [

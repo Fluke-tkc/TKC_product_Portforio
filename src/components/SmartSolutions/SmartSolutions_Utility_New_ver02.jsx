@@ -84,7 +84,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
           className: styles.redDot_IotWrapper,
           // tooltip: 'เซ็นเซอร์ IoT',
           // description: 'ตรวจวัดสภาพแวดล้อมภายในอาคาร',
-          position: { top: '12%', left: '96%' }
+          position: { top: '25%', left: '95%' }
         },
         {
           id: 'data-hub',
@@ -128,7 +128,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
           className: styles.redDot_BuildingAutomationWrapper,
           // tooltip: 'ระบบอาคารอัตโนมัติ',
           // description: 'ควบคุมระบบอาคารอัตโนมัติทั้งหมด',
-          position: { top: '85%', left: '19%' }
+          position: { top: '79%', left: '21%' }
         }
       ],
      

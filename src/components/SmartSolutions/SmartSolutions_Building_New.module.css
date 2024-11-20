@@ -356,7 +356,7 @@
 /* Renewable Energy Integration */
 .redDot_RenewableEnergyIntegrationWrapper {
   top: 10%;
-  left: 60%;
+  left: 59%;
    background-image: url("/image/SolarFarm.png"); 
 
 }
@@ -404,7 +404,7 @@
 
 /* Smart Lighting */
 .redDot_LightingWrapper {
-  top: 57%;
+  top: 60%;
   left: 40%;
    background-image: url("/image/Picture1.svg"); 
 }
@@ -416,7 +416,7 @@
 
 /* Building Automation */
 .redDot_BuildingAutomationWrapper {
-  top: 88%;
+  top: 90%;
   left: 20%;
    background-image: url("/image/SmartBuildingPicture7.svg"); 
 }
@@ -428,7 +428,7 @@
 
 /* Motion Sensors */
 .redDot_MotionSensorsWrapper {
-  top: 82%;
+  top: 88%;
   left: 60%;
   background-image: url("/image/SmartBuildingPicture4.png");
 }
@@ -440,7 +440,7 @@
 
 /* Smart Parking */
 .redDot_SmartParkingWrapper {
-  top: 85%;
+  top: 90%;
   left: 83%;
    background-image: url("/image/SmartBuildingPicture3.svg"); 
 }
