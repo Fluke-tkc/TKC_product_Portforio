@@ -463,15 +463,16 @@
 
 
 
-@media screen and (max-width: 700px) {
+
+@media screen and (max-width: 400px) {
  
   .slider.pausedAnimation {
     transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));
   }
 
   .slider {
-    width: 100px !important;
-    height: 140px !important;
+    width: 800px !important;
+    height: 120px !important;
   } 
   
   .itemTitle {
@@ -577,7 +578,7 @@
     height: 140px;
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
  
   .slider.pausedAnimation {
     transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));

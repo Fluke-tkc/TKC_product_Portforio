@@ -497,7 +497,7 @@ export const Hero_New = () => {
           className={`${styles.slider} ${isDragging ? styles.dragging : ''}`}
           style={{
             transform: `translateX(-50%) perspective(1000px) rotateX(${
-              window.innerWidth <= 767 ? '-16deg' : '0deg'
+              window.innerWidth <= 900 ? '-16deg' : '0deg'
             }) rotateY(${currentRotation}deg)`
           }}
         >
