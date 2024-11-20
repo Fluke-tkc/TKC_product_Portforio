@@ -462,397 +462,185 @@
 
 
 
-/* Portrait Mode Specific */
-@media screen and (orientation: portrait) {
-  .slider {
-    top: 25%;
-  }
 
-  .content {
-    bottom: 15%;
-  }
-
-  .rotationButton {
-    transform: translateY(-100%);
-  }
-}
-
-/* Landscape Mode Specific */
-@media screen and (orientation: landscape) and (max-height: 600px) {
-  .slider {
-    top: 30%;
-    height: 100px;
-  }
-
-  .content {
-    bottom: 5%;
-  }
-
-  .content h1 {
-    font-size: clamp(2rem, 4vw, 10rem);
-    margin-bottom: 1rem;
-  }
-
-  .author {
-    font-size: 12px;
-  }
-
-  .rotationButton {
-    width: 35px;
-    height: 35px;
-  }
-
-  .buttonIcon {
-    width: 16px;
-    height: 16px;
-  }
-}
-@media screen and (max-width: 480px) {
-  .overlayText {
-    font-size: 12px;
-    top: 5px;
-    left: 25%;
+@media screen and (max-width: 700px) {
+ 
+  .slider.pausedAnimation {
+    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));
   }
 
   .slider {
-    width: 60px;
-    height: 90px;
-  }
-
-  .content h1 {
-    font-size: clamp(2rem, 4vw, 12rem);
-  }
-
-  .author {
+    width: 100px !important;
+    height: 140px !important;
+  } 
+  
+  .itemTitle {
     font-size: 14px;
-    max-width: 90%;
-  }
-
-  .rotationButton {
-    width: 35px;
-    height: 35px;
-  }
-
-  .buttonIcon {
-    width: 16px;
-    height: 16px;
-  }
-
-  .tooltipText {
-    width: 180px;
-    padding: 12px;
-  }
-
-  .tooltipText h3 {
-    font-size: 16px;
-  }
-
-  .tooltipText p {
-    font-size: 12px;
-  }
-
-  .modalOverlay {
     padding: 10px;
   }
 
-  .imageModal {
-    width: 95% !important;
-    margin: 0 auto;
-  }
-
-  .serviceCard {
-    margin: 0 5px;
-  }
-
-  .modalContent {
-    padding: 8px;
-  }
-
-  .modalImage {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .closeButton {
-    width: 25px;
-    height: 25px;
-    font-size: 16px;
-    top: 5px;
-    right: 5px;
-  }
-
-  .messageBox {
-    width: 250px;
-    padding: 12px;
-  }
-
-  .messageTitle {
-    font-size: 14px;
-  }
-
-  .messageContent {
-    font-size: 12px;
-  }
-
-  [class*="redDot_"][class*="Wrapper"] {
-    width: 25px;
-    height: 25px;
-  }
-}
-@media screen and (max-width: 767px) {
-  .slider {
-    width: 80px;
-    height: 120px;
-    top: 20%;
-    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(0deg);
-  }
-
-  .itemTitle {
-    font-size: 8px;
-    padding: 8px;
-    line-height: 1.3;
-  }
-
   .item {
-    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(200px);
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(200px ) !important;
   }
   
   .content {
     bottom: 5%;
   }
 
-  .slider.pausedAnimation {
-    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));
-  }
-
   .overlayText {
-    font-size: 12px;
+    font-size: 18px;
     top: 5px;
     left: 25%;
   }
 
-  .topLeftButton {
-    width: 150px;
-    height: 120px;
+  .modalContent {
+    padding: 15px;
   }
 
-  .rotationButton {
+  .imageModal {
+    max-width: 90%;
+    max-height: 85vh;
+  }
+
+  .tooltipText {
+    width: 300px;
+  }
+
+  .messageBox {
+    width: 350px;
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
     width: 40px;
     height: 40px;
   }
 
-  .buttonIcon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .leftButton {
-    left: 10px;
-  }
-
-  .rightButton {
-    right: 10px;
-  }
-
-  .tooltipText {
+  .topLeftButton {
     width: 200px;
-    padding: 15px;
+    height: 140px;
+  }
+}
+@media screen and (max-width: 600px) {
+ 
+  .slider.pausedAnimation {
+    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));
+  }
+
+  .slider {
+    width: 100px !important;
+    height: 140px !important;
+  } 
+  
+  .itemTitle {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(220px ) !important;
+  }
+  
+  .content {
+    bottom: 5%;
+  }
+
+  .overlayText {
+    font-size: 18px;
+    top: 5px;
+    left: 25%;
   }
 
   .modalContent {
-    padding: 10px;
-  }
-
-  .modalOverlay {
-    padding: 10px;
-  }
-
-  .imageModal {
-    width: 95% !important;
-    max-height: 80vh !important;
-    margin: 0 auto;
-  }
-
-  .modalImage {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .servicesSection {
-    padding: 3rem 1rem;
-  }
-
-  .serviceCard {
-    margin: 0 10px;
-  }
-
-  .imageContainer {
-    width: 90%;
-    margin: 0 auto;
-  }
-
-  [class*="redDot_"][class*="Wrapper"] {
-    width: 30px;
-    height: 30px;
-  }
-
-  [class*="redDot_"][class*="Wrapper"]::before,
-  [class*="redDot_"][class*="Wrapper"]::after {
-    width: 140%;
-    height: 140%;
-  }
-
-  .spotlight {
-    width: 60px;
-    height: 60px;
-  }
-
-  .messageBox {
-    width: 280px;
     padding: 15px;
   }
 
-  .messageTitle {
-    font-size: 16px;
-    margin-bottom: 8px;
+  .imageModal {
+    max-width: 90%;
+    max-height: 85vh;
   }
 
-  .messageContent {
+  .tooltipText {
+    width: 300px;
+  }
+
+  .messageBox {
+    width: 350px;
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 40px;
+    height: 40px;
+  }
+
+  .topLeftButton {
+    width: 200px;
+    height: 140px;
+  }
+}
+@media screen and (max-width: 800px) {
+ 
+  .slider.pausedAnimation {
+    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));
+  }
+
+  .slider {
+    width: 160px !important;
+    height: 200px !important;
+  } 
+  
+  .itemTitle {
     font-size: 14px;
-    line-height: 1.4;
+    padding: 10px;
   }
 
-  .buttonContainer {
-    margin-top: 12px;
+  .item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px ) !important;
+  }
+  
+  .content {
+    bottom: 5%;
   }
 
-  .primaryButton {
-    padding: 8px 16px;
-    font-size: 14px;
-    min-width: 80px;
+  .overlayText {
+    font-size: 18px;
+    top: 5px;
+    left: 25%;
   }
 
-  .skipButton {
-    padding: 6px 12px;
-    font-size: 12px;
-    top: 10px;
-    right: 10px;
+  .modalContent {
+    padding: 15px;
   }
 
-  .closeButton {
-    width: 25px;
-    height: 25px;
-    font-size: 16px;
+  .imageModal {
+    max-width: 90%;
+    max-height: 85vh;
   }
 
-  /* Individual messageBox positions for mobile */
-  .messageBoxStep1 { left: 70%; }
-  .messageBoxStep2 { left: 40%; }
-  .messageBoxStep3 { left: 60%; }
-  .messageBoxStep4 { left: 70%; }
-  .messageBoxStep5 { left: 50%; }
-  .messageBoxStep6 { left: 40%; }
-  .messageBoxStep7 { left: 40%; }
-  .messageBoxStep8 { left: 60%; }
-
-  /* Tooltip positions for mobile */
-  .redDot_RenewableEnergyIntegrationWrapper .tooltipText {
-    top: calc(15% + 0px);
-    left: 65%;
-    width: 180px;
+  .tooltipText {
+    width: 300px;
   }
 
-  .redDot_IotWrapper .tooltipText {
-    top: calc(35% + 0px);
-    left: 35%;
-    width: 180px;
+  .messageBox {
+    width: 350px;
   }
 
-  .redDot_AccessControlSystemsWrapper .tooltipText {
-    top: calc(35% + 0px);
-    left: 60%;
-    width: 180px;
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 40px;
+    height: 40px;
   }
 
-  .redDot_SurveillanceSecurityWrapper .tooltipText {
-    top: calc(60% + 0px);
-    left: 70%;
-    width: 180px;
-  }
-
-  .redDot_LightingWrapper .tooltipText {
-    top: calc(60% + 0px);
-    left: 50%;
-    width: 180px;
-  }
-
-  .redDot_BuildingAutomationWrapper .tooltipText {
-    top: calc(85% - 0px);
-    left: 40%;
-    width: 180px;
-  }
-
-  .redDot_MotionSensorsWrapper .tooltipText {
-    top: calc(80% - 0px);
-    left: 40%;
-    width: 180px;
-  }
-
-  .redDot_SmartParkingWrapper .tooltipText {
-    top: calc(82% - 0px);
-    left: 65%;
-    width: 180px;
-  }
-
-  .tooltipText h3 {
-    font-size: 14px;
-    margin-bottom: 6px;
-  }
-
-  .tooltipText p {
-    font-size: 12px;
-    margin-bottom: 12px;
-  }
-
-  .tooltipButton {
-    padding: 6px 16px;
-    font-size: 12px;
-  }
-
-  /* Resize handles for mobile */
-  .resizeHandles {
-    width: 15px;
-    height: 15px;
-  }
-
-  .resizeHandle {
-    width: 8px;
-    height: 8px;
-    bottom: 3px;
-    right: 3px;
-  }
-
-  @keyframes ripple {
-    0% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 0.8;
-    }
-    50% {
-      transform: translate(-50%, -50%) scale(1.5);
-      opacity: 0.4;
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(2);
-      opacity: 0;
-    }
+  .topLeftButton {
+    width: 200px;
+    height: 140px;
   }
 }
 
+
 @media screen and (max-width: 1200px) {
-  /* .slider {
+   .slider {
     width: 160px;
     height: 200px;
-  } */
+  } 
   
   .itemTitle {
     font-size: 14px;
