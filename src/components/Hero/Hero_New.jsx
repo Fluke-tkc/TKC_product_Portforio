@@ -1,24 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
+
 import styles from "./Hero_New.module.css";
 
 const DRAG_SETTINGS = {
-  sensitivity: 0.1,          // ความไวในการลาก
-  momentumMultiplier: 1,     // ตัวคูณความเฉื่อย
-  momentumDampening: 0.97,   // ค่าหน่วงความเฉื่อย
-  minimumVelocity: 0.05,     // ความเร็วขั้นต่ำสำหรับความเฉื่อย
-  rotationSpeed: 2,          // ความเร็วในการหมุนอัตโนมัติ
-  autoRotateDelay: 3000,     // ระยะเวลารอก่อนหมุนอัตโนมัติ
+  sensitivity: 0.1,          
+  momentumMultiplier: 1,     
+  momentumDampening: 0.97,   
+  minimumVelocity: 0.05,     
+  rotationSpeed: 2,          
+  autoRotateDelay: 3000,     
+  continuousRotationSpeed: 1, // Speed for button hold rotation
   clickThreshold: {
-    duration: 200,           // ระยะเวลาสูงสุดที่ถือว่าเป็นการคลิก (ms)
-    movement: 5              // ระยะทางสูงสุดที่ถือว่าเป็นการคลิก (px)
+    duration: 200,           
+    movement: 5              
   },
   wheel: {
-    sensitivity: 0.5,        // ความไวในการหมุนด้วย wheel
-    momentum: true,          // เปิดใช้ momentum สำหรับ wheel
-    momentumDuration: 1000,  // ระยะเวลาของ momentum (ms)
-    debounceTime: 150        // เวลารอก่อนเริ่มหมุนอัตโนมัติหลังใช้ wheel
+    sensitivity: 0.5,        
+    momentum: true,          
+    momentumDuration: 1000,  
+    debounceTime: 150        
   }
 };
 
@@ -79,6 +81,7 @@ const IMAGE_ROUTES = [
     title: 'Cloud Services'
   }
 ];
+
 const SliderItem = ({ 
   image, 
   position, 
@@ -167,6 +170,23 @@ const SliderItem = ({
     </div>
   );
 };
+
+const RotationButton = ({ direction, onPress, onRelease }) => {
+  return (
+    <button
+      className={`${styles.rotationButton} ${direction === 'left' ? styles.leftButton : styles.rightButton}`}
+      onMouseDown={onPress}
+      onMouseUp={onRelease}
+      onMouseLeave={onRelease}
+      onTouchStart={onPress}
+      onTouchEnd={onRelease}
+      aria-label={`Rotate ${direction}`}
+    >
+      {direction === 'left' ? '◀' : '▶'}
+    </button>
+  );
+};
+
 export const Hero_New = () => {
   const navigate = useNavigate();
   
@@ -182,6 +202,9 @@ export const Hero_New = () => {
   const wheelTimeoutRef = useRef(null);
   const wheelMomentumRef = useRef(null);
   const wheelVelocityRef = useRef(0);
+  const buttonRotationFrameRef = useRef(null);
+  const isButtonPressedRef = useRef(false);
+  const buttonDirectionRef = useRef(null);
   
   const dragState = useRef({
     isDragging: false,
@@ -192,10 +215,11 @@ export const Hero_New = () => {
     lastTimestamp: 0,
     isMoved: false
   });
-// ฟังก์ชันที่เรียกใช้งานเมื่อกดปุ่ม
-const handleButtonClick = () => {
-  window.location.href = "https://www.tkc-services.com/th/home";
-};
+
+  const handleButtonClick = () => {
+    window.location.href = "https://www.tkc-services.com/th/home";
+  };
+
   const clearAllTimers = () => {
     if (autoRotateTimeoutRef.current) {
       clearTimeout(autoRotateTimeoutRef.current);
@@ -213,6 +237,42 @@ const handleButtonClick = () => {
       cancelAnimationFrame(animationFrameRef.current);
       animationFrameRef.current = null;
     }
+    if (buttonRotationFrameRef.current) {
+      cancelAnimationFrame(buttonRotationFrameRef.current);
+      buttonRotationFrameRef.current = null;
+    }
+  };
+
+  const handleButtonPress = (direction) => {
+    setIsRotating(false);
+    clearAllTimers();
+    isButtonPressedRef.current = true;
+    buttonDirectionRef.current = direction;
+
+    const rotate = () => {
+      if (isButtonPressedRef.current) {
+        setCurrentRotation(prev => {
+          const delta = direction === 'left' ? 
+            DRAG_SETTINGS.continuousRotationSpeed : 
+            -DRAG_SETTINGS.continuousRotationSpeed;
+          return prev + delta;
+        });
+        buttonRotationFrameRef.current = requestAnimationFrame(rotate);
+      }
+    };
+
+    buttonRotationFrameRef.current = requestAnimationFrame(rotate);
+  };
+
+  const handleButtonRelease = () => {
+    isButtonPressedRef.current = false;
+    buttonDirectionRef.current = null;
+    if (buttonRotationFrameRef.current) {
+      cancelAnimationFrame(buttonRotationFrameRef.current);
+    }
+    autoRotateTimeoutRef.current = setTimeout(() => {
+      setIsRotating(true);
+    }, DRAG_SETTINGS.autoRotateDelay);
   };
 
   const handleWheelMomentum = () => {
@@ -227,7 +287,7 @@ const handleButtonClick = () => {
       return;
     }
   
-    setCurrentRotation(prev => prev + (wheelVelocityRef.current * DRAG_SETTINGS.wheel.sensitivity)); // ลบ modulo ออก
+    setCurrentRotation(prev => prev + (wheelVelocityRef.current * DRAG_SETTINGS.wheel.sensitivity));
   
     wheelVelocityRef.current *= DRAG_SETTINGS.momentumDampening;
     wheelMomentumRef.current = requestAnimationFrame(handleWheelMomentum);
@@ -242,7 +302,7 @@ const handleButtonClick = () => {
     const delta = Math.sign(e.deltaY || e.deltaX);
     const wheelDelta = delta * DRAG_SETTINGS.wheel.sensitivity;
   
-    setCurrentRotation(prev => prev + wheelDelta); // ลบ modulo ออก
+    setCurrentRotation(prev => prev + wheelDelta);
   
     wheelVelocityRef.current = wheelDelta;
   
@@ -257,6 +317,7 @@ const handleButtonClick = () => {
       }, DRAG_SETTINGS.wheel.debounceTime);
     }
   };
+
   const handleDragStart = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -309,9 +370,10 @@ const handleButtonClick = () => {
       dragState.current.lastX = point.clientX;
       dragState.current.lastTimestamp = now;
   
-      setCurrentRotation(prev => prev + (deltaX * DRAG_SETTINGS.sensitivity)); // ลบ modulo ออก
+      setCurrentRotation(prev => prev + (deltaX * DRAG_SETTINGS.sensitivity));
     }
   };
+
   const handleDragEnd = () => {
     if (!dragState.current.isDragging) return;
 
@@ -345,7 +407,7 @@ const handleButtonClick = () => {
 
           setCurrentRotation(prev => {
             const newRotation = prev + (currentVelocity * DRAG_SETTINGS.sensitivity);
-            return newRotation; //%360
+            return newRotation;
           });
 
           currentVelocity *= DRAG_SETTINGS.momentumDampening;
@@ -361,28 +423,6 @@ const handleButtonClick = () => {
     }
   };
 
-  const handleNavigation = (route, event) => {
-    if (!dragState.current.isMoved) {
-      event.stopPropagation();
-      navigate(route);
-    }
-  };
-
-  // Add wheel event listener effect
-  // useEffect(() => {
-  //   const sliderElement = sliderRef.current;
-    
-  //   if (sliderElement) {
-  //     sliderElement.addEventListener('wheel', handleWheel, { passive: false });
-  //   }
-
-  //   return () => {
-  //     if (sliderElement) {
-  //       sliderElement.removeEventListener('wheel', handleWheel);
-  //     }
-  //     clearAllTimers();
-  //   };
-  // }, []);
   useEffect(() => {
     document.addEventListener('wheel', handleWheel, { passive: false });
   
@@ -392,29 +432,22 @@ const handleButtonClick = () => {
     };
   }, []);
 
-  // Auto-rotation effect
   useEffect(() => {
     let lastTimestamp = 0;
 
     const animateRotation = (timestamp) => {
-      if (!lastTimestamp) {
-        lastTimestamp = timestamp;
-      }
-
+      if (!lastTimestamp) lastTimestamp = timestamp;
       const deltaTime = (timestamp - lastTimestamp) / 1000;
       lastTimestamp = timestamp;
 
-      if (isRotating && !dragState.current.isDragging) {
-        setCurrentRotation(prev => {
-          const newRotation = prev + DRAG_SETTINGS.rotationSpeed * deltaTime;
-          return newRotation;//% 360
-        });
+      if (isRotating && !dragState.current.isDragging && !isButtonPressedRef.current) {
+        setCurrentRotation(prev => prev + DRAG_SETTINGS.rotationSpeed * deltaTime);
       }
 
       animationFrameRef.current = requestAnimationFrame(animateRotation);
     };
 
-    if (isRotating && !dragState.current.isDragging) {
+    if (isRotating && !dragState.current.isDragging && !isButtonPressedRef.current) {
       animationFrameRef.current = requestAnimationFrame(animateRotation);
     }
 
@@ -425,18 +458,39 @@ const handleButtonClick = () => {
     };
   }, [isRotating]);
 
-  // Cleanup effect
   useEffect(() => {
     return () => {
       clearAllTimers();
     };
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowLeft') {
+        handleButtonPress('left');
+      } else if (e.key === 'ArrowRight') {
+        handleButtonPress('right');
+      }
+    };
+
+    const handleKeyUp = (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        handleButtonRelease();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
+
   return (
     <div className={styles.slider_section}>
-       <button /* data-content="TKC"*/ className={styles.topLeftButton} onClick={handleButtonClick}>
-        {/* TKC */}
-      </button>
+      <button className={styles.topLeftButton} onClick={handleButtonClick} />
       <div className={styles.banner}>
         <div 
           ref={sliderRef}
@@ -453,13 +507,29 @@ const handleButtonClick = () => {
               image={item.image}
               position={index + 1}
               total={IMAGE_ROUTES.length}
-              onNavigate={(e) => handleNavigation(item.route, e)}
+              onNavigate={(e) => {
+                if (!dragState.current.isMoved) {
+                  e.stopPropagation();
+                  navigate(item.route);
+                }
+              }}
               onDragStart={handleDragStart}
               isDragging={isDragging}
               title={item.title}
             />
           ))}
         </div>
+
+        <RotationButton 
+          direction="left"
+          onPress={() => handleButtonPress('left')}
+          onRelease={handleButtonRelease}
+        />
+        <RotationButton 
+          direction="right"
+          onPress={() => handleButtonPress('right')}
+          onRelease={handleButtonRelease}
+        />
 
         <div className={styles.content}>
           <h1 data-content="SMART SOLUTIONS">SMART SOLUTIONS</h1>
@@ -468,6 +538,7 @@ const handleButtonClick = () => {
           </div>
         </div>
       </div>
+      {/* <Contact /> */}
     </div>
   );
 };

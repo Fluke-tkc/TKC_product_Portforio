@@ -11,40 +11,6 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-.topLeftButton {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 250px; /* กำหนดความกว้างของปุ่ม */
-  height: 160px; /* กำหนดความสูงของปุ่ม */
-  padding: 0;
-  border: none;
-  cursor: pointer;
-  background-color: #ffffff00;
-   background-image: url("/image/TKC_Logo Rev.1.png");  
-  background-size: cover; /* ให้รูปภาพครอบคลุมปุ่ม */
-  background-position: center; /* จัดรูปให้อยู่ตรงกลาง */
-  background-repeat: no-repeat; /* ไม่ให้รูปภาพซ้ำ */
-  
-  /* font-family: 'ICA Rubrik', sans-serif;
-  font-size: clamp(3rem, 4vw, 16rem);
-  line-height: 1em;
-  color: #25283B; */
-  /* position: relative; */
-  /* margin-top: 0rem;
-  font-weight: 700;
-  text-transform: uppercase; */
-  
-  z-index: 1001; 
-}
-.topLeftButton::after {
-  content: attr(data-content); /* ใช้ data-content เป็นข้อความใน ::after */
-  position: absolute;
-  inset: 0; /* เต็มพื้นที่ปุ่ม */
-  -webkit-text-stroke: 2px #d2d2d2; /* ขอบตัวอักษร */
-  color: transparent; /* ทำตัวอักษรโปร่งใส */
-  z-index: -1; /* ซ่อนอยู่ใต้ปุ่ม */
-}
 
 .banner {
   width: 100%;
@@ -53,7 +19,6 @@
   overflow: hidden;
   position: relative;
 }
-
 
 .slider {
   position: absolute;
@@ -121,44 +86,7 @@
   background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.1) 100%);
 }
 
-.content {
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(1400px, 90vw);
-  text-align: center;
-  z-index: 1;
-}
-
-.content h1 {
-  font-family: 'ICA Rubrik', sans-serif;
-  font-size: clamp(3rem, 5vw, 16rem);
-  line-height: 1em;
-  color: #25283B;
-  position: relative;
-  margin-bottom: 2rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.content h1::after {
-  position: absolute;
-  inset: 0;
-  content: attr(data-content);
-  z-index: 2;
-  -webkit-text-stroke: 2px #d2d2d2;
-  color: transparent;
-}
-
-.author {
-  font-family: 'Poppins', sans-serif;
-  color: #f8f9fa;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
+/* Services Section Styles */
 .servicesSection {
   padding: 6rem 2rem;
   background: #f8f9fa;
@@ -193,247 +121,6 @@
 .serviceCard:hover {
   transform: translateY(-10px);
   box-shadow: 0 30px 37px 0 rgba(0, 0, 0, 0.1);
-}
-
-/* Animation Keyframes */
-@keyframes ripple {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(2);
-    opacity: 0.4;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(3);
-    opacity: 0;
-  }
-}
-
-@keyframes pulse {
-  0% { 
-    transform: scale(1); 
-    opacity: 1; 
-  }
-  50% { 
-    transform: scale(1.2); 
-    opacity: 0.7; 
-  }
-  100% { 
-    transform: scale(1); 
-    opacity: 1; 
-  }
-}
-
-/* Media Queries */
-@media screen and (max-width: 1200px) {
-  .slider {
-    width: 160px;
-    height: 200px;
-  }
-  
-  .itemTitle {
-    font-size: 14px;
-    padding: 10px;
-  }
-  
-  .item {
-    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px);
-  }
-  
-  .content {
-    bottom: 5%;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .slider {
-    width: 80px;
-    height: 120px;
-    top: 20%;
-    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(0deg);
-  }
-
-  .itemTitle {
-    font-size: 8px;
-    padding: 8px;
-    line-height: 1.3;
-  }
-
-  .item {
-    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(200px);
-  }
-
-  .slider.pausedAnimation {
-    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));
-  }
-
-  .overlayText {
-    font-size: 12px;
-    top: 5px;
-    left: 25%;
-  }
-  .topLeftButton {
-
-    
-    width: 150px; /* กำหนดความกว้างของปุ่ม */
-    height: 120px; /* กำหนดความสูงของปุ่ม */
-    
-    
-  }
-}
-
-@media (max-width: 480px) {
-  .overlayText {
-    font-size: 12px;
-    top: 5px;
-    left: 25%;
-  }
-
-  .slider {
-    width: 60px;
-    height: 90px;
-  }
-
-  .content h1 {
-    font-size: clamp(2rem, 4vw, 12rem);
-  }
-
-  .author {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .overlayText {
-    font-size: 18px;
-    top: 5px;
-    left: 25%;
-  }
-}
-
-@media (max-width: 1400px) {
-  .overlayText {
-    font-size: 28px;
-    top: 5px;
-    left: 25%;
-  }
-}
-
-/* Touch Device Optimizations */
-@media (hover: none) {
-  .item {
-    touch-action: none;
-  }
-  
-  .slider {
-    touch-action: none;
-  }
-}
-
-/* Focus and Accessibility */
-.item:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6);
-}
-
-.item:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6);
-}
-
-/* Image Styles */
-.imageContainer {
-  width: 100%;
-  max-width: 100px;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.image {
-  width: 100%;
-  height: auto;
-  transition: transform 0.3s ease;
-}
-
-.image:hover {
-  transform: scale(1.05);
-}
-
-/* Title Styles */
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  text-decoration: none;
-  margin-bottom: 15px;
-}
-
-/* Overlay Text Styles */
-.overlayText {
-  position: absolute;
-  top: 20px;
-  left: 20%;
-  transform: translateX(-50%);
-  color: white;
-  font-size: 36px;
-  font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  z-index: 1;
-}
-
-/* Button Styles */
-.buttonContainer {
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  position: relative;
-  padding: 0;
-}
-
-.primaryButton {
-  background-color: #007bff;
-  color: white;
-  padding: clamp(6px, 0.8vw, 12px) clamp(12px, 1.5vw, 24px);
-  border: none;
-  border-radius: clamp(4px, 0.4vw, 8px);
-  font-size: clamp(12px, 1vw, 16px);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: inline-block;
-  text-align: center;
-  min-width: clamp(60px, 8vw, 100px);
-  user-select: none;
-  font-weight: 600;
-}
-
-.primaryButton:hover {
-  background-color: #0056b3;
-  transform: translateY(-1px);
-}
-
-.skipButton {
-  position: absolute;
-  top: clamp(10px, 1.5vw, 20px);
-  right: clamp(10px, 1.5vw, 20px);
-  padding: clamp(6px, 0.8vw, 12px) clamp(12px, 1.5vw, 24px);
-  background-color: white;
-  border: none;
-  border-radius: clamp(4px, 0.4vw, 8px);
-  font-size: clamp(12px, 1vw, 16px);
-  cursor: pointer;
-  font-weight: 500;
-  z-index: 1001;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.skipButton:hover {
-  background-color: #f8f8f8;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Modal Styles */
@@ -492,7 +179,211 @@
   object-fit: contain;
 }
 
-.closeModalButton {
+/* Content Styles */
+.content {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1400px, 90vw);
+  text-align: center;
+  z-index: 1;
+}
+
+.content h1 {
+  font-family: 'ICA Rubrik', sans-serif;
+  font-size: clamp(3rem, 5vw, 16rem);
+  line-height: 1em;
+  color: #25283B;
+  position: relative;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.content h1::after {
+  position: absolute;
+  inset: 0;
+  content: attr(data-content);
+  z-index: 2;
+  -webkit-text-stroke: 2px #d2d2d2;
+  color: transparent;
+}
+
+.author {
+  font-family: 'Poppins', sans-serif;
+  color: #f8f9fa;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Image Container Styles */
+.imageContainer {
+  position: relative;
+  width: 100%;
+  max-width: 100px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.image:hover {
+  transform: scale(1.05);
+}
+
+/* Title Styles */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 15px;
+}
+
+/* Tooltip Styles */
+.tooltipText {
+  visibility: hidden;
+  background-color: white;
+  color: black;
+  text-align: left;
+  padding: 20px;
+  border-radius: 12px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+  width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  white-space: normal;
+  z-index: 1000;
+}
+
+.tooltipText h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+}
+
+.tooltipText p {
+  font-size: 14px;
+  margin: 0 0 16px 0;
+  color: #666;
+}
+
+/* Button Styles */
+.buttonContainer {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  position: relative;
+  padding: 0;
+}
+
+.primaryButton {
+  background-color: #007bff;
+  color: white;
+  padding: clamp(6px, 0.8vw, 12px) clamp(12px, 1.5vw, 24px);
+  border: none;
+  border-radius: clamp(4px, 0.4vw, 8px);
+  font-size: clamp(12px, 1vw, 16px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-block;
+  text-align: center;
+  min-width: clamp(60px, 8vw, 100px);
+  user-select: none;
+  font-weight: 600;
+}
+
+.primaryButton:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+/* Rotation Buttons (New) */
+.rotationButton {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.rotationButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.rotationButton:active {
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-50%) scale(0.95);
+}
+
+.leftButton {
+  left: 20px;
+}
+
+.rightButton {
+  right: 20px;
+}
+
+.buttonIcon {
+  width: 24px;
+  height: 24px;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.rotationButton:hover .buttonIcon {
+  transform: scale(1.2);
+}
+
+/* Top Left Button */
+.topLeftButton {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 250px;
+  height: 160px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background-color: #ffffff00;
+  background-image: url("/image/TKC_Logo Rev.1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1001;
+}
+
+.topLeftButton::after {
+  content: attr(data-content);
+  position: absolute;
+  inset: 0;
+  -webkit-text-stroke: 2px #d2d2d2;
+  color: transparent;
+  z-index: -1;
+}
+
+/* Close Button */
+.closeButton {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -511,7 +402,7 @@
   transition: all 0.2s ease;
 }
 
-.closeModalButton:hover {
+.closeButton:hover {
   background: rgba(0, 0, 0, 0.2);
 }
 
@@ -533,4 +424,644 @@
   height: 10px;
   border-right: 2px solid #666;
   border-bottom: 2px solid #666;
+}
+
+/* Animation Keyframes */
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Media Queries */
+
+
+
+
+/* Portrait Mode Specific */
+@media screen and (orientation: portrait) {
+  .slider {
+    top: 25%;
+  }
+
+  .content {
+    bottom: 15%;
+  }
+
+  .rotationButton {
+    transform: translateY(-100%);
+  }
+}
+
+/* Landscape Mode Specific */
+@media screen and (orientation: landscape) and (max-height: 600px) {
+  .slider {
+    top: 30%;
+    height: 100px;
+  }
+
+  .content {
+    bottom: 5%;
+  }
+
+  .content h1 {
+    font-size: clamp(2rem, 4vw, 10rem);
+    margin-bottom: 1rem;
+  }
+
+  .author {
+    font-size: 12px;
+  }
+
+  .rotationButton {
+    width: 35px;
+    height: 35px;
+  }
+
+  .buttonIcon {
+    width: 16px;
+    height: 16px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .overlayText {
+    font-size: 12px;
+    top: 5px;
+    left: 25%;
+  }
+
+  .slider {
+    width: 60px;
+    height: 90px;
+  }
+
+  .content h1 {
+    font-size: clamp(2rem, 4vw, 12rem);
+  }
+
+  .author {
+    font-size: 14px;
+    max-width: 90%;
+  }
+
+  .rotationButton {
+    width: 35px;
+    height: 35px;
+  }
+
+  .buttonIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .tooltipText {
+    width: 180px;
+    padding: 12px;
+  }
+
+  .tooltipText h3 {
+    font-size: 16px;
+  }
+
+  .tooltipText p {
+    font-size: 12px;
+  }
+
+  .modalOverlay {
+    padding: 10px;
+  }
+
+  .imageModal {
+    width: 95% !important;
+    margin: 0 auto;
+  }
+
+  .serviceCard {
+    margin: 0 5px;
+  }
+
+  .modalContent {
+    padding: 8px;
+  }
+
+  .modalImage {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .closeButton {
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+    top: 5px;
+    right: 5px;
+  }
+
+  .messageBox {
+    width: 250px;
+    padding: 12px;
+  }
+
+  .messageTitle {
+    font-size: 14px;
+  }
+
+  .messageContent {
+    font-size: 12px;
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 25px;
+    height: 25px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .slider {
+    width: 80px;
+    height: 120px;
+    top: 20%;
+    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(0deg);
+  }
+
+  .itemTitle {
+    font-size: 8px;
+    padding: 8px;
+    line-height: 1.3;
+  }
+
+  .item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(200px);
+  }
+  
+  .content {
+    bottom: 5%;
+  }
+
+  .slider.pausedAnimation {
+    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));
+  }
+
+  .overlayText {
+    font-size: 12px;
+    top: 5px;
+    left: 25%;
+  }
+
+  .topLeftButton {
+    width: 150px;
+    height: 120px;
+  }
+
+  .rotationButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .buttonIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .leftButton {
+    left: 10px;
+  }
+
+  .rightButton {
+    right: 10px;
+  }
+
+  .tooltipText {
+    width: 200px;
+    padding: 15px;
+  }
+
+  .modalContent {
+    padding: 10px;
+  }
+
+  .modalOverlay {
+    padding: 10px;
+  }
+
+  .imageModal {
+    width: 95% !important;
+    max-height: 80vh !important;
+    margin: 0 auto;
+  }
+
+  .modalImage {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .servicesSection {
+    padding: 3rem 1rem;
+  }
+
+  .serviceCard {
+    margin: 0 10px;
+  }
+
+  .imageContainer {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 30px;
+    height: 30px;
+  }
+
+  [class*="redDot_"][class*="Wrapper"]::before,
+  [class*="redDot_"][class*="Wrapper"]::after {
+    width: 140%;
+    height: 140%;
+  }
+
+  .spotlight {
+    width: 60px;
+    height: 60px;
+  }
+
+  .messageBox {
+    width: 280px;
+    padding: 15px;
+  }
+
+  .messageTitle {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .messageContent {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .buttonContainer {
+    margin-top: 12px;
+  }
+
+  .primaryButton {
+    padding: 8px 16px;
+    font-size: 14px;
+    min-width: 80px;
+  }
+
+  .skipButton {
+    padding: 6px 12px;
+    font-size: 12px;
+    top: 10px;
+    right: 10px;
+  }
+
+  .closeButton {
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+  }
+
+  /* Individual messageBox positions for mobile */
+  .messageBoxStep1 { left: 70%; }
+  .messageBoxStep2 { left: 40%; }
+  .messageBoxStep3 { left: 60%; }
+  .messageBoxStep4 { left: 70%; }
+  .messageBoxStep5 { left: 50%; }
+  .messageBoxStep6 { left: 40%; }
+  .messageBoxStep7 { left: 40%; }
+  .messageBoxStep8 { left: 60%; }
+
+  /* Tooltip positions for mobile */
+  .redDot_RenewableEnergyIntegrationWrapper .tooltipText {
+    top: calc(15% + 0px);
+    left: 65%;
+    width: 180px;
+  }
+
+  .redDot_IotWrapper .tooltipText {
+    top: calc(35% + 0px);
+    left: 35%;
+    width: 180px;
+  }
+
+  .redDot_AccessControlSystemsWrapper .tooltipText {
+    top: calc(35% + 0px);
+    left: 60%;
+    width: 180px;
+  }
+
+  .redDot_SurveillanceSecurityWrapper .tooltipText {
+    top: calc(60% + 0px);
+    left: 70%;
+    width: 180px;
+  }
+
+  .redDot_LightingWrapper .tooltipText {
+    top: calc(60% + 0px);
+    left: 50%;
+    width: 180px;
+  }
+
+  .redDot_BuildingAutomationWrapper .tooltipText {
+    top: calc(85% - 0px);
+    left: 40%;
+    width: 180px;
+  }
+
+  .redDot_MotionSensorsWrapper .tooltipText {
+    top: calc(80% - 0px);
+    left: 40%;
+    width: 180px;
+  }
+
+  .redDot_SmartParkingWrapper .tooltipText {
+    top: calc(82% - 0px);
+    left: 65%;
+    width: 180px;
+  }
+
+  .tooltipText h3 {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .tooltipText p {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .tooltipButton {
+    padding: 6px 16px;
+    font-size: 12px;
+  }
+
+  /* Resize handles for mobile */
+  .resizeHandles {
+    width: 15px;
+    height: 15px;
+  }
+
+  .resizeHandle {
+    width: 8px;
+    height: 8px;
+    bottom: 3px;
+    right: 3px;
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.4;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(2);
+      opacity: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  /* .slider {
+    width: 160px;
+    height: 200px;
+  } */
+  
+  .itemTitle {
+    font-size: 14px;
+    padding: 10px;
+  }
+  
+  .item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px);
+  }
+  
+  .content {
+    bottom: 5%;
+  }
+
+  .overlayText {
+    font-size: 18px;
+    top: 5px;
+    left: 25%;
+  }
+
+  .modalContent {
+    padding: 15px;
+  }
+
+  .imageModal {
+    max-width: 90%;
+    max-height: 85vh;
+  }
+
+  .tooltipText {
+    width: 300px;
+  }
+
+  .messageBox {
+    width: 350px;
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 40px;
+    height: 40px;
+  }
+
+  .topLeftButton {
+    width: 200px;
+    height: 140px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .overlayText {
+    font-size: 28px;
+    top: 5px;
+    left: 25%;
+  }
+
+  .tooltipText {
+    width: 350px;
+  }
+
+  .slider {
+    width: 180px;
+    height: 220px;
+  }
+
+  .item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(400px);
+  }
+
+  .imageModal {
+    max-width: 95%;
+    max-height: 90vh;
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 45px;
+    height: 45px;
+  }
+}
+/* High Resolution Screens */
+@media screen and (min-width: 1920px) {
+  /* .slider {
+    width: 200px;
+    height: 250px;
+  } */
+
+  .item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(600px);
+  }
+
+  .content h1 {
+    font-size: clamp(4rem, 6vw, 20rem);
+  }
+
+  .author {
+    font-size: 18px;
+    max-width: 800px;
+  }
+
+  .tooltipText {
+    width: 450px;
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 55px;
+    height: 55px;
+  }
+
+  .rotationButton {
+    width: 60px;
+    height: 60px;
+  }
+
+  .buttonIcon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Touch Device Specific */
+@media (hover: none) and (pointer: coarse) {
+  .rotationButton {
+    opacity: 0.8;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .rotationButton:active {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .tooltipText {
+    transition: opacity 0.2s ease;
+  }
+
+  [class*="redDot_"][class*="Wrapper"]:active .tooltipText {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .item {
+    cursor: default;
+  }
+
+  .slider {
+    cursor: default;
+  }
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  .slider {
+    transition: none;
+  }
+
+  .item {
+    transition: none;
+  }
+
+  .rotationButton {
+    transition: opacity 0.2s ease;
+  }
+
+  .buttonIcon {
+    transition: none;
+  }
+
+  [class*="redDot_"][class*="Wrapper"]::before,
+  [class*="redDot_"][class*="Wrapper"]::after {
+    animation: none;
+  }
+
+  @keyframes ripple {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.4;
+    }
+  }
+}
+
+/* Print Styles */
+@media print {
+  .slider_section {
+    height: auto;
+    background: none;
+  }
+
+  .slider {
+    display: none;
+  }
+
+  .content {
+    position: static;
+    transform: none;
+    margin: 2em auto;
+  }
+
+  .content h1 {
+    color: #000;
+  }
+
+  .author {
+    color: #333;
+  }
+
+  .rotationButton {
+    display: none;
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
+    display: none;
+  }
 }
