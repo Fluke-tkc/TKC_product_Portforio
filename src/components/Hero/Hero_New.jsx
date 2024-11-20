@@ -253,8 +253,8 @@ export const Hero_New = () => {
       if (isButtonPressedRef.current) {
         setCurrentRotation(prev => {
           const delta = direction === 'left' ? 
-            DRAG_SETTINGS.continuousRotationSpeed : 
-            -DRAG_SETTINGS.continuousRotationSpeed;
+            -DRAG_SETTINGS.continuousRotationSpeed : 
+            DRAG_SETTINGS.continuousRotationSpeed;
           return prev + delta;
         });
         buttonRotationFrameRef.current = requestAnimationFrame(rotate);
