@@ -246,7 +246,7 @@
 .redDot_DemandResponseWrapper {
   top: 52%;
   left: 60%;
-  background-image: url("/image/SmartBuildingPicture6.svg");
+  /* background-image: url("/image/SmartBuildingPicture6.svg"); */
 }
 
 .redDot_DemandResponseWrapper::before,
@@ -258,7 +258,7 @@
 .redDot_EnergyManagementSystemWrapper {
   top: 52%;
   left: 50%;
-  background-image: url("/image/SmartBuildingPicture6.svg");
+  /* background-image: url("/image/SmartBuildingPicture6.svg"); */
 }
 
 .redDot_EnergyManagementSystemWrapper::before,
@@ -270,7 +270,7 @@
 .redDot_RenewableEnergyWrapper {
   top: 20%;
   left: 95%;
-  background-image: url("/image/SmartBuildingPicture6.svg");
+  /* background-image: url("/image/SmartBuildingPicture6.svg"); */
 }
 
 .redDot_RenewableEnergyWrapper::before,
@@ -293,7 +293,7 @@
 .redDot_MicrogridProsumerWrapper {
   top: 95%;
   left: 80%;
-  background-image: url("/image/SmartBuildingPicture6.svg");
+  /* background-image: url("/image/SmartBuildingPicture6.svg"); */
 }
 
 .redDot_MicrogridProsumerWrapper::before,
@@ -316,7 +316,7 @@
 .redDot_EnergyStorageSystemWrapper {
   top: 85%;
   left: 20%;
-  background-image: url("/image/SmartBuildingPicture6.svg");
+  /* background-image: url("/image/SmartBuildingPicture6.svg"); */
 }
 
 .redDot_EnergyStorageSystemWrapper::before,

@@ -213,8 +213,22 @@ const handleSectionClick_Ver2 = (section) => {
     });
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        navigate("/");
+      }
+    };
 
- 
+    // เพิ่ม event listener สำหรับ keydown
+    document.addEventListener('keydown', handleKeyDown);
+
+    // ลบ event listener เมื่อ component ถูก unmount
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [navigate]
+  )
    // Example handlers for different sections
    const handleLearnMoreClick_smart_BuildingTo_RenewableEnergyIntegration = () => {
     handleSectionClick_Ver2('renewableEnergy', [

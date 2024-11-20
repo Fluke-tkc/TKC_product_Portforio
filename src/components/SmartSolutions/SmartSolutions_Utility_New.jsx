@@ -109,7 +109,22 @@ export const SmartSolutions_Utility_New = () => {
   const handleLearnMoreClick_smart_BuildingTo_EnergyStorageSystem = () => {
     navigate("/smart-solutions-building", { state: { scrollTo: 'Energy Storage System​' } });
   };
- 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        navigate("/");
+      }
+    };
+
+    // เพิ่ม event listener สำหรับ keydown
+    document.addEventListener('keydown', handleKeyDown);
+
+    // ลบ event listener เมื่อ component ถูก unmount
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [navigate]
+  )
 
   return (
     <>

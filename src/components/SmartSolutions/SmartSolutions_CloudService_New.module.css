@@ -357,7 +357,7 @@
 .redDot_RenewableEnergyIntegrationWrapper {
   top: 75%;
   left: 30%;
-   background-image: url("/image/SolarFarm.png"); 
+   /* background-image: url("/image/SolarFarm.png");  */
 
 }
 
@@ -370,7 +370,7 @@
 .redDot_IotWrapper {
   top: 65%;
   left: 80%;
- background-image: url("/image/SmartBuildingPicture6.svg"); 
+ /* background-image: url("/image/SmartBuildingPicture6.svg");  */
 }
 
 .redDot_IotWrapper::before,
@@ -382,7 +382,7 @@
 .redDot_AccessControlSystemsWrapper {
   top: 10%;
   left: 32%;
-   background-image: url("/image/AccessControlSystems.png"); 
+   /* background-image: url("/image/AccessControlSystems.png");  */
 }
 
 .redDot_AccessControlSystemsWrapper::before,
@@ -394,7 +394,7 @@
 .redDot_SurveillanceSecurityWrapper {
   top: 34%;
   left: 86%;
-   background-image: url("/image/SurveillanceSecurity.png"); 
+   /* background-image: url("/image/SurveillanceSecurity.png");  */
 }
 
 .redDot_SurveillanceSecurityWrapper::before,
@@ -406,7 +406,7 @@
 .redDot_LightingWrapper {
   top: 40%;
   left: 13%;
-   background-image: url("/image/Picture1.svg"); 
+   /* background-image: url("/image/Picture1.svg");  */
 }
 
 .redDot_LightingWrapper::before,
@@ -418,7 +418,7 @@
 .redDot_BuildingAutomationWrapper {
   top: 10%;
   left: 77%;
-   background-image: url("/image/SmartBuildingPicture7.svg"); 
+   /* background-image: url("/image/SmartBuildingPicture7.svg");  */
 }
 
 .redDot_BuildingAutomationWrapper::before,
@@ -430,7 +430,7 @@
 .redDot_MotionSensorsWrapper {
   top: 55%;
   left: 68%;
-  background-image: url("/image/SmartBuildingPicture4.png");
+  /* background-image: url("/image/SmartBuildingPicture4.png"); */
 }
 
 .redDot_MotionSensorsWrapper::before,
@@ -442,7 +442,7 @@
 .redDot_SmartParkingWrapper {
   top: 85%;
   left: 83%;
-   background-image: url("/image/SmartBuildingPicture3.svg"); 
+   /* background-image: url("/image/SmartBuildingPicture3.svg");  */
 }
 
 .redDot_SmartParkingWrapper::before,

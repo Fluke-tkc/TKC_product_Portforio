@@ -229,7 +229,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
-        navigate("/");
+        navigate("/smart-solutions-building_new");
       }
     };
 

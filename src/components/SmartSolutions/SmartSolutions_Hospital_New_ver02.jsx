@@ -229,7 +229,7 @@ export const SmartSolutions_Hospital_New_ver02 = () => {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
-        navigate("/");
+        navigate("/smart-solutions-hospital_new");
       }
     };
 

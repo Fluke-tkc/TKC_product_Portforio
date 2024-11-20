@@ -325,6 +325,22 @@ const handleImageResize = (e) => {
   }
 };
 
+useEffect(() => {
+  const handleKeyDown = (event) => {
+    if (event.key === 'Escape') {
+      navigate("/");
+    }
+  };
+
+  // เพิ่ม event listener สำหรับ keydown
+  document.addEventListener('keydown', handleKeyDown);
+
+  // ลบ event listener เมื่อ component ถูก unmount
+  return () => {
+    document.removeEventListener('keydown', handleKeyDown);
+  };
+}, [navigate]
+)
 return (
   <>
     <Navbar />

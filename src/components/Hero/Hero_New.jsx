@@ -26,7 +26,7 @@ const DRAG_SETTINGS = {
 
 const IMAGE_ROUTES = [
   { 
-    image: '/image/smartsolution2.png',
+    image: '/image/smartsolution2.jpg',
     route: '/smart-solutions-building_new',
     title: 'Smart Building'
   },
