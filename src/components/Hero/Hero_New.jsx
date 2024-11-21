@@ -7,7 +7,7 @@ import styles from "./Hero_New.module.css";
 const DRAG_SETTINGS = {
   sensitivity: 0.1,          
   momentumMultiplier: 1,     
-  momentumDampening: 0.97,   
+  momentumDampening: 0.5,   
   minimumVelocity: 0.05,     
   rotationSpeed: 2,          
   autoRotateDelay: 3000,     
@@ -17,7 +17,7 @@ const DRAG_SETTINGS = {
     movement: 5              
   },
   wheel: {
-    sensitivity: 0.5,        
+    sensitivity: 2,        
     momentum: true,          
     momentumDuration: 1000,  
     debounceTime: 150        
