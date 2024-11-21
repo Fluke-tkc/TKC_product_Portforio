@@ -110,7 +110,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
           className: styles.redDot_SurveillanceSecurityWrapper,
           // tooltip: 'ระบบรักษาความปลอดภัย',
           // description: 'กล้องวงจรปิดและระบบเฝ้าระวัง',
-          position: { top: '95%', left: '80%' }
+          position: { top: '90%', left: '80%' }
         }
       ],
       'EV Integration': [

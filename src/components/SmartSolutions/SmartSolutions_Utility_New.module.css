@@ -282,7 +282,7 @@
 .redDot_AdvancedMeteringInfrastructureWrapper {
   top: 65%;
   left: 70%;
-  background-image: url("/image/Smart_UtilityPicture2.svg");
+  /* background-image: url("/image/Smart_UtilityPicture2.svg"); */
 }
 
 .redDot_AdvancedMeteringInfrastructureWrapper::before,
@@ -291,7 +291,7 @@
 }
 
 .redDot_MicrogridProsumerWrapper {
-  top: 95%;
+  top: 90%;
   left: 80%;
   /* background-image: url("/image/SmartBuildingPicture6.svg"); */
 }
@@ -304,7 +304,7 @@
 .redDot_EVIntegrationWrapper {
   top: 65%;
   left: 42%;
-  background-image: url("/image/Smart_UtilityPicture1.svg");
+  /* background-image: url("/image/Smart_UtilityPicture1.svg"); */
 }
 
 .redDot_EVIntegrationWrapper::before,

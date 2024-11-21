@@ -393,7 +393,7 @@
 
 /* Surveillance and Security */
 .redDot_SurveillanceSecurityWrapper {
-  top: 95%;
+  top: 90%;
   left: 80%;
    /* background-image: url("/image/SurveillanceSecurity.png");  */
 }
@@ -405,8 +405,8 @@
 
 /* Smart Lighting */
 .redDot_LightingWrapper {
-  top: 65%;
-  left: 43%;
+  top: 78%;
+  left: 50%;
    /* background-image: url("/image/SolarFarm.png");  */
 }
 

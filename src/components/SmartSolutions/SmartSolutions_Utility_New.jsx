@@ -191,7 +191,7 @@ export const SmartSolutions_Utility_New = () => {
               </button> */}
             </div>
           </div>
-ss
+
           <div 
             id="Advanced Metering Infrastructure (AMI)"
             className={styles.redDot_AdvancedMeteringInfrastructureWrapper} 
