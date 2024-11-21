@@ -97,6 +97,10 @@ const SliderItem = ({
   const clickStartPosRef = useRef({ x: 0, y: 0 });
   const hasMovedRef = useRef(false);
 
+
+ 
+
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -206,6 +210,69 @@ export const Hero_New = () => {
   const isButtonPressedRef = useRef(false);
   const buttonDirectionRef = useRef(null);
   
+  
+  const [isPlaying, setIsPlaying] = useState(true);
+  const audioRef = useRef(new Audio('/audio/CatCoffee.mp3'));
+
+
+   // จัดการเสียงเพลงและเล่นอัตโนมัติ
+  useEffect(() => {
+    const audio = audioRef.current;
+    audio.loop = true;
+    audio.volume = 0.5;
+
+    // เล่นเพลงอัตโนมัติเมื่อโหลดหน้า
+    const playAudio = async () => {
+      try {
+        // หน่วงเวลาเล็กน้อยเพื่อให้ browser พร้อมเล่นเสียง
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        await audio.play();
+        setIsPlaying(true);
+      } catch (error) {
+        console.error('AutoPlay failed:', error);
+        setIsPlaying(false);
+      }
+    };
+
+    playAudio();
+
+    // Event listeners สำหรับตรวจสอบสถานะการเล่น
+    audio.addEventListener('playing', () => setIsPlaying(true));
+    audio.addEventListener('pause', () => setIsPlaying(false));
+    audio.addEventListener('error', (e) => {
+      console.error('Audio error:', e);
+      setIsPlaying(false);
+    });
+
+    return () => {
+      // Cleanup
+      audio.removeEventListener('playing', () => setIsPlaying(true));
+      audio.removeEventListener('pause', () => setIsPlaying(false));
+      audio.removeEventListener('error', () => setIsPlaying(false));
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, []);
+
+  // ปรับปรุงฟังก์ชัน toggleMusic
+  const toggleMusic = async () => {
+    try {
+      const audio = audioRef.current;
+      if (isPlaying) {
+        audio.pause();
+        setIsPlaying(false);
+      } else {
+        await audio.play();
+        setIsPlaying(true);
+      }
+    } catch (error) {
+      console.error('Music toggle failed:', error);
+      setIsPlaying(false);
+    }
+  };
+
+
+
   const dragState = useRef({
     isDragging: false,
     startX: 0,
@@ -490,6 +557,15 @@ export const Hero_New = () => {
 
   return (
     <div className={styles.slider_section}>
+
+      <button 
+        className={styles.musicButton}
+        onClick={toggleMusic}
+        aria-label={isPlaying ? 'Pause music' : 'Play music'}
+      >
+        {isPlaying ? '♫' : '♪'}
+      </button>
+
       <button className={styles.topLeftButton} onClick={handleButtonClick} />
       <div className={styles.banner}>
         <div 
@@ -518,6 +594,8 @@ export const Hero_New = () => {
               title={item.title}
             />
           ))}
+
+          
         </div>
 
         <RotationButton 
@@ -537,6 +615,7 @@ export const Hero_New = () => {
             <p>Transform your business with our innovative smart solutions</p>
           </div>
         </div>
+      
       </div>
       {/* <Contact /> */}
     </div>
