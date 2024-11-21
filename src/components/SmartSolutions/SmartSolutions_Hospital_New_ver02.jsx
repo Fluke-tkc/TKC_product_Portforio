@@ -226,22 +226,29 @@ export const SmartSolutions_Hospital_New_ver02 = () => {
       clearTimeout(timeoutRef.current);
     }
   };
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
-        navigate("/smart-solutions-hospital_new");
+        if (showImageViewer) {
+          // กรณีกำลังดูรูปภาพ ให้ปิด viewer และกลับไปหน้า ver02
+          setShowImageViewer(false);
+          navigate("/smart-solutions-hospital_new_ver02");
+        } else {
+          // กรณีอยู่หน้าหลัก ให้กลับไปหน้า new
+          navigate("/smart-solutions-hospital_new");
+        }
       }
     };
-
+  
     // เพิ่ม event listener สำหรับ keydown
     document.addEventListener('keydown', handleKeyDown);
-
+  
     // ลบ event listener เมื่อ component ถูก unmount
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [navigate]
-  )
+  }, [navigate, showImageViewer]); // เพิ่ม showImageViewer เป็น dependency
   // แสดงผลส่วนหลัก
   return (
     <>
