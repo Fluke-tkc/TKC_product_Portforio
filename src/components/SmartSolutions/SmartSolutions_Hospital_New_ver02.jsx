@@ -95,7 +95,7 @@ export const SmartSolutions_Hospital_New_ver02 = () => {
           className: styles.redDot_IotWrapper,
           // tooltip: 'เซ็นเซอร์ IoT',
           // description: 'ตรวจวัดสภาพแวดล้อมภายในอาคาร',
-          position: { top: '76%', left: '22%' }
+          position: { top: '50%', left: '10%' }
         },
         {
           id: 'data-hub',
