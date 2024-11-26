@@ -212,7 +212,7 @@ export const Hero_New = () => {
   
   
   const [isPlaying, setIsPlaying] = useState(true);
-  const audioRef = useRef(new Audio('/audio/CatCoffee.mp3'));
+  const audioRef = useRef(new Audio('/audio/CatCoffee.aac'));
 
 
    // จัดการเสียงเพลงและเล่นอัตโนมัติ
