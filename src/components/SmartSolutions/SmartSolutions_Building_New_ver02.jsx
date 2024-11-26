@@ -357,12 +357,14 @@ export const SmartSolutions_Building_New_ver02 = () => {
                     <button 
                       className={styles.BacknavButton}
                       onClick={handlePrevious}
+                      type="button"
                     >
                       Back
                     </button>
                     <button 
                       className={styles.NextnavButton}
                       onClick={handleNext}
+                      type="button"
                     >
                       Next
                     </button>

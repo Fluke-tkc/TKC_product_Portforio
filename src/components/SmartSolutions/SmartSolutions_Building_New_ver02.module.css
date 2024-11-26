@@ -716,11 +716,13 @@
 
 .navigationButtons {
   position: absolute;
-  bottom: 20px; /* ติดขอบล่างของภาพ */
+  bottom: 20px;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0 20px; /* ระยะห่างจากขอบซ้ายและขวาของภาพ */
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 4;
 }
 
 .BacknavButton, .NextnavButton {
@@ -732,12 +734,24 @@
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.2s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
+
 .BacknavButton:hover, .NextnavButton:hover {
   background-color: #0056b3;
 }
 
-
+/* Safari-specific fix */
+@media not all and (min-resolution:.001dpcm) { 
+  @supports (-webkit-appearance:none) {
+    .navigationButtons {
+      display: -webkit-flex;
+      -webkit-justify-content: space-between;
+    }
+  }
+}
 /* สำหรับหน้าจอที่เล็กมาก (มือถือ) */
 @media (max-width: 480px) {
   .overlayText {
