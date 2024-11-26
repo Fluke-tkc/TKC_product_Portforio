@@ -9,7 +9,7 @@ const DRAG_SETTINGS = {
   momentumMultiplier: 1,     
   momentumDampening: 0.5,   
   minimumVelocity: 0.05,     
-  rotationSpeed: 2,          
+  rotationSpeed: 0.5,          
   autoRotateDelay: 3000,     
   continuousRotationSpeed: 1, // Speed for button hold rotation
   clickThreshold: {
