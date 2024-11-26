@@ -45,6 +45,7 @@
 
 .slider {
   position: absolute;
+  image-rendering: auto;
   width: 150px; 
   height: 200px;
   top: 20%;

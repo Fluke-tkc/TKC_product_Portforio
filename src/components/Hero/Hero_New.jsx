@@ -211,8 +211,8 @@ export const Hero_New = () => {
   const buttonDirectionRef = useRef(null);
   
   
-  const [isPlaying, setIsPlaying] = useState(true);
-  const audioRef = useRef(new Audio('/audio/CatCoffee.aac'));
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(new Audio('/audio/CatCoffee.mp3'));
 
 
    // จัดการเสียงเพลงและเล่นอัตโนมัติ
@@ -222,19 +222,19 @@ export const Hero_New = () => {
     audio.volume = 0.5;
 
     // เล่นเพลงอัตโนมัติเมื่อโหลดหน้า
-    const playAudio = async () => {
-      try {
-        // หน่วงเวลาเล็กน้อยเพื่อให้ browser พร้อมเล่นเสียง
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        await audio.play();
-        setIsPlaying(true);
-      } catch (error) {
-        console.error('AutoPlay failed:', error);
-        setIsPlaying(false);
-      }
-    };
+    // const playAudio = async () => {
+    //   try {
+    //     // หน่วงเวลาเล็กน้อยเพื่อให้ browser พร้อมเล่นเสียง
+    //     await new Promise(resolve => setTimeout(resolve, 1000));
+    //     await audio.play();
+    //     setIsPlaying(true);
+    //   } catch (error) {
+    //     console.error('AutoPlay failed:', error);
+    //     setIsPlaying(false);
+    //   }
+    // };
 
-    playAudio();
+    // playAudio();
 
     // Event listeners สำหรับตรวจสอบสถานะการเล่น
     audio.addEventListener('playing', () => setIsPlaying(true));
