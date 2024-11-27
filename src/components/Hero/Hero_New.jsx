@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
-
 import styles from "./Hero_New.module.css";
 
 const DRAG_SETTINGS = {
@@ -11,7 +10,7 @@ const DRAG_SETTINGS = {
   minimumVelocity: 0.05,     
   rotationSpeed: 0.5,          
   autoRotateDelay: 3000,     
-  continuousRotationSpeed: 1, // Speed for button hold rotation
+  continuousRotationSpeed: 1,
   clickThreshold: {
     duration: 200,           
     movement: 5              
@@ -92,14 +91,9 @@ const SliderItem = ({
   isDragging 
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  
   const clickStartTimeRef = useRef(0);
   const clickStartPosRef = useRef({ x: 0, y: 0 });
   const hasMovedRef = useRef(false);
-
-
- 
-
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -193,13 +187,11 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
 
 export const Hero_New = () => {
   const navigate = useNavigate();
-  
-  // State management
   const [isDragging, setIsDragging] = useState(false);
   const [isRotating, setIsRotating] = useState(true);
   const [currentRotation, setCurrentRotation] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   
-  // Refs
   const sliderRef = useRef(null);
   const animationFrameRef = useRef(null);
   const autoRotateTimeoutRef = useRef(null);
@@ -209,43 +201,32 @@ export const Hero_New = () => {
   const buttonRotationFrameRef = useRef(null);
   const isButtonPressedRef = useRef(false);
   const buttonDirectionRef = useRef(null);
-  
-  
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef(new Audio('/audio/CatCoffee.aac'));
+  const audioRef = useRef(null);
 
+  const dragState = useRef({
+    isDragging: false,
+    startX: 0,
+    lastX: 0,
+    currentX: 0,
+    velocity: 0,
+    lastTimestamp: 0,
+    isMoved: false
+  });
 
-   // จัดการเสียงเพลงและเล่นอัตโนมัติ
   useEffect(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio('/audio/CatCoffee.mp3');
+      audioRef.current.loop = true;
+      audioRef.current.volume = 0.5;
+    }
+
     const audio = audioRef.current;
-    audio.loop = true;
-    audio.volume = 0.5;
 
-    // เล่นเพลงอัตโนมัติเมื่อโหลดหน้า
-    // const playAudio = async () => {
-    //   try {
-    //     // หน่วงเวลาเล็กน้อยเพื่อให้ browser พร้อมเล่นเสียง
-    //     await new Promise(resolve => setTimeout(resolve, 1000));
-    //     await audio.play();
-    //     setIsPlaying(true);
-    //   } catch (error) {
-    //     console.error('AutoPlay failed:', error);
-    //     setIsPlaying(false);
-    //   }
-    // };
-
-    // playAudio();
-
-    // Event listeners สำหรับตรวจสอบสถานะการเล่น
     audio.addEventListener('playing', () => setIsPlaying(true));
     audio.addEventListener('pause', () => setIsPlaying(false));
-    audio.addEventListener('error', (e) => {
-      console.error('Audio error:', e);
-      setIsPlaying(false);
-    });
+    audio.addEventListener('error', () => setIsPlaying(false));
 
     return () => {
-      // Cleanup
       audio.removeEventListener('playing', () => setIsPlaying(true));
       audio.removeEventListener('pause', () => setIsPlaying(false));
       audio.removeEventListener('error', () => setIsPlaying(false));
@@ -254,10 +235,11 @@ export const Hero_New = () => {
     };
   }, []);
 
-  // ปรับปรุงฟังก์ชัน toggleMusic
   const toggleMusic = async () => {
     try {
       const audio = audioRef.current;
+      if (!audio) return;
+
       if (isPlaying) {
         audio.pause();
         setIsPlaying(false);
@@ -270,18 +252,6 @@ export const Hero_New = () => {
       setIsPlaying(false);
     }
   };
-
-
-
-  const dragState = useRef({
-    isDragging: false,
-    startX: 0,
-    lastX: 0,
-    currentX: 0,
-    velocity: 0,
-    lastTimestamp: 0,
-    isMoved: false
-  });
 
   const handleButtonClick = () => {
     window.location.href = "https://www.tkc-services.com/th/home";
@@ -557,7 +527,6 @@ export const Hero_New = () => {
 
   return (
     <div className={styles.slider_section}>
-
       <button 
         className={styles.musicButton}
         onClick={toggleMusic}
@@ -567,6 +536,7 @@ export const Hero_New = () => {
       </button>
 
       <button className={styles.topLeftButton} onClick={handleButtonClick} />
+      
       <div className={styles.banner}>
         <div 
           ref={sliderRef}
@@ -594,8 +564,6 @@ export const Hero_New = () => {
               title={item.title}
             />
           ))}
-
-          
         </div>
 
         <RotationButton 
@@ -615,9 +583,7 @@ export const Hero_New = () => {
             <p>Transform your business with our innovative smart solutions</p>
           </div>
         </div>
-      
       </div>
-      {/* <Contact /> */}
     </div>
   );
 };
