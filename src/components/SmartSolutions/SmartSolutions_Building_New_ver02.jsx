@@ -11,13 +11,12 @@ export const SmartSolutions_Building_New_ver02 = () => {
   const [showPostTutorialImage, setShowPostTutorialImage] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageViewer, setShowImageViewer] = useState(false);
+  const [isMouseEnterActive, setIsMouseEnterActive] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  
   const containerRef = useRef(null);
   const timeoutRef = useRef(null);
 
-  const [isMouseEnterActive, setIsMouseEnterActive] = useState(false); // เพิ่ม state ใหม่
-
-
-  // ข้อมูลรูปภาพทั้งหมด
   const allImages = [
     {
       id: 'renewableEnergy',
@@ -69,51 +68,38 @@ export const SmartSolutions_Building_New_ver02 = () => {
     }
   ];
 
-  // คอมโพเนนต์สำหรับจัดการจุดสีแดงในแต่ละรูปภาพ
+  // Preload images
+  const preloadImages = () => {
+    allImages.forEach(imageData => {
+      const img = new Image();
+      img.src = imageData.src;
+    });
+  };
+
+  useEffect(() => {
+    preloadImages();
+  }, []);
+
   const DynamicRedDots = ({ currentImage }) => {
     const [activeTooltip, setActiveTooltip] = useState(null);
 
-    // กำหนดตำแหน่งและข้อความสำหรับจุดแต่ละจุดในแต่ละรูปภาพ
     const dotConfigurations = {
       'renewableEnergy': [
         {
-          // id: 'solar-panels',
           className: styles.redDot_RenewableEnergyIntegrationWrapper,
-        //   tooltip: 'แผงโซลาร์เซลล์',
-          // description: 'ระบบผลิตพลังงานแสงอาทิตย์สำหรับอาคาร',
           position: { top: '15%', left: '59%' }
-        },
-        {
-          id: 'energy-storage',
-          className: styles.redDot_EnergyStorageWrapper,
-          // tooltip: 'ระบบกักเก็บพลังงาน',
-          // description: 'แบตเตอรี่สำหรับเก็บพลังงานไว้ใช้ในเวลากลางคืน',
-          position: { top: '45%', left: '90%' }
         }
       ],
       'iot': [
         {
-          id: 'iot-sensors',
           className: styles.redDot_IotWrapper,
-          // tooltip: 'เซ็นเซอร์ IoT',
-          // description: 'ตรวจวัดสภาพแวดล้อมภายในอาคาร',
           position: { top: '25%', left: '84%' }
-        },
-        {
-          id: 'data-hub',
-          className: styles.redDot_DataHubWrapper,
-          // tooltip: 'ศูนย์ข้อมูล',
-          // description: 'ประมวลผลและจัดเก็บข้อมูลจากเซ็นเซอร์',
-          position: { top: '50%', left: '65%' }
         }
       ],
-      
       'Access Control Systems': [
         {
           id: 'access-control',
           className: styles.redDot_AccessControlSystemsWrapper,
-          // tooltip: 'ระบบควบคุมการเข้าออก',
-          // description: 'เทคโนโลยีการควบคุมการเข้าถึงที่ปลอดภัย',
           position: { top: '20%', left: '91.5%' }
         }
       ],
@@ -121,8 +107,6 @@ export const SmartSolutions_Building_New_ver02 = () => {
         {
           id: 'security-system',
           className: styles.redDot_SurveillanceSecurityWrapper,
-          // tooltip: 'ระบบรักษาความปลอดภัย',
-          // description: 'กล้องวงจรปิดและระบบเฝ้าระวัง',
           position: { top: '25%', left: '92%' }
         }
       ],
@@ -130,8 +114,6 @@ export const SmartSolutions_Building_New_ver02 = () => {
         {
           id: 'smart-lighting',
           className: styles.redDot_LightingWrapper,
-          // tooltip: 'ระบบไฟอัจฉริยะ',
-          // description: 'ระบบควบคุมแสงสว่างอัตโนมัติ',
           position: { top: '22%', left: '93.5%' }
         }
       ],
@@ -139,8 +121,6 @@ export const SmartSolutions_Building_New_ver02 = () => {
         {
           id: 'building-automation',
           className: styles.redDot_BuildingAutomationWrapper,
-          // tooltip: 'ระบบอาคารอัตโนมัติ',
-          // description: 'ควบคุมระบบอาคารอัตโนมัติทั้งหมด',
           position: { top: '87%', left: '20%' }
         }
       ],
@@ -148,8 +128,6 @@ export const SmartSolutions_Building_New_ver02 = () => {
         {
           id: 'motion-sensors',
           className: styles.redDot_MotionSensorsWrapper,
-          // tooltip: 'เซ็นเซอร์ตรวจจับการเคลื่อนไหว',
-          // description: 'ระบบตรวจจับการเคลื่อนไหวอัจฉริยะ',
           position: { top: '20%', left: '94%' }
         }
       ],
@@ -157,8 +135,6 @@ export const SmartSolutions_Building_New_ver02 = () => {
         {
           id: 'smart-parking',
           className: styles.redDot_SmartParkingWrapper,
-          // tooltip: 'ระบบจอดรถอัจฉริยะ',
-          // description: 'ระบบบริหารจัดการที่จอดรถอัตโนมัติ',
           position: { top: '82%', left: '85.8%' }
         }
       ]
@@ -170,11 +146,9 @@ export const SmartSolutions_Building_New_ver02 = () => {
       <>
         {dots.map((dot) => (
           <div
-            key={dot.id}
+            key={dot.id || dot.className}
             className={dot.className}
             style={dot.position}
-            //  onMouseEnter={() => setActiveTooltip(dot.id)}
-            // onMouseLeave={() => setActiveTooltip(null)}
           >
             {activeTooltip === dot.id && (
               <div className={styles.tooltipText}>
@@ -188,8 +162,8 @@ export const SmartSolutions_Building_New_ver02 = () => {
     );
   };
 
-  // ฟังก์ชันจัดการการนำทาง
   const handleNext = () => {
+    setImageLoaded(false);
     setCurrentImageIndex((prevIndex) => 
       prevIndex === allImages.length - 1 ? 0 : prevIndex + 1
     );
@@ -199,60 +173,53 @@ export const SmartSolutions_Building_New_ver02 = () => {
     setShowImageViewer(false);
   };
 
-  const handleCloseViewer = () => {
-    setShowImageViewer(false);
-  };
-
   const handleSectionClick = (sectionId) => {
+    setImageLoaded(false);
     const index = allImages.findIndex(img => img.id === sectionId);
     if (index !== -1) {
       setCurrentImageIndex(index);
       setShowImageViewer(true);
     }
   };
+
   const handleMouseEnterWithDelay = (section) => {
     setIsMouseEnterActive(true);
-    // ยกเลิก timeout เดิมถ้ามี
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
     
-    // ตั้ง timeout ใหม่
     timeoutRef.current = setTimeout(() => {
+      setImageLoaded(false);
       handleSectionClick(section);
     }, 3000);
   };
 
-  // ฟังก์ชันจัดการเมื่อเมาส์ออก
   const handleMouseLeave = () => {
     setIsMouseEnterActive(false);
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
   };
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
         if (showImageViewer) {
-          // กรณีกำลังดูรูปภาพ ให้ปิด viewer และกลับไปหน้า ver02
           setShowImageViewer(false);
           navigate("/smart-solutions-building_new_ver02");
         } else {
-          // กรณีอยู่หน้าหลัก ให้กลับไปหน้า new
           navigate("/smart-solutions-building_new");
         }
       }
     };
   
-    // เพิ่ม event listener สำหรับ keydown
     document.addEventListener('keydown', handleKeyDown);
   
-    // ลบ event listener เมื่อ component ถูก unmount
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [navigate, showImageViewer]); // เพิ่ม showImageViewer เป็น dependency
-  // แสดงผลส่วนหลัก
+  }, [navigate, showImageViewer]);
+
   return (
     <>
       <Navbar />
@@ -272,103 +239,96 @@ export const SmartSolutions_Building_New_ver02 = () => {
               ×
             </button>
 
-            {/* Red Dots */}
             <div
-                   id="RenewableEnergy"
-                   className={styles.redDot_RenewableEnergyIntegrationWrapper}
-                   onMouseEnter={() => handleMouseEnterWithDelay("renewableEnergy")}
-                   onMouseLeave={handleMouseLeave}
-                   onClick={() => handleSectionClick("renewableEnergy")} // เพิ่ม onClick กลับมา
-                 
-               />
- 
+              id="RenewableEnergy"
+              className={styles.redDot_RenewableEnergyIntegrationWrapper}
+              onMouseEnter={() => handleMouseEnterWithDelay("renewableEnergy")}
+              onMouseLeave={handleMouseLeave}
+              onClick={() => handleSectionClick("renewableEnergy")}
+            />
+
             <div 
               id="Iot"
               className={styles.redDot_IotWrapper}
-               onClick={() => handleSectionClick('iot')}
-               onMouseEnter={() => handleMouseEnterWithDelay("iot")}
-               onMouseLeave={handleMouseLeave}
-             // onMouseEnter={() => handleSectionClick('iot')}
+              onClick={() => handleSectionClick('iot')}
+              onMouseEnter={() => handleMouseEnterWithDelay("iot")}
+              onMouseLeave={handleMouseLeave}
             />
+
             <div 
               id="Access Control Systems"
               className={styles.redDot_AccessControlSystemsWrapper}
-               onClick={() => handleSectionClick('Access Control Systems')}
-               onMouseEnter={() => handleMouseEnterWithDelay("Access Control Systems")}
-               onMouseLeave={handleMouseLeave}
-            //  onMouseEnter={() => handleSectionClick('Access Control Systems')}
+              onClick={() => handleSectionClick('Access Control Systems')}
+              onMouseEnter={() => handleMouseEnterWithDelay("Access Control Systems")}
+              onMouseLeave={handleMouseLeave}
             />
+
             <div 
               id="Security System"
               className={styles.redDot_SurveillanceSecurityWrapper}
-               onClick={() => handleSectionClick('Security System')}
-               onMouseEnter={() => handleMouseEnterWithDelay("Security System")}
-               onMouseLeave={handleMouseLeave}
-            //  onMouseEnter={() => handleSectionClick('Security System')}
+              onClick={() => handleSectionClick('Security System')}
+              onMouseEnter={() => handleMouseEnterWithDelay("Security System")}
+              onMouseLeave={handleMouseLeave}
             />
-             <div 
+
+            <div 
               id="Smart Lighting"
               className={styles.redDot_LightingWrapper}
-               onClick={() => handleSectionClick('Smart Lighting')}
-               onMouseEnter={() => handleMouseEnterWithDelay("Smart Lighting")}
-               onMouseLeave={handleMouseLeave}
-            //  onMouseEnter={() => handleSectionClick('Smart Lighting')}
+              onClick={() => handleSectionClick('Smart Lighting')}
+              onMouseEnter={() => handleMouseEnterWithDelay("Smart Lighting")}
+              onMouseLeave={handleMouseLeave}
             />
-             <div 
+
+            <div 
               id="Building Automation System"
               className={styles.redDot_BuildingAutomationWrapper}
-               onClick={() => handleSectionClick('Building Automation System')}
-               onMouseEnter={() => handleMouseEnterWithDelay("Building Automation System")}
-               onMouseLeave={handleMouseLeave}
-             // onMouseEnter={() => handleSectionClick('Building Automation System')}
+              onClick={() => handleSectionClick('Building Automation System')}
+              onMouseEnter={() => handleMouseEnterWithDelay("Building Automation System")}
+              onMouseLeave={handleMouseLeave}
             />
-                 <div 
+
+            <div 
               id="Motion Sensors"
               className={styles.redDot_MotionSensorsWrapper}
-               onClick={() => handleSectionClick('Motion Sensors')}
-               onMouseEnter={() => handleMouseEnterWithDelay("Motion Sensors")}
-               onMouseLeave={handleMouseLeave}
-           //   onMouseEnter={() => handleSectionClick('Motion Sensors')}
+              onClick={() => handleSectionClick('Motion Sensors')}
+              onMouseEnter={() => handleMouseEnterWithDelay("Motion Sensors")}
+              onMouseLeave={handleMouseLeave}
             />
-                <div 
+
+            <div 
               id="Smart Parking Management"
               className={styles.redDot_SmartParkingWrapper}
-               onClick={() => handleSectionClick('Smart Parking Management')}
-               onMouseEnter={() => handleMouseEnterWithDelay("Smart Parking Management")}
-               onMouseLeave={handleMouseLeave}
-            //  onMouseEnter={() => handleSectionClick('Smart Parking Management')}
+              onClick={() => handleSectionClick('Smart Parking Management')}
+              onMouseEnter={() => handleMouseEnterWithDelay("Smart Parking Management")}
+              onMouseLeave={handleMouseLeave}
             />
-           
-           
-           
-           
 
-            {/* Image Viewer Overlay */}
             {showImageViewer && (
               <div className={styles.imageViewerOverlay}>
                 <div className={styles.viewerContent}>
                   <img
                     src={allImages[currentImageIndex].src}
                     alt={allImages[currentImageIndex].title}
-                    className={styles.viewerImage}
+                    className={`${styles.viewerImage} ${imageLoaded ? styles.loaded : ''}`}
+                    onLoad={() => setImageLoaded(true)}
                   />
                   <DynamicRedDots currentImage={allImages[currentImageIndex].id} />
-                  <div className={styles.navigationButtons}>
-                    <button 
-                      className={styles.BacknavButton}
-                      onClick={handlePrevious}
-                      type="button"
-                    >
-                      Back
-                    </button>
-                    <button 
-                      className={styles.NextnavButton}
-                      onClick={handleNext}
-                      type="button"
-                    >
-                      Next
-                    </button>
-                  </div>
+                  {imageLoaded && (
+                    <div className={`${styles.navigationButtons} ${imageLoaded ? styles.visible : ''}`}>
+                      <button 
+                        className={styles.BacknavButton}
+                        onClick={handlePrevious}
+                      >
+                        Back
+                      </button>
+                      <button 
+                        className={styles.NextnavButton}
+                        onClick={handleNext}
+                      >
+                        Next
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

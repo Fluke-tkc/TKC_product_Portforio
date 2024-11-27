@@ -10,6 +10,7 @@
   flex-direction: row;
   align-items: center;
 }
+
 .imageContainer {
   position: relative;
   width: 100%;
@@ -17,32 +18,30 @@
 
 .overlayText {
   position: absolute;
-  top: 20px; /* ปรับระยะห่างจากด้านบนได้ตามต้องการ */
+  top: 20px; 
   left: 20%;
   transform: translateX(-50%);
   color: white;
-  font-size: 36px; /* ปรับขนาดตัวอักษรได้ตามต้องการ */
+  font-size: 36px;
   font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* เพิ่มเงาเพื่อให้อ่านง่ายขึ้น */
-  z-index: 1; /* ให้อยู่ด้านบนสุด */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 
 .imageContainer {
   position: relative;
-  width: 80%; /* หรือปรับเป็น 100% ตามความต้องการ */
+  width: 80%;
   height: auto;
-  margin: 0 auto; /* จัดกึ่งกลางแนวนอน */
+  margin: 0 auto;
   display: flex;
-  justify-content: center; /* จัดกึ่งกลางแนวนอน */
-  align-items: center; /* จัดกึ่งกลางแนวตั้ง */
-  
-  
+  justify-content: center;
+  align-items: center;
 }
+
 .imageModal {
   position: absolute;
   background: rgba(255, 255, 255, 0);
   border-radius: 8px;
- 
   z-index: 1000;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -58,7 +57,7 @@
   justify-content: center;
   padding: 20px;
   overflow: auto;
-  background: transparent; /* เพิ่มเพื่อให้แน่ใจว่าไม่มีพื้นหลัง */
+  background: transparent;
 }
 
 .modalImageWrapper {
@@ -68,7 +67,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  background: transparent; /* เพิ่มเพื่อให้แน่ใจว่าไม่มีพื้นหลัง */
+  background: transparent;
 }
 
 .modalImageWrapper:last-child {
@@ -80,6 +79,7 @@
   max-height: 100%;
   object-fit: contain;
 }
+
 .closeModalButton {
   position: absolute;
   top: 10px;
@@ -103,28 +103,23 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
-
 .aboutImage {
   width: 100%;
   height: auto;
   display: block;
-
-  
 }
+
 .aboutItems {
   color: var(--color-text);
   display: flex;
   flex-direction: column;
   gap: 50px;
-  
 }
 
 .aboutItem {
   display: flex;
   flex-direction: row;
-  
   align-items: center;
-  /* border-radius: 20px; */
   list-style: none;
   padding-top: 50px;
   padding-bottom: 50px;
@@ -138,11 +133,7 @@
   background-size: 0 100%;
   background-repeat: no-repeat;
   transition: 0.4s;
-
-
-  
 }
-
 
 .aboutItem:hover {
   background-size: 100% 100%;
@@ -155,12 +146,10 @@
   margin-left: 0px;
   margin-right:0px;
   margin-bottom: 50px;
-
   padding-top: 0px;
   padding-bottom: 0px;
   padding-left: 80px;
   padding-right: 0px;
-  
 }
 
 .aboutItemp {
@@ -169,80 +158,88 @@
   margin-left: 0px;
   margin-right:100px;
   margin-bottom: 0px;
-
   padding-top: 0px;
   padding-bottom: 0px;
   padding-left: 80px;
   padding-right: 0px;
 }
-/* Post-Tutorial Image Styles */
-.postTutorialOverlay {
+
+/* Image Viewer Styles */
+.imageViewerOverlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  
+  z-index: 3;
 }
 
-.postTutorialContent {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.postTutorialImage {
+.viewerImage {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* Ensure the close button is visible on the post-tutorial image */
-.postTutorialContent .closeButton {
+.viewerImage.loaded {
+  opacity: 1;
+}
+
+.navigationButtons {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 24px;
-  cursor: pointer;
+  bottom: 20px;
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1001;
+  justify-content: space-between;
+  padding: 0 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.postTutorialContent .closeButton:hover {
-  background-color: #f0f0f0;
+.navigationButtons.visible {
+  opacity: 1;
 }
+
+.BacknavButton, 
+.NextnavButton {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.BacknavButton:hover, 
+.NextnavButton:hover {
+  background-color: #0056b3;
+}
+
 /* Tooltip Styles */
 .tooltipText {
   visibility: hidden;
   background-color: white;
   color: black;
   text-align: left;
-  padding: 0px;
+  padding: 20px;
   border-radius: 12px;
   position: absolute;
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: opacity 0.3s, visibility 0.3s;
-  width: 00px;
+  width: 400px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   white-space: normal;
   z-index: 0;
 }
+
 .tooltipText h3 {
   font-size: 20px;
   font-weight: bold;
@@ -255,22 +252,7 @@
   color: #666;
 }
 
-.tooltipButton {
-  background-color: #007bff;
-  color: white;
-  padding: 8px 24px;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  float: right;
-}
-
-.tooltipButton:hover {
-  background-color: #0056b3;
-}
-
-/* Individual Tooltip Positions - matching messageBox positions */
+/* Individual Tooltip Positions */
 .redDot_RenewableEnergyIntegrationWrapper .tooltipText {
   top: calc(10% + 0px);
   left: 70%;
@@ -310,13 +292,8 @@
   top: calc(85% - 0px);
   left: 70%;
 }
-/* Update hover effects for all red dots */
-[class*="redDot_"][class*="Wrapper"]:hover .tooltipText {
-  visibility: visible;
-  opacity: 1;
-}
 
-/* Common Red Dot Styles */
+/* Red Dot Common Styles */
 [class*="redDot_"][class*="Wrapper"] {
   position: absolute;
   width: 50px !important;
@@ -330,7 +307,7 @@
   background-position: center center;
 }
 
-/* Ripple Effect for all dots */
+/* Ripple Effect */
 [class*="redDot_"][class*="Wrapper"]::before,
 [class*="redDot_"][class*="Wrapper"]::after {
   content: '';
@@ -353,25 +330,19 @@
 }
 
 /* Individual Red Dot Styles */
-/* Renewable Energy Integration */
 .redDot_RenewableEnergyIntegrationWrapper {
   top: 15%;
   left: 59%;
-  
-   /* background-image: url("/image/SolarFarm.png");  */
 }
 
 .redDot_RenewableEnergyIntegrationWrapper::before,
 .redDot_RenewableEnergyIntegrationWrapper::after {
   background: rgba(255, 255, 255, 0.6);
-  
 }
 
-/* IoT */
 .redDot_IotWrapper {
   top: 32%;
   left: 18.5%;
- /* background-image: url("/image/SmartBuildingPicture1.svg");  */
 }
 
 .redDot_IotWrapper::before,
@@ -379,11 +350,9 @@
   background: rgba(255, 255, 255, 0.6);
 }
 
-/* Access Control Systems */
 .redDot_AccessControlSystemsWrapper {
   top: 33%;
   left: 48.5%;
-   /* background-image: url("/image/AccessControlSystems.png");  */
 }
 
 .redDot_AccessControlSystemsWrapper::before,
@@ -391,11 +360,9 @@
   background: rgba(255, 255, 255, 0.6);
 }
 
-/* Surveillance and Security */
 .redDot_SurveillanceSecurityWrapper {
   top: 58%;
   left: 88%;
-   /* background-image: url("/image/SurveillanceSecurity.png");  */
 }
 
 .redDot_SurveillanceSecurityWrapper::before,
@@ -403,11 +370,9 @@
   background: rgba(255, 255, 255, 0.6);
 }
 
-/* Smart Lighting */
 .redDot_LightingWrapper {
   top: 52%;
   left: 28.2%;
-   /* background-image: url("/image/SolarFarm.png");  */
 }
 
 .redDot_LightingWrapper::before,
@@ -415,11 +380,9 @@
   background: rgba(255, 255, 255, 0.6);
 }
 
-/* Building Automation */
 .redDot_BuildingAutomationWrapper {
   top: 88%;
   left: 20%;
-   /* background-image: url("/image/SmartBuildingPicture7.svg");  */
 }
 
 .redDot_BuildingAutomationWrapper::before,
@@ -427,11 +390,9 @@
   background: rgba(255, 255, 255, 0.6);
 }
 
-/* Motion Sensors */
 .redDot_MotionSensorsWrapper {
   top: 85%;
   left: 59.2%;
-  /* background-image: url("/image/SmartBuildingPicture4.png"); */
 }
 
 .redDot_MotionSensorsWrapper::before,
@@ -439,11 +400,9 @@
   background: rgba(255, 255, 255, 0.6);
 }
 
-/* Smart Parking */
 .redDot_SmartParkingWrapper {
   top: 81.8%;
   left: 85.8%;
-   /* background-image: url("/image/SmartBuildingPicture3.svg");  */
 }
 
 .redDot_SmartParkingWrapper::before,
@@ -452,188 +411,12 @@
 }
 
 /* Hover Effects */
-.redDot_RenewableEnergyIntegrationWrapper:hover .tooltipText,
-.redDot_IotWrapper:hover .tooltipText,
-.redDot_AccessControlSystemsWrapper:hover .tooltipText,
-.redDot_SurveillanceSecurityWrapper:hover .tooltipText,
-.redDot_LightingWrapper:hover .tooltipText,
-.redDot_BuildingAutomationWrapper:hover .tooltipText,
-.redDot_MotionSensorsWrapper:hover .tooltipText,
-.redDot_SmartParkingWrapper:hover .tooltipText {
+[class*="redDot_"][class*="Wrapper"]:hover .tooltipText {
   visibility: visible;
   opacity: 1;
 }
 
-/* Tutorial Elements */
-.tutorialContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-  cursor: pointer;
-}
-
-.messageTitle {
-  font-size: clamp(16px, 1.8vw, 24px);
-  margin-bottom: 0.8vw;
-  font-weight: 600;
-}
-
-.messageContent {
-  font-size: clamp(14px, 1.4vw, 18px);
-  margin-bottom: 0.8vw;
-  line-height: 1.4;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(245, 5, 5, 0);
-}
-
-.messageBox {
-  position: absolute;
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-  transform: translate(-50%, -50%);
-}
-
-.spotlight {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
-}
-
-/* Spotlight Positions */
-.spotlightStep1 { top: 10%; left: 60%; }
-.spotlightStep2 { top: 32%; left: 18%; }
-.spotlightStep3 { top: 30%; left: 52%; }
-.spotlightStep4 { top: 57%; left: 91%; }
-.spotlightStep5 { top: 57%; left: 40%; }
-.spotlightStep6 { top: 88%; left: 20%; }
-.spotlightStep7 { top: 82%; left: 60%; }
-.spotlightStep8 { top: 85%; left: 83%; }
-
-/* Message Box Positions */
-.messageBoxStep1 { top: calc(10% + 0px); left: 75%; }
-.messageBoxStep2 { top: calc(32% + 0px); left: 30%; }
-.messageBoxStep3 { top: calc(30% + 0px); left: 65%; }
-.messageBoxStep4 { top: calc(57% + 0px); left: 78%; }
-.messageBoxStep5 { top: calc(57% + 0px); left: 55%; }
-.messageBoxStep6 { top: calc(88% - 0px); left: 35%; }
-.messageBoxStep7 { top: calc(82% - 0px); left: 45%; }
-.messageBoxStep8 { top: calc(85% - 0px); left: 70%; }
-
-/* Button Styles */
-.buttonContainer {
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  position: relative;
-  padding: 0;
-}
-
-.primaryButton {
-  background-color: #007bff;
-  color: white;
-  padding: clamp(6px, 0.8vw, 12px) clamp(12px, 1.5vw, 24px);
-  border: none;
-  border-radius: clamp(4px, 0.4vw, 8px);
-  font-size: clamp(12px, 1vw, 16px);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: inline-block;
-  text-align: center;
-  min-width: clamp(60px, 8vw, 100px);
-  user-select: none;
-  font-weight: 600;
-}
-
-.primaryButton:hover {
-  background-color: #0056b3;
-  transform: translateY(-1px);
-}
-
-.skipButton {
-  position: absolute;
-  top: clamp(10px, 1.5vw, 20px);
-  right: clamp(10px, 1.5vw, 20px);
-  padding: clamp(6px, 0.8vw, 12px) clamp(12px, 1.5vw, 24px);
-  background-color: white;
-  border: none;
-  border-radius: clamp(4px, 0.4vw, 8px);
-  font-size: clamp(12px, 1vw, 16px);
-  cursor: pointer;
-  font-weight: 500;
-  z-index: 1001;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.skipButton:hover {
-  background-color: #f8f8f8;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* Animations */
-@keyframes ripple {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(2);
-    opacity: 0.4;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(3);
-    opacity: 0;
-  }
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.7; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-
-
-
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #333;
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-.closeButton:hover {
-  background-color: rgba(255, 255, 255, 1);
-}
+/* Close Button Styles */
 .closeButton {
   position: absolute;
   top: 10px;
@@ -658,6 +441,7 @@
   background-color: rgba(255, 255, 255, 1);
 }
 
+/* Resize Handle Styles */
 .resizeHandles {
   position: absolute;
   bottom: 0;
@@ -668,7 +452,7 @@
 }
 
 .resizeHandle {
-  position: absolute;
+  position: relative;
   bottom: 5px;
   right: 5px;
   width: 10px;
@@ -677,107 +461,102 @@
   border-bottom: 2px solid #666;
 }
 
-.resizeHandles {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 20px;
-  height: 20px;
-  cursor: se-resize;
+/* Animations */
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
 }
 
-.resizeHandle {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  width: 10px;
-  height: 10px;
-  border-right: 2px solid #666;
-  border-bottom: 2px solid #666;
-}
-.imageViewerOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 3;
+/* Safari Specific Fixes */
+@supports (-webkit-touch-callout: none) {
+  .viewerImage,
+  .navigationButtons {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
 }
 
-.viewerImage {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
+/* Media Queries */
+@media (max-width: 400px) {
+  .slider.pausedAnimation {
+    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));
+  }
 
-.navigationButtons {
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 20px;
-  box-sizing: border-box;
-  z-index: 4;
-}
-
-.BacknavButton, .NextnavButton {
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s;
-
-}
-
-.BacknavButton:hover, .NextnavButton:hover {
-  background-color: #0056b3;
-}
-
-
-/* สำหรับหน้าจอที่เล็กมาก (มือถือ) */
-@media (max-width: 480px) {
-  .overlayText {
-    font-size: 12px; /* ขนาดเล็กลงสำหรับมือถือ */
-    top: 5px; /* ระยะห่างน้อยลง */
-    left: 25%
+  .itemTitle {
+    font-size: 14px;
+    padding: 10px;
   }
   
-}
-/* สำหรับหน้าจอที่เล็กมาก (มือถือ) */
-@media (max-width: 1200px) {
+  .content {
+    bottom: 5%;
+  }
+
   .overlayText {
-    font-size: 18px; /* ขนาดเล็กลงสำหรับมือถือ */
-    top: 5px; /* ระยะห่างน้อยลง */
-    left: 25%
+    font-size: 18px;
+    top: 5px;
+    left: 25%;
+  }
+
+  .modalContent {
+    padding: 15px;
+  }
+
+  .imageModal {
+    max-width: 90%;
+    max-height: 85vh;
+  }
+
+  .tooltipText {
+    width: 300px;
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 40px;
+    height: 40px;
   }
 }
 
-@media (max-width: 1400px) {
-  .overlayText {
-    font-size: 28px; /* ขนาดเล็กลงสำหรับมือถือ */
-    top: 5px; /* ระยะห่างน้อยลง */
-    left: 25%
-  }
-}/* Responsive Design */
 @media screen and (max-width: 768px) {
   .overlayText {
-    font-size: 1px; /* ลดขนาดตัวอักษร */
-    top: 10px; /* ลดระยะห่างจากด้านบน */
+    font-size: 1px;
+    top: 10px;
     left: 25%;
   }
-  .imageModal {
-    width: 90vw !important;
-    height: auto !important;
-    max-height: 80vh;
+
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 30px !important;
+    height: 30px !important;
   }
+
+  .tooltipText {
+    width: 200px;
+  }
+
+  .navigationButtons {
+    padding: 0 10px;
+  }
+
+  .BacknavButton, 
+  .NextnavButton {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
   [class*="redDot_"][class*="Wrapper"] {
     position: absolute;
     width: 30px !important;
@@ -789,75 +568,6 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-  }
-  
-
-  
-  /* Rest of your existing styles */
-.tooltipText h3 {
-font-size: 20px;
-font-weight: bold;
-margin: 0 0 8px 0;
-}
-
-.tooltipText p {
-font-size: 14px;
-margin: 0 0 16px 0;
-color: #666;
-}
-
-.tooltipButton {
-background-color: #007bff;
-color: white;
-padding: 8px 24px;
-border: none;
-border-radius: 4px;
-font-size: 14px;
-cursor: pointer;
-float: right;
-}
-
-.tooltipButton:hover {
-background-color: #0056b3;
-}
-
-/* Hover effects */
-[class*="redDot_"][class*="Wrapper"]:hover .tooltipText {
-visibility: visible;
-opacity: 1;
-}
-  [class*="redDot_"][class*="Wrapper"] {
-    width: 30px;
-    height: 30px;
-  }
-
-  .spotlight {
-    width: 40px;
-    height: 40px;
-  }cd
-
-  .messageBox {
-    width: 250px;
-    padding: 15px;
-  }
-
-  .messageBoxStep1 {
-    left: 80%;
-  }
-
-  .messageBoxStep2,
-  .messageBoxStep3,
-  .messageBoxStep4,
-  .messageBoxStep5,
-  .messageBoxStep6,
-  .messageBoxStep7,
-  .messageBoxStep8 {
-    left: 50%;
-  }
-
-  .tooltipText {
-    width: 200px;
-    padding: 15px;
   }
 
   @keyframes ripple {
@@ -873,5 +583,241 @@ opacity: 1;
       transform: translate(-50%, -50%) scale(2);
       opacity: 0;
     }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .slider.pausedAnimation {
+    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));
+  }
+
+  .slider {
+    width: 160px !important;
+    height: 200px !important;
+  } 
+  
+  .itemTitle {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px ) !important;
+  }
+  
+  .content {
+    bottom: 5%;
+  }
+
+  .overlayText {
+    font-size: 18px;
+    top: 5px;
+    left: 25%;
+  }
+
+  .modalContent {
+    padding: 15px;
+  }
+
+  .imageModal {
+    max-width: 90%;
+    max-height: 85vh;
+  }
+
+  .tooltipText {
+    width: 300px;
+  }
+
+  .messageBox {
+    width: 350px;
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 40px;
+    height: 40px;
+  }
+
+  .topLeftButton {
+    width: 200px;
+    height: 140px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .slider {
+    width: 160px;
+    height: 200px;
+  } 
+  
+  .itemTitle {
+    font-size: 14px;
+    padding: 10px;
+  }
+  
+  .item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px);
+  }
+  
+  .content {
+    bottom: 5%;
+  }
+
+  .overlayText {
+    font-size: 18px;
+    top: 5px;
+    left: 25%;
+  }
+
+  .modalContent {
+    padding: 15px;
+  }
+
+  .imageModal {
+    max-width: 90%;
+    max-height: 85vh;
+  }
+
+  .tooltipText {
+    width: 300px;
+  }
+
+  .messageBox {
+    width: 350px;
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 40px;
+    height: 40px;
+  }
+
+  .topLeftButton {
+    width: 200px;
+    height: 140px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .overlayText {
+    font-size: 28px;
+    top: 5px;
+    left: 25%;
+  }
+
+  .tooltipText {
+    width: 350px;
+  }
+
+  .slider {
+    width: 180px;
+    height: 220px;
+  }
+
+  .item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(400px);
+  }
+
+  .imageModal {
+    max-width: 95%;
+    max-height: 90vh;
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+/* Touch Device Specific */
+@media (hover: none) and (pointer: coarse) {
+  .rotationButton {
+    opacity: 0.8;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .rotationButton:active {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .tooltipText {
+    transition: opacity 0.2s ease;
+  }
+
+  [class*="redDot_"][class*="Wrapper"]:active .tooltipText {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .item {
+    cursor: default;
+  }
+
+  .slider {
+    cursor: default;
+  }
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  .slider {
+    transition: none;
+  }
+
+  .item {
+    transition: none;
+  }
+
+  .rotationButton {
+    transition: opacity 0.2s ease;
+  }
+
+  .buttonIcon {
+    transition: none;
+  }
+
+  [class*="redDot_"][class*="Wrapper"]::before,
+  [class*="redDot_"][class*="Wrapper"]::after {
+    animation: none;
+  }
+
+  @keyframes ripple {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.4;
+    }
+  }
+}
+
+/* Print Styles */
+@media print {
+  .slider_section {
+    height: auto;
+    background: none;
+  }
+
+  .slider {
+    display: none;
+  }
+
+  .content {
+    position: static;
+    transform: none;
+    margin: 2em auto;
+  }
+
+  .content h1 {
+    color: #000;
+  }
+
+  .author {
+    color: #333;
+  }
+
+  .rotationButton {
+    display: none;
+  }
+
+  [class*="redDot_"][class*="Wrapper"] {
+    display: none;
   }
 }
