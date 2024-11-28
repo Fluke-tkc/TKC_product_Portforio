@@ -93,42 +93,42 @@ export const SmartSolutions_Building_New_ver02 = () => {
       'iot': [
         {
           className: styles.redDot_IotWrapper,
-          position: { top: '25%', left: '84%' }
+          position: { top: '35%', left: '18.5%' }
         }
       ],
       'Access Control Systems': [
         {
           id: 'access-control',
           className: styles.redDot_AccessControlSystemsWrapper,
-          position: { top: '20%', left: '91.5%' }
+          position: { top: '20%', left: '93.5%' }
         }
       ],
       'Security System': [
         {
           id: 'security-system',
           className: styles.redDot_SurveillanceSecurityWrapper,
-          position: { top: '25%', left: '92%' }
+          position: { top: '83%', left: '51.8%' }
         }
       ],
       'Smart Lighting': [
         {
           id: 'smart-lighting',
           className: styles.redDot_LightingWrapper,
-          position: { top: '22%', left: '93.5%' }
+          position: { top: '58%', left: '88%' }
         }
       ],
       'Building Automation System': [
         {
           id: 'building-automation',
           className: styles.redDot_BuildingAutomationWrapper,
-          position: { top: '87%', left: '20%' }
+          position: { top: '20%', left: '66%' }
         }
       ],
       'Motion Sensors': [
         {
           id: 'motion-sensors',
           className: styles.redDot_MotionSensorsWrapper,
-          position: { top: '20%', left: '94%' }
+          position: { top: '88%', left: '20%' }
         }
       ],
       'Smart Parking Management': [
