@@ -11,153 +11,119 @@ export const SmartSolutions_CloudService_New_ver02 = () => {
   const [showPostTutorialImage, setShowPostTutorialImage] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageViewer, setShowImageViewer] = useState(false);
+  const [isMouseEnterActive, setIsMouseEnterActive] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  
   const containerRef = useRef(null);
   const timeoutRef = useRef(null);
 
-  
-  // ข้อมูลรูปภาพทั้งหมด
   const allImages = [
     {
-      id: 'renewableEnergy',
+      id: 'Cloud Data Center Solutions',
       src: "/image/CS_1.png",
-      title: "Renewable Energy Integration",
-      description: "Sustainable energy solutions for smart buildings"
+      title: "Cloud Data Center Solutions",
+      description: "Cloud Solutions"
     },
     {
-      id: 'iot',
+      id: 'Big Data Analytics on Cloud',
       src: "/image/CS_2.png",
-      title: "IoT Systems",
+      title: "Big Data Analytics on Cloud",
       description: "Connected devices and smart sensors"
     },
     {
-      id: 'Access Control Systems',
+      id: 'AI Services on Cloud',
       src: "/image/CS_3.png",
-      title: "Access Control",
-      description: "Advanced security access management"
+      title: "AI Services on Cloud",
+      description: "AI Services"
     },
     {
-      id: 'Security System',
+      id: 'Security and Compliance Services',
       src: "/image/CS_4.png",
-      title: "Security Systems",
-      description: "Comprehensive building security"
+      title: "Security and Compliance Services",
+      description: "Security Services"
     },
     {
-      id: 'Smart Lighting',
+      id: 'ERP on Cloud',
       src: "/image/CS_5.png",
-      title: "Smart Lighting",
-      description: "Intelligent lighting control"
+      title: "ERP on Cloud",
+      description: "Systems seamlessly integrate business functions"
     },
     {
-      id: 'Building Automation System',
+      id: 'Cloud-Based Call Center / Chatbot',
       src: "/image/CS_6.png",
-      title: "Building Automation",
-      description: "Automated building management"
+      title: "Cloud-Based Call Center / Chatbot",
+      description: "Support Center"
     },
     {
-      id: 'Motion Sensors',
+      id: 'Blockchain',
       src: "/image/CS_7.png",
-      title: "Motion Detection",
-      description: "Advanced motion sensing technology"
-    },
-    // {
-    //   id: 'Smart Parking Management',
-    //   src: "/image/P_8.png",
-    //   title: "Smart Parking",
-    //   description: "Intelligent parking solutions"
-    // }
+      title: "Blockchain",
+      description: "Decentralized data storage"
+    }
   ];
 
-  // คอมโพเนนต์สำหรับจัดการจุดสีแดงในแต่ละรูปภาพ
+  // Preload images
+  const preloadImages = () => {
+    allImages.forEach(imageData => {
+      const img = new Image();
+      img.src = imageData.src;
+    });
+  };
+
+  useEffect(() => {
+    preloadImages();
+  }, []);
+
   const DynamicRedDots = ({ currentImage }) => {
     const [activeTooltip, setActiveTooltip] = useState(null);
 
-    // กำหนดตำแหน่งและข้อความสำหรับจุดแต่ละจุดในแต่ละรูปภาพ
     const dotConfigurations = {
-      'renewableEnergy': [
+      'Cloud Data Center Solutions': [
         {
-          // id: 'solar-panels',
           className: styles.redDot_RenewableEnergyIntegrationWrapper,
-        //   tooltip: 'แผงโซลาร์เซลล์',
-          // description: 'ระบบผลิตพลังงานแสงอาทิตย์สำหรับอาคาร',
-          position: { top: '70%', left: '30%' }
-        },
-        {
-          id: 'energy-storage',
-          className: styles.redDot_EnergyStorageWrapper,
-          // tooltip: 'ระบบกักเก็บพลังงาน',
-          // description: 'แบตเตอรี่สำหรับเก็บพลังงานไว้ใช้ในเวลากลางคืน',
-          position: { top: '0%', left: '0%' }
+          position: { top: '75%', left: '30%' }
         }
       ],
-      'iot': [
+      'Big Data Analytics on Cloud': [
         {
-          id: 'iot-sensors',
+          id: 'big-data',
           className: styles.redDot_IotWrapper,
-          // tooltip: 'เซ็นเซอร์ IoT',
-          // description: 'ตรวจวัดสภาพแวดล้อมภายในอาคาร',
           position: { top: '65%', left: '80%' }
-        },
-        {
-          id: 'data-hub',
-          className: styles.redDot_DataHubWrapper,
-          // tooltip: 'ศูนย์ข้อมูล',
-          // description: 'ประมวลผลและจัดเก็บข้อมูลจากเซ็นเซอร์',
-          position: { top: '0%', left: '0%' }
         }
       ],
-      
-      'Access Control Systems': [
+      'AI Services on Cloud': [
         {
-          id: 'access-control',
+          id: 'ai-services',
           className: styles.redDot_AccessControlSystemsWrapper,
-          // tooltip: 'ระบบควบคุมการเข้าออก',
-          // description: 'เทคโนโลยีการควบคุมการเข้าถึงที่ปลอดภัย',
-          position: { top: '12%', left: '34%' }
+          position: { top: '10%', left: '33%' }
         }
       ],
-      'Security System': [
+      'Security and Compliance Services': [
         {
-          id: 'security-system',
+          id: 'security-services',
           className: styles.redDot_SurveillanceSecurityWrapper,
-          // tooltip: 'ระบบรักษาความปลอดภัย',
-          // description: 'กล้องวงจรปิดและระบบเฝ้าระวัง',
-          position: { top: '34.5%', left: '83.8%' }
+          position: { top: '35%', left: '83.8%' }
         }
       ],
-      'Smart Lighting': [
+      'ERP on Cloud': [
         {
-          id: 'smart-lighting',
+          id: 'erp-cloud',
           className: styles.redDot_LightingWrapper,
-          // tooltip: 'ระบบไฟอัจฉริยะ',
-          // description: 'ระบบควบคุมแสงสว่างอัตโนมัติ',
-          position: { top: '39%', left: '15%' }
+          position: { top: '40%', left: '15%' }
         }
       ],
-      'Building Automation System': [
+      'Cloud-Based Call Center / Chatbot': [
         {
-          id: 'building-automation',
+          id: 'call-center',
           className: styles.redDot_BuildingAutomationWrapper,
-          // tooltip: 'ระบบอาคารอัตโนมัติ',
-          // description: 'ควบคุมระบบอาคารอัตโนมัติทั้งหมด',
-          position: { top: '10%', left: '75.5%' }
+          position: { top: '10%', left: '75.3%' }
         }
       ],
-      'Motion Sensors': [
+      'Blockchain': [
         {
-          id: 'motion-sensors',
+          id: 'blockchain',
           className: styles.redDot_MotionSensorsWrapper,
-          // tooltip: 'เซ็นเซอร์ตรวจจับการเคลื่อนไหว',
-          // description: 'ระบบตรวจจับการเคลื่อนไหวอัจฉริยะ',
           position: { top: '55%', left: '67%' }
-        }
-      ],
-      'Smart Parking Management': [
-        {
-          id: 'smart-parking',
-          className: styles.redDot_SmartParkingWrapper,
-          // tooltip: 'ระบบจอดรถอัจฉริยะ',
-          // description: 'ระบบบริหารจัดการที่จอดรถอัตโนมัติ',
-          position: { top: '0%', left: '0%' }
         }
       ]
     };
@@ -168,11 +134,9 @@ export const SmartSolutions_CloudService_New_ver02 = () => {
       <>
         {dots.map((dot) => (
           <div
-            key={dot.id}
+            key={dot.id || dot.className}
             className={dot.className}
             style={dot.position}
-            //  onMouseEnter={() => setActiveTooltip(dot.id)}
-            // onMouseLeave={() => setActiveTooltip(null)}
           >
             {activeTooltip === dot.id && (
               <div className={styles.tooltipText}>
@@ -186,8 +150,8 @@ export const SmartSolutions_CloudService_New_ver02 = () => {
     );
   };
 
-  // ฟังก์ชันจัดการการนำทาง
   const handleNext = () => {
+    setImageLoaded(false);
     setCurrentImageIndex((prevIndex) => 
       prevIndex === allImages.length - 1 ? 0 : prevIndex + 1
     );
@@ -197,60 +161,53 @@ export const SmartSolutions_CloudService_New_ver02 = () => {
     setShowImageViewer(false);
   };
 
-  const handleCloseViewer = () => {
-    setShowImageViewer(false);
-  };
-
   const handleSectionClick = (sectionId) => {
+    setImageLoaded(false);
     const index = allImages.findIndex(img => img.id === sectionId);
     if (index !== -1) {
       setCurrentImageIndex(index);
       setShowImageViewer(true);
     }
   };
+
   const handleMouseEnterWithDelay = (section) => {
-    // ยกเลิก timeout เดิมถ้ามี
+    setIsMouseEnterActive(true);
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
     
-    // ตั้ง timeout ใหม่
     timeoutRef.current = setTimeout(() => {
+      setImageLoaded(false);
       handleSectionClick(section);
     }, 3000);
   };
 
-  // ฟังก์ชันจัดการเมื่อเมาส์ออก
   const handleMouseLeave = () => {
+    setIsMouseEnterActive(false);
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
   };
-  
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
         if (showImageViewer) {
-          // กรณีกำลังดูรูปภาพ ให้ปิด viewer และกลับไปหน้า ver02
           setShowImageViewer(false);
           navigate("/smart-solutions-cloudservice_new_ver02");
         } else {
-          // กรณีอยู่หน้าหลัก ให้กลับไปหน้า new
           navigate("/smart-solutions-cloudservice_new");
         }
       }
     };
   
-    // เพิ่ม event listener สำหรับ keydown
     document.addEventListener('keydown', handleKeyDown);
   
-    // ลบ event listener เมื่อ component ถูก unmount
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [navigate, showImageViewer]); // เพิ่ม showImageViewer เป็น dependency
-  
-  // แสดงผลส่วนหลัก
+  }, [navigate, showImageViewer]);
+
   return (
     <>
       <Navbar />
@@ -270,101 +227,88 @@ export const SmartSolutions_CloudService_New_ver02 = () => {
               ×
             </button>
 
-            {/* Red Dots */}
             <div
-                   id="RenewableEnergy"
-                   className={styles.redDot_RenewableEnergyIntegrationWrapper}
-                   onMouseEnter={() => handleMouseEnterWithDelay("renewableEnergy")}
-                   onMouseLeave={handleMouseLeave}
-                   onClick={() => handleSectionClick("renewableEnergy")} // เพิ่ม onClick กลับมา
-                 
-               />
+              id="Cloud Data Center Solutions"
+              className={styles.redDot_RenewableEnergyIntegrationWrapper}
+              onMouseEnter={() => handleMouseEnterWithDelay("Cloud Data Center Solutions")}
+              onMouseLeave={handleMouseLeave}
+              onClick={() => handleSectionClick("Cloud Data Center Solutions")}
+            />
  
             <div 
-              id="Iot"
+              id="Big Data Analytics on Cloud"
               className={styles.redDot_IotWrapper}
-               onClick={() => handleSectionClick('iot')}
-               onMouseEnter={() => handleMouseEnterWithDelay("iot")}
-               onMouseLeave={handleMouseLeave}
-             // onMouseEnter={() => handleSectionClick('iot')}
+              onClick={() => handleSectionClick('Big Data Analytics on Cloud')}
+              onMouseEnter={() => handleMouseEnterWithDelay("Big Data Analytics on Cloud")}
+              onMouseLeave={handleMouseLeave}
             />
-            <div 
-              id="Access Control Systems"
-              className={styles.redDot_AccessControlSystemsWrapper}
-               onClick={() => handleSectionClick('Access Control Systems')}
-               onMouseEnter={() => handleMouseEnterWithDelay("Access Control Systems")}
-               onMouseLeave={handleMouseLeave}
-            //  onMouseEnter={() => handleSectionClick('Access Control Systems')}
-            />
-            <div 
-              id="Security System"
-              className={styles.redDot_SurveillanceSecurityWrapper}
-               onClick={() => handleSectionClick('Security System')}
-               onMouseEnter={() => handleMouseEnterWithDelay("Security System")}
-               onMouseLeave={handleMouseLeave}
-            //  onMouseEnter={() => handleSectionClick('Security System')}
-            />
-             <div 
-              id="Smart Lighting"
-              className={styles.redDot_LightingWrapper}
-               onClick={() => handleSectionClick('Smart Lighting')}
-               onMouseEnter={() => handleMouseEnterWithDelay("Smart Lighting")}
-               onMouseLeave={handleMouseLeave}
-            //  onMouseEnter={() => handleSectionClick('Smart Lighting')}
-            />
-             <div 
-              id="Building Automation System"
-              className={styles.redDot_BuildingAutomationWrapper}
-               onClick={() => handleSectionClick('Building Automation System')}
-               onMouseEnter={() => handleMouseEnterWithDelay("Building Automation System")}
-               onMouseLeave={handleMouseLeave}
-             // onMouseEnter={() => handleSectionClick('Building Automation System')}
-            />
-                 <div 
-              id="Motion Sensors"
-              className={styles.redDot_MotionSensorsWrapper}
-               onClick={() => handleSectionClick('Motion Sensors')}
-               onMouseEnter={() => handleMouseEnterWithDelay("Motion Sensors")}
-               onMouseLeave={handleMouseLeave}
-           //   onMouseEnter={() => handleSectionClick('Motion Sensors')}
-            />
-                <div 
-              id="Smart Parking Management"
-              className={styles.redDot_SmartParkingWrapper}
-               onClick={() => handleSectionClick('Smart Parking Management')}
-               onMouseEnter={() => handleMouseEnterWithDelay("Smart Parking Management")}
-               onMouseLeave={handleMouseLeave}
-            //  onMouseEnter={() => handleSectionClick('Smart Parking Management')}
-            />
-           
-           
-           
-           
 
-            {/* Image Viewer Overlay */}
+            <div 
+              id="AI Services on Cloud"
+              className={styles.redDot_AccessControlSystemsWrapper}
+              onClick={() => handleSectionClick('AI Services on Cloud')}
+              onMouseEnter={() => handleMouseEnterWithDelay("AI Services on Cloud")}
+              onMouseLeave={handleMouseLeave}
+            />
+
+            <div 
+              id="Security and Compliance Services"
+              className={styles.redDot_SurveillanceSecurityWrapper}
+              onClick={() => handleSectionClick('Security and Compliance Services')}
+              onMouseEnter={() => handleMouseEnterWithDelay("Security and Compliance Services")}
+              onMouseLeave={handleMouseLeave}
+            />
+
+            <div 
+              id="ERP on Cloud"
+              className={styles.redDot_LightingWrapper}
+              onClick={() => handleSectionClick('ERP on Cloud')}
+              onMouseEnter={() => handleMouseEnterWithDelay("ERP on Cloud")}
+              onMouseLeave={handleMouseLeave}
+            />
+
+            <div 
+              id="Cloud-Based Call Center / Chatbot"
+              className={styles.redDot_BuildingAutomationWrapper}
+              onClick={() => handleSectionClick('Cloud-Based Call Center / Chatbot')}
+              onMouseEnter={() => handleMouseEnterWithDelay("Cloud-Based Call Center / Chatbot")}
+              onMouseLeave={handleMouseLeave}
+            />
+
+            <div 
+              id="Blockchain"
+              className={styles.redDot_MotionSensorsWrapper}
+              onClick={() => handleSectionClick('Blockchain')}
+              onMouseEnter={() => handleMouseEnterWithDelay("Blockchain")}
+              onMouseLeave={handleMouseLeave}
+            />
+
             {showImageViewer && (
               <div className={styles.imageViewerOverlay}>
                 <div className={styles.viewerContent}>
                   <img
                     src={allImages[currentImageIndex].src}
                     alt={allImages[currentImageIndex].title}
-                    className={styles.viewerImage}
+                    className={`${styles.viewerImage} ${imageLoaded ? styles.loaded : ''}`}
+                    onLoad={() => setImageLoaded(true)}
                   />
                   <DynamicRedDots currentImage={allImages[currentImageIndex].id} />
-                  <div className={styles.navigationButtons}>
-                    <button 
-                      className={styles.BacknavButton}
-                      onClick={handlePrevious}
-                    >
-                      Back
-                    </button>
-                    <button 
-                      className={styles.NextnavButton}
-                      onClick={handleNext}
-                    >
-                      Next
-                    </button>
-                  </div>
+                  {imageLoaded && (
+                    <div className={`${styles.navigationButtons} ${imageLoaded ? styles.visible : ''}`}>
+                      <button 
+                        className={styles.BacknavButton}
+                        onClick={handlePrevious}
+                      >
+                        Back
+                      </button>
+                      <button 
+                        className={styles.NextnavButton}
+                        onClick={handleNext}
+                      >
+                        Next
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
