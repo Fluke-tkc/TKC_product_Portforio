@@ -31,35 +31,38 @@ export const SmartSolutions_Building_New_ver02 = () => {
       description: "Connected devices and smart sensors"
     },
     {
-      id: 'Access Control Systems',
-      src: "/image/P_3.png",
-      title: "Access Control",
-      description: "Advanced security access management"
-    },
-    {
-      id: 'Security System',
-      src: "/image/P_4.png",
-      title: "Security Systems",
-      description: "Comprehensive building security"
-    },
-    {
       id: 'Smart Lighting',
-      src: "/image/P_5.png",
+      src: "/image/P_3.png",
       title: "Smart Lighting",
       description: "Intelligent lighting control"
     },
     {
-      id: 'Building Automation System',
-      src: "/image/P_6.png",
-      title: "Building Automation",
-      description: "Automated building management"
-    },
-    {
       id: 'Motion Sensors',
-      src: "/image/P_7.png",
+      src: "/image/P_4.png",
       title: "Motion Detection",
       description: "Advanced motion sensing technology"
     },
+    {
+      id: 'Security System',
+      src: "/image/P_5.png",
+      title: "Security Systems",
+      description: "Comprehensive building security"
+    },
+    {
+      id: 'Access Control Systems',
+      src: "/image/P_6.png",
+      title: "Access Control",
+      description: "Advanced security access management"
+    },
+ 
+  
+    {
+      id: 'Building Automation System',
+      src: "/image/P_7.png",
+      title: "Building Automation",
+      description: "Automated building management"
+    },
+ 
     {
       id: 'Smart Parking Management',
       src: "/image/P_8.png",
@@ -96,41 +99,44 @@ export const SmartSolutions_Building_New_ver02 = () => {
           position: { top: '35%', left: '18.5%' }
         }
       ],
-      'Access Control Systems': [
-        {
-          id: 'access-control',
-          className: styles.redDot_AccessControlSystemsWrapper,
-          position: { top: '20%', left: '93.5%' }
-        }
-      ],
-      'Security System': [
-        {
-          id: 'security-system',
-          className: styles.redDot_SurveillanceSecurityWrapper,
-          position: { top: '83%', left: '51.8%' }
-        }
-      ],
       'Smart Lighting': [
         {
           id: 'smart-lighting',
           className: styles.redDot_LightingWrapper,
-          position: { top: '58%', left: '88%' }
-        }
-      ],
-      'Building Automation System': [
-        {
-          id: 'building-automation',
-          className: styles.redDot_BuildingAutomationWrapper,
-          position: { top: '20%', left: '66%' }
+          position: { top: '20%', left: '93.5%' }
         }
       ],
       'Motion Sensors': [
         {
           id: 'motion-sensors',
           className: styles.redDot_MotionSensorsWrapper,
+          position: { top: '83%', left: '51.8%' }
+        }
+      ],
+      'Security System': [
+        {
+          id: 'security-system',
+          className: styles.redDot_SurveillanceSecurityWrapper,
+          position: { top: '57%', left: '88%' }
+        }
+      ],
+      'Access Control Systems': [
+        {
+          id: 'access-control',
+          className: styles.redDot_AccessControlSystemsWrapper,
+          position: { top: '20%', left: '66%' }
+        }
+      ],
+     
+      
+      'Building Automation System': [
+        {
+          id: 'building-automation',
+          className: styles.redDot_BuildingAutomationWrapper,
           position: { top: '88%', left: '20%' }
         }
       ],
+      
       'Smart Parking Management': [
         {
           id: 'smart-parking',
