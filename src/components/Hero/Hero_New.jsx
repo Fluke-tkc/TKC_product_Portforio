@@ -51,7 +51,7 @@ const IMAGE_ROUTES = [
   },
   { 
     image: '/image/SmartSolutions_Organized_Communication_Cables.jpg',
-    route: '/communication-solutions',
+    route: '/smart-solutions-organized_communication_cables_new',
     title: 'SmartOrganized Communication Cables'
   },
   { 
