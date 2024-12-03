@@ -374,8 +374,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Renewable Energy Integration</h3>
-                  <p>Integrating Renewable Energy into Building Systems</p>
+                  <h3>Underground cables</h3>
+                  <p>Designed for burial, are used in infrastructure projects like electrical, communication, and internet systems.</p>
                 </div> 
               </div>
 
@@ -387,8 +387,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>IoT</h3>
-                  <p>Connected Devices and Sensors for Data Collection and Transmission</p>
+                  <h3>Organize Communication Cable</h3>
+                  <p>Manage and optimize the performance of communication systems in networks or technological infrastructures.​</p>
                 </div> 
               </div>
 
