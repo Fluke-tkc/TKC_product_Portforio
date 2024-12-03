@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import styles from "./Hero_New.module.css";
+import { useLanguage } from "../../contexts/LanguageContext";
+import { imageMapping } from "../../contexts/LanguageContext";
 
 const DRAG_SETTINGS = {
   sensitivity: 0.1,          
@@ -25,56 +27,67 @@ const DRAG_SETTINGS = {
 
 const IMAGE_ROUTES = [
   { 
+    id: 'smartsolution2',
     image: '/image/smartsolution2.jpg',
     route: '/smart-solutions-building_new',
     title: 'Smart Building'
   },
   { 
+    id: 'smartHospital',
     image: '/image/Smart Hospital.jpg',
     route: '/smart-solutions-hospital_new',
     title: 'Smart Hospital'
   },
   { 
+    id: 'smartPlatform',
     image: '/image/Samrt Platform.jpg',
     route: '/smart-platform',
     title: 'Smart Platform'
   },
   { 
+    id: 'smartLearning',
     image: '/image/Smart Learning.jpg',
     route: '/smart-learning',
     title: 'Smart Learning'
   },
   { 
+    id: 'smartLogistics',
     image: '/image/Smart Logistics.jpg',
     route: '/smart-logistics',
     title: 'Smart Logistics'
   },
   { 
+    id: 'organizedCommunication',
     image: '/image/SmartSolutions_Organized_Communication_Cables.jpg',
     route: '/smart-solutions-organized_communication_cables_new',
     title: 'SmartOrganized Communication Cables'
   },
   { 
+    id: 'autonomous',
     image: '/image/Autonomous Solution.jpg',
     route: '/smart-solutions_autonomous_new',
     title: 'Autonomous'
   },
   { 
+    id: 'cyberSecurity',
     image: '/image/Cyber Security.jpg',
     route: '/cyber-security',
     title: 'Cyber Security'
   },
   { 
+    id: 'smartFarming',
     image: '/image/Smart Farming.jpg',
     route: '/smart-farming',
     title: 'Smart Farming'
   },
   { 
+    id: 'smartUtility',
     image: '/image/Smart Utility (Grid).jpg',
     route: '/smart-solutions-utility_new',
     title: 'Smart Utility'
   },
   { 
+    id: 'cloudServices',
     image: '/image/Cloud Services.jpg',
     route: '/smart-solutions-cloudservice_new',
     title: 'Cloud Services'
@@ -82,6 +95,7 @@ const IMAGE_ROUTES = [
 ];
 
 const SliderItem = ({ 
+  id,
   image, 
   position, 
   total, 
@@ -94,6 +108,7 @@ const SliderItem = ({
   const clickStartTimeRef = useRef(0);
   const clickStartPosRef = useRef({ x: 0, y: 0 });
   const hasMovedRef = useRef(false);
+  const { language } = useLanguage();
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -155,7 +170,7 @@ const SliderItem = ({
       aria-label={`Navigate to ${title}`}
     >
       <img 
-        src={image} 
+        src={imageMapping[language][id]}
         alt={title}
         draggable={false}
         className={styles.itemImage}
@@ -191,6 +206,7 @@ export const Hero_New = () => {
   const [isRotating, setIsRotating] = useState(true);
   const [currentRotation, setCurrentRotation] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const { language, toggleLanguage } = useLanguage();
   
   const sliderRef = useRef(null);
   const animationFrameRef = useRef(null);
@@ -535,6 +551,22 @@ export const Hero_New = () => {
         {isPlaying ? '♫' : '♪'}
       </button>
 
+      {/* เพิ่มปุ่มเปลี่ยนภาษา */}
+      <div className={styles.languageTabs}>
+      <button 
+        className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
+        onClick={() => language !== 'en' && toggleLanguage()}
+      >
+        EN
+      </button>
+      <button 
+        className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
+        onClick={() => language !== 'th' && toggleLanguage()}
+      >
+        TH
+      </button>
+    </div>
+
       <button className={styles.topLeftButton} onClick={handleButtonClick} />
       
       <div className={styles.banner}>
@@ -550,6 +582,7 @@ export const Hero_New = () => {
           {IMAGE_ROUTES.map((item, index) => (
             <SliderItem 
               key={index}
+              id={item.id}
               image={item.image}
               position={index + 1}
               total={IMAGE_ROUTES.length}
@@ -580,7 +613,7 @@ export const Hero_New = () => {
         <div className={styles.content}>
           <h1 data-content="SMART SOLUTIONS">SMART SOLUTIONS</h1>
           <div className={styles.author}>
-            <p>Transform your business with our innovative smart solutions</p>
+            <p>Digital Communication Solutions</p>
           </div>
         </div>
       </div>

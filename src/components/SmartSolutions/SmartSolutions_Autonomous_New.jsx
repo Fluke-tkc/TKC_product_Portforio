@@ -3,6 +3,8 @@ import styles from "./SmartSolutions_Autonomous_New.module.css";
 import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
+import { useLanguage } from "../../contexts/LanguageContext";
+import { imageMapping } from "../../contexts/LanguageContext";
 export const SmartSolutions_Autonomous_New = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);

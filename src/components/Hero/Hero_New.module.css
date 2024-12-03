@@ -20,7 +20,56 @@
   backdrop-filter: blur(5px);
   transition: all 0.3s ease;
 }
+.languageSwitcher {
+  position: fixed;
+  top: 20px;
+  right: 80px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+.languageTabs {
+  position: fixed;
+  top: 20px;
+  right: 80px;
+  display: flex;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
 
+.languageTab {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.languageTab:hover:not(.active) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.languageTab.active {
+  background: #007bff;
+  color: white;
+}
+.languageSwitcher:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
 .musicButton:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: scale(1.1);
