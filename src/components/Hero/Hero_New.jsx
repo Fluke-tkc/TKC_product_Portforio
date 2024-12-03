@@ -56,7 +56,7 @@ const IMAGE_ROUTES = [
   },
   { 
     image: '/image/Autonomous Solution.jpg',
-    route: '/autonomous-solutions',
+    route: '/smart-solutions_autonomous_new',
     title: 'Autonomous'
   },
   { 
