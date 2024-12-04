@@ -231,7 +231,7 @@ export const Hero_New = () => {
 
   useEffect(() => {
     if (!audioRef.current) {
-      audioRef.current = new Audio('/audio/CatCoffee.mp3');
+      audioRef.current = new Audio('/audio/christmas_spirit.mp3');
       audioRef.current.loop = true;
       audioRef.current.volume = 0.5;
     }
