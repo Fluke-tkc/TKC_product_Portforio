@@ -1,0 +1,36 @@
+/* snowEffect.module.css */
+
+/* Container สำหรับเอฟเฟคหิมะ */
+.snowContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none; /* ห้ามรับเหตุการณ์การคลิก */
+    z-index: 1; /* ครอบคลุมหน้าเว็บ */
+    overflow: hidden;
+  }
+  
+  /* หิมะ */
+  .snow {
+    position: absolute;
+    background-image: url('/image/snow.png'); /* ใส่ path ของรูปหิมะ */
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: snowfall linear infinite;
+  }
+  
+ /* อนิเมชันหิมะตก */
+ @keyframes snowfall {
+    0% {
+      transform: translate(0, -20vh) rotate(0deg); /* เริ่มต้น */
+    }
+    50% {
+      transform: translate(5vw, 50vh) rotate(180deg); /* เคลื่อนไปด้านข้าง */
+    }
+    100% {
+      transform: translate(-5vw, 100vh) rotate(360deg); /* ตกถึงล่าง */
+    }
+  }
+  

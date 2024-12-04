@@ -17,7 +17,40 @@ export const imageMapping = {
     cyberSecurity: '/image/Cyber Security.jpg',
     smartFarming: '/image/Smart Farming.jpg',
     smartUtility: '/image/Smart Utility (Grid).jpg',
-    cloudServices: '/image/Cloud Services.jpg'
+    cloudServices: '/image/Cloud Services.jpg',
+
+    smart_solutions_building_new00:'/image/SmartBuilding.png',
+    smart_solutions_building_new_ver2_0:'/image/SmatOverlay.png',
+    renewableEnergy:'/image/P_1.png',
+    iot:'/image/P_2.png',
+    SmartLighting:'/image/P_3.png',
+    MotionSensors:'/image/P_4.png',
+    SecuritySystem:'/image/P_5.png',
+    AccessControlSystems:'/image/P_6.png',
+    BuildingAutomationSystem:'/image/P_7.png',
+    SmartParkingManagement:'/image/P_8.png',
+
+   //utility
+   smart_solutions_utility_new_00:'/image/SmartBuilding.png',
+   smart_solutions_utility_new_ver2_0:'/image/SmartBuilding.png',
+   DemandResponse_DR_EnergyManagementSystem_EMS:'/image/P_1.png',
+   Renewable_Energy:'/image/P_2.png',
+   Advanced_Mtering_Infrastructure_AMI:'/image/P_3.png',
+   Microgrid_Prosumer:'/image/P_4.png',
+   EV_Integration:'/image/P_5.png',
+   EnergyStorageSysem:'/image/P_6.png',
+
+    //Hospital
+    smart_solutions_Hospital_new_00:'/image/SmartBuilding.png',
+    smart_solutions_Hospital_new_ver2_0:'/image/SmartBuilding.png',
+    Data_Analytics_Knowledge_Management:'/image/P_1.png',
+    Smart_Diagnostics_Treatment:'/image/P_2.png',
+    Smart_Safety_Convenience_Systems:'/image/P_3.png',
+    Integrated_Patient_Care:'/image/P_4.png',
+    Smart_Hospital_Management_Systems:'/image/P_5.png',
+   
+
+
   },
   th: {
     // รูปภาษาไทย Hero
@@ -31,7 +64,18 @@ export const imageMapping = {
     cyberSecurity: '/image/Cyber Security.jpg',
     smartFarming: '/image/Smart Farming.jpg',
     smartUtility: '/image/Smart Utility (Grid).jpg',
-    cloudServices: '/image/Cloud Services.jpg'
+    cloudServices: '/image/Cloud Services.jpg',
+
+    smart_solutions_building_new00:'/image/SmartBuilding_TH.png',
+    smart_solutions_building_new_ver2_0:'/image/SmatOverlay_TH.png',
+    renewableEnergy:'/image/BD_TH_1.png',
+    iot:'/image/BD_TH_2.png',
+    SmartLighting:'/image/BD_TH_3.png',
+    MotionSensors:'/image/BD_TH_4.png',
+    SecuritySystem:'/image/BD_TH_5.png',
+    AccessControlSystems:'/image/BD_TH_6.png',
+    BuildingAutomationSystem:'/image/BD_TH_7.png',
+    SmartParkingManagement:'/image/BD_TH_8.png',
   }
 };
 
@@ -39,13 +83,43 @@ export const imageMapping = {
 export const textContent = {
   en: {
     title: "SMART SOLUTIONS",
-    subtitle: "Transform your business with our innovative smart solutions",
+    subtitle: "Digital Communication Solutions",
     // เพิ่มข้อความอื่นๆ ตามต้องการ
+    card1:"Smart Building",
+    card2:"Smart Hospital",
+    card3:"Smart Platform",
+    card4:"Smart Learning",
+    card5:"Smart Logistics",
+    card6:"SmartOrganized Communication Cables",
+    card7:"Autonomous",
+    card8:"Cyber Security",
+    card9:"Smart Farming",
+    card10:"Smart Utility",
+    card11:"Cloud Services",
+    
+  
+
+
   },
   th: {
     title: "โซลูชั่นอัจฉริยะ",
-    subtitle: "ยกระดับธุรกิจของคุณด้วยโซลูชั่นนวัตกรรมอัจฉริยะของเรา",
+    subtitle: "โซลูชั่นการสื่อสารดิจิทัล",
+
+    card1:"ตึกอัจฉริยะ",
+    card2:"โรงพยาบาลอัจฉริยะ",
+    card3:"แพลตฟอร์มอัจฉริยะ",
+    card4:"การเรียนรู้อย่างชาญฉลาด",
+    card5:"สมาร์ทโลจิสติกส์",
+    card6:"สายเคเบิลสื่อสารอัจฉริยะ",
+    card7:"อัตโนมัติ",
+    card8:"ความปลอดภัยทางไซเบอร์",
+    card9:"ฟาร์มอัจฉริยะ",
+    card10:"ยูทิลิตี้อัจฉริยะ",
+    card11:"บริการคลาวด์",
     // เพิ่มข้อความอื่นๆ ตามต้องการ
+
+
+
   }
 };
 

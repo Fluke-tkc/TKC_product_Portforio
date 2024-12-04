@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./SmartSolutions_Building_New_ver02.module.css";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export const SmartSolutions_Building_New_ver02 = () => {
   const navigate = useNavigate();
@@ -16,41 +17,42 @@ export const SmartSolutions_Building_New_ver02 = () => {
   
   const containerRef = useRef(null);
   const timeoutRef = useRef(null);
-
+  const { images } = useLanguage();
+  
   const allImages = [
     {
       id: 'renewableEnergy',
-      src: "/image/P_1.png",
+      src: images.renewableEnergy,
       title: "Renewable Energy Integration",
       description: "Sustainable energy solutions for smart buildings"
     },
     {
       id: 'iot',
-      src: "/image/P_2.png",
+      src: images.iot,
       title: "IoT Systems",
       description: "Connected devices and smart sensors"
     },
     {
       id: 'Smart Lighting',
-      src: "/image/P_3.png",
+      src: images.SmartLighting,
       title: "Smart Lighting",
       description: "Intelligent lighting control"
     },
     {
       id: 'Motion Sensors',
-      src: "/image/P_4.png",
+      src: images.MotionSensors,
       title: "Motion Detection",
       description: "Advanced motion sensing technology"
     },
     {
       id: 'Security System',
-      src: "/image/P_5.png",
+      src: images.SecuritySystem,
       title: "Security Systems",
       description: "Comprehensive building security"
     },
     {
       id: 'Access Control Systems',
-      src: "/image/P_6.png",
+      src: images.AccessControlSystems,
       title: "Access Control",
       description: "Advanced security access management"
     },
@@ -58,14 +60,14 @@ export const SmartSolutions_Building_New_ver02 = () => {
   
     {
       id: 'Building Automation System',
-      src: "/image/P_7.png",
+      src: images.BuildingAutomationSystem,
       title: "Building Automation",
       description: "Automated building management"
     },
  
     {
       id: 'Smart Parking Management',
-      src: "/image/P_8.png",
+      src: images.SmartParkingManagement,
       title: "Smart Parking",
       description: "Intelligent parking solutions"
     }
@@ -233,7 +235,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
         <div className={styles.content}>
           <div className={styles.imageContainer}>
             <img
-              src="/image/SmatOverlay.png"
+              src={images.smart_solutions_building_new_ver2_0}
               alt="Smart Building"
               className={styles.aboutImage}
             />

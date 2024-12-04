@@ -4,7 +4,7 @@ import { Contact } from "../Contact/Contact";
 import styles from "./Hero_New.module.css";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { imageMapping } from "../../contexts/LanguageContext";
-
+import SnowEffect from '../Hero/snowEffect';
 const DRAG_SETTINGS = {
   sensitivity: 0.1,          
   momentumMultiplier: 1,     
@@ -24,75 +24,6 @@ const DRAG_SETTINGS = {
     debounceTime: 150        
   }
 };
-
-const IMAGE_ROUTES = [
-  { 
-    id: 'smartsolution2',
-    image: '/image/smartsolution2.jpg',
-    route: '/smart-solutions-building_new',
-    title: 'Smart Building'
-  },
-  { 
-    id: 'smartHospital',
-    image: '/image/Smart Hospital.jpg',
-    route: '/smart-solutions-hospital_new',
-    title: 'Smart Hospital'
-  },
-  { 
-    id: 'smartPlatform',
-    image: '/image/Samrt Platform.jpg',
-    route: '/smart-platform',
-    title: 'Smart Platform'
-  },
-  { 
-    id: 'smartLearning',
-    image: '/image/Smart Learning.jpg',
-    route: '/smart-learning',
-    title: 'Smart Learning'
-  },
-  { 
-    id: 'smartLogistics',
-    image: '/image/Smart Logistics.jpg',
-    route: '/smart-logistics',
-    title: 'Smart Logistics'
-  },
-  { 
-    id: 'organizedCommunication',
-    image: '/image/SmartSolutions_Organized_Communication_Cables.jpg',
-    route: '/smart-solutions-organized_communication_cables_new',
-    title: 'SmartOrganized Communication Cables'
-  },
-  { 
-    id: 'autonomous',
-    image: '/image/Autonomous Solution.jpg',
-    route: '/smart-solutions_autonomous_new',
-    title: 'Autonomous'
-  },
-  { 
-    id: 'cyberSecurity',
-    image: '/image/Cyber Security.jpg',
-    route: '/cyber-security',
-    title: 'Cyber Security'
-  },
-  { 
-    id: 'smartFarming',
-    image: '/image/Smart Farming.jpg',
-    route: '/smart-farming',
-    title: 'Smart Farming'
-  },
-  { 
-    id: 'smartUtility',
-    image: '/image/Smart Utility (Grid).jpg',
-    route: '/smart-solutions-utility_new',
-    title: 'Smart Utility'
-  },
-  { 
-    id: 'cloudServices',
-    image: '/image/Cloud Services.jpg',
-    route: '/smart-solutions-cloudservice_new',
-    title: 'Cloud Services'
-  }
-];
 
 const SliderItem = ({ 
   id,
@@ -218,7 +149,7 @@ export const Hero_New = () => {
   const isButtonPressedRef = useRef(false);
   const buttonDirectionRef = useRef(null);
   const audioRef = useRef(null);
-
+  const { text } = useLanguage();
   const dragState = useRef({
     isDragging: false,
     startX: 0,
@@ -228,6 +159,75 @@ export const Hero_New = () => {
     lastTimestamp: 0,
     isMoved: false
   });
+
+  const IMAGE_ROUTES = [
+    { 
+      id: 'smartsolution2',
+      image: '/image/smartsolution2.jpg',
+      route: '/smart-solutions-building_new',
+      title: text.card1
+    },
+    { 
+      id: 'smartHospital',
+      image: '/image/Smart Hospital.jpg',
+      route: '/smart-solutions-hospital_new',
+      title: text.card2
+    },
+    { 
+      id: 'smartPlatform',
+      image: '/image/Samrt Platform.jpg',
+      route: '/smart-platform',
+      title: text.card3
+    },
+    { 
+      id: 'smartLearning',
+      image: '/image/Smart Learning.jpg',
+      route: '/smart-learning',
+      title: text.card4
+    },
+    { 
+      id: 'smartLogistics',
+      image: '/image/Smart Logistics.jpg',
+      route: '/smart-logistics',
+      title: text.card5
+    },
+    { 
+      id: 'organizedCommunication',
+      image: '/image/SmartSolutions_Organized_Communication_Cables.jpg',
+      route: '/smart-solutions-organized_communication_cables_new',
+      title: text.card6
+    },
+    { 
+      id: 'autonomous',
+      image: '/image/Autonomous Solution.jpg',
+      route: '/smart-solutions_autonomous_new',
+      title: text.card7
+    },
+    { 
+      id: 'cyberSecurity',
+      image: '/image/Cyber Security.jpg',
+      route: '/cyber-security',
+      title: text.card8
+    },
+    { 
+      id: 'smartFarming',
+      image: '/image/Smart Farming.jpg',
+      route: '/smart-farming',
+      title: text.card9
+    },
+    { 
+      id: 'smartUtility',
+      image: '/image/Smart Utility (Grid).jpg',
+      route: '/smart-solutions-utility_new',
+      title: text.card10
+    },
+    { 
+      id: 'cloudServices',
+      image: '/image/Cloud Services.jpg',
+      route: '/smart-solutions-cloudservice_new',
+      title: text.card11
+    }
+  ];
 
   useEffect(() => {
     if (!audioRef.current) {
@@ -250,6 +250,8 @@ export const Hero_New = () => {
       audio.currentTime = 0;
     };
   }, []);
+
+  
 
   const toggleMusic = async () => {
     try {
@@ -328,6 +330,7 @@ export const Hero_New = () => {
     }, DRAG_SETTINGS.autoRotateDelay);
   };
 
+  // Mouse wheel handling
   const handleWheelMomentum = () => {
     if (Math.abs(wheelVelocityRef.current) < DRAG_SETTINGS.minimumVelocity) {
       wheelMomentumRef.current = null;
@@ -476,6 +479,7 @@ export const Hero_New = () => {
     }
   };
 
+  // Event listeners setup
   useEffect(() => {
     document.addEventListener('wheel', handleWheel, { passive: false });
   
@@ -541,83 +545,88 @@ export const Hero_New = () => {
     };
   }, []);
 
+  // Render
   return (
-    <div className={styles.slider_section}>
-      <button 
-        className={styles.musicButton}
-        onClick={toggleMusic}
-        aria-label={isPlaying ? 'Pause music' : 'Play music'}
-      >
-        {isPlaying ? '♫' : '♪'}
-      </button>
+    <> 
+    <SnowEffect />
+      {/* <div id="container" className={styles.snowContainer}> */}
+        <div className={styles.slider_section}>
+          <button 
+            className={styles.musicButton}
+            onClick={toggleMusic}
+            aria-label={isPlaying ? 'Pause music' : 'Play music'}
+          >
+            {isPlaying ? '♫' : '♪'}
+          </button>
 
-      {/* เพิ่มปุ่มเปลี่ยนภาษา */}
-      <div className={styles.languageTabs}>
-      <button 
-        className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
-        onClick={() => language !== 'en' && toggleLanguage()}
-      >
-        EN
-      </button>
-      <button 
-        className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
-        onClick={() => language !== 'th' && toggleLanguage()}
-      >
-        TH
-      </button>
-    </div>
+          <div className={styles.languageTabs}>
+            <button 
+              className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
+              onClick={() => language !== 'en' && toggleLanguage()}
+            >
+              EN
+            </button>
+            <button 
+              className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
+              onClick={() => language !== 'th' && toggleLanguage()}
+            >
+              TH
+            </button>
+          </div>
 
-      <button className={styles.topLeftButton} onClick={handleButtonClick} />
-      
-      <div className={styles.banner}>
-        <div 
-          ref={sliderRef}
-          className={`${styles.slider} ${isDragging ? styles.dragging : ''}`}
-          style={{
-            transform: `translateX(-50%) perspective(1000px) rotateX(${
-              window.innerWidth <= 900 ? '-16deg' : '0deg'
-            }) rotateY(${currentRotation}deg)`
-          }}
-        >
-          {IMAGE_ROUTES.map((item, index) => (
-            <SliderItem 
-              key={index}
-              id={item.id}
-              image={item.image}
-              position={index + 1}
-              total={IMAGE_ROUTES.length}
-              onNavigate={(e) => {
-                if (!dragState.current.isMoved) {
-                  e.stopPropagation();
-                  navigate(item.route);
-                }
+          <button className={styles.topLeftButton} onClick={handleButtonClick} />
+          
+          <div className={styles.banner}>
+            <div 
+              ref={sliderRef}
+              className={`${styles.slider} ${isDragging ? styles.dragging : ''}`}
+              style={{
+                transform: `translateX(-50%) perspective(1000px) rotateX(${
+                  window.innerWidth <= 900 ? '-16deg' : '0deg'
+                }) rotateY(${currentRotation}deg)`
               }}
-              onDragStart={handleDragStart}
-              isDragging={isDragging}
-              title={item.title}
+            >
+              {IMAGE_ROUTES.map((item, index) => (
+                <SliderItem 
+                  key={index}
+                  id={item.id}
+                  image={item.image}
+                  position={index + 1}
+                  total={IMAGE_ROUTES.length}
+                  onNavigate={(e) => {
+                    if (!dragState.current.isMoved) {
+                      e.stopPropagation();
+                      navigate(item.route);
+                    }
+                  }}
+                  onDragStart={handleDragStart}
+                  isDragging={isDragging}
+                  title={item.title}
+                />
+              ))}
+            </div>
+
+            <RotationButton 
+              direction="left"
+              onPress={() => handleButtonPress('left')}
+              onRelease={handleButtonRelease}
             />
-          ))}
-        </div>
+            <RotationButton 
+              direction="right"
+              onPress={() => handleButtonPress('right')}
+              onRelease={handleButtonRelease}
+            />
 
-        <RotationButton 
-          direction="left"
-          onPress={() => handleButtonPress('left')}
-          onRelease={handleButtonRelease}
-        />
-        <RotationButton 
-          direction="right"
-          onPress={() => handleButtonPress('right')}
-          onRelease={handleButtonRelease}
-        />
-
-        <div className={styles.content}>
-          <h1 data-content="SMART SOLUTIONS">SMART SOLUTIONS</h1>
-          <div className={styles.author}>
-            <p>Digital Communication Solutions</p>
+            <div className={styles.content}>
+              <h1 data-content={text.title}>{text.title}</h1>
+              <div className={styles.author}>
+                <p>{text.subtitle}</p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      {/* </div> */}
+    </>
   );
 };
 
