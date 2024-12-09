@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./SmartSolutions_Autonomous_New_ver02.module.css";
-
+import { useLanguage } from "../../contexts/LanguageContext";
 export const SmartSolutions_Autonomous_New_ver02 = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
@@ -16,33 +16,34 @@ export const SmartSolutions_Autonomous_New_ver02 = () => {
   
   const containerRef = useRef(null);
   const timeoutRef = useRef(null);
+  const { images } = useLanguage();
 
   const allImages = [
     {
       id: 'renewableEnergy',
-      src: "/image/AS_1.png",
-      title: "Renewable Energy Integration",
+      src: images.Autonomous_Security_Systems,
+      title: "Autonomous Security Systems",
       description: "Sustainable energy solutions for smart buildings"
     },
     {
       id: 'iot',
-      src: "/image/AS_2.png",
-      title: "IoT Systems",
+      src: images.Autonomous_Vehicles,
+      title: "Autonomous Vehicles",
       description: "Connected devices and smart sensors"
     },
    
   
      {
        id: 'Access Control Systems',
-      src: "/image/AS_3.png",
-       title: "Access Control",
+      src: images.Autonomous_Industrial_Robot,
+       title: "Autonomous Industrial Robot",
      description: "Advanced security access management"
     },
  
      {
        id: 'Security System',
-       src: "/image/AS_4.png",
-       title: "Security Systems",
+       src: images.Autonomous_Service_Robot,
+       title: "Autonomous Service Robot",
        description: "Comprehensive building security"
      },
    // {
@@ -233,7 +234,7 @@ export const SmartSolutions_Autonomous_New_ver02 = () => {
         <div className={styles.content}>
           <div className={styles.imageContainer}>
             <img
-              src="/image/AS_00.png"
+              src={images.smart_solutions_Autonomous_new_ver2_0}
               alt="Smart Building"
               className={styles.aboutImage}
             />

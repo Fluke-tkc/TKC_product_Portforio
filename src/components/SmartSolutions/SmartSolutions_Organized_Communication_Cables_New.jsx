@@ -3,12 +3,13 @@ import styles from "./SmartSolutions_Organized_Communication_Cables_New.module.c
 import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
+import { useLanguage } from "../../contexts/LanguageContext";
 export const SmartSolutions_Organized_Communication_Cables_New = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [showTutorial, setShowTutorial] = useState(true);
   const [showPostTutorialImage, setShowPostTutorialImage] = useState(false);
-
+  const { images } = useLanguage();
   
   const [modalConfig, setModalConfig] = useState({
     isOpen: false,
@@ -350,7 +351,7 @@ return (
           
           {/* Main Background Image */}
           <img
-            src="/image/OC_0.png"
+            src={images.smart_solutions_Organized_Communication_Cables_new_00}
             onClick={handleClosePostTutorialImage}
             alt="Smart Building"
             className={styles.aboutImage}

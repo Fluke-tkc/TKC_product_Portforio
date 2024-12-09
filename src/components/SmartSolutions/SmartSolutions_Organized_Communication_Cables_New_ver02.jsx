@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./SmartSolutions_Organized_Communication_Cables_New_ver02.module.css";
-
+import { useLanguage } from "../../contexts/LanguageContext";
 export const SmartSolutions_Organized_Communication_Cables_New_ver02 = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
@@ -16,18 +16,19 @@ export const SmartSolutions_Organized_Communication_Cables_New_ver02 = () => {
   
   const containerRef = useRef(null);
   const timeoutRef = useRef(null);
-
+  const { images } = useLanguage();
+  
   const allImages = [
     {
       id: 'renewableEnergy',
-      src: "/image/OC_2.png",
-      title: "Renewable Energy Integration",
+      src: images.Underground_cables,
+      title: "Underground cables",
       description: "Sustainable energy solutions for smart buildings"
     },
     {
       id: 'iot',
-      src: "/image/OC_1.png",
-      title: "IoT Systems",
+      src: images.Organize_Communication_Cable,
+      title: "Organize Communication Cable",
       description: "Connected devices and smart sensors"
     },
     // {
@@ -233,7 +234,7 @@ export const SmartSolutions_Organized_Communication_Cables_New_ver02 = () => {
         <div className={styles.content}>
           <div className={styles.imageContainer}>
             <img
-              src="/image/OC_00.png"
+              src={images.smart_solutions_Organized_Communication_Cables_new_ver2_0}
               alt="Smart Building"
               className={styles.aboutImage}
             />

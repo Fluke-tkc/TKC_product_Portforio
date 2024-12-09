@@ -63,7 +63,19 @@ export const imageMapping = {
     Cloud_Based_Call_Center_Chatbot:'/image/CS_6.png',
     Blockchain:'/image/CS_7.png',
    
-
+    //Organized_Communication_Cables
+    smart_solutions_Organized_Communication_Cables_new_00:'/image/OC_0.png',
+    smart_solutions_Organized_Communication_Cables_new_ver2_0:'/image/OC_00.png',
+    Organize_Communication_Cable:'/image/OC_1.png',
+    Underground_cables:'/image/OC_2.png',
+    
+    //Autonomous
+    smart_solutions_Autonomous_new_00:'/image/AS_0.png',
+    smart_solutions_Autonomous_new_ver2_0:'/image/AS_00.png',
+    Autonomous_Security_Systems:'/image/AS_1.png',
+    Autonomous_Vehicles:'/image/AS_2.png',
+    Autonomous_Industrial_Robot:'/image/AS_3.png',
+    Autonomous_Service_Robot:'/image/AS_4.png',
 
   },
   th: {
@@ -122,7 +134,20 @@ export const imageMapping = {
     ERP_on_Cloud:'/image/CS_5.png',
     Cloud_Based_Call_Center_Chatbot:'/image/CS_6.png',
     Blockchain:'/image/CS_7.png',
-     
+    
+    //Organized_Communication_Cables
+    smart_solutions_Organized_Communication_Cables_new_00:'/image/OC_0.png',
+    smart_solutions_Organized_Communication_Cables_new_ver2_0:'/image/OC_00.png',
+    Organize_Communication_Cable:'/image/OC_1.png',
+    Underground_cables:'/image/OC_2.png',
+
+    //Autonomous
+    smart_solutions_Autonomous_new_00:'/image/AS_0.png',
+    smart_solutions_Autonomous_new_ver2_0:'/image/AS_00.png',
+    Autonomous_Security_Systems:'/image/AS_1.png',
+    Autonomous_Vehicles:'/image/AS_2.png',
+    Autonomous_Industrial_Robot:'/image/AS_3.png',
+    Autonomous_Service_Robot:'/image/AS_4.png',
   }
 };
 
