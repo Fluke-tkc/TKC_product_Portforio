@@ -105,7 +105,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
         {
           id: 'smart-lighting',
           className: styles.redDot_LightingWrapper,
-          position: { top: '20%', left: '93.5%' }
+          position: { top: '10%', left: '92.5%' }
         }
       ],
       'Motion Sensors': [
@@ -126,7 +126,7 @@ export const SmartSolutions_Building_New_ver02 = () => {
         {
           id: 'access-control',
           className: styles.redDot_AccessControlSystemsWrapper,
-          position: { top: '20%', left: '66%' }
+          position: { top: '20%', left: '68%' }
         }
       ],
      

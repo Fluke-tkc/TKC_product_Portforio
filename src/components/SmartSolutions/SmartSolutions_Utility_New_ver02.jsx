@@ -102,7 +102,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
       'EV Integration': [
         {
           className: styles.redDot_LightingWrapper,
-          position: { top: '78%', left: '50%' }
+          position: { top: '78%', left: '42%' }
         }
       ],
       'EnergyStorageSysem': [

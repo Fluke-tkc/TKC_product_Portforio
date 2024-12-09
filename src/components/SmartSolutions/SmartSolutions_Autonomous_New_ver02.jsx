@@ -105,7 +105,7 @@ export const SmartSolutions_Autonomous_New_ver02 = () => {
        {
            id: 'access-control',
            className: styles.redDot_AccessControlSystemsWrapper,
-           position: { top: '30%', left: '74%' }
+           position: { top: '30%', left: '93%' }
          }
        ],
        'Security System': [
