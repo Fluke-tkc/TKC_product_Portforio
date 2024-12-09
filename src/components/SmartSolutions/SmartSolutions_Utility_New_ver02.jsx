@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./SmartSolutions_Utility_New_ver02.module.css";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export const SmartSolutions_Utility_New_ver02 = () => {
   const navigate = useNavigate();
@@ -17,40 +18,42 @@ export const SmartSolutions_Utility_New_ver02 = () => {
   const containerRef = useRef(null);
   const timeoutRef = useRef(null);
 
+  const { images } = useLanguage();
+
   const allImages = [
     {
       id: 'Demand Response(DR)Energy Management System(EMS)',
-      src: "/image/U_3.png",
+      src:  images.DemandResponse_DR_EnergyManagementSystem_EMS,
       title: "Demand Response(DR)Energy Management System(EMS)",
       description: "Optimizes energy use by reducing consumption during peak times, easing grid load and cutting costs"
     },
     {
       id: 'Renewable Energy',
-      src: "/image/U_4.png",
+      src: images.Renewable_Energy,
       title: "Renewable Energy",
       description: "Integrating renewable energy into the grid enhances clean energy share"
     },
     {
       id: 'Advanced Mtering Infrastructure(AMI)',
-      src: "/image/U_5.png",
+      src: images.Advanced_Mtering_Infrastructure_AMI,
       title: "Advanced Mtering Infrastructure(AMI)",
       description: "Technology deploying smart meters that seamlessly relay real-time energy usage between consumers and providers"
     },
     {
       id: 'Microgrid Prosumer',
-      src: "/image/U_6.png",
+      src: images.Microgrid_Prosumer,
       title: "Microgrid Prosumer",
       description: "Efficient Local Energy Management and independently from the main grid"
     },
     {
       id: 'EV Integration',
-      src: "/image/U_7.png",
+      src: images.EV_Integration,
       title: "EV Integration",
       description: "Elegantly connects electric vehicles to the grid"
     },
     {
       id: 'EnergyStorageSysem',
-      src: "/image/U_8.png",
+      src: images.EnergyStorageSysem,
       title: "Energy Storage System",
       description: "Ensuring Stable Electricity Supply"
     }
@@ -197,7 +200,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
         <div className={styles.content}>
           <div className={styles.imageContainer}>
             <img
-              src="/image/U_2.png"
+              src={images.smart_solutions_utility_new_ver2_0}
               alt="Smart Building"
               className={styles.aboutImage}
             />

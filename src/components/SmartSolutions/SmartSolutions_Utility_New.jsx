@@ -3,10 +3,12 @@ import styles from "./SmartSolutions_Utility_New.module.css";
 import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
+import { useLanguage } from "../../contexts/LanguageContext";
 export const SmartSolutions_Utility_New = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [showTutorial, setShowTutorial] = useState(true);
+  const { images } = useLanguage();
 
   const tutorialSteps = [
     {
@@ -136,7 +138,7 @@ export const SmartSolutions_Utility_New = () => {
         {/* <div className={styles.overlayText}>Intelligent Grid</div>
         <div className={styles.overlayText_1}>Technology-driven system that optimizes energy management through sensors, data analytics, and smart communication​</div> */}
           <img
-            src="/image/U_1.png"
+            src={images.smart_solutions_utility_new_00}
             alt="Smart Building"
             className={styles.aboutImage}
             onClick={handleClosePostTutorialImage}

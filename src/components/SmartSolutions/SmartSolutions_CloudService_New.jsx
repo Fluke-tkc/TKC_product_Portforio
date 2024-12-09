@@ -3,12 +3,13 @@ import styles from "./SmartSolutions_CloudService_New.module.css";
 import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
+import { useLanguage } from "../../contexts/LanguageContext";
 export const SmartSolutions_CloudService_New = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [showTutorial, setShowTutorial] = useState(true);
   const [showPostTutorialImage, setShowPostTutorialImage] = useState(false);
-
+  const { images } = useLanguage();
   
   const [modalConfig, setModalConfig] = useState({
     isOpen: false,
@@ -352,7 +353,7 @@ return (
           
           {/* Main Background Image */}
           <img
-            src="/image/smart_cloudservice.png"
+            src={images.smart_solutions_CloudServices_new_00}
             onClick={handleClosePostTutorialImage}
             alt="Smart Building"
             className={styles.aboutImage}

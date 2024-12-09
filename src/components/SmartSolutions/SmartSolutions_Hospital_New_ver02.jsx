@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./SmartSolutions_Hospital_New_ver02.module.css";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export const SmartSolutions_Hospital_New_ver02 = () => {
   const navigate = useNavigate();
@@ -16,35 +17,36 @@ export const SmartSolutions_Hospital_New_ver02 = () => {
   
   const containerRef = useRef(null);
   const timeoutRef = useRef(null);
+  const { images } = useLanguage();
 
   const allImages = [
     {
       id: 'renewableEnergy',
-      src: "/image/H_1.png",
+      src:  images.Data_Analytics_Knowledge_Management,
       title: "Data Analytics & Knowledge Management",
       description: "Leveraging Data to Drive Informed Decisions and Organizational"
     },
     {
       id: 'iot',
-      src: "/image/H_2.png",
+      src:  images.Smart_Diagnostics_Treatment,
       title: "Smart Diagnostics & Treatment",
       description: "Advanced AI tools assist in precise diagnostics and treatment"
     },
     {
       id: 'Access Control Systems',
-      src: "/image/H_3.png",
+      src:  images.Smart_Safety_Convenience_Systems,
       title: "Smart Safety & Convenience",
       description: "Enhanced Safety, Security, and Comfort through Technology"
     },
     {
       id: 'Security System',
-      src: "/image/H_4.png",
+      src:  images.Integrated_Patient_Care,
       title: "Integrated Patient Care",
       description: "A Coordinated, Technology-Driven Approach to Healthcare"
     },
     {
       id: 'Smart Lighting',
-      src: "/image/H_5.png",
+      src: images.Smart_Hospital_Management_Systems,
       title: "Smart Hospital Management",
       description: "Digital Solutions for Enhanced Patient Service"
     }
@@ -95,7 +97,7 @@ export const SmartSolutions_Hospital_New_ver02 = () => {
         {
           id: 'smart-lighting',
           className: styles.redDot_LightingWrapper,
-          position: { top: '70%', left: '75%' }
+          position: { top: '36%', left: '64%' }
         }
       ]
     };
@@ -187,7 +189,7 @@ export const SmartSolutions_Hospital_New_ver02 = () => {
         <div className={styles.content}>
           <div className={styles.imageContainer}>
             <img
-              src="/image/SmartHospital_2.png"
+              src={images.smart_solutions_Hospital_new_ver2_0}
               alt="Smart Building"
               className={styles.aboutImage}
             />

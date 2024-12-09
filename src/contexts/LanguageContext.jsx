@@ -7,6 +7,7 @@ export const LanguageContext = createContext();
 export const imageMapping = {
   en: {
     // รูปภาษาอังกฤษ Hero
+  //main
     smartsolution2: '/image/smartsolution2.jpg',
     smartHospital: '/image/Smart Hospital.jpg',
     smartPlatform: '/image/Samrt Platform.jpg',
@@ -19,6 +20,7 @@ export const imageMapping = {
     smartUtility: '/image/Smart Utility (Grid).jpg',
     cloudServices: '/image/Cloud Services.jpg',
 
+    //Building
     smart_solutions_building_new00:'/image/SmartBuilding.png',
     smart_solutions_building_new_ver2_0:'/image/SmatOverlay.png',
     renewableEnergy:'/image/P_1.png',
@@ -31,23 +33,35 @@ export const imageMapping = {
     SmartParkingManagement:'/image/P_8.png',
 
    //utility
-   smart_solutions_utility_new_00:'/image/SmartBuilding.png',
-   smart_solutions_utility_new_ver2_0:'/image/SmartBuilding.png',
-   DemandResponse_DR_EnergyManagementSystem_EMS:'/image/P_1.png',
-   Renewable_Energy:'/image/P_2.png',
-   Advanced_Mtering_Infrastructure_AMI:'/image/P_3.png',
-   Microgrid_Prosumer:'/image/P_4.png',
-   EV_Integration:'/image/P_5.png',
-   EnergyStorageSysem:'/image/P_6.png',
+   smart_solutions_utility_new_00:'/image/U_1.png',
+   smart_solutions_utility_new_ver2_0:'/image/U_2.png',
+   DemandResponse_DR_EnergyManagementSystem_EMS:'/image/U_3.png',
+   Renewable_Energy:'/image/U_4.png',
+   Advanced_Mtering_Infrastructure_AMI:'/image/U_5.png',
+   Microgrid_Prosumer:'/image/U_6.png',
+   EV_Integration:'/image/U_7.png',
+   EnergyStorageSysem:'/image/U_8.png',
 
     //Hospital
-    smart_solutions_Hospital_new_00:'/image/SmartBuilding.png',
-    smart_solutions_Hospital_new_ver2_0:'/image/SmartBuilding.png',
-    Data_Analytics_Knowledge_Management:'/image/P_1.png',
-    Smart_Diagnostics_Treatment:'/image/P_2.png',
-    Smart_Safety_Convenience_Systems:'/image/P_3.png',
-    Integrated_Patient_Care:'/image/P_4.png',
-    Smart_Hospital_Management_Systems:'/image/P_5.png',
+   smart_solutions_Hospital_new_00:'/image/SmartHospital.png',
+   smart_solutions_Hospital_new_ver2_0:'/image/SmartHospital_2.png',
+   Data_Analytics_Knowledge_Management:'/image/H_1.png',
+   Smart_Diagnostics_Treatment:'/image/H_2.png',
+   Smart_Safety_Convenience_Systems:'/image/H_3.png',
+   Integrated_Patient_Care:'/image/H_4.png',
+   Smart_Hospital_Management_Systems:'/image/H_5.png',
+
+
+    //cloud service
+    smart_solutions_CloudServices_new_00:'/image/smart_cloudservice.png',
+    smart_solutions_CloudServices_new_ver2_0:'/image/smart_cloudservice_2.png',
+    Cloud_Data_Center_Solutions:'/image/CS_1.png',
+    Big_Data_Analytics_on_Cloud:'/image/CS_2.png',
+    AI_Services_on_Cloud:'/image/CS_3.png',
+    Security_and_Compliance_Services:'/image/CS_4.png',
+    ERP_on_Cloud:'/image/CS_5.png',
+    Cloud_Based_Call_Center_Chatbot:'/image/CS_6.png',
+    Blockchain:'/image/CS_7.png',
    
 
 
@@ -66,6 +80,7 @@ export const imageMapping = {
     smartUtility: '/image/Smart Utility (Grid).jpg',
     cloudServices: '/image/Cloud Services.jpg',
 
+     //Building
     smart_solutions_building_new00:'/image/SmartBuilding_TH.png',
     smart_solutions_building_new_ver2_0:'/image/SmatOverlay_TH.png',
     renewableEnergy:'/image/BD_TH_1.png',
@@ -76,6 +91,38 @@ export const imageMapping = {
     AccessControlSystems:'/image/BD_TH_6.png',
     BuildingAutomationSystem:'/image/BD_TH_7.png',
     SmartParkingManagement:'/image/BD_TH_8.png',
+
+    //utility
+    smart_solutions_utility_new_00:'/image/U_1.png',
+    smart_solutions_utility_new_ver2_0:'/image/U_2.png',
+    DemandResponse_DR_EnergyManagementSystem_EMS:'/image/U_3.png',
+    Renewable_Energy:'/image/U_4.png',
+    Advanced_Mtering_Infrastructure_AMI:'/image/U_5.png',
+    Microgrid_Prosumer:'/image/U_6.png',
+    EV_Integration:'/image/U_7.png',
+    EnergyStorageSysem:'/image/U_8.png',
+
+
+      //Hospital
+    smart_solutions_Hospital_new_00:'/image/SmartHospital.png',
+    smart_solutions_Hospital_new_ver2_0:'/image/SmartHospital_2.png',
+    Data_Analytics_Knowledge_Management:'/image/H_1.png',
+    Smart_Diagnostics_Treatment:'/image/H_2.png',
+    Smart_Safety_Convenience_Systems:'/image/H_3.png',
+    Integrated_Patient_Care:'/image/H_4.png',
+    Smart_Hospital_Management_Systems:'/image/H_5.png',
+
+    //cloud service
+    smart_solutions_CloudServices_new_00:'/image/smart_cloudservice.png',
+    smart_solutions_CloudServices_new_ver2_0:'/image/smart_cloudservice_2.png',
+    Cloud_Data_Center_Solutions:'/image/CS_1.png',
+    Big_Data_Analytics_on_Cloud:'/image/CS_2.png',
+    AI_Services_on_Cloud:'/image/CS_3.png',
+    Security_and_Compliance_Services:'/image/CS_4.png',
+    ERP_on_Cloud:'/image/CS_5.png',
+    Cloud_Based_Call_Center_Chatbot:'/image/CS_6.png',
+    Blockchain:'/image/CS_7.png',
+     
   }
 };
 

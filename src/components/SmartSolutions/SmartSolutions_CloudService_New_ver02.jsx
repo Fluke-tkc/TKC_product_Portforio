@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./SmartSolutions_CloudService_New_ver02.module.css";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export const SmartSolutions_CloudService_New_ver02 = () => {
   const navigate = useNavigate();
@@ -16,47 +17,47 @@ export const SmartSolutions_CloudService_New_ver02 = () => {
   
   const containerRef = useRef(null);
   const timeoutRef = useRef(null);
-
+  const { images } = useLanguage();
   const allImages = [
     {
       id: 'Cloud Data Center Solutions',
-      src: "/image/CS_1.png",
+      src: images.Cloud_Data_Center_Solutions,
       title: "Cloud Data Center Solutions",
       description: "Cloud Solutions"
     },
     {
       id: 'Big Data Analytics on Cloud',
-      src: "/image/CS_2.png",
+      src: images.Big_Data_Analytics_on_Cloud,
       title: "Big Data Analytics on Cloud",
       description: "Connected devices and smart sensors"
     },
     {
       id: 'AI Services on Cloud',
-      src: "/image/CS_3.png",
+      src: images.AI_Services_on_Cloud,
       title: "AI Services on Cloud",
       description: "AI Services"
     },
     {
       id: 'Security and Compliance Services',
-      src: "/image/CS_4.png",
+      src: images.Security_and_Compliance_Services,
       title: "Security and Compliance Services",
       description: "Security Services"
     },
     {
       id: 'ERP on Cloud',
-      src: "/image/CS_5.png",
+      src: images.ERP_on_Cloud,
       title: "ERP on Cloud",
       description: "Systems seamlessly integrate business functions"
     },
     {
       id: 'Cloud-Based Call Center / Chatbot',
-      src: "/image/CS_6.png",
+      src: images.Cloud_Based_Call_Center_Chatbot,
       title: "Cloud-Based Call Center / Chatbot",
       description: "Support Center"
     },
     {
       id: 'Blockchain',
-      src: "/image/CS_7.png",
+      src: images.Blockchain,
       title: "Blockchain",
       description: "Decentralized data storage"
     }
@@ -215,7 +216,7 @@ export const SmartSolutions_CloudService_New_ver02 = () => {
         <div className={styles.content}>
           <div className={styles.imageContainer}>
             <img
-              src="/image/smart_cloudservice_2.png"
+              src={images.smart_solutions_CloudServices_new_ver2_0}
               alt="Smart Building"
               className={styles.aboutImage}
             />
