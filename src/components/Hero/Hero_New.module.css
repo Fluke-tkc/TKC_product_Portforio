@@ -307,7 +307,7 @@
 }
 
 .content h1 {
-  font-family: 'ICA Rubrik', sans-serif;
+  /* font-family: 'ICA Rubrik', sans-serif; */
   font-size: clamp(3rem, 5vw, 16rem);
   line-height: 1em;
   color: #25283B;
@@ -315,6 +315,11 @@
   margin-bottom: 2rem;
   font-weight: 700;
   text-transform: uppercase;
+  font-family: 'Prompt';
+    src: url('/fonts/Prompt-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 .content h1::after {
@@ -324,6 +329,11 @@
   z-index: 2;
   -webkit-text-stroke: 2px #d2d2d2;
   color: transparent;
+  font-family: 'Prompt';
+    src: url('/fonts/Prompt-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 .author {

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-
+import styles from './Prompt.module.css';
 // สร้าง Context สำหรับเก็บข้อมูลภาษา
 export const LanguageContext = createContext();
 
@@ -176,18 +176,17 @@ export const textContent = {
   th: {
     title: "ระบบโซลูชั่นอัจฉริยะ",
     subtitle: "Digital Communication Solutions",
-
-    card1:"ระบบอาคารอัจฉริยะ",
-    card2:"ระบบโรงพยบาลอัจฉริยะ",
-    card3:"ระบบแพลตฟอร์มอัจฉริยะ",
-    card4:"ระบบการเรียนรู้อัจฉริยะ",
-    card5:"ระบบขนส่งอัจฉริยะ",
-    card6:"ระบบโครงข่ายสายสื่อสารอัจฉริยะ",
-    card7:"ระบบการทำงานอัตโนมัติ",
-    card8:"ระบบการรักษาความปลอดภัยทางไซเบอร์",
-    card9:"ระบบเกษตรนวัตกรรมอัจฉริยะ",
-    card10:"ระบบโครงสร้างพื้นฐานอัจฉริยะ",
-    card11:"ระบบบริการคลาวด์อัจฉริยะ",
+    card1: <span className={styles.thaiFont}>ระบบอาคารอัจฉริยะ</span>,
+    card2: <span className={styles.thaiFont}>ระบบโรงพยบาลอัจฉริยะ</span>,
+    card3: <span className={styles.thaiFont}>ระบบแพลตฟอร์มอัจฉริยะ</span>,
+    card4: <span className={styles.thaiFont}>ระบบการเรียนรู้อัจฉริยะ</span>,
+    card5: <span className={styles.thaiFont}>ระบบขนส่งอัจฉริยะ</span>,
+    card6: <span className={styles.thaiFont}>ระบบโครงข่ายสายสื่อสารอัจฉริยะ</span>,
+    card7: <span className={styles.thaiFont}>ระบบการทำงานอัตโนมัติ</span>,
+    card8: <span className={styles.thaiFont}>ระบบการรักษาความปลอดภัยทางไซเบอร์</span>,
+    card9: <span className={styles.thaiFont}>ระบบเกษตรนวัตกรรมอัจฉริยะ</span>,
+    card10: <span className={styles.thaiFont}>ระบบโครงสร้างพื้นฐานอัจฉริยะ</span>,
+    card11: <span className={styles.thaiFont}>ระบบบริการคลาวด์อัจฉริยะ</span>,
     // เพิ่มข้อความอื่นๆ ตามต้องการ
 
 
