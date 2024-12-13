@@ -76,7 +76,7 @@ export const SmartSolutions_Hospital_New_ver02 = () => {
       'iot': [
         {
           className: styles.redDot_IotWrapper,
-          position: { top: '76%', left: '22%' }
+          position: { top: '51%', left: '5%' }
         }
       ],
       'Access Control Systems': [
@@ -90,7 +90,7 @@ export const SmartSolutions_Hospital_New_ver02 = () => {
         {
           id: 'security-system',
           className: styles.redDot_SurveillanceSecurityWrapper,
-          position: { top: '27%', left: '72%' }
+          position: { top: '27%', left: '93.5%' }
         }
       ],
       'Smart Lighting': [

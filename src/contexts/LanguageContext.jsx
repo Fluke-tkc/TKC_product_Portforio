@@ -186,7 +186,7 @@ export const textContent = {
     card8: <span className={styles.thaiFont}>ระบบการรักษาความปลอดภัยทางไซเบอร์</span>,
     card9: <span className={styles.thaiFont}>ระบบเกษตรนวัตกรรมอัจฉริยะ</span>,
     card10: <span className={styles.thaiFont}>ระบบโครงสร้างพื้นฐานอัจฉริยะ</span>,
-    card11: <span className={styles.thaiFont}>ระบบบริการคลาวด์อัจฉริยะ</span>,
+    card11: <span className={styles.thaiFont}>ระบบบริการ<br></br>คลาวด์อัจฉริยะ</span>,
     // เพิ่มข้อความอื่นๆ ตามต้องการ
 
 

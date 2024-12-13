@@ -108,7 +108,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
       'EnergyStorageSysem': [
         {
           className: styles.redDot_BuildingAutomationWrapper,
-          position: { top: '80%', left: '21%' }
+          position: { top: '54%', left: '6.5%' }
         }
       ]
     };

@@ -182,7 +182,7 @@ export const Hero_New = () => {
     { 
       id: 'smartLearning',
       image: '/image/Smart Learning.jpg',
-      route: '/smart-learning',
+      route: '/smart-solutions-learning_new',
       title: text.card4
     },
     { 
@@ -206,13 +206,13 @@ export const Hero_New = () => {
     { 
       id: 'cyberSecurity',
       image: '/image/Cyber Security.jpg',
-      route: '/cyber-security',
+      route: '/smart-solutions-cybersecurity_new',
       title: text.card8
     },
     { 
       id: 'smartFarming',
       image: '/image/Smart Farming.jpg',
-      route: '/smart-farming',
+      route: '/smart-solutions-farm_new',
       title: text.card9
     },
     { 

@@ -323,8 +323,8 @@
 }
 
 .redDot_IotWrapper {
-  top: 76%;
-  left: 22%;
+  top: 51%;
+  left: 5%;
 }
 
 .redDot_IotWrapper::before,
@@ -344,7 +344,7 @@
 
 .redDot_SurveillanceSecurityWrapper {
   top: 27%;
-  left: 72%;
+  left: 93.5%;
 }
 
 .redDot_SurveillanceSecurityWrapper::before,
@@ -353,8 +353,8 @@
 }
 
 .redDot_LightingWrapper {
-  top: 70%;
-  left: 75%;
+  top: 36%;
+  left: 63.5%;
 }
 
 .redDot_LightingWrapper::before,

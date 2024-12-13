@@ -244,8 +244,8 @@
 /* Individual Red Dot Styles */
 /* Renewable Energy Integration */
 .redDot_DemandResponseWrapper {
-  top: 52%;
-  left: 60%;
+  top: 53%;
+  left: 52%;
   /* background-image: url("/image/SmartBuildingPicture6.svg"); */
 }
 
@@ -256,8 +256,8 @@
 
 /* IoT */
 .redDot_EnergyManagementSystemWrapper {
-  top: 52%;
-  left: 50%;
+  top: 25%;
+  left: 95%;
   /* background-image: url("/image/SmartBuildingPicture6.svg"); */
 }
 
@@ -268,8 +268,8 @@
 
 /* Access Control Systems */
 .redDot_RenewableEnergyWrapper {
-  top: 20%;
-  left: 95%;
+  top: 65%;
+  left: 74.5%;
   /* background-image: url("/image/SmartBuildingPicture6.svg"); */
 }
 
@@ -280,8 +280,8 @@
 
 /* Surveillance and Security */
 .redDot_AdvancedMeteringInfrastructureWrapper {
-  top: 65%;
-  left: 70%;
+  top: 90%;
+  left: 80%;
   /* background-image: url("/image/Smart_UtilityPicture2.svg"); */
 }
 
@@ -291,8 +291,8 @@
 }
 
 .redDot_MicrogridProsumerWrapper {
-  top: 90%;
-  left: 80%;
+  top: 78%;
+  left: 42%;
   /* background-image: url("/image/SmartBuildingPicture6.svg"); */
 }
 
@@ -302,8 +302,8 @@
 }
 /* Building Automation */
 .redDot_EVIntegrationWrapper {
-  top: 65%;
-  left: 42%;
+  top: 85%;
+  left: 21%;
   /* background-image: url("/image/Smart_UtilityPicture1.svg"); */
 }
 
@@ -313,16 +313,16 @@
 }
 
 /* Smart Lighting */
-.redDot_EnergyStorageSystemWrapper {
+/* .redDot_EnergyStorageSystemWrapper {
   top: 85%;
   left: 20%;
-  /* background-image: url("/image/SmartBuildingPicture6.svg"); */
+ 
 }
 
 .redDot_EnergyStorageSystemWrapper::before,
 .redDot_EnergyStorageSystemWrapper::after {
   background: rgba(255, 255, 0, 0.6);
-}
+} */
 
 
 /* Motion Sensors */

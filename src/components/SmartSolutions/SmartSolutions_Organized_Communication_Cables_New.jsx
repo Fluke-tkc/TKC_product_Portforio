@@ -394,7 +394,7 @@ return (
               </div>
 
               {/* Access Control Systems Dot */}
-              <div 
+              {/* <div 
                 id="AccessControlSystems"
                 className={styles.redDot_AccessControlSystemsWrapper}
                 // onClick={handleLearnMoreClick_smart_BuildingTo_AccessControlSystems}
@@ -404,10 +404,10 @@ return (
                   <h3>Access Control Systems</h3>
                   <p>Technologies for Secure Access Management</p>
                 </div> 
-              </div>
+              </div> */}
 
               {/* Surveillance and Security Dot */}
-              <div 
+              {/* <div 
                 id="SurveillanceAndSecurity"
                 className={styles.redDot_SurveillanceSecurityWrapper}
                 // onClick={handleLearnMoreClick_smart_BuildingTo_SurveillanceandSecuritySystem}
@@ -417,10 +417,10 @@ return (
                   <h3>Surveillance and Security System</h3>
                   <p>AI-Enhanced Surveillance, Biometric Access Control, and Advanced Fire Detection</p>
                 </div> 
-              </div>
+              </div> */}
 
               {/* Smart Lighting Dot */}
-              <div 
+              {/* <div 
                 id="Lighting"
                 className={styles.redDot_LightingWrapper}
                 // onClick={handleLearnMoreClick_smart_BuildingTo_Lighting}
@@ -430,10 +430,10 @@ return (
                   <h3>Smart Digital Signage and Lighting​</h3>
                   <p>Dynamic and campaign launches content, Adaptive Lighting System ​</p>
                 </div> 
-              </div>
+              </div> */}
 
               {/* Building Automation Dot */}
-              <div 
+              {/* <div 
                 id="BuildingAutomation"
                 className={styles.redDot_BuildingAutomationWrapper}
                 // onClick={handleLearnMoreClick_smart_BuildingTo_BuildingAutomationSystem}
@@ -443,10 +443,10 @@ return (
                   <h3>Building Automation System</h3>
                   <p>Efficient Control of HVAC, Electrical, Security, and Water Management</p>
                 </div> 
-              </div>
+              </div> */}
 
               {/* Motion Sensors Dot */}
-              <div 
+              {/* <div 
                 id="MotionSensors"
                 className={styles.redDot_MotionSensorsWrapper}
                 // onClick={handleLearnMoreClick_smart_BuildingTo_MotionSensors}
@@ -456,10 +456,10 @@ return (
                   <h3>Motion Sensors</h3>
                   <p>Future Trends in Motion Detection</p>
                 </div> 
-              </div>
+              </div> */}
 
               {/* Smart Parking Dot */}
-              <div 
+              {/* <div 
                 id="SmartParking"
                 className={styles.redDot_SmartParkingWrapper}
                 // onClick={handleLearnMoreClick_smart_BuildingTo_SmartParkingManagement}
@@ -469,7 +469,7 @@ return (
                   <h3>Smart Parking Management</h3>
                   <p>Efficient Parking Management and Availability Tracking</p>
                 </div> 
-              </div>
+              </div> */}
             </>
           )}  
 

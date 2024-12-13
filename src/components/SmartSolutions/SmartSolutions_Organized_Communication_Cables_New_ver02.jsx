@@ -84,7 +84,7 @@ export const SmartSolutions_Organized_Communication_Cables_New_ver02 = () => {
     preloadImages();
   }, []);
 
-  const DynamicRedDots = ({ currentImage }) => {
+  const DynamicRedDots = ({ currentImage }) => {  
     const [activeTooltip, setActiveTooltip] = useState(null);
 
     const dotConfigurations = {
@@ -97,7 +97,7 @@ export const SmartSolutions_Organized_Communication_Cables_New_ver02 = () => {
       'iot': [
         {
           className: styles.redDot_IotWrapper,
-          position: { top: '30%', left: '92.3%' }
+          position: { top: '30%', left: '93%' }
         }
       ],
       // 'Smart Lighting': [
