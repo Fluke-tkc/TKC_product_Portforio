@@ -97,7 +97,7 @@ export const SmartSolutions_Organized_Communication_Cables_New_ver02 = () => {
       'iot': [
         {
           className: styles.redDot_IotWrapper,
-          position: { top: '30%', left: '93%' }
+          position: { top: '30%', left: '92.4%' }
         }
       ],
       // 'Smart Lighting': [

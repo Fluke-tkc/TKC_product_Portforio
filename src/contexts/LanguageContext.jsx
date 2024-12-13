@@ -154,7 +154,7 @@ export const imageMapping = {
 // ข้อความตามภาษา
 export const textContent = {
   en: {
-    title: "SMART SOLUTIONS",
+    title: "SMART SOLUTIONS",//SMARTSOLUTIONS
     subtitle: "Digital Communication Solutions",
     // เพิ่มข้อความอื่นๆ ตามต้องการ
     card1:"Smart Building",
