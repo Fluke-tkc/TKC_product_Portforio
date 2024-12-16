@@ -351,7 +351,7 @@ return (
           
           {/* Main Background Image */}
           <img
-            src= {images.smart_solutions_building_new00}
+            src= {images.smart_solutions_CyberSecurity_new_00}
             onClick={handleClosePostTutorialImage}
             alt="Smart Building"
             className={styles.aboutImage}
@@ -375,8 +375,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Renewable Energy Integration</h3>
-                  <p>Integrating Renewable Energy into Building Systems</p>
+                  <h3>Network Security</h3>
+                  <p>Measures designed to protect computer networks and associated resources</p>
                 </div> 
               </div>
 
@@ -388,8 +388,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>IoT</h3>
-                  <p>Connected Devices and Sensors for Data Collection and Transmission</p>
+                  <h3>Endpoint Security</h3>
+                  <p>Approach to protecting endpoint devices connected to a network.</p>
                 </div> 
               </div>
 
@@ -401,8 +401,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Access Control Systems</h3>
-                  <p>Technologies for Secure Access Management</p>
+                  <h3>Application Security & Cloud Security</h3>
+                  <p>A comprehensive security strategy to protect both the application development process and cloud infrastructure.</p>
                 </div> 
               </div>
 
@@ -414,8 +414,8 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Surveillance and Security System</h3>
-                  <p>AI-Enhanced Surveillance, Biometric Access Control, and Advanced Fire Detection</p>
+                  <h3>Cyber Threat Intelligence(CTI)</h3>
+                  <p>Information or processes involiving the collection analysis and presentation of insights about cyber threats.</p>
                 </div> 
               </div>
 
@@ -427,13 +427,13 @@ return (
                 onClick={handleClosePostTutorialImage}
               >
                  <div className={styles.tooltipText}>
-                  <h3>Smart Digital Signage and Lighting​</h3>
-                  <p>Dynamic and campaign launches content, Adaptive Lighting System ​</p>
+                  <h3>Cyber Security Consulting Services​</h3>
+                  <p>Consulting services focused on helping organizations protect their data, systems , and digital assets from cyber threats.​</p>
                 </div> 
               </div>
 
               {/* Building Automation Dot */}
-              <div 
+              {/* <div 
                 id="BuildingAutomation"
                 className={styles.redDot_BuildingAutomationWrapper}
                 // onClick={handleLearnMoreClick_smart_BuildingTo_BuildingAutomationSystem}
@@ -443,10 +443,10 @@ return (
                   <h3>Building Automation System</h3>
                   <p>Efficient Control of HVAC, Electrical, Security, and Water Management</p>
                 </div> 
-              </div>
+              </div> */}
 
               {/* Motion Sensors Dot */}
-              <div 
+              {/* <div 
                 id="MotionSensors"
                 className={styles.redDot_MotionSensorsWrapper}
                 // onClick={handleLearnMoreClick_smart_BuildingTo_MotionSensors}
@@ -456,10 +456,10 @@ return (
                   <h3>Motion Sensors</h3>
                   <p>Future Trends in Motion Detection</p>
                 </div> 
-              </div>
+              </div> */}
 
               {/* Smart Parking Dot */}
-              <div 
+              {/* <div 
                 id="SmartParking"
                 className={styles.redDot_SmartParkingWrapper}
                 // onClick={handleLearnMoreClick_smart_BuildingTo_SmartParkingManagement}
@@ -469,7 +469,7 @@ return (
                   <h3>Smart Parking Management</h3>
                   <p>Efficient Parking Management and Availability Tracking</p>
                 </div> 
-              </div>
+              </div> */}
             </>
           )}  
 

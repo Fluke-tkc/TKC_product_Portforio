@@ -22,55 +22,55 @@ export const SmartSolutions_CyberSecurity_New_ver02 = () => {
   const allImages = [
     {
       id: 'renewableEnergy',
-      src: images.renewableEnergy,
+      src: images.Network_Security,
       title: "Renewable Energy Integration",
       description: "Sustainable energy solutions for smart buildings"
     },
     {
       id: 'iot',
-      src: images.iot,
+      src: images.Endpoint_Security,
       title: "IoT Systems",
       description: "Connected devices and smart sensors"
     },
     {
       id: 'Smart Lighting',
-      src: images.SmartLighting,
+      src: images.Application_Security_Cloud_Security,
       title: "Smart Lighting",
       description: "Intelligent lighting control"
     },
     {
       id: 'Motion Sensors',
-      src: images.MotionSensors,
+      src: images.Cyber_Threat_Intelligence,
       title: "Motion Detection",
       description: "Advanced motion sensing technology"
     },
     {
       id: 'Security System',
-      src: images.SecuritySystem,
+      src: images.Cyber_Security_Consulting_Services,
       title: "Security Systems",
       description: "Comprehensive building security"
     },
-    {
-      id: 'Access Control Systems',
-      src: images.AccessControlSystems,
-      title: "Access Control",
-      description: "Advanced security access management"
-    },
+    // {
+    //   id: 'Access Control Systems',
+    //   src: images.AccessControlSystems,
+    //   title: "Access Control",
+    //   description: "Advanced security access management"
+    // },
  
   
-    {
-      id: 'Building Automation System',
-      src: images.BuildingAutomationSystem,
-      title: "Building Automation",
-      description: "Automated building management"
-    },
+    // {
+    //   id: 'Building Automation System',
+    //   src: images.BuildingAutomationSystem,
+    //   title: "Building Automation",
+    //   description: "Automated building management"
+    // },
  
-    {
-      id: 'Smart Parking Management',
-      src: images.SmartParkingManagement,
-      title: "Smart Parking",
-      description: "Intelligent parking solutions"
-    }
+    // {
+    //   id: 'Smart Parking Management',
+    //   src: images.SmartParkingManagement,
+    //   title: "Smart Parking",
+    //   description: "Intelligent parking solutions"
+    // }
   ];
 
   // Preload images
@@ -235,7 +235,7 @@ export const SmartSolutions_CyberSecurity_New_ver02 = () => {
         <div className={styles.content}>
           <div className={styles.imageContainer}>
             <img
-              src={images.smart_solutions_building_new_ver2_0}
+              src={images.smart_solutions_CyberSecurity_new_ver2_0}
               alt="Smart Building"
               className={styles.aboutImage}
             />

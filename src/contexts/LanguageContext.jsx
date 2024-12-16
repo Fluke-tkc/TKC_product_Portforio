@@ -77,6 +77,15 @@ export const imageMapping = {
     Autonomous_Industrial_Robot:'/image/AS_3.png',
     Autonomous_Service_Robot:'/image/AS_4.png',
 
+  //CyberSecurity
+    smart_solutions_CyberSecurity_new_00:'/image/CBS_0.png',
+    smart_solutions_CyberSecurity_new_ver2_0:'/image/CBS_00.png',
+    Network_Security:'/image/CBS_1.png',
+    Endpoint_Security:'/image/CBS_2.png',
+    Application_Security_Cloud_Security:'/image/CBS_3.png',
+    Cyber_Threat_Intelligence:'/image/CBS_4.png',
+    Cyber_Security_Consulting_Services:'/image/CBS_5.png',
+
   },
   th: {
     // รูปภาษาไทย Hero
@@ -148,6 +157,15 @@ export const imageMapping = {
     Autonomous_Vehicles:'/image/AS_2_TH.png',
     Autonomous_Industrial_Robot:'/image/AS_3_TH.png',
     Autonomous_Service_Robot:'/image/AS_4_TH.png',
+
+  //CyberSecurity
+  smart_solutions_CyberSecurity_new_00:'/image/CBS_0_TH.png',
+  smart_solutions_CyberSecurity_new_ver2_0:'/image/CBS_00_TH.png',
+  Network_Security:'/image/CBS_1_TH.png',
+  Endpoint_Security:'/image/CBS_2_TH.png',
+  Application_Security_Cloud_Security:'/image/CBS_3_TH.png',
+  Cyber_Threat_Intelligence:'/image/CBS_4_TH.png',
+  Cyber_Security_Consulting_Services:'/image/CBS_5_Th.png',
   }
 };
 
@@ -174,7 +192,7 @@ export const textContent = {
 
   },
   th: {
-    title: "ระบบโซลูชั่นอัจฉริยะ",
+    title: "ระบบอัจฉริยะ",
     subtitle: "Digital Communication Solutions",
     card1: <span className={styles.thaiFont}>ระบบอาคารอัจฉริยะ</span>,
     card2: <span className={styles.thaiFont}>ระบบโรงพยบาลอัจฉริยะ</span>,

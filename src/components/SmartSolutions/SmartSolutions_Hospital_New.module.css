@@ -368,8 +368,8 @@
 
 /* IoT */
 .redDot_IotWrapper {
-  top: 76%;
-  left: 22%;
+  top: 51%;
+  left: 5%;
  /* background-image: url("/image/SmartBuildingPicture6.svg");  */
 }
 
@@ -393,7 +393,7 @@
 /* Surveillance and Security */
 .redDot_SurveillanceSecurityWrapper {
   top: 27%;
-  left: 72%;
+  left: 93.5%;
    /* background-image: url("/image/SurveillanceSecurity.png");  */
 }
 
@@ -404,8 +404,8 @@
 
 /* Smart Lighting */
 .redDot_LightingWrapper {
-  top: 75%;
-  left: 75%;
+  top: 36%;
+  left: 63.5%;
    /* background-image: url("/image/Picture1.svg");  */
 }
 
