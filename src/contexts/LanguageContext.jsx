@@ -165,7 +165,7 @@ export const imageMapping = {
   Endpoint_Security:'/image/CBS_2_TH.png',
   Application_Security_Cloud_Security:'/image/CBS_3_TH.png',
   Cyber_Threat_Intelligence:'/image/CBS_4_TH.png',
-  Cyber_Security_Consulting_Services:'/image/CBS_5_Th.png',
+  Cyber_Security_Consulting_Services:'/image/CBS_5_TH.png',
   }
 };
 

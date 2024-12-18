@@ -18,7 +18,7 @@
 
 .overlayText {
   position: absolute;
-  top: 20px; 
+  top: 20px;
   left: 20%;
   transform: translateX(-50%);
   color: white;
@@ -109,59 +109,166 @@
   display: block;
 }
 
-.aboutItems {
-  color: var(--color-text);
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
+/* Tooltip Styles */
+.tooltipText {
+  visibility: hidden;
+  background-color: white;
+  color: black;
+  text-align: left;
+  padding: 0px;
+  border-radius: 12px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+  width: 0px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  white-space: normal;
+  z-index: 0;
 }
 
-.aboutItem {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  list-style: none;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  padding-right: 0px;
-  padding-left: 0px;
-  background-image: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.42) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  background-size: 0 100%;
+.tooltipText h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+}
+
+.tooltipText p {
+  font-size: 14px;
+  margin: 0 0 16px 0;
+  color: #666;
+}
+
+/* Common Red Dot Styles */
+[class*="redDot_"][class*="Wrapper"] {
+  position: absolute;
+  width: 50px !important;
+  height: 50px !important;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 50%;
+  background-size: cover;
   background-repeat: no-repeat;
-  transition: 0.4s;
+  background-position: center center;
 }
 
-.aboutItem:hover {
-  background-size: 100% 100%;
+/* Ripple Effect for all dots */
+[class*="redDot_"][class*="Wrapper"]::before,
+[class*="redDot_"][class*="Wrapper"]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: -1;
 }
 
-.aboutItem h3 {
-  font-size: 40px;
-  font-weight: 600;
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-right:0px;
-  margin-bottom: 50px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 80px;
-  padding-right: 0px;
+[class*="redDot_"][class*="Wrapper"]::before {
+  animation: ripple 2s infinite;
 }
 
-.aboutItemp {
-  font-size: 25px;
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-right:100px;
-  margin-bottom: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 80px;
-  padding-right: 0px;
+[class*="redDot_"][class*="Wrapper"]::after {
+  animation: ripple 2s infinite 1s;
+}
+
+/* Individual Red Dot Styles */
+.redDot_RenewableEnergyIntegrationWrapper {
+  top: 22%;
+  left: 50.5%;
+}
+
+.redDot_RenewableEnergyIntegrationWrapper::before,
+.redDot_RenewableEnergyIntegrationWrapper::after {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.redDot_IotWrapper {
+  top: 40%;
+  left: 45.7%;
+}
+
+.redDot_IotWrapper::before,
+.redDot_IotWrapper::after {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.redDot_AccessControlSystemsWrapper {
+  top: 25%;
+  left: 91%;
+}
+
+.redDot_AccessControlSystemsWrapper::before,
+.redDot_AccessControlSystemsWrapper::after {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.redDot_SurveillanceSecurityWrapper {
+  top: 72%;
+  left: 8%;
+}
+
+.redDot_SurveillanceSecurityWrapper::before,
+.redDot_SurveillanceSecurityWrapper::after {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.redDot_LightingWrapper {
+  top: 80%;
+  left: 93%;
+}
+
+.redDot_LightingWrapper::before,
+.redDot_LightingWrapper::after {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.redDot_BuildingAutomationWrapper {
+  top: 0%;
+  left: 0%;
+}
+
+.redDot_BuildingAutomationWrapper::before,
+.redDot_BuildingAutomationWrapper::after {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.redDot_MotionSensorsWrapper {
+  top: 0%;
+  left: 0%;
+}
+
+.redDot_MotionSensorsWrapper::before,
+.redDot_MotionSensorsWrapper::after {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Close Button Styles */
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 2;
+}
+
+.closeButton:hover {
+  background-color: rgba(255, 255, 255, 1);
 }
 
 /* Image Viewer Styles */
@@ -176,6 +283,15 @@
   justify-content: center;
   align-items: center;
   z-index: 3;
+}
+
+.viewerContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .viewerImage {
@@ -222,245 +338,6 @@
   background-color: #0056b3;
 }
 
-/* Tooltip Styles */
-.tooltipText {
-  visibility: hidden;
-  background-color: white;
-  color: black;
-  text-align: left;
-  padding: 20px;
-  border-radius: 12px;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.3s, visibility 0.3s;
-  width: 400px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  white-space: normal;
-  z-index: 0;
-}
-
-.tooltipText h3 {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 0 0 8px 0;
-}
-
-.tooltipText p {
-  font-size: 14px;
-  margin: 0 0 16px 0;
-  color: #666;
-}
-
-/* Individual Tooltip Positions */
-.redDot_RenewableEnergyIntegrationWrapper .tooltipText {
-  top: calc(10% + 0px);
-  left: 70%;
-}
-
-.redDot_IotWrapper .tooltipText {
-  top: calc(32% + 0px);
-  left: 30%;
-}
-
-.redDot_AccessControlSystemsWrapper .tooltipText {
-  top: calc(30% + 0px);
-  left: 65%;
-}
-
-.redDot_SurveillanceSecurityWrapper .tooltipText {
-  top: calc(57% + 0px);
-  left: 78%;
-}
-
-.redDot_LightingWrapper .tooltipText {
-  top: calc(57% + 0px);
-  left: 55%;
-}
-
-.redDot_BuildingAutomationWrapper .tooltipText {
-  top: calc(88% - 0px);
-  left: 35%;
-}
-
-.redDot_MotionSensorsWrapper .tooltipText {
-  top: calc(82% - 0px);
-  left: 45%;
-}
-
-.redDot_SmartParkingWrapper .tooltipText {
-  top: calc(85% - 0px);
-  left: 70%;
-}
-
-/* Red Dot Common Styles */
-[class*="redDot_"][class*="Wrapper"] {
-  position: absolute;
-  width: 50px !important;
-  height: 50px !important;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  z-index: 2;
-  border-radius: 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-/* Ripple Effect */
-[class*="redDot_"][class*="Wrapper"]::before,
-[class*="redDot_"][class*="Wrapper"]::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  z-index: -1;
-}
-
-[class*="redDot_"][class*="Wrapper"]::before {
-  animation: ripple 2s infinite;
-}
-
-[class*="redDot_"][class*="Wrapper"]::after {
-  animation: ripple 2s infinite 1s;
-}
-
-/* Individual Red Dot Styles */
-.redDot_RenewableEnergyIntegrationWrapper {
-  top: 22%;
-  left: 50.5%;
-}
-
-.redDot_RenewableEnergyIntegrationWrapper::before,
-.redDot_RenewableEnergyIntegrationWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.redDot_IotWrapper {
-  top: 40%;
-  left: 45.5%;
-}
-
-.redDot_IotWrapper::before,
-.redDot_IotWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.redDot_AccessControlSystemsWrapper {
-  top: 25%;
-  left: 91%;
-}
-
-.redDot_AccessControlSystemsWrapper::before,
-.redDot_AccessControlSystemsWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.redDot_SurveillanceSecurityWrapper {
-  top: 72%;
-  left: 7.5%;
-}
-
-.redDot_SurveillanceSecurityWrapper::before,
-.redDot_SurveillanceSecurityWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.redDot_LightingWrapper {
-  top: 80%;
-  left: 93%;
-}
-
-.redDot_LightingWrapper::before,
-.redDot_LightingWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
-}
-
-/* .redDot_BuildingAutomationWrapper {
-  top: 88%;
-  left: 20%;
-}
-
-.redDot_BuildingAutomationWrapper::before,
-.redDot_BuildingAutomationWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.redDot_MotionSensorsWrapper {
-  top: 83%;
-  left: 52%;
-}
-
-.redDot_MotionSensorsWrapper::before,
-.redDot_MotionSensorsWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.redDot_SmartParkingWrapper {
-  top: 81.8%;
-  left: 85.8%;
-}
-
-.redDot_SmartParkingWrapper::before,
-.redDot_SmartParkingWrapper::after {
-  background: rgba(255, 255, 255, 0.6);
-} */
-
-/* Hover Effects */
-[class*="redDot_"][class*="Wrapper"]:hover .tooltipText {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* Close Button Styles */
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #333;
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.8);
-  z-index: 2;
-}
-
-.closeButton:hover {
-  background-color: rgba(255, 255, 255, 1);
-}
-
-/* Resize Handle Styles */
-.resizeHandles {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 20px;
-  height: 20px;
-  cursor: se-resize;
-}
-
-.resizeHandle {
-  position: relative;
-  bottom: 5px;
-  right: 5px;
-  width: 10px;
-  height: 10px;
-  border-right: 2px solid #666;
-  border-bottom: 2px solid #666;
-}
-
 /* Animations */
 @keyframes ripple {
   0% {
@@ -477,84 +354,12 @@
   }
 }
 
-/* Safari Specific Fixes */
-@supports (-webkit-touch-callout: none) {
-  .viewerImage,
-  .navigationButtons {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-  }
-
-  [class*="redDot_"][class*="Wrapper"] {
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
-}
-
 /* Media Queries */
-@media (max-width: 400px) {
-  .slider.pausedAnimation {
-    transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));
-  }
-
-  .itemTitle {
-    font-size: 14px;
-    padding: 10px;
-  }
-  
-  .content {
-    bottom: 5%;
-  }
-
-  .overlayText {
-    font-size: 18px;
-    top: 5px;
-    left: 25%;
-  }
-
-  .modalContent {
-    padding: 15px;
-  }
-
-  .imageModal {
-    max-width: 90%;
-    max-height: 85vh;
-  }
-
-  .tooltipText {
-    width: 300px;
-  }
-
-  [class*="redDot_"][class*="Wrapper"] {
-    width: 40px;
-    height: 40px;
-  }
-}
-
 @media screen and (max-width: 768px) {
-  .overlayText {
-    font-size: 1px;
-    top: 10px;
-    left: 25%;
-  }
-
-  [class*="redDot_"][class*="Wrapper"] {
-    width: 30px !important;
-    height: 30px !important;
-  }
-
-  .tooltipText {
-    width: 200px;
-  }
-
-  .navigationButtons {
-    padding: 0 10px;
-  }
-
-  .BacknavButton, 
-  .NextnavButton {
-    padding: 6px 12px;
-    font-size: 12px;
+  .imageModal {
+    width: 90vw !important;
+    height: auto !important;
+    max-height: 80vh;
   }
 
   [class*="redDot_"][class*="Wrapper"] {
@@ -568,6 +373,11 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+  }
+
+  .tooltipText {
+    width: 200px;
+    padding: 15px;
   }
 
   @keyframes ripple {
@@ -586,6 +396,94 @@
   }
 }
 
+@media (max-width: 480px) {
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 30px !important;
+    height: 30px !important;
+  }
+}
+
+/* Touch Device Specific */
+@media (hover: none) and (pointer: coarse) {
+  .tooltipText {
+    transition: opacity 0.2s ease;
+  }
+
+  [class*="redDot_"][class*="Wrapper"]:active .tooltipText {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  .viewerImage,
+  .navigationButtons {
+    transition: none;
+  }
+
+  [class*="redDot_"][class*="Wrapper"]::before,
+  [class*="redDot_"][class*="Wrapper"]::after {
+    animation: none;
+  }
+
+  @keyframes ripple {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.4;
+    }
+  }
+}
+.aboutItems {
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.aboutItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-right: 0px;
+  padding-left: 0px;
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.42) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  background-size: 0 100%;
+  background-repeat: no-repeat;
+  transition: 0.4s;
+}
+
+.aboutItem h3 {
+  font-size: 40px;
+  font-weight: 600;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right:0px;
+  margin-bottom: 50px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 80px;
+  padding-right: 0px;
+}
+
+.aboutItemp {
+  font-size: 25px;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right:100px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 80px;
+  padding-right: 0px;
+}
 @media screen and (max-width: 900px) {
   .slider.pausedAnimation {
     transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));
@@ -609,25 +507,6 @@
     bottom: 5%;
   }
 
-  .overlayText {
-    font-size: 18px;
-    top: 5px;
-    left: 25%;
-  }
-
-  .modalContent {
-    padding: 15px;
-  }
-
-  .imageModal {
-    max-width: 90%;
-    max-height: 85vh;
-  }
-
-  .tooltipText {
-    width: 300px;
-  }
-
   .messageBox {
     width: 350px;
   }
@@ -635,90 +514,18 @@
   [class*="redDot_"][class*="Wrapper"] {
     width: 40px;
     height: 40px;
-  }
-
-  .topLeftButton {
-    width: 200px;
-    height: 140px;
   }
 }
 
 @media screen and (max-width: 1200px) {
-  .slider {
-    width: 160px;
-    height: 200px;
-  } 
-  
-  .itemTitle {
-    font-size: 14px;
-    padding: 10px;
-  }
-  
-  .item {
-    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px);
-  }
-  
-  .content {
-    bottom: 5%;
-  }
-
   .overlayText {
     font-size: 18px;
     top: 5px;
     left: 25%;
   }
 
-  .modalContent {
-    padding: 15px;
-  }
-
-  .imageModal {
-    max-width: 90%;
-    max-height: 85vh;
-  }
-
   .tooltipText {
     width: 300px;
-  }
-
-  .messageBox {
-    width: 350px;
-  }
-
-  [class*="redDot_"][class*="Wrapper"] {
-    width: 40px;
-    height: 40px;
-  }
-
-  .topLeftButton {
-    width: 200px;
-    height: 140px;
-  }
-}
-
-@media screen and (max-width: 1400px) {
-  .overlayText {
-    font-size: 28px;
-    top: 5px;
-    left: 25%;
-  }
-
-  .tooltipText {
-    width: 350px;
-  }
-
-  .slider {
-    width: 180px;
-    height: 220px;
-  }
-
-  .item {
-    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(400px);
-  }
-
-  .imageModal {
-    max-width: 95%;
-    max-height: 90vh;
   }
 
   [class*="redDot_"][class*="Wrapper"] {
@@ -727,68 +534,25 @@
   }
 }
 
-/* Touch Device Specific */
-@media (hover: none) and (pointer: coarse) {
-  .rotationButton {
-    opacity: 0.8;
-    background-color: rgba(255, 255, 255, 0.3);
+@media screen and (min-width: 1920px) {
+  .content h1 {
+    font-size: clamp(4rem, 6vw, 20rem);
   }
 
-  .rotationButton:active {
-    opacity: 1;
-    background-color: rgba(255, 255, 255, 0.5);
+  .author {
+    font-size: 18px;
+    max-width: 800px;
   }
 
   .tooltipText {
-    transition: opacity 0.2s ease;
+    width: 450px;
   }
 
-  [class*="redDot_"][class*="Wrapper"]:active .tooltipText {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  .item {
-    cursor: default;
-  }
-
-  .slider {
-    cursor: default;
+  [class*="redDot_"][class*="Wrapper"] {
+    width: 55px;
+    height: 55px;
   }
 }
-
-/* Reduced Motion Preferences */
-@media (prefers-reduced-motion: reduce) {
-  .slider {
-    transition: none;
-  }
-
-  .item {
-    transition: none;
-  }
-
-  .rotationButton {
-    transition: opacity 0.2s ease;
-  }
-
-  .buttonIcon {
-    transition: none;
-  }
-
-  [class*="redDot_"][class*="Wrapper"]::before,
-  [class*="redDot_"][class*="Wrapper"]::after {
-    animation: none;
-  }
-
-  @keyframes ripple {
-    0%, 100% {
-      transform: translate(-50%, -50%) scale(1.5);
-      opacity: 0.4;
-    }
-  }
-}
-
-/* Print Styles */
 @media print {
   .slider_section {
     height: auto;
