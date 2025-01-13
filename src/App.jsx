@@ -62,8 +62,8 @@ function App() {
                     <Route path="/smart-solutions_autonomous_new" element={<Smart_Autonomous_New />} />
                     <Route path="/smart-solutions_autonomous_new_ver02" element={<Smart_Autonomous_New_ver02 />} />
              <Route path="/smart-solutions-learning" element={<Smart_Learning />} />
-                    {/* <Route path="/smart-solutions-learning_new" element={<Smart_Learning_New />} />
-                    <Route path="/smart-solutions-learning_new_ver02" element={<Smart_Learning_New_Ver02 />} />  */}
+                     <Route path="/smart-solutions-learning_new" element={<Smart_Learning_New />} />
+                    <Route path="/smart-solutions-learning_new_ver02" element={<Smart_Learning_New_Ver02 />} /> 
              <Route path="/smart-solutions-logistics" element={<Smart_Logistics />} />
                    <Route path="/smart-solutions-logistics_new" element={<Smart_Logistics_New />} />
                     <Route path="/smart-solutions-logistics_new_ver02" element={<Smart_Logistics_New_Ver02 />} />

@@ -355,8 +355,8 @@
 /* Individual Red Dot Styles */
 /* Renewable Energy Integration */
 .redDot_RenewableEnergyIntegrationWrapper {
-  top: 10%;
-  left: 59%;
+  top: 22%;
+  left: 6%;
    /* background-image: url("/image/SolarFarm.png");  */
 
 }
@@ -368,8 +368,8 @@
 
 /* IoT */
 .redDot_IotWrapper {
-  top: 32%;
-  left: 18%;
+  top: 16%;
+  left: 87.5%;
  /* background-image: url("/image/SmartBuildingPicture6.svg");  */
 }
 
@@ -380,8 +380,8 @@
 
 /* Access Control Systems */
 .redDot_AccessControlSystemsWrapper {
-  top: 30%;
-  left: 52%;
+  top: 33%;
+  left: 94%;
    /* background-image: url("/image/AccessControlSystems.png");  */
 }
 
@@ -392,8 +392,8 @@
 
 /* Surveillance and Security */
 .redDot_SurveillanceSecurityWrapper {
-  top: 57%;
-  left: 91%;
+  top: 82%;
+  left: 50%;
    /* background-image: url("/image/SurveillanceSecurity.png");  */
 }
 
@@ -404,8 +404,8 @@
 
 /* Smart Lighting */
 .redDot_LightingWrapper {
-  top: 60%;
-  left: 40%;
+  top: 52%;
+  left: 28.2%;
    /* background-image: url("/image/Picture1.svg");  */
 }
 

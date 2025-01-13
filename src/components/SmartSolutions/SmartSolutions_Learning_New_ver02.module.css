@@ -331,8 +331,8 @@
 
 /* Individual Red Dot Styles */
 .redDot_RenewableEnergyIntegrationWrapper {
-  top: 15%;
-  left: 59%;
+  top: 22%;
+  left: 6%;
 }
 
 .redDot_RenewableEnergyIntegrationWrapper::before,
@@ -341,8 +341,8 @@
 }
 
 .redDot_IotWrapper {
-  top: 32%;
-  left: 18.5%;
+  top: 16%;
+  left: 87.5%;
 }
 
 .redDot_IotWrapper::before,
@@ -352,7 +352,7 @@
 
 .redDot_AccessControlSystemsWrapper {
   top: 33%;
-  left: 48.5%;
+  left: 94%;
 }
 
 .redDot_AccessControlSystemsWrapper::before,
@@ -361,8 +361,8 @@
 }
 
 .redDot_SurveillanceSecurityWrapper {
-  top: 58%;
-  left: 88%;
+  top: 82%;
+  left: 50%;
 }
 
 .redDot_SurveillanceSecurityWrapper::before,

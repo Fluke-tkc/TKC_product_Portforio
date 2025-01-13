@@ -97,14 +97,15 @@ export const imageMapping = {
     PointofSale:'/image/lg_5.png',
 
 
-    //  //Learning
-    //  smart_solutions_CyberSecurity_new_00:'/image/CBS_0.png',
-    //  smart_solutions_CyberSecurity_new_ver2_0:'/image/CBS_00.png',
-    //  Network_Security:'/image/CBS_1.png',
-    //  Endpoint_Security:'/image/CBS_2.png',
-    //  Application_Security_Cloud_Security:'/image/CBS_3.png',
-    //  Cyber_Threat_Intelligence:'/image/CBS_4.png',
-    //  Cyber_Security_Consulting_Services:'/image/CBS_5.png',
+     //Learning
+     smart_solutions_Learning_new_00:'/image/Learn_0.png',
+     smart_solutions_Learning_new_ver2_0:'/image/Learn_00.png',
+     Cloud_Based_Learning_Management_Systems:'/image/Learn_1.png',
+     IOT_Enabled_Smart_Classrooms:'/image/Learn_2.png',
+     AI_Driven_Personallized_Learning:'/image/Learn_3.png',
+     Professional_Assessment_and_Certificate:'/image/Learn_4.png',
+    
+
   },
   th: {
     // รูปภาษาไทย Hero
@@ -187,6 +188,7 @@ export const imageMapping = {
   Cyber_Security_Consulting_Services:'/image/CBS_5_TH.png',
 
 
+    //Logistics
   smart_solutions_Logistics_new_00:'/image/lg_0_TH.png',
   smart_solutions_Logistics_new_ver2_0:'/image/lg_00_TH.png',
   SmartScan:'/image/lg_1_TH.png',
@@ -195,6 +197,14 @@ export const imageMapping = {
   TransferDelivery:'/image/lg_4_TH.png',
   PointofSale:'/image/lg_5_TH.png',
 
+
+   //Learning
+  //  smart_solutions_Learning_new_00:'/image/Learn_0_TH.png',
+  //  smart_solutions_Learning_new_ver2_0:'/image/Learn_00_TH.png',
+  //  Cloud_Based_Learning_Management_Systems:'/image/Learn_1_TH.png',
+  //  IOT_Enabled_Smart_Classrooms:'/image/Learn_2_TH.png',
+  //  AI_Driven_Personallized_Learning:'/image/Learn_3_TH.png',
+  //  Professional_Assessment_and_Certificate:'/image/Learn_4_TH.png',
   }
 };
 
