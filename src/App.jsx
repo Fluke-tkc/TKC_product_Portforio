@@ -65,8 +65,8 @@ function App() {
                     {/* <Route path="/smart-solutions-learning_new" element={<Smart_Learning_New />} />
                     <Route path="/smart-solutions-learning_new_ver02" element={<Smart_Learning_New_Ver02 />} />  */}
              <Route path="/smart-solutions-logistics" element={<Smart_Logistics />} />
-                   {/* <Route path="/smart-solutions-logistics_new" element={<Smart_Logistics_New />} />
-                    <Route path="/smart-solutions-logistics_new_ver02" element={<Smart_Logistics_New_Ver02 />} /> */}
+                   <Route path="/smart-solutions-logistics_new" element={<Smart_Logistics_New />} />
+                    <Route path="/smart-solutions-logistics_new_ver02" element={<Smart_Logistics_New_Ver02 />} />
              <Route path="/smart-solutions-organized_communication_cables" element={<Smart_Organized_Communication_Cables />} />
                     <Route path="/smart-solutions-organized_communication_cables_new" element={<Smart_Organized_Communication_Cables_New />} />
                     <Route path="/smart-solutions-organized_communication_cables_new_ver02" element={<Smart_Organized_Communication_Cables_New_Ver02 />} />

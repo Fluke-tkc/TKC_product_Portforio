@@ -188,7 +188,7 @@ export const Hero_New = () => {
     { 
       id: 'smartLogistics',
       image: '/image/Smart Logistics.jpg',
-      route: '/smart-logistics_new',
+      route: '/smart-solutions-logistics_new',
       title: text.card5
     },
     { 

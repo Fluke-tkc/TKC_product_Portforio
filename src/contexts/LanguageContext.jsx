@@ -86,6 +86,25 @@ export const imageMapping = {
     Cyber_Threat_Intelligence:'/image/CBS_4.png',
     Cyber_Security_Consulting_Services:'/image/CBS_5.png',
 
+
+    //Logistics
+    smart_solutions_Logistics_new_00:'/image/lg_0.png',
+    smart_solutions_Logistics_new_ver2_0:'/image/lg_00.png',
+    SmartScan:'/image/lg_1.png',
+    RouteOptimization:'/image/lg_2.png',
+    IntelligentCargoVolumeAnalysis:'/image/lg_3.png',
+    TransferDelivery:'/image/lg_4.png',
+    PointofSale:'/image/lg_5.png',
+
+
+    //  //Learning
+    //  smart_solutions_CyberSecurity_new_00:'/image/CBS_0.png',
+    //  smart_solutions_CyberSecurity_new_ver2_0:'/image/CBS_00.png',
+    //  Network_Security:'/image/CBS_1.png',
+    //  Endpoint_Security:'/image/CBS_2.png',
+    //  Application_Security_Cloud_Security:'/image/CBS_3.png',
+    //  Cyber_Threat_Intelligence:'/image/CBS_4.png',
+    //  Cyber_Security_Consulting_Services:'/image/CBS_5.png',
   },
   th: {
     // รูปภาษาไทย Hero
@@ -166,6 +185,16 @@ export const imageMapping = {
   Application_Security_Cloud_Security:'/image/CBS_3_TH.png',
   Cyber_Threat_Intelligence:'/image/CBS_4_TH.png',
   Cyber_Security_Consulting_Services:'/image/CBS_5_TH.png',
+
+
+  smart_solutions_Logistics_new_00:'/image/lg_0_TH.png',
+  smart_solutions_Logistics_new_ver2_0:'/image/lg_00_TH.png',
+  SmartScan:'/image/lg_1_TH.png',
+  RouteOptimization:'/image/lg_2_TH.png',
+  IntelligentCargoVolumeAnalysis:'/image/lg_3_TH.png',
+  TransferDelivery:'/image/lg_4_TH.png',
+  PointofSale:'/image/lg_5_TH.png',
+
   }
 };
 
