@@ -5,6 +5,9 @@ import styles from "./Hero_New.module.css";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { imageMapping } from "../../contexts/LanguageContext";
 import SnowEffect from '../Hero/snowEffect';
+import valentineEffect from '../Hero/valentineEffect';
+
+
 const DRAG_SETTINGS = {
   sensitivity: 0.1,          
   momentumMultiplier: 1,     
@@ -548,7 +551,7 @@ export const Hero_New = () => {
   // Render
   return (
     <> 
-    <SnowEffect />
+     <SnowEffect /> 
       {/* <div id="container" className={styles.snowContainer}> */}
         <div className={styles.slider_section}>
           <button 

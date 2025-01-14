@@ -1,0 +1,79 @@
+/* snowEffect.module.css */
+
+/* Container สำหรับเอฟเฟค */
+.valentineContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none; /* ห้ามรับเหตุการณ์การคลิก */
+    z-index: 1; /* ครอบคลุมหน้าเว็บ */
+    overflow: hidden; /* ที่ออกนอกขอบ */
+  }
+  
+  
+  .heart {
+    position: absolute;
+    width: 20px; /* กำหนดขนาด*/
+    height: 20px;
+    background-image: url('/image/heart.png'); /* ใส่ path ของรูป */
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: snowfall 10s linear infinite; /* เริ่มใช้งานอนิเมชัน */
+    -webkit-animation: snowfall 10s linear infinite; /* สำหรับ Safari */
+    will-change: transform; /* ปรับประสิทธิภาพ */
+  }
+  
+ 
+  @keyframes heartfall {
+    0% {
+        transform: translate(0, -20vh) rotate(0deg); /* เริ่มต้น */
+    }
+    50% {
+        transform: translate(5vw, 50vh) rotate(180deg); /* เคลื่อนที่ */
+    }
+    100% {
+        transform: translate(-5vw, 100vh) rotate(360deg); /* ตกถึงล่าง */
+    }
+  }
+  
+  @-webkit-keyframes heartfall { /* สำหรับ Safari */
+    0% {
+        -webkit-transform: translate(0, -20vh) rotate(0deg); /* เริ่มต้น */
+    }
+    50% {
+        -webkit-transform: translate(5vw, 50vh) rotate(180deg); /* เคลื่อนที่ */
+    }
+    100% {
+        -webkit-transform: translate(-5vw, 100vh) rotate(360deg); /* ตกถึงล่าง */
+    }
+  }
+  
+  /* ตัวอย่างสำหรับใช้งาน */
+  .heart:nth-child(1) {
+    left: 10%; /* กำหนดจุดเริ่ม */
+    animation-delay: 0s;
+    -webkit-animation-delay: 0s;
+  }
+  .heart:nth-child(2) {
+    left: 30%;
+    animation-delay: 2s;
+    -webkit-animation-delay: 2s;
+  }
+  .heart:nth-child(3) {
+    left: 50%;
+    animation-delay: 4s;
+    -webkit-animation-delay: 4s;
+  }
+  .heart:nth-child(4) {
+    left: 70%;
+    animation-delay: 6s;
+    -webkit-animation-delay: 6s;
+  }
+  .heart:nth-child(5) {
+    left: 90%;
+    animation-delay: 8s;
+    -webkit-animation-delay: 8s;
+  }
+  
