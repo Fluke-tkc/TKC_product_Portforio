@@ -6,7 +6,7 @@ const valentineEffect = () => {
     const valentineContainer = document.getElementById('valentineContainer');
 
     if (!valentineContainer) {
-      console.error('Snow container not found');
+      
       return;
     }
 
@@ -24,20 +24,20 @@ const valentineEffect = () => {
       // สุ่มค่าความเบลอ
       const blurAmount = Math.random() *  (3 - 2) + 2; // ระดับเบลอระหว่าง 0px - 3px
       heart.style.filter = `blur(${blurAmount}px)`;
-      snowContainer.appendChild(heart);
+      valentineContainer.appendChild(heart);
 
       // ลบหิมะเมื่อจบอนิเมชัน
       setTimeout(() => heart.remove(), parseFloat(heart.style.animationDuration) * 1000);
     };
 
     // สร้างหิมะทุกๆ 100ms
-    const snowInterval = setInterval(createSnow, 100);
+    const heartInterval = setInterval(createheart, 100);
 
     // ทำความสะอาด interval เมื่อ component ถูกลบ
-    return () => clearInterval(snowInterval);
+    return () => clearInterval(heartInterval);
   }, []);
 
-  return <div id="snowContainer" className={styles.snowContainer}></div>;
+  return <div id="valentineContainer" className={styles.valentineContainer}></div>;
 };
 
 export default valentineEffect;
