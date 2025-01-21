@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import styles from './valentineEffect.module.css';
+import styles from './Hearteffect.module.css';
 
-const valentineEffect = () => {
+const HeartEffect = () => {
   useEffect(() => {
     const valentineContainer = document.getElementById('valentineContainer');
 
@@ -15,12 +15,12 @@ const valentineEffect = () => {
       heart.classList.add(styles.heart);
       heart.style.left = Math.random() * 100 + 'vw'; // สุ่มตำแหน่งเริ่มต้นแนวนอน
       heart.style.width = `${Math.random() * 20 + 10}px`; // สุ่มขนาดหิมะ
-      heart.style.height = snow.style.width; // ให้ขนาดกว้างเท่ากับสูง
+      heart.style.height = heart.style.width; // ให้ขนาดกว้างเท่ากับสูง
       heart.style.animationDuration = `${Math.random() * 30 + 10}s`; // สุ่มระยะเวลาอนิเมชัน
       heart.style.opacity = Math.random(); // สุ่มความโปร่งใส
   // สุ่มระยะเวลาอนิเมชันหมุน
       
-      heart.style.animation = `${styles.heartfall} ${snow.style.animationDuration} linear infinite`;
+      heart.style.animation = `${styles.heartfall} ${heart.style.animationDuration} linear infinite`;
       // สุ่มค่าความเบลอ
       const blurAmount = Math.random() *  (3 - 2) + 2; // ระดับเบลอระหว่าง 0px - 3px
       heart.style.filter = `blur(${blurAmount}px)`;
@@ -40,4 +40,4 @@ const valentineEffect = () => {
   return <div id="valentineContainer" className={styles.valentineContainer}></div>;
 };
 
-export default valentineEffect;
+export default HeartEffect;
