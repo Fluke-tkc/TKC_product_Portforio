@@ -28,25 +28,25 @@
 /* อนิเมชันหิมะตก */
 @keyframes snowfall {
   0% {
-      transform: translate(0, -20vh) rotate(0deg); /* เริ่มต้น */
+      transform: translate(0, 100vh) rotate(0deg); /* เริ่มต้น */
   }
   50% {
       transform: translate(0vw, 50vh) rotate(180deg); /* เคลื่อนที่ */
   }
   100% {
-      transform: translate(0vw, 100vh) rotate(360deg); /* ตกถึงล่าง */
+      transform: translate(0vw, -20vh) rotate(360deg); /* ตกถึงล่าง */
   }
 }
 
 @-webkit-keyframes snowfall { /* สำหรับ Safari */
   0% {
-      -webkit-transform: translate(0, -20vh) rotate(0deg); /* เริ่มต้น */
+      -webkit-transform: translate(0, 100vh) rotate(0deg); /* เริ่มต้น */
   }
   50% {
       -webkit-transform: translate(5vw, 50vh) rotate(180deg); /* เคลื่อนที่ */
   }
   100% {
-      -webkit-transform: translate(-5vw, 100vh) rotate(360deg); /* ตกถึงล่าง */
+      -webkit-transform: translate(-5vw, -20vh) rotate(360deg); /* ตกถึงล่าง */
   }
 }
 
