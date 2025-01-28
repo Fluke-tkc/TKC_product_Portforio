@@ -5,8 +5,6 @@ import styles from "./Hero_New.module.css";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { imageMapping } from "../../contexts/LanguageContext";
 import SnowEffect from '../Hero/snowEffect';
-//import HeartEffect from '../Hero/HeartEffect';
-
 
 const DRAG_SETTINGS = {
   sensitivity: 0.1,          
@@ -138,7 +136,10 @@ export const Hero_New = () => {
   const navigate = useNavigate();
   const [isDragging, setIsDragging] = useState(false);
   const [isRotating, setIsRotating] = useState(true);
-  const [currentRotation, setCurrentRotation] = useState(0);
+  const [currentRotation, setCurrentRotation] = useState(() => {
+    const savedPosition = localStorage.getItem('heroRotationPosition');
+    return savedPosition ? parseFloat(savedPosition) : 0;
+  });
   const [isPlaying, setIsPlaying] = useState(false);
   const { language, toggleLanguage } = useLanguage();
   
@@ -232,6 +233,31 @@ export const Hero_New = () => {
     }
   ];
 
+  // Save rotation position to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('heroRotationPosition', currentRotation.toString());
+  }, [currentRotation]);
+
+  // Load saved position when component mounts
+  useEffect(() => {
+    const savedPosition = localStorage.getItem('heroRotationPosition');
+    if (savedPosition) {
+      setCurrentRotation(parseFloat(savedPosition));
+    }
+  }, []);
+
+  // Save position before navigating away
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      localStorage.setItem('heroRotationPosition', currentRotation.toString());
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [currentRotation]);
+
   useEffect(() => {
     if (!audioRef.current) {
       audioRef.current = new Audio('/audio/loveromanticinstrumental.m4a');
@@ -253,8 +279,6 @@ export const Hero_New = () => {
       audio.currentTime = 0;
     };
   }, []);
-
-  
 
   const toggleMusic = async () => {
     try {
@@ -333,7 +357,6 @@ export const Hero_New = () => {
     }, DRAG_SETTINGS.autoRotateDelay);
   };
 
-  // Mouse wheel handling
   const handleWheelMomentum = () => {
     if (Math.abs(wheelVelocityRef.current) < DRAG_SETTINGS.minimumVelocity) {
       wheelMomentumRef.current = null;
@@ -429,7 +452,11 @@ export const Hero_New = () => {
       dragState.current.lastX = point.clientX;
       dragState.current.lastTimestamp = now;
   
-      setCurrentRotation(prev => prev + (deltaX * DRAG_SETTINGS.sensitivity));
+      setCurrentRotation(prev => {
+        const newRotation = prev + (deltaX * DRAG_SETTINGS.sensitivity);
+        localStorage.setItem('heroRotationPosition', newRotation.toString());
+        return newRotation;
+      });
     }
   };
 
@@ -466,6 +493,7 @@ export const Hero_New = () => {
 
           setCurrentRotation(prev => {
             const newRotation = prev + (currentVelocity * DRAG_SETTINGS.sensitivity);
+            localStorage.setItem('heroRotationPosition', newRotation.toString());
             return newRotation;
           });
 
@@ -501,7 +529,11 @@ export const Hero_New = () => {
       lastTimestamp = timestamp;
 
       if (isRotating && !dragState.current.isDragging && !isButtonPressedRef.current) {
-        setCurrentRotation(prev => prev + DRAG_SETTINGS.rotationSpeed * deltaTime);
+        setCurrentRotation(prev => {
+          const newRotation = prev + DRAG_SETTINGS.rotationSpeed * deltaTime;
+          localStorage.setItem('heroRotationPosition', newRotation.toString());
+          return newRotation;
+        });
       }
 
       animationFrameRef.current = requestAnimationFrame(animateRotation);
@@ -552,83 +584,82 @@ export const Hero_New = () => {
   return (
     <> 
      <SnowEffect /> 
-      {/* <div id="container" className={styles.snowContainer}> */}
-        <div className={styles.slider_section}>
-          <button 
-            className={styles.musicButton}
-            onClick={toggleMusic}
-            aria-label={isPlaying ? 'Pause music' : 'Play music'}
-          >
-            {isPlaying ? '♫' : '♪'}
-          </button>
+      <div className={styles.slider_section}>
+        <button 
+          className={styles.musicButton}
+          onClick={toggleMusic}
+          aria-label={isPlaying ? 'Pause music' : 'Play music'}
+        >
+          {isPlaying ? '♫' : '♪'}
+        </button>
 
-          <div className={styles.languageTabs}>
-            <button 
-              className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
-              onClick={() => language !== 'en' && toggleLanguage()}
-            >
-              EN
-            </button>
-            <button 
-              className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
-              onClick={() => language !== 'th' && toggleLanguage()}
-            >
-              TH
-            </button>
+        <div className={styles.languageTabs}>
+          <button 
+            className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
+            onClick={() => language !== 'en' && toggleLanguage()}
+          >
+            EN
+          </button>
+          <button 
+            className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
+            onClick={() => language !== 'th' && toggleLanguage()}
+          >
+            TH
+          </button>
+        </div>
+
+        <button className={styles.topLeftButton} onClick={handleButtonClick} />
+        
+        <div className={styles.banner}>
+          <div 
+            ref={sliderRef}
+            className={`${styles.slider} ${isDragging ? styles.dragging : ''}`}
+            style={{
+              transform: `translateX(-50%) perspective(1000px) rotateX(${
+                window.innerWidth <= 900 ? '-16deg' : '0deg'
+              }) rotateY(${currentRotation}deg)`
+            }}
+          >
+            {IMAGE_ROUTES.map((item, index) => (
+              <SliderItem 
+                key={index}
+                id={item.id}
+                image={item.image}
+                position={index + 1}
+                total={IMAGE_ROUTES.length}
+                onNavigate={(e) => {
+                  if (!dragState.current.isMoved) {
+                    e.stopPropagation();
+                    localStorage.setItem('heroRotationPosition', currentRotation.toString());
+                    navigate(item.route);
+                  }
+                }}
+                onDragStart={handleDragStart}
+                isDragging={isDragging}
+                title={item.title}
+              />
+            ))}
           </div>
 
-          <button className={styles.topLeftButton} onClick={handleButtonClick} />
-          
-          <div className={styles.banner}>
-            <div 
-              ref={sliderRef}
-              className={`${styles.slider} ${isDragging ? styles.dragging : ''}`}
-              style={{
-                transform: `translateX(-50%) perspective(1000px) rotateX(${
-                  window.innerWidth <= 900 ? '-16deg' : '0deg'
-                }) rotateY(${currentRotation}deg)`
-              }}
-            >
-              {IMAGE_ROUTES.map((item, index) => (
-                <SliderItem 
-                  key={index}
-                  id={item.id}
-                  image={item.image}
-                  position={index + 1}
-                  total={IMAGE_ROUTES.length}
-                  onNavigate={(e) => {
-                    if (!dragState.current.isMoved) {
-                      e.stopPropagation();
-                      navigate(item.route);
-                    }
-                  }}
-                  onDragStart={handleDragStart}
-                  isDragging={isDragging}
-                  title={item.title}
-                />
-              ))}
-            </div>
+          <RotationButton 
+            direction="left"
+            onPress={() => handleButtonPress('left')}
+            onRelease={handleButtonRelease}
+          />
+          <RotationButton 
+            direction="right"
+            onPress={() => handleButtonPress('right')}
+            onRelease={handleButtonRelease}
+          />
 
-            <RotationButton 
-              direction="left"
-              onPress={() => handleButtonPress('left')}
-              onRelease={handleButtonRelease}
-            />
-            <RotationButton 
-              direction="right"
-              onPress={() => handleButtonPress('right')}
-              onRelease={handleButtonRelease}
-            />
-
-            <div className={styles.content}>
-              <h1 data-content={text.title}>{text.title}</h1>
-              <div className={styles.author}>
-                <p>{text.subtitle}</p>
-              </div>
+          <div className={styles.content}>
+            <h1 data-content={text.title}>{text.title}</h1>
+            <div className={styles.author}>
+              <p>{text.subtitle}</p>
             </div>
           </div>
         </div>
-      {/* </div> */}
+      </div>
     </>
   );
 };
