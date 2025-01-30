@@ -178,12 +178,6 @@ export const Hero_New = () => {
       title: text.card2
     },
     { 
-      id: 'smartPlatform',
-      image: '/image/Samrt Platform.jpg',
-      route: '/smart-platform',
-      title: text.card3
-    },
-    { 
       id: 'smartLearning',
       image: '/image/Smart Learning.jpg',
       route: '/smart-solutions-learning_new',

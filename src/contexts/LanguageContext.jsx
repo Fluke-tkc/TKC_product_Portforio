@@ -10,7 +10,6 @@ export const imageMapping = {
   //main
     smartsolution2: '/image/smartsolution2.jpg',
     smartHospital: '/image/Smart Hospital.jpg',
-    smartPlatform: '/image/Samrt Platform.jpg',
     smartLearning: '/image/Smart Learning.jpg',
     smartLogistics: '/image/Smart Logistics.jpg',
     organizedCommunication: '/image/SmartSolutions_Organized_Communication_Cables.jpg',
@@ -111,7 +110,6 @@ export const imageMapping = {
     // รูปภาษาไทย Hero
     smartsolution2: '/image/smartsolution2.jpg',
     smartHospital: '/image/Smart Hospital.jpg',
-    smartPlatform: '/image/Samrt Platform.jpg',
     smartLearning: '/image/Smart Learning.jpg',
     smartLogistics: '/image/Smart Logistics.jpg',
     organizedCommunication: '/image/SmartSolutions_Organized_Communication_Cables.jpg',
@@ -216,17 +214,16 @@ export const textContent = {
     // เพิ่มข้อความอื่นๆ ตามต้องการ
     card1:"Smart Building",
     card2:"Smart Hospital",
-    card3:"Smart Platform",
-    card4:"Smart Learning",
-    card5:"Smart Logistics",
-    card6:"SmartOrganized Communication Cables",
-    card7:"Autonomous",
-    card8:"Cyber Security",
-    card9:"Smart Farming",
-    card10:"Smart Utility",
-    card11:"Cloud Services",
+    card3:"Smart Learning",
+    card4:"Smart Logistics",
+    card5:"SmartOrganized Communication Cables",
+    card6:"Autonomous",
+    card7:"Cyber Security",
+    card8:"Smart Farming",
+    card9:"Smart Utility",
+    card10:"Cloud Services",
     
-  
+    commingsoon:"COMING SOON",
 
 
   },
@@ -235,18 +232,17 @@ export const textContent = {
     subtitle: "Digital Communication Solutions",
     card1: <span className={styles.thaiFont}>ระบบอาคารอัจฉริยะ</span>,
     card2: <span className={styles.thaiFont}>ระบบโรงพยบาลอัจฉริยะ</span>,
-    card3: <span className={styles.thaiFont}>ระบบแพลตฟอร์มอัจฉริยะ</span>,
-    card4: <span className={styles.thaiFont}>ระบบการเรียนรู้อัจฉริยะ</span>,
-    card5: <span className={styles.thaiFont}>ระบบขนส่งอัจฉริยะ</span>,
-    card6: <span className={styles.thaiFont}>ระบบโครงข่ายสายสื่อสารอัจฉริยะ</span>,
-    card7: <span className={styles.thaiFont}>ระบบการทำงานอัตโนมัติ</span>,
-    card8: <span className={styles.thaiFont}>ระบบการรักษาความปลอดภัยทางไซเบอร์</span>,
-    card9: <span className={styles.thaiFont}>ระบบเกษตรนวัตกรรมอัจฉริยะ</span>,
-    card10: <span className={styles.thaiFont}>ระบบโครงสร้างพื้นฐานอัจฉริยะ</span>,
-    card11: <span className={styles.thaiFont}>ระบบบริการ<br></br>คลาวด์อัจฉริยะ</span>,
+    card3: <span className={styles.thaiFont}>ระบบการเรียนรู้อัจฉริยะ</span>,
+    card4: <span className={styles.thaiFont}>ระบบขนส่งอัจฉริยะ</span>,
+    card5: <span className={styles.thaiFont}>ระบบโครงข่ายสายสื่อสารอัจฉริยะ</span>,
+    card6: <span className={styles.thaiFont}>ระบบการทำงานอัตโนมัติ</span>,
+    card7: <span className={styles.thaiFont}>ระบบการรักษาความปลอดภัยทางไซเบอร์</span>,
+    card8: <span className={styles.thaiFont}>ระบบเกษตรนวัตกรรมอัจฉริยะ</span>,
+    card9: <span className={styles.thaiFont}>ระบบโครงสร้างพื้นฐานอัจฉริยะ</span>,
+    card10: <span className={styles.thaiFont}>ระบบบริการ<br></br>คลาวด์อัจฉริยะ</span>,
     // เพิ่มข้อความอื่นๆ ตามต้องการ
 
-
+    commingsoon:"COMING SOON",
 
   }
 };
