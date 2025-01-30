@@ -181,49 +181,49 @@ export const Hero_New = () => {
       id: 'smartLearning',
       image: '/image/Smart Learning.jpg',
       route: '/smart-solutions-learning_new',
-      title: text.card4
+      title: text.card3
     },
     { 
       id: 'smartLogistics',
       image: '/image/Smart Logistics.jpg',
       route: '/smart-solutions-logistics_new',
-      title: text.card5
+      title: text.card4
     },
     { 
       id: 'organizedCommunication',
       image: '/image/SmartSolutions_Organized_Communication_Cables.jpg',
       route: '/smart-solutions-organized_communication_cables_new',
-      title: text.card6
+      title: text.card5
     },
     { 
       id: 'autonomous',
       image: '/image/Autonomous Solution.jpg',
       route: '/smart-solutions_autonomous_new',
-      title: text.card7
+      title: text.card6
     },
     { 
       id: 'cyberSecurity',
       image: '/image/Cyber Security.jpg',
       route: '/smart-solutions-cybersecurity_new',
-      title: text.card8
+      title: text.card7
     },
     { 
       id: 'smartFarming',
       image: '/image/Smart Farming.jpg',
       route: '/smart-solutions-farm_new',
-      title: text.card9
+      title: text.card8
     },
     { 
       id: 'smartUtility',
       image: '/image/Smart Utility (Grid).jpg',
       route: '/smart-solutions-utility_new',
-      title: text.card10
+      title: text.card9
     },
     { 
       id: 'cloudServices',
       image: '/image/Cloud Services.jpg',
       route: '/smart-solutions-cloudservice_new',
-      title: text.card11
+      title: text.card10
     }
   ];
 
