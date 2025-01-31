@@ -7,34 +7,34 @@ import { imageMapping } from "../../contexts/LanguageContext";
 import SnowEffect from '../Hero/snowEffect';
 
 const DRAG_SETTINGS = {
-  sensitivity: 0.1,          
-  momentumMultiplier: 1,     
-  momentumDampening: 0.5,   
-  minimumVelocity: 0.05,     
-  rotationSpeed: 0.5,          
-  autoRotateDelay: 3000,     
+  sensitivity: 0.1,
+  momentumMultiplier: 1,
+  momentumDampening: 0.5,
+  minimumVelocity: 0.05,
+  rotationSpeed: 0.5,
+  autoRotateDelay: 3000,
   continuousRotationSpeed: 1,
   clickThreshold: {
-    duration: 200,           
-    movement: 5              
+    duration: 200,
+    movement: 5
   },
   wheel: {
-    sensitivity: 2,        
-    momentum: true,          
-    momentumDuration: 1000,  
-    debounceTime: 150        
+    sensitivity: 2,
+    momentum: true,
+    momentumDuration: 1000,
+    debounceTime: 150
   }
 };
 
-const SliderItem = ({ 
+const SliderItem = ({
   id,
-  image, 
-  position, 
-  total, 
-  onNavigate, 
-  title, 
+  image,
+  position,
+  total,
+  onNavigate,
+  title,
   onDragStart,
-  isDragging 
+  isDragging
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const clickStartTimeRef = useRef(0);
@@ -57,44 +57,44 @@ const SliderItem = ({
       y: e.touches ? e.touches[0].clientY : e.clientY
     };
     hasMovedRef.current = false;
-    if (e.cancelable) {
-      e.preventDefault();
-    }
+    // if (e.cancelable) {
+    //   e.preventDefault();
+    // }
     onDragStart(e);
   };
 
   const handleClick = (e) => {
     const clickEndTime = Date.now();
     const clickDuration = clickEndTime - clickStartTimeRef.current;
-    
+
     const currentPos = {
       x: e.clientX,
       y: e.clientY
     };
-    
+
     const deltaX = Math.abs(currentPos.x - clickStartPosRef.current.x);
     const deltaY = Math.abs(currentPos.y - clickStartPosRef.current.y);
     const totalMovement = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-    if (clickDuration < DRAG_SETTINGS.clickThreshold.duration && 
-        totalMovement < DRAG_SETTINGS.clickThreshold.movement && 
-        !isDragging && 
+    if (clickDuration < DRAG_SETTINGS.clickThreshold.duration &&
+        totalMovement < DRAG_SETTINGS.clickThreshold.movement &&
+        !isDragging &&
         !hasMovedRef.current) {
       onNavigate(e);
     }
   };
 
   const handleTouchStart = (e) => {
-    if (e.cancelable) {
-      e.preventDefault();
-    }
+    // if (e.cancelable) {
+    //   e.preventDefault();
+    // }
     handleMouseDown(e);
   };
 
   return (
-    <div 
+    <div
       className={`${styles.item} ${isDragging ? styles.dragging : ''}`}
-      style={{ 
+      style={{
         '--position': position,
         '--quantity': total
       }}
@@ -107,19 +107,18 @@ const SliderItem = ({
       tabIndex={0}
       aria-label={`Navigate to ${title}`}
     >
-     <img
-  src={imageMapping[language][id]}
-  alt={title}
-  draggable={false}
-  className={styles.itemImage}
-  loading="eager" // เพิ่มการโหลดรูปภาพแบบทันที
-  decoding="async" // เพิ่มประสิทธิภาพการ decode รูปภาพ
-  onLoad={(e) => {
-    // เพิ่ม class เมื่อโหลดรูปเสร็จ เพื่อทำ smooth transition
-    e.target.classList.add(styles.loaded)
-  }}
-/>
-      <div 
+      <img
+        src={imageMapping[language][id]}
+        alt={title}
+        draggable={false}
+        className={styles.itemImage}
+        loading="eager"
+        decoding="async"
+        onLoad={(e) => {
+          e.target.classList.add(styles.loaded)
+        }}
+      />
+      <div
         className={`${styles.itemOverlay} ${isHovered ? styles.hovered : ''}`}
       >
         <span className={styles.itemTitle}>{title}</span>
@@ -127,14 +126,19 @@ const SliderItem = ({
     </div>
   );
 };
-
 const RotationButton = ({ direction, onPress, onRelease }) => {
-
   const handleTouchStart = (e) => {
-    if (e.cancelable) {
-      e.preventDefault();
-    }
+    // if (e.cancelable) {
+    //   e.preventDefault();
+    // }
     onPress();
+  };
+
+  const handleTouchEnd = (e) => {
+    // if (e.cancelable) {
+    //   e.preventDefault();
+    // }
+    onRelease();
   };
 
   return (
@@ -143,16 +147,16 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
       onMouseDown={onPress}
       onMouseUp={onRelease}
       onMouseLeave={onRelease}
-      onTouchStart={onPress}
-      onTouchEnd={onRelease}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
       aria-label={`Rotate ${direction}`}
     >
       {direction === 'left' ? '◀' : '▶'}
     </button>
   );
-};
+ };
 
-export const Hero_New = () => {
+ export const Hero_New = () => {
   const navigate = useNavigate();
   const [isDragging, setIsDragging] = useState(false);
   const [isRotating, setIsRotating] = useState(true);
@@ -162,7 +166,7 @@ export const Hero_New = () => {
   });
   const [isPlaying, setIsPlaying] = useState(false);
   const { language, toggleLanguage } = useLanguage();
-  
+
   const sliderRef = useRef(null);
   const animationFrameRef = useRef(null);
   const autoRotateTimeoutRef = useRef(null);
@@ -183,63 +187,62 @@ export const Hero_New = () => {
     lastTimestamp: 0,
     isMoved: false
   });
-
   const IMAGE_ROUTES = [
-    { 
+    {
       id: 'smartsolution2',
       image: '/image/smartsolution2.jpg',
       route: '/smart-solutions-building_new',
       title: text.card1
     },
-    { 
+    {
       id: 'smartHospital',
       image: '/image/Smart Hospital.jpg',
       route: '/smart-solutions-hospital_new',
       title: text.card2
     },
-    { 
+    {
       id: 'smartLearning',
       image: '/image/Smart Learning.jpg',
       route: '/smart-solutions-learning_new',
       title: text.card3
     },
-    { 
+    {
       id: 'smartLogistics',
       image: '/image/Smart Logistics.jpg',
       route: '/smart-solutions-logistics_new',
       title: text.card4
     },
-    { 
+    {
       id: 'organizedCommunication',
       image: '/image/SmartSolutions_Organized_Communication_Cables.jpg',
       route: '/smart-solutions-organized_communication_cables_new',
       title: text.card5
     },
-    { 
+    {
       id: 'autonomous',
       image: '/image/Autonomous Solution.jpg',
       route: '/smart-solutions_autonomous_new',
       title: text.card6
     },
-    { 
+    {
       id: 'cyberSecurity',
       image: '/image/Cyber Security.jpg',
       route: '/smart-solutions-cybersecurity_new',
       title: text.card7
     },
-    { 
+    {
       id: 'smartFarming',
       image: '/image/Smart Farming.jpg',
       route: '/smart-solutions-farm_new',
       title: text.card8
     },
-    { 
+    {
       id: 'smartUtility',
       image: '/image/Smart Utility (Grid).jpg',
       route: '/smart-solutions-utility_new',
       title: text.card9
     },
-    { 
+    {
       id: 'cloudServices',
       image: '/image/Cloud Services.jpg',
       route: '/smart-solutions-cloudservice_new',
@@ -247,12 +250,10 @@ export const Hero_New = () => {
     }
   ];
 
-  // Save rotation position to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('heroRotationPosition', currentRotation.toString());
   }, [currentRotation]);
 
-  // Load saved position when component mounts
   useEffect(() => {
     const savedPosition = localStorage.getItem('heroRotationPosition');
     if (savedPosition) {
@@ -260,7 +261,6 @@ export const Hero_New = () => {
     }
   }, []);
 
-  // Save position before navigating away
   useEffect(() => {
     const handleBeforeUnload = () => {
       localStorage.setItem('heroRotationPosition', currentRotation.toString());
@@ -271,7 +271,6 @@ export const Hero_New = () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, [currentRotation]);
-
   useEffect(() => {
     if (!audioRef.current) {
       audioRef.current = new Audio('/audio/loveromanticinstrumental.m4a');
@@ -338,7 +337,6 @@ export const Hero_New = () => {
       buttonRotationFrameRef.current = null;
     }
   };
-
   const handleButtonPress = (direction) => {
     setIsRotating(false);
     clearAllTimers();
@@ -348,8 +346,8 @@ export const Hero_New = () => {
     const rotate = () => {
       if (isButtonPressedRef.current) {
         setCurrentRotation(prev => {
-          const delta = direction === 'left' ? 
-            -DRAG_SETTINGS.continuousRotationSpeed : 
+          const delta = direction === 'left' ?
+            -DRAG_SETTINGS.continuousRotationSpeed :
             DRAG_SETTINGS.continuousRotationSpeed;
           return prev + delta;
         });
@@ -375,33 +373,35 @@ export const Hero_New = () => {
     if (Math.abs(wheelVelocityRef.current) < DRAG_SETTINGS.minimumVelocity) {
       wheelMomentumRef.current = null;
       wheelVelocityRef.current = 0;
-      
+
       wheelTimeoutRef.current = setTimeout(() => {
         setIsRotating(true);
       }, DRAG_SETTINGS.wheel.debounceTime);
-      
+
       return;
     }
-  
+
     setCurrentRotation(prev => prev + (wheelVelocityRef.current * DRAG_SETTINGS.wheel.sensitivity));
-  
+
     wheelVelocityRef.current *= DRAG_SETTINGS.momentumDampening;
     wheelMomentumRef.current = requestAnimationFrame(handleWheelMomentum);
   };
 
   const handleWheel = (e) => {
-    e.preventDefault();
-    
+    // if (e.cancelable) {
+    //   e.preventDefault();
+    // }
+
     setIsRotating(false);
     clearAllTimers();
-  
+
     const delta = Math.sign(e.deltaY || e.deltaX);
     const wheelDelta = delta * DRAG_SETTINGS.wheel.sensitivity;
-  
+
     setCurrentRotation(prev => prev + wheelDelta);
-  
+
     wheelVelocityRef.current = wheelDelta;
-  
+
     if (DRAG_SETTINGS.wheel.momentum) {
       if (wheelMomentumRef.current) {
         cancelAnimationFrame(wheelMomentumRef.current);
@@ -413,15 +413,13 @@ export const Hero_New = () => {
       }, DRAG_SETTINGS.wheel.debounceTime);
     }
   };
-
   const handleDragStart = (e) => {
-    if (e.cancelable) {
-      e.preventDefault();
-    }
+    // if (e.cancelable) {
+    //   e.preventDefault();
+    // }
     e.stopPropagation();
-    
+
     const point = e.touches ? e.touches[0] : e;
-    
     dragState.current = {
       isDragging: true,
       startX: point.clientX,
@@ -431,22 +429,16 @@ export const Hero_New = () => {
       lastTimestamp: Date.now(),
       isMoved: false
     };
-  
+
     setIsRotating(false);
     clearAllTimers();
-  
-    const options = { passive: false };
-    
-    const touchOptions = { passive: false };
-    const mouseOptions = { passive: true };
+
 
     if (e.touches) {
-      
-      document.addEventListener('touchmove', handleDragMove, options);
-      document.addEventListener('touchend', handleDragEnd, options);
-      document.addEventListener('touchcancel', handleDragEnd, options);
+      document.addEventListener('touchmove', handleDragMove);
+      document.addEventListener('touchend', handleDragEnd);
+      document.addEventListener('touchcancel', handleDragEnd);
     } else {
-     
       document.addEventListener('mousemove', handleDragMove);
       document.addEventListener('mouseup', handleDragEnd);
       document.addEventListener('mouseleave', handleDragEnd);
@@ -455,29 +447,26 @@ export const Hero_New = () => {
 
   const handleDragMove = (e) => {
     if (!dragState.current.isDragging) return;
-  
-    if (e.cancelable) {  // เพิ่มการตรวจสอบ
-      e.preventDefault();
-    }
+
+
 
     const point = e.touches ? e.touches[0] : e;
-    
     const deltaX = point.clientX - dragState.current.lastX;
     const absDeltaX = Math.abs(deltaX);
-  
+
     if (absDeltaX > DRAG_SETTINGS.clickThreshold.movement) {
       dragState.current.isMoved = true;
       setIsDragging(true);
     }
-  
+
     if (dragState.current.isMoved) {
       const now = Date.now();
       const deltaTime = now - dragState.current.lastTimestamp;
-      
+
       dragState.current.velocity = deltaX / deltaTime;
       dragState.current.lastX = point.clientX;
       dragState.current.lastTimestamp = now;
-  
+
       setCurrentRotation(prev => {
         const newRotation = prev + (deltaX * DRAG_SETTINGS.sensitivity);
         localStorage.setItem('heroRotationPosition', newRotation.toString());
@@ -485,25 +474,24 @@ export const Hero_New = () => {
       });
     }
   };
-
   const handleDragEnd = () => {
     if (!dragState.current.isDragging) return;
 
     const wasDragging = dragState.current.isMoved;
 
-    const touchOptions = { passive: false };
-    const mouseOptions = { passive: true };
-
     dragState.current.isDragging = false;
     dragState.current.isMoved = false;
     setIsDragging(false);
 
-    document.removeEventListener('mousemove', handleDragMove);
+    const touchOptions = { passive: false };
+    const mouseOptions = { passive: true };
+
+    document.removeEventListener('mousemove', handleDragMove, mouseOptions);
     document.removeEventListener('mouseup', handleDragEnd);
     document.removeEventListener('mouseleave', handleDragEnd);
-    document.removeEventListener('touchmove', handleDragMove);
-    document.removeEventListener('touchend', handleDragEnd);
-    document.removeEventListener('touchcancel', handleDragEnd);
+    document.removeEventListener('touchmove', handleDragMove, touchOptions);
+    document.removeEventListener('touchend', handleDragEnd, touchOptions);
+    document.removeEventListener('touchcancel', handleDragEnd, touchOptions);
 
     if (wasDragging) {
       const finalVelocity = dragState.current.velocity;
@@ -539,17 +527,15 @@ export const Hero_New = () => {
     }
   };
 
-  // Event listeners setup
   useEffect(() => {
     const wheelOptions = { passive: false };
-  document.addEventListener('wheel', handleWheel, wheelOptions);
+    document.addEventListener('wheel', handleWheel, wheelOptions);
 
-  return () => {
-    document.removeEventListener('wheel', handleWheel, wheelOptions);
-    clearAllTimers();
+    return () => {
+      document.removeEventListener('wheel', handleWheel, wheelOptions);
+      clearAllTimers();
     };
   }, []);
-
   useEffect(() => {
     let lastTimestamp = 0;
 
@@ -610,12 +596,11 @@ export const Hero_New = () => {
     };
   }, []);
 
-  // Render
   return (
-    <> 
-     <SnowEffect /> 
+    <>
+      <SnowEffect />
       <div className={styles.slider_section}>
-        <button 
+        <button
           className={styles.musicButton}
           onClick={toggleMusic}
           aria-label={isPlaying ? 'Pause music' : 'Play music'}
@@ -624,13 +609,13 @@ export const Hero_New = () => {
         </button>
 
         <div className={styles.languageTabs}>
-          <button 
+          <button
             className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
             onClick={() => language !== 'en' && toggleLanguage()}
           >
             EN
           </button>
-          <button 
+          <button
             className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
             onClick={() => language !== 'th' && toggleLanguage()}
           >
@@ -639,9 +624,9 @@ export const Hero_New = () => {
         </div>
 
         <button className={styles.topLeftButton} onClick={handleButtonClick} />
-        
+
         <div className={styles.banner}>
-          <div 
+          <div
             ref={sliderRef}
             className={`${styles.slider} ${isDragging ? styles.dragging : ''}`}
             style={{
@@ -651,7 +636,7 @@ export const Hero_New = () => {
             }}
           >
             {IMAGE_ROUTES.map((item, index) => (
-              <SliderItem 
+              <SliderItem
                 key={index}
                 id={item.id}
                 image={item.image}
@@ -671,12 +656,12 @@ export const Hero_New = () => {
             ))}
           </div>
 
-          <RotationButton 
+          <RotationButton
             direction="left"
             onPress={() => handleButtonPress('left')}
             onRelease={handleButtonRelease}
           />
-          <RotationButton 
+          <RotationButton
             direction="right"
             onPress={() => handleButtonPress('right')}
             onRelease={handleButtonRelease}
@@ -692,6 +677,6 @@ export const Hero_New = () => {
       </div>
     </>
   );
-};
+ };
 
-export default Hero_New;
+ export default Hero_New;
