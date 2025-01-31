@@ -117,12 +117,14 @@
 }
 .slider_section {
   position: relative;
-  width: 100%;  
+  width: 100%;
   background-color: #D2D2D2;
   background-image: url("/image/bgibs.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
     
 }
 
@@ -141,7 +143,7 @@
   height: 200px;
   top: 20%;
   left: 50%;
-  transform: translateX(-50%) perspective(1000px) rotateX(0deg);
+  transform: translateX(-50%) perspective(2000px) rotateX(0deg); /* เพิ่ม perspective */
   transform-style: preserve-3d;
   z-index: 2;
   user-select: none;
@@ -163,19 +165,37 @@
   transition: transform 0.3s ease;
   cursor: grab;
   user-select: none;
+  /* backface-visibility: hidden; */
+  /* -webkit-backface-visibility: hidden; */
+  will-change: transform;
+
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
 }
 
 .item:active {
   cursor: grabbing;
 }
 
-.item img {
+.itemImage  {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  -ms-interpolation-mode: nearest-neighbor;
   pointer-events: none;
+  transform: translateZ(0); /* เพิ่ม hardware acceleration */
+  /* backface-visibility: hidden; */
+  /* -webkit-backface-visibility: hidden; */
+  image-rendering: -webkit-optimize-contrast; /* เพิ่มความคมชัด */
+  image-rendering: crisp-edges;
+
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
 }
 
 .itemTitle {

@@ -57,6 +57,9 @@ const SliderItem = ({
       y: e.touches ? e.touches[0].clientY : e.clientY
     };
     hasMovedRef.current = false;
+    if (e.cancelable) {
+      e.preventDefault();
+    }
     onDragStart(e);
   };
 
@@ -82,6 +85,9 @@ const SliderItem = ({
   };
 
   const handleTouchStart = (e) => {
+    if (e.cancelable) {
+      e.preventDefault();
+    }
     handleMouseDown(e);
   };
 
@@ -101,12 +107,18 @@ const SliderItem = ({
       tabIndex={0}
       aria-label={`Navigate to ${title}`}
     >
-      <img 
-        src={imageMapping[language][id]}
-        alt={title}
-        draggable={false}
-        className={styles.itemImage}
-      />
+     <img
+  src={imageMapping[language][id]}
+  alt={title}
+  draggable={false}
+  className={styles.itemImage}
+  loading="eager" // เพิ่มการโหลดรูปภาพแบบทันที
+  decoding="async" // เพิ่มประสิทธิภาพการ decode รูปภาพ
+  onLoad={(e) => {
+    // เพิ่ม class เมื่อโหลดรูปเสร็จ เพื่อทำ smooth transition
+    e.target.classList.add(styles.loaded)
+  }}
+/>
       <div 
         className={`${styles.itemOverlay} ${isHovered ? styles.hovered : ''}`}
       >
@@ -117,6 +129,14 @@ const SliderItem = ({
 };
 
 const RotationButton = ({ direction, onPress, onRelease }) => {
+
+  const handleTouchStart = (e) => {
+    if (e.cancelable) {
+      e.preventDefault();
+    }
+    onPress();
+  };
+
   return (
     <button
       className={`${styles.rotationButton} ${direction === 'left' ? styles.leftButton : styles.rightButton}`}
@@ -395,7 +415,9 @@ export const Hero_New = () => {
   };
 
   const handleDragStart = (e) => {
-    e.preventDefault();
+    if (e.cancelable) {
+      e.preventDefault();
+    }
     e.stopPropagation();
     
     const point = e.touches ? e.touches[0] : e;
@@ -409,15 +431,22 @@ export const Hero_New = () => {
       lastTimestamp: Date.now(),
       isMoved: false
     };
-
+  
     setIsRotating(false);
     clearAllTimers();
+  
+    const options = { passive: false };
+    
+    const touchOptions = { passive: false };
+    const mouseOptions = { passive: true };
 
     if (e.touches) {
-      document.addEventListener('touchmove', handleDragMove, { passive: false });
-      document.addEventListener('touchend', handleDragEnd);
-      document.addEventListener('touchcancel', handleDragEnd);
+      
+      document.addEventListener('touchmove', handleDragMove, options);
+      document.addEventListener('touchend', handleDragEnd, options);
+      document.addEventListener('touchcancel', handleDragEnd, options);
     } else {
+     
       document.addEventListener('mousemove', handleDragMove);
       document.addEventListener('mouseup', handleDragEnd);
       document.addEventListener('mouseleave', handleDragEnd);
@@ -427,7 +456,10 @@ export const Hero_New = () => {
   const handleDragMove = (e) => {
     if (!dragState.current.isDragging) return;
   
-    e.preventDefault();
+    if (e.cancelable) {  // เพิ่มการตรวจสอบ
+      e.preventDefault();
+    }
+
     const point = e.touches ? e.touches[0] : e;
     
     const deltaX = point.clientX - dragState.current.lastX;
@@ -458,7 +490,10 @@ export const Hero_New = () => {
     if (!dragState.current.isDragging) return;
 
     const wasDragging = dragState.current.isMoved;
-    
+
+    const touchOptions = { passive: false };
+    const mouseOptions = { passive: true };
+
     dragState.current.isDragging = false;
     dragState.current.isMoved = false;
     setIsDragging(false);
@@ -506,11 +541,12 @@ export const Hero_New = () => {
 
   // Event listeners setup
   useEffect(() => {
-    document.addEventListener('wheel', handleWheel, { passive: false });
-  
-    return () => {
-      document.removeEventListener('wheel', handleWheel);
-      clearAllTimers();
+    const wheelOptions = { passive: false };
+  document.addEventListener('wheel', handleWheel, wheelOptions);
+
+  return () => {
+    document.removeEventListener('wheel', handleWheel, wheelOptions);
+    clearAllTimers();
     };
   }, []);
 
