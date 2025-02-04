@@ -7,6 +7,9 @@ export default defineConfig({
   server: {
     historyApiFallback: true,
   },
+  preview: {
+    historyApiFallback: true,
+  },
   base: '/',
   build: {
     assetsInlineLimit: 0,
@@ -16,5 +19,4 @@ export default defineConfig({
       }
     }
   }
-  
 })
