@@ -4,6 +4,10 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   publicDir: 'public',
+  server: {
+    historyApiFallback: true,
+  },
+  base: '/',
   build: {
     assetsInlineLimit: 0,
     rollupOptions: {
@@ -12,4 +16,5 @@ export default defineConfig({
       }
     }
   }
+  
 })
