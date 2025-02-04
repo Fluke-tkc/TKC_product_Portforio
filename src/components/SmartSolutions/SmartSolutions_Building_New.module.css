@@ -4,7 +4,21 @@
   background-color: #285280;
   width: 100%;
 }
+.container {
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
 
+/* สำหรับส่วนที่ต้องการให้ scroll ได้ */
+.scrollableArea {
+  touch-action: pan-y;
+}
+
+/* สำหรับปุ่มและ interactive elements */
+.interactive {
+  touch-action: manipulation;
+}
 .content {
   display: flex;
   flex-direction: row;

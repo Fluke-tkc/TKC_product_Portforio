@@ -6,6 +6,7 @@ import { useLanguage } from "../../contexts/LanguageContext";
 import { imageMapping } from "../../contexts/LanguageContext";
 import SnowEffect from '../Hero/snowEffect';
 
+
 const DRAG_SETTINGS = {
   sensitivity: 0.1,
   momentumMultiplier: 1,
@@ -166,7 +167,7 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
   });
   const [isPlaying, setIsPlaying] = useState(false);
   const { language, toggleLanguage } = useLanguage();
-
+  
   const sliderRef = useRef(null);
   const animationFrameRef = useRef(null);
   const autoRotateTimeoutRef = useRef(null);
@@ -435,13 +436,13 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
 
 
     if (e.touches) {
-      document.addEventListener('touchmove', handleDragMove);
-      document.addEventListener('touchend', handleDragEnd);
-      document.addEventListener('touchcancel', handleDragEnd);
+      document.addEventListener('touchmove', handleDragMove, { passive: false });
+      document.addEventListener('touchend', handleDragEnd, { passive: false });
+      document.addEventListener('touchcancel', handleDragEnd, { passive: false });
     } else {
-      document.addEventListener('mousemove', handleDragMove);
-      document.addEventListener('mouseup', handleDragEnd);
-      document.addEventListener('mouseleave', handleDragEnd);
+      document.addEventListener('mousemove', handleDragMove, { passive: false });
+      document.addEventListener('mouseup', handleDragEnd, { passive: false });
+      document.addEventListener('mouseleave', handleDragEnd, { passive: false });
     }
   };
 

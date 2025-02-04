@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
 import { useLanguage } from "../../contexts/LanguageContext";
+
+import { useTouchEvents } from '../../hooks/useTouchEvents';
 export const SmartSolutions_Building = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
@@ -20,9 +22,13 @@ export const SmartSolutions_Building = () => {
   });
 
   const containerRef = useRef(null);
+  const touchOptions = { passive: false };
   
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageViewer, setShowImageViewer] = useState(false);
+  
+  useTouchEvents(containerRef);
+  
   // Example position configurations for different sections
   // const modalPositions = {
   //   renewableEnergy: {
@@ -339,6 +345,8 @@ const handleImageResize = (e) => {
     container.style.height = `${maxHeight}px`;
   }
 };
+
+  
 
 return (
   <>

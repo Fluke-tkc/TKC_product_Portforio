@@ -1,7 +1,7 @@
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Hero } from "./components/Hero/Hero";
+
 import { Hero_New } from "./components/Hero/Hero_New";
 import { SmartSolutions } from "./components/SmartSolutions/SmartSolutions";
 import { GreenSolutions } from "./components/GreenSolution/GreenSolutions";
@@ -43,7 +43,9 @@ function App() {
   return (
     <Router>
       <Routes>
+    
         <Route path="/" element={<Hero_New />} />
+        
         <Route path="/smart-solutions" element={<SmartSolutions />} />
              <Route path="/smart-solutions-building" element={<Smart_Building />} />
                     <Route path="/smart-solutions-building_new" element={<Smart_Building_New />} />
@@ -74,8 +76,9 @@ function App() {
              <Route path="/smart-solutions-utility" element={<Smart_Utility />} />
                     <Route path="/smart-solutions-utility_new" element={<Smart_Utility_New />} />
                     <Route path="/smart-solutions-utility_new_ver02" element={<Smart_Utility_New_Ver02 />} />
+                   
         <Route path="/green-solutions" element={<GreenSolutions />} />
-             {/* <Route path="/green-solutions-discription" element={<GreenSolutionsDiscription />} /> */}
+        
 
 
              
