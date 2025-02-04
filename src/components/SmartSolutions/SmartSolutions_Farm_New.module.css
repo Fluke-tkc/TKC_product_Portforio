@@ -56,6 +56,32 @@
   margin: 0 auto;
   padding: 0 1rem;
 }
+.Backhome_Header {
+  position: fixed;
+  padding-top: 20px;
+  padding-right: 50px;
+  padding-left: 50px;
+  
+
+  border-radius: 8px;
+  
+  z-index: 3;
+}
+.Backhome_Buttom{
+ 
+  padding-top: 10px;
+  padding-right: 50px;
+  padding-left: 50px;
+  padding-bottom: 10px;
+ 
+background-color: #2d89ec;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+}
+
 
 .languageTabs {
   position: fixed;

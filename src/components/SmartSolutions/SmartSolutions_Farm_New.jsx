@@ -9,11 +9,24 @@ export const SmartSolutions_Farm_New = () => {
   const navigate = useNavigate();
   const { language, toggleLanguage, text } = useLanguage();
 
+
+  const handleClose = () => {
+   
+    navigate("/");
+  };
   return (
     <>
     
       <div className={styles.slider_section}>
+      <div className={styles.Backhome_Header}>
+       <button  className={styles.Backhome_Buttom} onClick={handleClose}>
+      
+        Back 
+       
+       </button>
+       </div>
         <div className={styles.languageTabs}>
+          
           <button 
             className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
             onClick={() => language !== 'en' && toggleLanguage()}
@@ -34,8 +47,12 @@ export const SmartSolutions_Farm_New = () => {
             <div className={styles.author}>
               <p>{text.subtitle}</p>
             </div>
+            <br></br>
+            
           </div>
+       
         </div>
+        
       </div>
 
     </>
