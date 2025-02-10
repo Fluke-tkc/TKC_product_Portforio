@@ -1,6 +1,8 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useLanguage } from './contexts/LanguageContext';
+
 
 import { Hero_New } from "./components/Hero/Hero_New";
 import { SmartSolutions } from "./components/SmartSolutions/SmartSolutions";
@@ -38,9 +40,40 @@ import Smart_Logistics_New from "./components/SmartSolutions/SmartSolutions_Logi
 import Smart_Logistics_New_Ver02 from "./components/SmartSolutions/SmartSolutions_Logistics_New_ver02";
 // import {GreenSolutionsDiscription }from "./components/GreenSolution/GreenSolutions_Discription";
 
+//  import Test_TH from "./components/SmartSolutions/Test_TH";
+//  import Test_EN from "./components/SmartSolutions/Test_EN";
+
+
+
 
 function App() {
+
+       const { setLanguageDirectly } = useLanguage();
+
+       useEffect(() => {
+         // ตรวจสอบ referrer URL
+         const referrer = document.referrer;
+         
+         if (referrer) {
+           try {
+             const referrerUrl = new URL(referrer);
+             const pathSegments = referrerUrl.pathname.split('/');
+             
+             // ตรวจสอบส่วนที่เป็นภาษาใน path
+             const lang = pathSegments.find(segment => segment === 'th' || segment === 'en');
+             
+             if (lang) {
+               setLanguageDirectly(lang); // ตั้งค่าภาษาตามเว็บต้นทาง
+             }
+           } catch (error) {
+             console.error('Error parsing referrer URL:', error);
+           }
+         }
+       }, [setLanguageDirectly]);
+
+
   return (
+      
     <Router>
       <Routes>
     
@@ -78,12 +111,15 @@ function App() {
                     <Route path="/smart-solutions-utility_new_ver02" element={<Smart_Utility_New_Ver02 />} />
                    
         <Route path="/green-solutions" element={<GreenSolutions />} />
-        
+
+         {/* <Route path="/test_th/th" element={<Test_TH />} />
+        <Route path="/test_en/en" element={<Test_EN />} />  */}
 
 
              
       </Routes>
     </Router>
+ 
   );
 }
 

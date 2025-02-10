@@ -231,7 +231,7 @@ export const textContent = {
     title: "ระบบอัจฉริยะ",
     subtitle: "Digital Communication Solutions",
     card1: <span className={styles.thaiFont}>ระบบอาคารอัจฉริยะ</span>,
-    card2: <span className={styles.thaiFont}>ระบบโรงพยบาลอัจฉริยะ</span>,
+    card2: <span className={styles.thaiFont}>ระบบโรงพยาบาลอัจฉริยะ</span>,
     card3: <span className={styles.thaiFont}>ระบบการเรียนรู้อัจฉริยะ</span>,
     card4: <span className={styles.thaiFont}>ระบบขนส่งอัจฉริยะ</span>,
     card5: <span className={styles.thaiFont}>ระบบโครงข่ายสายสื่อสารอัจฉริยะ</span>,
@@ -246,6 +246,8 @@ export const textContent = {
 
   }
 };
+
+
 
 // Provider Component
 export const LanguageProvider = ({ children }) => {
