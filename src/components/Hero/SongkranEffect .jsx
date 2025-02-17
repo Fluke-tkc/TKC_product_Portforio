@@ -33,12 +33,12 @@ const SongkranEffect = () => {
 
   useEffect(() => {
     const createElements = () => {
-      const count = Math.floor(Math.random() * 4) + 3;
+      const count = Math.floor(Math.random() * 5) + 3;
       const newElements = Array(count).fill(null).map(() => ({
         id: Math.random(),
         image: images[Math.floor(Math.random() * images.length)],
         style: {
-          '--size': `${calculateSize()*5}px`,
+          '--size': `${calculateSize()*2}px`,
           '--rotation': `${Math.random() * 360}deg`,
           '--duration': `${2 + Math.random() * 2}s`,
           left: `${Math.random() * 100}%`,
