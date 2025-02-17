@@ -1,31 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import styles from './SongkranEffect.module.css';
 
 const SongkranEffect = () => {
   const [elements, setElements] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  // รายการรูปภาพสงกรานต์
   const images = [
-        // ขันน้ำ
-    '/image/Water.png',     // น้ำ
-    // '/image/songkran/water-gun.png',      // ปืนฉีดน้ำ
-    // '/image/songkran/sand-castle.png',    // ปราสาททราย
-    // '/image/songkran/temple.png',         // วัด
-    // '/image/songkran/buddha.png',         // พระพุทธรูป
-    // '/image/songkran/garland.png',        // พวงมาลัย
-    // '/image/songkran/elephant.png'        // ช้าง
+    '/image/Water.png',
+  
   ];
+
+  // คำนวณขนาดตามหน้าจอ
+  const calculateSize = useCallback(() => {
+    if (windowWidth <= 480) {
+      return 20 + Math.random() * 30; // ขนาดสำหรับมือถือเล็ก
+    } else if (windowWidth <= 768) {
+      return 30 + Math.random() * 40; // ขนาดสำหรับแท็บเล็ต
+    } else {
+      return 40 + Math.random() * 60; // ขนาดสำหรับเดสก์ท็อป
+    }
+  }, [windowWidth]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const createElements = () => {
-      // สร้าง 3-7 elements ต่อครั้ง
-      const count = Math.floor(Math.random() * 4) + 2;
+      const count = Math.floor(Math.random() * 4) + 3;
       const newElements = Array(count).fill(null).map(() => ({
         id: Math.random(),
         image: images[Math.floor(Math.random() * images.length)],
         style: {
-          '--x': `${Math.random() * 100}%`,
-          '--y': `${Math.random() * 100}%`,
-          '--size': `${40 + Math.random() * 180}px`, // ขนาดใหญ่ขึ้นสำหรับรูปภาพ
+          '--size': `${calculateSize()*5}px`,
           '--rotation': `${Math.random() * 360}deg`,
           '--duration': `${2 + Math.random() * 2}s`,
           left: `${Math.random() * 100}%`,
@@ -35,7 +48,6 @@ const SongkranEffect = () => {
 
       setElements(prev => [...prev, ...newElements]);
 
-      // ลบ elements หลังจากครบเวลา
       setTimeout(() => {
         setElements(prev => 
           prev.filter(el => !newElements.find(newEl => newEl.id === el.id))
@@ -45,7 +57,7 @@ const SongkranEffect = () => {
 
     const interval = setInterval(createElements, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [calculateSize]);
 
   return (
     <div className={styles.container}>
@@ -65,6 +77,5 @@ const SongkranEffect = () => {
     </div>
   );
 };
-
 
 export default SongkranEffect;
