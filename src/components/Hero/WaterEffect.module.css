@@ -1,0 +1,161 @@
+/* Container สำหรับเอฟเฟคน้ำ */
+.waterContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  /* หยดน้ำ */
+  .waterDrop {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url('/image/water-drop.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: waterfall 3s linear infinite;
+    -webkit-animation: waterfall 3s linear infinite;
+    will-change: transform;
+  }
+  
+  /* อนิเมชันน้ำตก */
+  @keyframes waterfall {
+    0% {
+      transform: translate(0, -20vh) rotate(0deg) scale(0);
+      opacity: 0;
+    }
+    25% {
+      transform: translate(2vw, 20vh) rotate(45deg) scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate(-2vw, 50vh) rotate(90deg) scale(0.8);
+      opacity: 0.6;
+    }
+    75% {
+      transform: translate(2vw, 80vh) rotate(135deg) scale(0.6);
+      opacity: 0.4;
+    }
+    100% {
+      transform: translate(-2vw, 120vh) rotate(180deg) scale(0.4);
+      opacity: 0;
+    }
+  }
+  
+  @-webkit-keyframes waterfall {
+    0% {
+      -webkit-transform: translate(0, -20vh) rotate(0deg) scale(0);
+      opacity: 0;
+    }
+    25% {
+      -webkit-transform: translate(2vw, 20vh) rotate(45deg) scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      -webkit-transform: translate(-2vw, 50vh) rotate(90deg) scale(0.8);
+      opacity: 0.6;
+    }
+    75% {
+      -webkit-transform: translate(2vw, 80vh) rotate(135deg) scale(0.6);
+      opacity: 0.4;
+    }
+    100% {
+      -webkit-transform: translate(-2vw, 120vh) rotate(180deg) scale(0.4);
+      opacity: 0;
+    }
+  }
+  
+  /* จัดการตำแหน่งเริ่มต้นของหยดน้ำ */
+  .waterDrop:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+    -webkit-animation-delay: 0s;
+  }
+  
+  .waterDrop:nth-child(2) {
+    left: 30%;
+    animation-delay: 0.8s;
+    -webkit-animation-delay: 0.8s;
+  }
+  
+  .waterDrop:nth-child(3) {
+    left: 50%;
+    animation-delay: 1.6s;
+    -webkit-animation-delay: 1.6s;
+  }
+  
+  .waterDrop:nth-child(4) {
+    left: 70%;
+    animation-delay: 2.4s;
+    -webkit-animation-delay: 2.4s;
+  }
+  
+  .waterDrop:nth-child(5) {
+    left: 90%;
+    animation-delay: 3.2s;
+    -webkit-animation-delay: 3.2s;
+  }
+  
+  /* เพิ่ม splash effect เมื่อน้ำตกถึงพื้น */
+  .splash {
+    position: absolute;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    animation: splashEffect 1s ease-out forwards;
+    opacity: 0;
+  }
+  
+  @keyframes splashEffect {
+    0% {
+      transform: scale(0.2);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+  
+  /* Media Queries สำหรับการปรับขนาดบนอุปกรณ์ต่างๆ */
+  @media (max-width: 768px) {
+    .waterDrop {
+      width: 15px;
+      height: 15px;
+    }
+    
+    .splash {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .waterDrop {
+      width: 10px;
+      height: 10px;
+    }
+    
+    .splash {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  /* สำหรับการรองรับ Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .waterDrop {
+      animation-duration: 4s;
+    }
+    
+    .splash {
+      animation: none;
+    }
+  }

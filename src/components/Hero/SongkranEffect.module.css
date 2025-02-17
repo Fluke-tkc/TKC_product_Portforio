@@ -1,0 +1,64 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  .element {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    will-change: transform, opacity;
+  }
+  
+  .image {
+    width: var(--size);
+    height: var(--size);
+    object-fit: contain;
+    animation: grow-and-fade var(--duration) ease-out forwards;
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  
+  @keyframes grow-and-fade {
+    0% {
+      opacity: 0;
+      transform: scale(0) rotate(0deg);
+    }
+    
+    20% {
+      opacity: 1;
+      transform: scale(1) rotate(var(--rotation));
+    }
+    
+    80% {
+      opacity: 1;
+      transform: scale(1) rotate(var(--rotation));
+    }
+    
+    100% {
+      opacity: 0;
+      transform: scale(0) rotate(calc(var(--rotation) * 2));
+    }
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .image {
+      --size: calc(var(--size) * 0.7); /* ลดขนาดบนมือถือ */
+    }
+  }
+  
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .image {
+      animation-duration: 4s;
+    }
+  }

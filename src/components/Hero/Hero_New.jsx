@@ -4,8 +4,8 @@ import { Contact } from "../Contact/Contact";
 import styles from "./Hero_New.module.css";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { imageMapping } from "../../contexts/LanguageContext";
-import SnowEffect from '../Hero/snowEffect';
-
+// import SnowEffect from '../Hero/snowEffect';
+import SongkranEffect  from '../Hero/SongkranEffect ';
 
 const DRAG_SETTINGS = {
   sensitivity: 0.1,
@@ -623,7 +623,7 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
 
   return (
     <>
-      <SnowEffect />
+       <SongkranEffect /> 
       <div className={styles.slider_section}>
         <button
           className={styles.musicButton}
