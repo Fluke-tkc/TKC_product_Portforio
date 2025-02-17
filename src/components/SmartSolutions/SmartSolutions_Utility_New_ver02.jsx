@@ -17,7 +17,7 @@ export const SmartSolutions_Utility_New_ver02 = () => {
   
   const containerRef = useRef(null);
   const timeoutRef = useRef(null);
-
+const { language, toggleLanguage } = useLanguage();
   const { images } = useLanguage();
 
   const allImages = [
@@ -199,6 +199,20 @@ export const SmartSolutions_Utility_New_ver02 = () => {
       <section className={styles.container}>
         <div className={styles.content}>
           <div className={styles.imageContainer}>
+             <div className={styles.languageTabs}>
+                            <button
+                             className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
+                            onClick={() => language !== 'en' && toggleLanguage()}
+                               >
+                            EN
+                              </button>
+                            <button
+                            className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
+                             onClick={() => language !== 'th' && toggleLanguage()}
+                               >
+                                 TH
+                              </button>
+                             </div>
             <img
               src={images.smart_solutions_utility_new_ver2_0}
               alt="Smart Building"

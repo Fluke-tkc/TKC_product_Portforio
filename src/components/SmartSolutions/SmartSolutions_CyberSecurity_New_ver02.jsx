@@ -4,6 +4,7 @@ import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./SmartSolutions_CyberSecurity_New_ver02.module.css";
 import { useLanguage } from "../../contexts/LanguageContext";
+import { imageMapping } from "../../contexts/LanguageContext";
 
 export const SmartSolutions_CyberSecurity_New_ver02 = () => {
   const navigate = useNavigate();
@@ -14,7 +15,8 @@ export const SmartSolutions_CyberSecurity_New_ver02 = () => {
   const [showImageViewer, setShowImageViewer] = useState(false);
   const [isMouseEnterActive, setIsMouseEnterActive] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-  
+
+      const { language, toggleLanguage } = useLanguage();
   const containerRef = useRef(null);
   const timeoutRef = useRef(null);
   const { images } = useLanguage();
@@ -214,7 +216,22 @@ export const SmartSolutions_CyberSecurity_New_ver02 = () => {
       <Navbar />
       <section className={styles.container}>
         <div className={styles.content}>
+          
           <div className={styles.imageContainer}>
+                <div className={styles.languageTabs}>
+                        <button
+                          className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
+                          onClick={() => language !== 'en' && toggleLanguage()}
+                        >
+                          EN
+                        </button>
+                        <button
+                          className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
+                          onClick={() => language !== 'th' && toggleLanguage()}
+                        >
+                          TH
+                        </button>
+                      </div>
             <img
               src={images.smart_solutions_CyberSecurity_new_ver2_0}
               alt="Smart Building"

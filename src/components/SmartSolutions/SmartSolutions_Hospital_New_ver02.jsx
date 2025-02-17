@@ -14,7 +14,7 @@ export const SmartSolutions_Hospital_New_ver02 = () => {
   const [showImageViewer, setShowImageViewer] = useState(false);
   const [isMouseEnterActive, setIsMouseEnterActive] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-  
+  const { language, toggleLanguage } = useLanguage();
   const containerRef = useRef(null);
   const timeoutRef = useRef(null);
   const { images } = useLanguage();
@@ -188,6 +188,20 @@ export const SmartSolutions_Hospital_New_ver02 = () => {
       <section className={styles.container}>
         <div className={styles.content}>
           <div className={styles.imageContainer}>
+             <div className={styles.languageTabs}>
+                                          <button
+                                            className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
+                                            onClick={() => language !== 'en' && toggleLanguage()}
+                                          >
+                                            EN
+                                          </button>
+                                          <button
+                                            className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
+                                            onClick={() => language !== 'th' && toggleLanguage()}
+                                          >
+                                            TH
+                                          </button>
+                                        </div>
             <img
               src={images.smart_solutions_Hospital_new_ver2_0}
               alt="Smart Building"

@@ -21,7 +21,7 @@ export const SmartSolutions_Hospital_New = () => {
   });
 
   const containerRef = useRef(null);
-  
+  const { language, toggleLanguage } = useLanguage();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageViewer, setShowImageViewer] = useState(false);
   // Example position configurations for different sections
@@ -351,7 +351,20 @@ return (
         <div className={styles.imageContainer}>
           {/* Main Title Overlay Text */}
           {/* <div className={styles.overlayText}>Efficient Building Management</div> */}
-          
+           <div className={styles.languageTabs}>
+                                        <button
+                                          className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
+                                          onClick={() => language !== 'en' && toggleLanguage()}
+                                        >
+                                          EN
+                                        </button>
+                                        <button
+                                          className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
+                                          onClick={() => language !== 'th' && toggleLanguage()}
+                                        >
+                                          TH
+                                        </button>
+                                      </div>
           {/* Main Background Image */}
           <img
             src={images.smart_solutions_Hospital_new_00}

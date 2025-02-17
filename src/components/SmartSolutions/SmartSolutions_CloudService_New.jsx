@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
 import { useLanguage } from "../../contexts/LanguageContext";
+import { imageMapping } from "../../contexts/LanguageContext";
 export const SmartSolutions_CloudService_New = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
@@ -20,7 +21,7 @@ export const SmartSolutions_CloudService_New = () => {
   });
 
   const containerRef = useRef(null);
-  
+    const { language, toggleLanguage } = useLanguage();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageViewer, setShowImageViewer] = useState(false);
   // Example position configurations for different sections
@@ -352,6 +353,20 @@ return (
           {/* <div className={styles.overlayText}>Efficient Building Management</div> */}
           
           {/* Main Background Image */}
+           <div className={styles.languageTabs}>
+                    <button
+                      className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
+                      onClick={() => language !== 'en' && toggleLanguage()}
+                    >
+                      EN
+                    </button>
+                    <button
+                      className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
+                      onClick={() => language !== 'th' && toggleLanguage()}
+                    >
+                      TH
+                    </button>
+                  </div>
           <img
             src={images.smart_solutions_CloudServices_new_00}
             onClick={handleClosePostTutorialImage}

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import { Navbar } from "../Navbar/Navbar";
 import { useLanguage } from "../../contexts/LanguageContext";
-
+import { imageMapping } from "../../contexts/LanguageContext";
 import { useTouchEvents } from '../../hooks/useTouchEvents';
 export const SmartSolutions_Building = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ export const SmartSolutions_Building = () => {
 
   const containerRef = useRef(null);
   const touchOptions = { passive: false };
-  
+   const { language, toggleLanguage } = useLanguage();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageViewer, setShowImageViewer] = useState(false);
   
@@ -48,7 +48,29 @@ export const SmartSolutions_Building = () => {
   //   },
    
   // };
-
+   const { setLanguageDirectly } = useLanguage();
+  
+         useEffect(() => {
+           // ตรวจสอบ referrer URL
+           const referrer = document.referrer;
+           
+           if (referrer) {
+             try {
+               const referrerUrl = new URL(referrer);
+               const pathSegments = referrerUrl.pathname.split('/');
+               
+               // ตรวจสอบส่วนที่เป็นภาษาใน path
+               const lang = pathSegments.find(segment => segment === 'th' || segment === 'en');
+               
+               if (lang) {
+                 setLanguageDirectly(lang); // ตั้งค่าภาษาตามเว็บต้นทาง
+               }
+             } catch (error) {
+               console.error('Error parsing referrer URL:', error);
+             }
+           }
+         }, [setLanguageDirectly]);
+  
 
   const allImages = [
     {
@@ -353,7 +375,23 @@ return (
     <Navbar />
     <section className={styles.container} id="about">
       <div className={styles.content}>
+        
         <div className={styles.imageContainer}>
+
+        <div className={styles.languageTabs}>
+          <button
+            className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
+            onClick={() => language !== 'en' && toggleLanguage()}
+          >
+            EN
+          </button>
+          <button
+            className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
+            onClick={() => language !== 'th' && toggleLanguage()}
+          >
+            TH
+          </button>
+        </div>
           {/* Main Title Overlay Text */}
           {/* <div className={styles.overlayText}>Efficient Building Management</div> */}
           
@@ -363,7 +401,12 @@ return (
             onClick={handleClosePostTutorialImage}
             alt="Smart Building"
             className={styles.aboutImage}
+
+            
           />
+
+
+          
             {/* <button 
                  className={styles.closeButton} 
                  onClick={handleClosePostTutorialImage}
@@ -373,8 +416,11 @@ return (
                 </button> */}
           
           {/* Red Dots with Enhanced Tooltips - Only show when post tutorial image is not showing */}
+
+          
           { (
             <>
+            
               {/* Renewable Energy Integration Dot */}
               <div 
                 id="RenewableEnergy"
@@ -480,6 +526,7 @@ return (
               </div>
             </>
           )}  
+          
 
           {/* Post Tutorial Image Overlay - Shows after tutorial ends */}
           {/* {showPostTutorialImage && (
@@ -613,8 +660,11 @@ return (
   </div>
 )}
 </div>
+
 </div>
+
 </section>
+
 <Contact />
 {/* <Contact /> */}
 </>

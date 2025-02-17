@@ -9,7 +9,7 @@ export const SmartSolutions_Utility_New = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [showTutorial, setShowTutorial] = useState(true);
   const { images } = useLanguage();
-
+const { language, toggleLanguage } = useLanguage();
   const tutorialSteps = [
     {
       target: 'Demand Response(DR)',
@@ -135,6 +135,20 @@ export const SmartSolutions_Utility_New = () => {
       
       <div className={styles.content}>
         <div className={styles.imageContainer}>
+           <div className={styles.languageTabs}>
+                          <button
+                           className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
+                          onClick={() => language !== 'en' && toggleLanguage()}
+                             >
+                          EN
+                            </button>
+                          <button
+                          className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
+                           onClick={() => language !== 'th' && toggleLanguage()}
+                             >
+                               TH
+                            </button>
+                           </div>
         {/* <div className={styles.overlayText}>Intelligent Grid</div>
         <div className={styles.overlayText_1}>Technology-driven system that optimizes energy management through sensors, data analytics, and smart communication​</div> */}
           <img

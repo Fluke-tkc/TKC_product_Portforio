@@ -10,7 +10,7 @@ export const SmartSolutions_Logistics_New = () => {
   const [showTutorial, setShowTutorial] = useState(true);
   const [showPostTutorialImage, setShowPostTutorialImage] = useState(false);
   const { images } = useLanguage();
-  
+  const { language, toggleLanguage } = useLanguage();
   const [modalConfig, setModalConfig] = useState({
     isOpen: false,
     images: [],
@@ -350,7 +350,20 @@ export const SmartSolutions_Logistics_New = () => {
           <div className={styles.imageContainer}>
             {/* Main Title Overlay Text */}
             {/* <div className={styles.overlayText}>Efficient Building Management</div> */}
-            
+             <div className={styles.languageTabs}>
+                            <button
+                             className={`${styles.languageTab} ${language === 'en' ? styles.active : ''}`}
+                            onClick={() => language !== 'en' && toggleLanguage()}
+                               >
+                            EN
+                              </button>
+                            <button
+                            className={`${styles.languageTab} ${language === 'th' ? styles.active : ''}`}
+                             onClick={() => language !== 'th' && toggleLanguage()}
+                               >
+                                 TH
+                              </button>
+                             </div>
             {/* Main Background Image */}
             <img
               src={images.smart_solutions_Logistics_new_00}

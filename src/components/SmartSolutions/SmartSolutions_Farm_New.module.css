@@ -15,7 +15,37 @@
   overflow: hidden;
   position: relative;
 }
+.languageTabs {
+  position: absolute;
+  top: 10px;
+  right: 80px;
+  display: flex;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 6;
+}
 
+.languageTab {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.languageTab:hover:not(.active) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.languageTab.active {
+  background: #007bff;
+  color: white;
+}
 .content {
   position: absolute;
   bottom: 10%;

@@ -262,6 +262,30 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
     }
   }, []);
 
+
+     const { setLanguageDirectly } = useLanguage();
+  
+         useEffect(() => {
+           // ตรวจสอบ referrer URL
+           const referrer = document.referrer;
+           
+           if (referrer) {
+             try {
+               const referrerUrl = new URL(referrer);
+               const pathSegments = referrerUrl.pathname.split('/');
+               
+               // ตรวจสอบส่วนที่เป็นภาษาใน path
+               const lang = pathSegments.find(segment => segment === 'th' || segment === 'en');
+               
+               if (lang) {
+                 setLanguageDirectly(lang); // ตั้งค่าภาษาตามเว็บต้นทาง
+               }
+             } catch (error) {
+               console.error('Error parsing referrer URL:', error);
+             }
+           }
+         }, [setLanguageDirectly]);
+  
   useEffect(() => {
     const handleBeforeUnload = () => {
       localStorage.setItem('heroRotationPosition', currentRotation.toString());

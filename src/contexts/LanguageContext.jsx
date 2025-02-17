@@ -197,12 +197,12 @@ export const imageMapping = {
 
 
    //Learning
-  //  smart_solutions_Learning_new_00:'/image/Learn_0_TH.png',
-  //  smart_solutions_Learning_new_ver2_0:'/image/Learn_00_TH.png',
-  //  Cloud_Based_Learning_Management_Systems:'/image/Learn_1_TH.png',
-  //  IOT_Enabled_Smart_Classrooms:'/image/Learn_2_TH.png',
-  //  AI_Driven_Personallized_Learning:'/image/Learn_3_TH.png',
-  //  Professional_Assessment_and_Certificate:'/image/Learn_4_TH.png',
+   smart_solutions_Learning_new_00:'/image/Learn_0_TH.png',
+   smart_solutions_Learning_new_ver2_0:'/image/Learn_00_TH.png',
+   Cloud_Based_Learning_Management_Systems:'/image/Learn_1_TH.png',
+   IOT_Enabled_Smart_Classrooms:'/image/Learn_2_TH.png',
+   AI_Driven_Personallized_Learning:'/image/Learn_3_TH.png',
+   Professional_Assessment_and_Certificate:'/image/Learn_4_TH.png',
   }
 };
 
@@ -216,7 +216,7 @@ export const textContent = {
     card2:"Smart Hospital",
     card3:"Smart Learning",
     card4:"Smart Logistics",
-    card5:"SmartOrganized Communication Cables",
+    card5:"Smart Organized Communication Cables",
     card6:"Autonomous",
     card7:"Cyber Security",
     card8:"Smart Farming",
@@ -249,32 +249,34 @@ export const textContent = {
 
 
 
-// Provider Component
 export const LanguageProvider = ({ children }) => {
-  // State เก็บภาษาปัจจุบัน
   const [language, setLanguage] = useState('en');
 
-  // ฟังก์ชันสลับภาษา
   const toggleLanguage = () => {
     setLanguage(prev => prev === 'en' ? 'th' : 'en');
   };
 
-  // สร้าง value object ที่จะส่งไปให้ component อื่นๆ
+  // เพิ่มฟังก์ชันสำหรับตั้งค่าภาษาโดยตรง
+  const setLanguageDirectly = (lang) => {
+    if (lang === 'th' || lang === 'en') {
+      setLanguage(lang);
+    }
+  };
+
   const value = {
     language,
     toggleLanguage,
+    setLanguageDirectly, // เพิ่ม function นี้เข้าไปใน context
     text: textContent[language],
     images: imageMapping[language]
   };
 
-  // Return Provider พร้อม value
   return (
     <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );
 };
-
 // Custom Hook สำหรับเรียกใช้ Context
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
