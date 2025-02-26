@@ -1,64 +1,47 @@
-.container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
-  }
+.eventImageContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
   
-  .element {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: translate(-50%, -50%);
-    will-change: transform, opacity;
-  }
+}
+
+.eventImage {
   
-  .image {
-    width: var(--size);
-    height: var(--size);
-    object-fit: contain;
-    animation: grow-and-fade var(--duration) ease-out forwards;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+}
+.bubbleContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -30px;
+  background: rgba(173, 216, 230, 0.7);
+  border-radius: 50%;
+  animation: rise ease-in infinite;
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.5);
     opacity: 0;
-    transform: scale(0) rotate(0deg);
   }
-  
-  @keyframes grow-and-fade {
-    0% {
-      opacity: 0;
-      transform: scale(0) rotate(0deg);
-    }
-    
-    20% {
-      opacity: 1;
-      transform: scale(1) rotate(var(--rotation));
-    }
-    
-    80% {
-      opacity: 1;
-      transform: scale(1) rotate(var(--rotation));
-    }
-    
-    100% {
-      opacity: 0;
-      transform: scale(0) rotate(calc(var(--rotation) * 2));
-    }
-  }
-  
-  /* Mobile Styles */
-  @media (max-width: 768px) {
-    .element {
-      transform: scale(0.7) translate(-50%, -50%);
-    }
-  }
-  
-  /* Small Mobile Styles */
-  @media (max-width: 480px) {
-    .element {
-      transform: scale(0.5) translate(-50%, -50%);
-    }
-  }
+}

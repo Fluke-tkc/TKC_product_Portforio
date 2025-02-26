@@ -136,6 +136,7 @@
   position: relative;
 }
 
+
 .slider {
   position: absolute;
   image-rendering: auto;
@@ -613,7 +614,11 @@
 
 
 @media screen and (max-width: 400px) {
- 
+  .content h1 {
+    font-size: clamp(2rem, 8vw, 3rem); /* ลดขนาดตัวอักษรให้เล็กลง */
+    white-space: normal; /* อนุญาตให้ข้อความขึ้นบรรทัดใหม่ได้ */
+    line-height: 1.2; /* เพิ่มระยะห่างระหว่างบรรทัด */
+  }
   .slider.pausedAnimation {
     transform: translateX(-50%) perspective(1000px) rotateX(-16deg) rotateY(var(--current-rotation, 0deg));
   }

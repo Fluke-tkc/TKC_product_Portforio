@@ -623,8 +623,13 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
 
   return (
     <>
-       <SongkranEffect /> 
+       
+       
       <div className={styles.slider_section}>
+     
+    
+   
+      
         <button
           className={styles.musicButton}
           onClick={toggleMusic}
@@ -632,6 +637,10 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
         >
           {isPlaying ? '♫' : '♪'}
         </button>
+   
+        <div className={styles.eventImageContainer}>
+      
+  </div>
 
         <div className={styles.languageTabs}>
           <button
@@ -646,12 +655,14 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
           >
             TH
           </button>
+          
         </div>
 
         <button className={styles.topLeftButton} onClick={handleButtonClick} />
 
         <div className={styles.banner}>
           <div
+          
             ref={sliderRef}
             className={`${styles.slider} ${isDragging ? styles.dragging : ''}`}
             style={{
@@ -659,14 +670,18 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
                 window.innerWidth <= 900 ? '-16deg' : '0deg'
               }) rotateY(${currentRotation}deg)`
             }}
+            
           >
+            
             {IMAGE_ROUTES.map((item, index) => (
+              
               <SliderItem
                 key={index}
                 id={item.id}
                 image={item.image}
                 position={index + 1}
                 total={IMAGE_ROUTES.length}
+                
                 onNavigate={(e) => {
                   if (!dragState.current.isMoved) {
                     e.stopPropagation();
@@ -677,9 +692,12 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
                 onDragStart={handleDragStart}
                 isDragging={isDragging}
                 title={item.title}
+                
               />
             ))}
+            
           </div>
+          <SongkranEffect />  
 
           <RotationButton
             direction="left"
@@ -698,6 +716,7 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
               <p>{text.subtitle}</p>
             </div>
           </div>
+          
         </div>
       </div>
     </>
