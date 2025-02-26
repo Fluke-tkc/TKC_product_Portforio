@@ -298,7 +298,7 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
   }, [currentRotation]);
   useEffect(() => {
     if (!audioRef.current) {
-      audioRef.current = new Audio('/audio/loveromanticinstrumental.m4a');
+      audioRef.current = new Audio('/audio/songkran_bgm.mp3');
       audioRef.current.loop = true;
       audioRef.current.volume = 0.5;
     }
