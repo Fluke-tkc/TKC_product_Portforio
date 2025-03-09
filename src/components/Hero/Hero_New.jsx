@@ -5,7 +5,7 @@ import styles from "./Hero_New.module.css";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { imageMapping } from "../../contexts/LanguageContext";
 // import SnowEffect from '../Hero/snowEffect';
-import SongkranEffect  from '../Hero/SongkranEffect ';
+// import SongkranEffect  from '../Hero/SongkranEffect ';
 
 const DRAG_SETTINGS = {
   sensitivity: 0.1,
@@ -298,7 +298,7 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
   }, [currentRotation]);
   useEffect(() => {
     if (!audioRef.current) {
-      audioRef.current = new Audio('/audio/songkran_bgm.mp3');
+      audioRef.current = new Audio('/audio/loveromanticinstrumental.m4a');
       audioRef.current.loop = true;
       audioRef.current.volume = 0.5;
     }
@@ -697,7 +697,7 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
             ))}
             
           </div>
-          <SongkranEffect />  
+          {/* <SongkranEffect />   */}
 
           <RotationButton
             direction="left"
