@@ -818,7 +818,7 @@ export const Hero_New = () => {
               onClick={forceMemoryReset}
               title="Force memory reset (debug only)"
             >
-              🔄
+              🔄T
             </button>
           )}
         </div>
