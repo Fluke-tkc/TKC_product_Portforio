@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Contact } from "../Contact/Contact";
 import styles from "./Hero_New.module.css";
@@ -6,6 +6,50 @@ import { useLanguage } from "../../contexts/LanguageContext";
 import { imageMapping } from "../../contexts/LanguageContext";
 // import SnowEffect from '../Hero/snowEffect';
 // import SongkranEffect  from '../Hero/SongkranEffect ';
+
+// Configuration settings for different devices
+const getDeviceSettings = () => {
+  const isMobile = /iPhone|Android/i.test(navigator.userAgent);
+  const isTablet = /iPad|tablet/i.test(navigator.userAgent) || 
+                  (navigator.maxTouchPoints > 1 && window.innerWidth > 600 && window.innerWidth < 1200);
+
+  if (isMobile) {
+    return {
+      translateZ: 200,
+      itemWidth: 100,
+      itemHeight: 140,
+      rotationSpeed: 0.3,
+      frameSkip: 2 // Render every 2 frames
+    };
+  } else if (isTablet) {
+    return {
+      translateZ: 350,
+      itemWidth: 160,
+      itemHeight: 200,
+      rotationSpeed: 0.4,
+      frameSkip: 1
+    };
+  } else {
+    return {
+      translateZ: 550,
+      itemWidth: 150,
+      itemHeight: 200,
+      rotationSpeed: 0.5,
+      frameSkip: 0
+    };
+  }
+};
+
+// Debounce function to prevent excessive calls
+const debounce = (func, wait) => {
+  let timeout;
+  return function() {
+    const context = this;
+    const args = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
+  };
+};
 
 const DRAG_SETTINGS = {
   sensitivity: 0.1,
@@ -35,7 +79,8 @@ const SliderItem = ({
   onNavigate,
   title,
   onDragStart,
-  isDragging
+  isDragging,
+  translateZ
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const clickStartTimeRef = useRef(0);
@@ -58,9 +103,6 @@ const SliderItem = ({
       y: e.touches ? e.touches[0].clientY : e.clientY
     };
     hasMovedRef.current = false;
-    // if (e.cancelable) {
-    //   e.preventDefault();
-    // }
     onDragStart(e);
   };
 
@@ -86,9 +128,6 @@ const SliderItem = ({
   };
 
   const handleTouchStart = (e) => {
-    // if (e.cancelable) {
-    //   e.preventDefault();
-    // }
     handleMouseDown(e);
   };
 
@@ -97,7 +136,8 @@ const SliderItem = ({
       className={`${styles.item} ${isDragging ? styles.dragging : ''}`}
       style={{
         '--position': position,
-        '--quantity': total
+        '--quantity': total,
+        '--translateZ': `${translateZ}px`
       }}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
@@ -127,18 +167,13 @@ const SliderItem = ({
     </div>
   );
 };
+
 const RotationButton = ({ direction, onPress, onRelease }) => {
   const handleTouchStart = (e) => {
-    // if (e.cancelable) {
-    //   e.preventDefault();
-    // }
     onPress();
   };
 
   const handleTouchEnd = (e) => {
-    // if (e.cancelable) {
-    //   e.preventDefault();
-    // }
     onRelease();
   };
 
@@ -155,9 +190,9 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
       {direction === 'left' ? '◀' : '▶'}
     </button>
   );
- };
+};
 
- export const Hero_New = () => {
+export const Hero_New = () => {
   const navigate = useNavigate();
   const [isDragging, setIsDragging] = useState(false);
   const [isRotating, setIsRotating] = useState(true);
@@ -167,6 +202,17 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
   });
   const [isPlaying, setIsPlaying] = useState(false);
   const { language, toggleLanguage } = useLanguage();
+  const [windowDimensions, setWindowDimensions] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+  
+  // Memory reset state and ref
+  const [memoryResetCount, setMemoryResetCount] = useState(0);
+  const memoryResetTimerRef = useRef(null);
+  
+  // Device-specific settings
+  const deviceSettings = useMemo(() => getDeviceSettings(), []);
   
   const sliderRef = useRef(null);
   const animationFrameRef = useRef(null);
@@ -179,6 +225,9 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
   const buttonDirectionRef = useRef(null);
   const audioRef = useRef(null);
   const { text } = useLanguage();
+  const frameCountRef = useRef(0);
+  const initialRenderRef = useRef(true);
+  
   const dragState = useRef({
     isDragging: false,
     startX: 0,
@@ -188,6 +237,7 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
     lastTimestamp: 0,
     isMoved: false
   });
+  
   const IMAGE_ROUTES = [
     {
       id: 'smartsolution2',
@@ -251,10 +301,78 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
     }
   ];
 
+  // Cleanup function for all timers and animation frames
+  const clearAllTimers = useCallback(() => {
+    if (autoRotateTimeoutRef.current) {
+      clearTimeout(autoRotateTimeoutRef.current);
+      autoRotateTimeoutRef.current = null;
+    }
+    if (wheelTimeoutRef.current) {
+      clearTimeout(wheelTimeoutRef.current);
+      wheelTimeoutRef.current = null;
+    }
+    if (wheelMomentumRef.current) {
+      cancelAnimationFrame(wheelMomentumRef.current);
+      wheelMomentumRef.current = null;
+    }
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
+    if (buttonRotationFrameRef.current) {
+      cancelAnimationFrame(buttonRotationFrameRef.current);
+      buttonRotationFrameRef.current = null;
+    }
+  }, []);
+
+  // Function to reset memory usage periodically
+  const resetMemoryUsage = useCallback(() => {
+    // 1. Stop rotation temporarily
+    setIsRotating(false);
+    
+    // 2. Clear all timers and animation frames
+    clearAllTimers();
+    
+    // 3. Reset state variables
+    dragState.current = {
+      isDragging: false,
+      startX: 0,
+      lastX: 0,
+      currentX: 0,
+      velocity: 0,
+      lastTimestamp: 0,
+      isMoved: false
+    };
+    
+    // 4. Force garbage collection indirectly
+    frameCountRef.current = 0;
+    wheelVelocityRef.current = 0;
+    
+    // 5. Update memory reset counter
+    setMemoryResetCount(prev => prev + 1);
+    
+    // 6. Temporarily add CSS class to pause animations
+    document.documentElement.classList.add('paused');
+    
+    // 7. Restart after a short delay
+    setTimeout(() => {
+      document.documentElement.classList.remove('paused');
+      setIsRotating(true);
+    }, 100);
+    
+    console.log(`[Memory Reset] Performed reset #${memoryResetCount + 1}`);
+  }, [clearAllTimers, memoryResetCount]);
+
+  // Save rotation position to localStorage
   useEffect(() => {
-    localStorage.setItem('heroRotationPosition', currentRotation.toString());
+    if (!initialRenderRef.current) {
+      localStorage.setItem('heroRotationPosition', currentRotation.toString());
+    } else {
+      initialRenderRef.current = false;
+    }
   }, [currentRotation]);
 
+  // Load saved rotation position
   useEffect(() => {
     const savedPosition = localStorage.getItem('heroRotationPosition');
     if (savedPosition) {
@@ -262,30 +380,46 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
     }
   }, []);
 
-
-     const { setLanguageDirectly } = useLanguage();
+  // Handle language preference from referrer URL
+  const { setLanguageDirectly } = useLanguage();
   
-         useEffect(() => {
-           // ตรวจสอบ referrer URL
-           const referrer = document.referrer;
-           
-           if (referrer) {
-             try {
-               const referrerUrl = new URL(referrer);
-               const pathSegments = referrerUrl.pathname.split('/');
-               
-               // ตรวจสอบส่วนที่เป็นภาษาใน path
-               const lang = pathSegments.find(segment => segment === 'th' || segment === 'en');
-               
-               if (lang) {
-                 setLanguageDirectly(lang); // ตั้งค่าภาษาตามเว็บต้นทาง
-               }
-             } catch (error) {
-               console.error('Error parsing referrer URL:', error);
-             }
-           }
-         }, [setLanguageDirectly]);
+  useEffect(() => {
+    // Check referrer URL for language setting
+    const referrer = document.referrer;
+    
+    if (referrer) {
+      try {
+        const referrerUrl = new URL(referrer);
+        const pathSegments = referrerUrl.pathname.split('/');
+        
+        // Find language segment in path
+        const lang = pathSegments.find(segment => segment === 'th' || segment === 'en');
+        
+        if (lang) {
+          setLanguageDirectly(lang);
+        }
+      } catch (error) {
+        console.error('Error parsing referrer URL:', error);
+      }
+    }
+  }, [setLanguageDirectly]);
   
+  // Set up memory reset interval
+  useEffect(() => {
+    // Set interval for memory reset (every 60 seconds)
+    memoryResetTimerRef.current = setInterval(() => {
+      resetMemoryUsage();
+    }, 60000); // 60000ms = 1 minute
+    
+    return () => {
+      if (memoryResetTimerRef.current) {
+        clearInterval(memoryResetTimerRef.current);
+        memoryResetTimerRef.current = null;
+      }
+    };
+  }, [resetMemoryUsage]);
+  
+  // Save rotation position before page unload
   useEffect(() => {
     const handleBeforeUnload = () => {
       localStorage.setItem('heroRotationPosition', currentRotation.toString());
@@ -296,6 +430,8 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, [currentRotation]);
+
+  // Handle music player
   useEffect(() => {
     if (!audioRef.current) {
       audioRef.current = new Audio('/audio/loveromanticinstrumental.m4a');
@@ -318,6 +454,42 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
     };
   }, []);
 
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = debounce(() => {
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    }, 150);
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // Handle page visibility changes
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        setIsRotating(false);
+        clearAllTimers();
+        document.documentElement.classList.add('paused');
+      } else if (document.visibilityState === 'visible' && !dragState.current.isDragging) {
+        setIsRotating(true);
+        document.documentElement.classList.remove('paused');
+      }
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [clearAllTimers]);
+
+  // Toggle music play/pause
   const toggleMusic = async () => {
     try {
       const audio = audioRef.current;
@@ -336,32 +508,12 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
     }
   };
 
+  // Navigate to main website
   const handleButtonClick = () => {
     window.location.href = "https://www.tkc-services.com/th/home";
   };
 
-  const clearAllTimers = () => {
-    if (autoRotateTimeoutRef.current) {
-      clearTimeout(autoRotateTimeoutRef.current);
-      autoRotateTimeoutRef.current = null;
-    }
-    if (wheelTimeoutRef.current) {
-      clearTimeout(wheelTimeoutRef.current);
-      wheelTimeoutRef.current = null;
-    }
-    if (wheelMomentumRef.current) {
-      cancelAnimationFrame(wheelMomentumRef.current);
-      wheelMomentumRef.current = null;
-    }
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-      animationFrameRef.current = null;
-    }
-    if (buttonRotationFrameRef.current) {
-      cancelAnimationFrame(buttonRotationFrameRef.current);
-      buttonRotationFrameRef.current = null;
-    }
-  };
+  // Handle rotation button press
   const handleButtonPress = (direction) => {
     setIsRotating(false);
     clearAllTimers();
@@ -383,6 +535,7 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
     buttonRotationFrameRef.current = requestAnimationFrame(rotate);
   };
 
+  // Handle rotation button release
   const handleButtonRelease = () => {
     isButtonPressedRef.current = false;
     buttonDirectionRef.current = null;
@@ -394,6 +547,7 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
     }, DRAG_SETTINGS.autoRotateDelay);
   };
 
+  // Handle mouse wheel momentum effect
   const handleWheelMomentum = () => {
     if (Math.abs(wheelVelocityRef.current) < DRAG_SETTINGS.minimumVelocity) {
       wheelMomentumRef.current = null;
@@ -412,11 +566,8 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
     wheelMomentumRef.current = requestAnimationFrame(handleWheelMomentum);
   };
 
-  const handleWheel = (e) => {
-    // if (e.cancelable) {
-    //   e.preventDefault();
-    // }
-
+  // Handle mouse wheel event
+  const handleWheel = useCallback((e) => {
     setIsRotating(false);
     clearAllTimers();
 
@@ -437,11 +588,10 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
         setIsRotating(true);
       }, DRAG_SETTINGS.wheel.debounceTime);
     }
-  };
-  const handleDragStart = (e) => {
-    // if (e.cancelable) {
-    //   e.preventDefault();
-    // }
+  }, [clearAllTimers]);
+
+  // Handle drag start event
+  const handleDragStart = useCallback((e) => {
     e.stopPropagation();
 
     const point = e.touches ? e.touches[0] : e;
@@ -458,22 +608,20 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
     setIsRotating(false);
     clearAllTimers();
 
-
     if (e.touches) {
-      document.addEventListener('touchmove', handleDragMove, { passive: false });
-      document.addEventListener('touchend', handleDragEnd, { passive: false });
-      document.addEventListener('touchcancel', handleDragEnd, { passive: false });
+      document.addEventListener('touchmove', handleDragMove, { passive: true });
+      document.addEventListener('touchend', handleDragEnd, { passive: true });
+      document.addEventListener('touchcancel', handleDragEnd, { passive: true });
     } else {
-      document.addEventListener('mousemove', handleDragMove, { passive: false });
-      document.addEventListener('mouseup', handleDragEnd, { passive: false });
-      document.addEventListener('mouseleave', handleDragEnd, { passive: false });
+      document.addEventListener('mousemove', handleDragMove, { passive: true });
+      document.addEventListener('mouseup', handleDragEnd, { passive: true });
+      document.addEventListener('mouseleave', handleDragEnd, { passive: true });
     }
-  };
+  }, [clearAllTimers]);
 
-  const handleDragMove = (e) => {
+  // Handle drag move event
+  const handleDragMove = useCallback((e) => {
     if (!dragState.current.isDragging) return;
-
-
 
     const point = e.touches ? e.touches[0] : e;
     const deltaX = point.clientX - dragState.current.lastX;
@@ -494,12 +642,13 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
 
       setCurrentRotation(prev => {
         const newRotation = prev + (deltaX * DRAG_SETTINGS.sensitivity);
-        localStorage.setItem('heroRotationPosition', newRotation.toString());
         return newRotation;
       });
     }
-  };
-  const handleDragEnd = () => {
+  }, []);
+
+  // Handle drag end event
+  const handleDragEnd = useCallback(() => {
     if (!dragState.current.isDragging) return;
 
     const wasDragging = dragState.current.isMoved;
@@ -508,15 +657,12 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
     dragState.current.isMoved = false;
     setIsDragging(false);
 
-    const touchOptions = { passive: false };
-    const mouseOptions = { passive: true };
-
-    document.removeEventListener('mousemove', handleDragMove, mouseOptions);
+    document.removeEventListener('mousemove', handleDragMove);
     document.removeEventListener('mouseup', handleDragEnd);
     document.removeEventListener('mouseleave', handleDragEnd);
-    document.removeEventListener('touchmove', handleDragMove, touchOptions);
-    document.removeEventListener('touchend', handleDragEnd, touchOptions);
-    document.removeEventListener('touchcancel', handleDragEnd, touchOptions);
+    document.removeEventListener('touchmove', handleDragMove);
+    document.removeEventListener('touchend', handleDragEnd);
+    document.removeEventListener('touchcancel', handleDragEnd);
 
     if (wasDragging) {
       const finalVelocity = dragState.current.velocity;
@@ -535,7 +681,6 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
 
           setCurrentRotation(prev => {
             const newRotation = prev + (currentVelocity * DRAG_SETTINGS.sensitivity);
-            localStorage.setItem('heroRotationPosition', newRotation.toString());
             return newRotation;
           });
 
@@ -550,53 +695,57 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
         }, DRAG_SETTINGS.autoRotateDelay);
       }
     }
-  };
+  }, [handleDragMove]);
 
+  // Add event listeners for wheel event
   useEffect(() => {
-    const wheelOptions = { passive: false };
+    const wheelOptions = { passive: true };
     document.addEventListener('wheel', handleWheel, wheelOptions);
 
     return () => {
       document.removeEventListener('wheel', handleWheel, wheelOptions);
       clearAllTimers();
     };
-  }, []);
-  useEffect(() => {
-    let lastTimestamp = 0;
+  }, [handleWheel, clearAllTimers]);
 
+  // Automatic rotation animation with frame skipping for performance
+  useEffect(() => {
+    let animationId = null;
+    let lastTimestamp = 0;
+    
     const animateRotation = (timestamp) => {
       if (!lastTimestamp) lastTimestamp = timestamp;
+      
       const deltaTime = (timestamp - lastTimestamp) / 1000;
-      lastTimestamp = timestamp;
-
-      if (isRotating && !dragState.current.isDragging && !isButtonPressedRef.current) {
-        setCurrentRotation(prev => {
-          const newRotation = prev + DRAG_SETTINGS.rotationSpeed * deltaTime;
-          localStorage.setItem('heroRotationPosition', newRotation.toString());
-          return newRotation;
-        });
+      
+      // Apply frame skipping for performance
+      frameCountRef.current += 1;
+      if (frameCountRef.current % (deviceSettings.frameSkip + 1) === 0) {
+        if (isRotating && !dragState.current.isDragging && !isButtonPressedRef.current) {
+          setCurrentRotation(prev => {
+            // Use device-specific rotation speed
+            const newRotation = prev + deviceSettings.rotationSpeed * deltaTime;
+            return newRotation;
+          });
+        }
+        lastTimestamp = timestamp;
       }
-
-      animationFrameRef.current = requestAnimationFrame(animateRotation);
+      
+      animationId = requestAnimationFrame(animateRotation);
     };
 
     if (isRotating && !dragState.current.isDragging && !isButtonPressedRef.current) {
-      animationFrameRef.current = requestAnimationFrame(animateRotation);
+      animationId = requestAnimationFrame(animateRotation);
     }
 
     return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
+      if (animationId) {
+        cancelAnimationFrame(animationId);
       }
     };
-  }, [isRotating]);
+  }, [isRotating, deviceSettings.rotationSpeed, deviceSettings.frameSkip]);
 
-  useEffect(() => {
-    return () => {
-      clearAllTimers();
-    };
-  }, []);
-
+  // Add keyboard controls
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowLeft') {
@@ -621,15 +770,24 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
     };
   }, []);
 
+  // Clean up when component unmounts
+  useEffect(() => {
+    return () => {
+      clearAllTimers();
+      if (memoryResetTimerRef.current) {
+        clearInterval(memoryResetTimerRef.current);
+      }
+    };
+  }, [clearAllTimers]);
+
+  // Manual memory reset when testing
+  const forceMemoryReset = () => {
+    resetMemoryUsage();
+  };
+
   return (
     <>
-       
-       
       <div className={styles.slider_section}>
-     
-    
-   
-      
         <button
           className={styles.musicButton}
           onClick={toggleMusic}
@@ -638,9 +796,7 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
           {isPlaying ? '♫' : '♪'}
         </button>
    
-        <div className={styles.eventImageContainer}>
-      
-  </div>
+        <div className={styles.eventImageContainer}></div>
 
         <div className={styles.languageTabs}>
           <button
@@ -655,33 +811,40 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
           >
             TH
           </button>
-          
+          {/* Hidden in production, useful for testing */}
+          {process.env.NODE_ENV === 'development' && (
+            <button
+              className={styles.debugButton}
+              onClick={forceMemoryReset}
+              title="Force memory reset (debug only)"
+            >
+              🔄
+            </button>
+          )}
         </div>
 
         <button className={styles.topLeftButton} onClick={handleButtonClick} />
 
         <div className={styles.banner}>
           <div
-          
             ref={sliderRef}
             className={`${styles.slider} ${isDragging ? styles.dragging : ''}`}
             style={{
               transform: `translateX(-50%) perspective(1000px) rotateX(${
-                window.innerWidth <= 900 ? '-16deg' : '0deg'
-              }) rotateY(${currentRotation}deg)`
+                windowDimensions.width <= 900 ? '-16deg' : '0deg'
+              }) rotateY(${currentRotation}deg)`,
+              width: `${deviceSettings.itemWidth}px`,
+              height: `${deviceSettings.itemHeight}px`
             }}
-            
           >
-            
             {IMAGE_ROUTES.map((item, index) => (
-              
               <SliderItem
                 key={index}
                 id={item.id}
                 image={item.image}
                 position={index + 1}
                 total={IMAGE_ROUTES.length}
-                
+                translateZ={deviceSettings.translateZ}
                 onNavigate={(e) => {
                   if (!dragState.current.isMoved) {
                     e.stopPropagation();
@@ -692,12 +855,9 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
                 onDragStart={handleDragStart}
                 isDragging={isDragging}
                 title={item.title}
-                
               />
             ))}
-            
           </div>
-          {/* <SongkranEffect />   */}
 
           <RotationButton
             direction="left"
@@ -716,11 +876,10 @@ const RotationButton = ({ direction, onPress, onRelease }) => {
               <p>{text.subtitle}</p>
             </div>
           </div>
-          
         </div>
       </div>
     </>
   );
- };
+};
 
- export default Hero_New;
+export default Hero_New;
