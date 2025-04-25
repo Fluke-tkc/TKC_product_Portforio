@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useLanguage } from './contexts/LanguageContext';
 
 
-import { Hero_New } from "./components/Hero/Hero_New";
+import { TKC_Main } from "./components/Hero/TKC_Main";
 import { SmartSolutions } from "./components/SmartSolutions/SmartSolutions";
 import { GreenSolutions } from "./components/GreenSolution/GreenSolutions";
 
@@ -77,7 +77,7 @@ function App() {
     <Router>
       <Routes>
     
-        <Route path="/" element={<Hero_New />} />
+        <Route path="/" element={<TKC_Main />} />
         
         <Route path="/smart-solutions" element={<SmartSolutions />} />
              <Route path="/smart-solutions-building" element={<Smart_Building />} />
