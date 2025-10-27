@@ -1,43 +1,43 @@
 import React, { useEffect } from 'react';
-import styles_H from './Hearteffect.module.css';
+import styles from './HeartEffect.module.css';
 
 const HeartEffect = () => {
   useEffect(() => {
-    const valentineContainer = document.getElementById('valentineContainer');
+    const snowContainer = document.getElementById('snowContainer');
 
-    if (!valentineContainer) {
-      
+    if (!snowContainer) {
+      console.error('Snow container not found');
       return;
     }
 
-    const createheart = () => {
-      const heart = document.createElement('div');
-      heart.classList.add(styles_H.heart);
-      heart.style.left = Math.random() * 100 + 'vw'; // สุ่มตำแหน่งเริ่มต้นแนวนอน
-      heart.style.width = `${Math.random() * 20 + 10}px`; // สุ่มขนาดหิมะ
-      heart.style.height = heart.style.width; // ให้ขนาดกว้างเท่ากับสูง
-      heart.style.animationDuration = `${Math.random() * 30 + 10}s`; // สุ่มระยะเวลาอนิเมชัน
-      heart.style.opacity = Math.random(); // สุ่มความโปร่งใส
+    const createSnow = () => {
+      const snow = document.createElement('div');
+      snow.classList.add(styles.snow);
+      snow.style.left = Math.random() * 100 + 'vw'; // สุ่มตำแหน่งเริ่มต้นแนวนอน
+      snow.style.width = `${Math.random() * 20 + 10}px`; // สุ่มขนาดหิมะ
+      snow.style.height = snow.style.width; // ให้ขนาดกว้างเท่ากับสูง
+      snow.style.animationDuration = `${Math.random() * 30 + 10}s`; // สุ่มระยะเวลาอนิเมชัน
+      snow.style.opacity = Math.random(); // สุ่มความโปร่งใส
   // สุ่มระยะเวลาอนิเมชันหมุน
       
-      heart.style.animation = `${styles_H.heartfall} ${heart.style.animationDuration} linear infinite`;
+      snow.style.animation = `${styles.snowfall} ${snow.style.animationDuration} linear infinite`;
       // สุ่มค่าความเบลอ
       const blurAmount = Math.random() *  (3 - 2) + 2; // ระดับเบลอระหว่าง 0px - 3px
-      heart.style.filter = `blur(${blurAmount}px)`;
-      valentineContainer.appendChild(heart);
+      snow.style.filter = `blur(${blurAmount}px)`;
+      snowContainer.appendChild(snow);
 
       // ลบหิมะเมื่อจบอนิเมชัน
-      setTimeout(() => heart.remove(), parseFloat(heart.style.animationDuration) * 1000);
+      setTimeout(() => snow.remove(), parseFloat(snow.style.animationDuration) * 1000);
     };
 
     // สร้างหิมะทุกๆ 100ms
-    const heartInterval = setInterval(createheart, 100);
+    const snowInterval = setInterval(createSnow, 100);
 
     // ทำความสะอาด interval เมื่อ component ถูกลบ
-    return () => clearInterval(heartInterval);
+    return () => clearInterval(snowInterval);
   }, []);
 
-  return <div id="valentineContainer" className={styles_H.valentineContainer}></div>;
+  return <div id="snowContainer" className={styles.snowContainer}></div>;
 };
 
 export default HeartEffect;

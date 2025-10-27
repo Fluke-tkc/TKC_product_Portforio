@@ -4,9 +4,10 @@ import { Contact } from "../Contact/Contact";
 import styles from "./TKC_Main.module.css";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { imageMapping } from "../../contexts/LanguageContext";
-// import SnowEffect from '../Hero/snowEffect';
+// import HeartEffect from '../Hero/HeartEffect';
+import SnowEffect from '../Hero/snowEffect';
 // import SongkranEffect  from '../Hero/SongkranEffect ';
-import RainEffectWithLightning  from './RainEffectWithLightning';
+//import RainEffectWithLightning  from './RainEffectWithLightning';
 
 // Configuration settings for different devices
 const getDeviceSettings = () => {
@@ -788,7 +789,9 @@ export const TKC_Main = () => {
 
   return (
     <>
-    <RainEffectWithLightning intensity="low" />  
+    {/* <RainEffectWithLightning intensity="low" />   */}
+    <SnowEffect intensity="medium" />
+    {/* <HeartEffect intensity="medium" /> */}
       <div className={styles.slider_section}>
       {/* <div className={styles.gifContainer}>
         <img src="/image/Rain.gif" alt="Animation" />
@@ -831,7 +834,7 @@ export const TKC_Main = () => {
 
         <button className={styles.topLeftButton} onClick={handleButtonClick} />
         <div className={styles.gifContainer}>
-        <img src="/image/Rain.gif" alt="Animation" />
+        <img src="/image/ChristmasTree.gif" alt="Animation" />
         </div>
 
         <div className={styles.banner}>
