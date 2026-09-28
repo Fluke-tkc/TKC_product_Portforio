@@ -1,0 +1,328 @@
+.page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  color: #fff;
+  background: radial-gradient(ellipse at 50% 40%, #0b2447 0%, #04152d 75%);
+  font-family: "Prompt", "Outfit", sans-serif;
+}
+
+.canvas {
+  position: absolute !important;
+  inset: 0;
+  touch-action: none;
+}
+
+.flat {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 90px 16px 80px;
+}
+
+.flatFrame {
+  position: relative;
+  width: min(100%, calc((100dvh - 170px) * 2));
+}
+
+.flatFrame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+}
+
+.flatPin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  position: absolute;
+  z-index: 30;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px 24px 40px;
+  background: linear-gradient(to bottom, rgba(4, 21, 45, 0.85), rgba(4, 21, 45, 0));
+  pointer-events: none;
+}
+
+.header > * {
+  pointer-events: auto;
+}
+
+.back {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font: 500 14px/1 "Prompt", "Outfit", sans-serif;
+  color: #fff;
+  background: rgba(4, 21, 45, 0.55);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.back:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.back:focus-visible,
+.chip:focus-visible,
+.chipActive:focus-visible {
+  outline: 2px solid #5ee7ff;
+  outline-offset: 2px;
+}
+
+.titleBlock {
+  flex: 1;
+  min-width: 0;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+}
+
+.eyebrow {
+  font: 500 11px/1 "Prompt", "Outfit", sans-serif;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #5ee7ff;
+  margin-bottom: 6px;
+}
+
+.titleBlock h1 {
+  font: 600 clamp(22px, 2.6vw, 34px) / 1.15 "Prompt", "Outfit", sans-serif;
+}
+
+.tagline {
+  margin-top: 4px;
+  font: 300 clamp(13px, 1.1vw, 16px) / 1.4 "Prompt", "Outfit", sans-serif;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* ---------- Dock ---------- */
+
+.dock {
+  position: absolute;
+  z-index: 30;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: calc(100vw - 48px);
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(4, 21, 45, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* the sliding strip of chips; edges fade where more chips are hidden */
+.dockTrack {
+  --fade-start: 0px;
+  --fade-end: 0px;
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+  padding: 2px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--fade-start), #000 calc(100% - var(--fade-end)), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 var(--fade-start), #000 calc(100% - var(--fade-end)), transparent 100%);
+}
+
+.dockTrack[data-fade-start="true"] {
+  --fade-start: 36px;
+}
+
+.dockTrack[data-fade-end="true"] {
+  --fade-end: 36px;
+}
+
+.dockTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.dockArrow {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font: 400 22px/1 "Prompt", "Outfit", sans-serif;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.dockArrow:hover:not(:disabled) {
+  background: rgba(94, 231, 255, 0.25);
+}
+
+.dockArrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.dockArrow:focus-visible {
+  outline: 2px solid #5ee7ff;
+  outline-offset: 2px;
+}
+
+.dockHidden {
+  opacity: 0;
+  transform: translate(-50%, 20px);
+  pointer-events: none;
+}
+
+.chip,
+.chipActive {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 14px 0 6px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: 400 13px/1 "Prompt", "Outfit", sans-serif;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.85);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.chipActive {
+  color: #04152d;
+  background: linear-gradient(135deg, #ffe7a6, #ffb547);
+}
+
+.chipNum {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 12px;
+  color: #04152d;
+  background: #bfefff;
+}
+
+.chipActive .chipNum {
+  background: #fff;
+}
+
+/* when a panel is open on desktop, keep the dock clear of it */
+@media (min-width: 901px) {
+  .page:has(aside) .dock {
+    left: calc(50% - 222px);
+    max-width: calc(100vw - 500px);
+  }
+}
+
+/* ---------- Hint ---------- */
+
+.hint {
+  position: absolute;
+  z-index: 20;
+  left: 50%;
+  bottom: 88px;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font: 400 13px/1.3 "Prompt", "Outfit", sans-serif;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(4, 21, 45, 0.55);
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  animation: hintIn 0.8s ease 2.4s both;
+}
+
+@keyframes hintIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+}
+
+.hintHidden {
+  opacity: 0;
+}
+
+@media (max-width: 900px) {
+  .header {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 14px 14px 30px;
+  }
+
+  .back span {
+    display: none;
+  }
+
+  .back {
+    width: 40px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .titleBlock {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .header > :last-child {
+    margin-left: auto;
+  }
+
+  .dock {
+    left: 12px;
+    right: 12px;
+    bottom: 14px;
+    max-width: none;
+    transform: none;
+    border-radius: 18px;
+  }
+
+  .dockHidden {
+    transform: translateY(20px);
+  }
+
+  .hint {
+    bottom: 80px;
+    white-space: normal;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+    text-align: center;
+  }
+}

@@ -1,0 +1,127 @@
+// Transcribed from the infographic slides; sections filled per hotspot.
+export default {
+  id: "autonomous",
+  title: { en: "Autonomous", th: "ระบบการทำงานอัตโนมัติ" },
+  tagline: { en: "Technologies that function autonomously with minimal human intervention", th: "เทคโนโลยีที่สามารถทำงานได้ด้วยตนเอง โดยไม่ต้องพึ่งพาการควบคุมจากมนุษย์" },
+  depth: 3.0,
+  hotspots: [
+    {
+      id: "security-systems",
+      pos: [0.07, 0.64],
+      detail: { en: "/image/AS_1.png", th: "/image/AS_1_TH.png" },
+      en: {
+        title: "Autonomous Security Systems",
+        summary: "Designed to operate seamlessly without the need for human intervention.",
+        sections: [
+          { h: "AI-Powered Threat Detection", items: ["Uses machine learning to identify suspicious behavior, anomalies, and potential threats in real-time."] },
+          { h: "Integrated Surveillance", items: ["High-definition cameras with night vision, thermal imaging, and 360-degree coverage.", "Smart video analytics for facial recognition and object tracking."] },
+          { h: "Automated Response", items: ["Instant alarms, lockdowns, or alerts triggered without manual intervention.", "Deploys drones or robots to investigate or deter threats."] },
+          { h: "Remote Monitoring", items: ["Cloud-based platforms for live monitoring via smartphones or PCs.", "Access control and event logs available in real-time."] },
+          { h: "Self-Healing Systems", items: ["Automatically detects and resolves system malfunctions or cyber-attacks."] },
+          { h: "IoT Integration", items: ["Communicates with other devices, such as smart doors, lighting, and environmental sensors."] },
+          { h: "Advanced Sensors", items: ["Motion detectors, vibration sensors, and sound analysis for comprehensive security."] },
+          { h: "Automated Patrols", items: ["Robots or drones conduct scheduled security sweeps."] },
+          { h: "Incident Response", items: ["Immediate deployment of security measures or notification to emergency services."] },
+          { h: "Services", items: ["24/7 Monitoring and Reporting", "Cybersecurity Protection", "Customizable Security Protocols"] },
+        ],
+      },
+      th: {
+        title: "Autonomous Security Systems",
+        summary: "ออกแบบมาให้ทำงานได้อย่างราบรื่น โดยไม่ต้องพึ่งพาการแทรกแซงจากมนุษย์",
+        sections: [
+          { h: "การตรวจจับภัยคุกคามด้วยพลังของ AI", items: ["ใช้การเรียนรู้ของเครื่อง (Machine Learning) เพื่อตรวจจับพฤติกรรมที่น่าสงสัย ความผิดปกติ และภัยคุกคามที่อาจเกิดขึ้นได้แบบเรียลไทม์"] },
+          { h: "การเฝ้าระวังแบบบูรณาการ", items: ["กล้องความคมชัดสูงที่มาพร้อมกับระบบมองกลางคืน การถ่ายภาพความร้อน และการครอบคลุมแบบ 360 องศา", "การวิเคราะห์วิดีโออัจฉริยะสำหรับการจดจำใบหน้าและการติดตามวัตถุ"] },
+          { h: "การตอบสนองอัตโนมัติ", items: ["การเตือนภัย การล็อกดาวน์ หรือการแจ้งเตือนที่ถูกกระตุ้นโดยอัตโนมัติ โดยไม่ต้องมีการแทรกแซงจากมนุษย์", "ส่งโดรนหรือหุ่นยนต์เพื่อตรวจสอบหรือยับยั้งภัยคุกคาม"] },
+          { h: "การเฝ้าระวังระยะไกล", items: ["แพลตฟอร์มบนคลาวด์สำหรับการเฝ้าติดตามแบบเรียลไทม์ผ่านสมาร์ทโฟนหรือพีซี", "การควบคุมการเข้าถึงและบันทึกเหตุการณ์ที่สามารถเข้าถึงได้แบบเรียลไทม์"] },
+          { h: "ระบบที่สามารถซ่อมแซมตัวเองได้", items: ["ตรวจจับ และแก้ไขข้อบกพร่องของระบบหรือการโจมตีทางไซเบอร์โดยอัตโนมัติ"] },
+          { h: "การบูรณาการ IoT (Internet of Things)", items: ["สื่อสารกับอุปกรณ์อื่นๆ เช่น ประตูอัจฉริยะ ระบบแสงสว่าง และเซ็นเซอร์สิ่งแวดล้อม"] },
+          { h: "เซ็นเซอร์ขั้นสูง", items: ["เคลื่อนไหว เซ็นเซอร์วัดแรงสั่นสะเทือน และการวิเคราะห์เสียงสำหรับความปลอดภัยแบบครบวงจร"] },
+          { h: "การลาดตระเวนอัตโนมัติ", items: ["หุ่นยนต์ หรือโดรนดำเนินการตรวจสอบความปลอดภัยตามกำหนดเวลา"] },
+          { h: "การตอบสนองต่อเหตุการณ์", items: ["การนำมาตรการรักษาความปลอดภัยไปใช้ทันที หรือการแจ้งเตือนบริการฉุกเฉิน"] },
+          { h: "บริการ", items: ["การเฝ้าระวัง และรายงานตลอด 24 ชั่วโมง 7 วัน", "การป้องกันความปลอดภัยทางไซเบอร์", "โปรโตคอลการรักษาความปลอดภัยที่ปรับแต่งได้"] },
+        ],
+      },
+    },
+    {
+      id: "vehicles",
+      pos: [0.38, 0.33],
+      detail: { en: "/image/AS_2.png", th: "/image/AS_2_TH.png" },
+      en: {
+        title: "Autonomous Vehicles",
+        summary: "Self-driving cars use sensors, cameras, and AI for independent navigation.",
+        sections: [
+          { h: "C-V2X – Cellular-Vehicle to Everything", items: ["V2V – Vehicle to Vehicle: communicates and shares information between vehicles.", "V2I – Vehicle to Infrastructure: communicates and shares information from Road Side Units (RSU) to vehicles.", "V2N – Vehicle to Network: shares information from vehicles to the network.", "V2P – Vehicle to Pedestrian: communicates and shares information between vehicles and pedestrians."] },
+          { h: "Autonomous AI Solutions", items: ["Image Detection", "Image Classification", "Path Planning", "Lane Keeping", "Lane Change", "Speed Control", "Steering Control", "Precise Stop", "Sign Recognition", "And more"] },
+          { h: "Other Systems", items: ["Advanced Safety Systems", "Fleet Management", "Predictive Maintenance", "Remote Operation Services", "And more"] },
+          { h: "Key Technologies", items: ["LiDAR", "RaDAR", "Camera", "GPS", "4G/5G"] },
+          { h: "Key Systems", items: ["Navigation: High-Precision GPS", "Mapping: High-Definition Map, GPS Map, SLAM"] },
+        ],
+      },
+      th: {
+        title: "Autonomous Vehicles",
+        summary: "รถยนต์ขับเคลื่อนอัตโนมัติใช้เซ็นเซอร์ กล้อง และปัญญาประดิษฐ์ (AI) ในการนำทางอย่างอิสระ",
+        sections: [
+          { h: "C-V2X – Cellular-Vehicle to Everything", items: ["V2V – Vehicle to Vehicle: การสื่อสารและการแชร์ข้อมูลระหว่างรถยนต์กับรถยนต์", "V2I – Vehicle to Infrastructure: การสื่อสารและการแชร์ข้อมูลจากหน่วยข้างทาง (RSU) ไปยังรถยนต์", "V2N – Vehicle to Network: การแชร์ข้อมูลจากรถยนต์ไปยังเครือข่าย", "V2P – Vehicle to Pedestrian: การสื่อสารและการแชร์ข้อมูลระหว่างรถยนต์กับคนเดินถนน"] },
+          { h: "โซลูชัน AI อัตโนมัติ", items: ["การตรวจจับภาพ", "การจำแนกประเภทภาพ", "การวางแผนเส้นทาง", "การรักษาช่องทางเดินรถ", "การเปลี่ยนช่องทางเดินรถ", "การควบคุมความเร็ว", "การควบคุมพวงมาลัย", "การหยุดรถอย่างแม่นยำ", "การจดจำสัญลักษณ์", "อื่นๆ"] },
+          { h: "ระบบอื่นๆ", items: ["ระบบความปลอดภัยขั้นสูง", "การบริหารจัดการฟลีท", "การบำรุงรักษาเชิงคาดการณ์", "บริการปฏิบัติการระยะไกล", "อื่นๆ"] },
+          { h: "เทคโนโลยีหลัก", items: ["LiDAR", "RaDAR", "กล้อง", "GPS", "4G/5G"] },
+          { h: "ระบบหลัก", items: ["การนำทาง GPS ความแม่นยำสูง", "การทำแผนที่: แผนที่ความคมชัดสูง แผนที่ GPS และ SLAM (Simultaneous Localization and Mapping)"] },
+        ],
+      },
+    },
+    {
+      id: "industrial-robot",
+      pos: [0.57, 0.22],
+      detail: { en: "/image/AS_3.png", th: "/image/AS_3_TH.png" },
+      en: {
+        title: "Autonomous Industrial Robot",
+        summary: "Autonomous industrial robots are becoming increasingly important across various industries.",
+        sections: [
+          { h: "Professional Robot Arm", items: ["Versatile robotic manipulators designed for a wide range of tasks, including assembly, packaging, and material handling. They can operate independently or in conjunction with other systems.", "Advanced Programming Options", "Flexibility", "Intelligent"] },
+          { h: "Robot Conveyor System", items: ["Integrates a conveyor belt with a robotic arm to automate transporting and manipulating items. The conveyor moves products to the robotic arm, which picks, places, or sorts them as needed.", "Increased Efficiency", "Cost Savings", "Improved Safety"] },
+          { h: "Autonomous Guided Vehicles (AGVs)", items: ["AGVs are available in a variety of models and can be used to move products on an assembly line, transport goods throughout a plant or warehouse, and deliver loads.", "Cart AGV", "Forklift AGV", "Towing AGV", "Unit Load AGV"] },
+          { h: "Self-Navigation", items: ["These robots can move around their operational environment autonomously, using technologies like LiDAR, cameras, and ultrasonic sensors to detect obstacles and navigate safely."] },
+          { h: "Adaptability", items: ["They can adjust to changing environments and tasks, making them suitable for dynamic manufacturing settings."] },
+          { h: "Continuous Operation", items: ["Autonomous robots can work for extended periods without breaks, enhancing productivity."] },
+        ],
+      },
+      th: {
+        title: "Autonomous Industrial Robot",
+        summary: "หุ่นยนต์อุตสาหกรรมอัตโนมัติกำลังมีความสำคัญมากขึ้นในหลากหลายอุตสาหกรรม",
+        sections: [
+          { h: "หุ่นยนต์แขนกลมืออาชีพ", items: ["หุ่นยนต์มือกลที่หลากหลายถูกออกแบบมาเพื่อทำงานหลากหลายประเภท เช่น การประกอบ การบรรจุภัณฑ์ และการจัดการวัสดุ สามารถทำงานได้อย่างอิสระหรือร่วมกับระบบอื่นๆ ได้", "ตัวเลือกการโปรแกรมขั้นสูง", "ความยืดหยุ่น", "อัจฉริยะ"] },
+          { h: "ระบบสายพานลำเลียงหุ่นยนต์", items: ["ระบบสายพานลำเลียงหุ่นยนต์รวมสายพานลำเลียงเข้ากับแขนหุ่นยนต์เพื่ออัตโนมัติกระบวนการขนส่งและจัดการสิ่งของ สายพานลำเลียงจะเคลื่อนย้ายผลิตภัณฑ์ไปยังแขนหุ่นยนต์ ซึ่งจะหยิบ วาง หรือคัดแยกตามความจำเป็น", "ประสิทธิภาพที่เพิ่มขึ้น", "การประหยัดค่าใช้จ่าย", "ความปลอดภัยที่ดีขึ้น"] },
+          { h: "Autonomous Guided Vehicles (AGVs)", items: ["AGVs มีให้เลือกหลายรุ่น และสามารถใช้ในการขนส่งผลิตภัณฑ์ในสายการประกอบ ขนส่งสินค้าในโรงงานหรือคลังสินค้า และส่งมอบของต่างๆ ได้", "Cart AGV", "Forklift AGV", "Towing AGV", "Unit Load AGV"] },
+          { h: "การนำทางด้วยตนเอง", items: ["หุ่นยนต์เหล่านี้สามารถเคลื่อนที่ในสภาพแวดล้อมการทำงานได้อย่างอัตโนมัติ โดยใช้เทคโนโลยีต่างๆ เช่น LiDAR กล้อง และเซ็นเซอร์อัลตราซาวด์ เพื่อตรวจจับอุปสรรคและนำทางอย่างปลอดภัย"] },
+          { h: "ความสามารถในการปรับตัว", items: ["สามารถปรับตัวให้เข้ากับสภาพแวดล้อม และงานที่เปลี่ยนแปลงไป ทำให้เหมาะสมกับการตั้งค่าการผลิตที่มีการเปลี่ยนแปลงอย่างต่อเนื่อง"] },
+          { h: "การทำงานต่อเนื่อง", items: ["หุ่นยนต์อัตโนมัติสามารถทำงานได้เป็นระยะเวลานานโดยไม่ต้องหยุดพัก ซึ่งช่วยเพิ่มประสิทธิภาพการผลิต"] },
+        ],
+      },
+    },
+    {
+      id: "service-robot",
+      pos: [0.88, 0.66],
+      detail: { en: "/image/AS_4.png", th: "/image/AS_4_TH.png" },
+      en: {
+        title: "Autonomous Service Robot",
+        summary: "A self-operating robot designed to assist humans using advanced technologies.",
+        sections: [
+          { h: "Healthcare Robot", items: ["Healthcare robots assist in various medical tasks, enhancing patient care and operational efficiency in healthcare settings."] },
+          { h: "Inspection Robot", items: ["Inspection robots are utilized for monitoring and inspecting environments or equipment, ensuring safety and compliance."] },
+          { h: "Field Robot", items: ["Field robots are employed in agricultural settings for tasks such as planting, harvesting, and monitoring crops.", "Agricultural drones are used for crop monitoring and management, collecting data on soil health, moisture levels, and crop conditions to optimize farming practices."] },
+          { h: "Logistic Robot", items: ["Logistic robots are designed to automate the transportation of goods within warehouses and manufacturing facilities. They can navigate autonomously, avoiding obstacles and optimizing routes for efficiency."] },
+        ],
+      },
+      th: {
+        title: "Autonomous Service Robot",
+        summary: "หุ่นยนต์ที่ทำงานได้เองออกแบบมาเพื่อช่วยเหลือมนุษย์โดยใช้เทคโนโลยีขั้นสูง",
+        sections: [
+          { h: "หุ่นยนต์ดูแลสุขภาพ", items: ["หุ่นยนต์ในวงการดูแลสุขภาพช่วยในงานทางการแพทย์ต่างๆ เช่น การดูแลผู้ป่วย และเพิ่มประสิทธิภาพการดำเนินงานในสถานพยาบาล"] },
+          { h: "หุ่นยนต์ตรวจสอบ", items: ["หุ่นยนต์ตรวจสอบถูกนำมาใช้ในการเฝ้าระวังและตรวจสอบสภาพแวดล้อมหรืออุปกรณ์ต่างๆ เพื่อให้มั่นใจในความปลอดภัยและการปฏิบัติตามมาตรฐาน"] },
+          { h: "หุ่นยนต์เพื่อการเกษตร", items: ["หุ่นยนต์ภาคสนามถูกนำมาใช้ในงานเกษตรกรรมสำหรับงานต่างๆ เช่น การปลูก การเก็บเกี่ยว และการเฝ้าติดตามพืชผล", "โดรนเกษตรถูกใช้สำหรับการเฝ้าติดตามและจัดการพืชผล โดยการเก็บข้อมูลเกี่ยวกับสุขภาพของดิน ระดับความชื้น และสภาพของพืชผล เพื่อปรับปรุงแนวทางการเกษตรให้มีประสิทธิภาพมากขึ้น"] },
+          { h: "หุ่นยนต์โลจิสติกส์", items: ["หุ่นยนต์โลจิสติกส์ถูกออกแบบมาเพื่อการขนส่งสินค้าอัตโนมัติในคลังสินค้า และโรงงานผลิต พวกเขาสามารถนำทางได้ด้วยตนเอง โดยหลีกเลี่ยงอุปสรรคและปรับเส้นทางให้เหมาะสมเพื่อเพิ่มประสิทธิภาพ"] },
+        ],
+      },
+    },
+  ],
+};

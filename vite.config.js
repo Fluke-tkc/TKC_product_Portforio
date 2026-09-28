@@ -15,7 +15,10 @@ export default defineConfig({
     assetsInlineLimit: 0,
     rollupOptions: {
       output: {
-        assetFileNames: 'assets/[name][extname]'
+        assetFileNames: 'assets/[name][extname]',
+        manualChunks: {
+          three: ['three', '@react-three/fiber', '@react-three/drei']
+        }
       }
     }
   }

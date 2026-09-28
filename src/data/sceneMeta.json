@@ -1,0 +1,92 @@
+{
+  "autonomous": {
+    "width": 2048,
+    "height": 1080,
+    "aspect": 1.89616,
+    "grid": [
+      512,
+      270
+    ],
+    "depthRes": 770
+  },
+  "building": {
+    "width": 2048,
+    "height": 960,
+    "aspect": 2.13272,
+    "grid": [
+      512,
+      240
+    ],
+    "depthRes": 770
+  },
+  "cables": {
+    "width": 2048,
+    "height": 1046,
+    "aspect": 1.95842,
+    "grid": [
+      512,
+      261
+    ],
+    "depthRes": 770
+  },
+  "cloud": {
+    "width": 2048,
+    "height": 1050,
+    "aspect": 1.95,
+    "grid": [
+      512,
+      263
+    ],
+    "depthRes": 770
+  },
+  "cybersecurity": {
+    "width": 2048,
+    "height": 1059,
+    "aspect": 1.93411,
+    "grid": [
+      512,
+      265
+    ],
+    "depthRes": 770
+  },
+  "hospital": {
+    "width": 2048,
+    "height": 1055,
+    "aspect": 1.94199,
+    "grid": [
+      512,
+      264
+    ],
+    "depthRes": 770
+  },
+  "learning": {
+    "width": 2048,
+    "height": 1049,
+    "aspect": 1.95317,
+    "grid": [
+      512,
+      262
+    ],
+    "depthRes": 770
+  },
+  "logistics": {
+    "width": 2048,
+    "height": 1082,
+    "aspect": 1.89222,
+    "grid": [
+      512,
+      271
+    ],
+    "depthRes": 770
+  },
+  "utility": {
+    "width": 2048,
+    "height": 936,
+    "aspect": 2.18793,
+    "grid": [
+      512,
+      234
+    ],
+    "depthRes": 770
+  }
+}

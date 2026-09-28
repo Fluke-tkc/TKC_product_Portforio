@@ -1,0 +1,21 @@
+// Pre-3D URLs (linked from tkc-services.com) mapped to the new pages.
+export const LEGACY_ROUTES = {
+  "/smart-solutions-building_new": "building",
+  "/smart-solutions-building_new_ver02": "building",
+  "/smart-solutions-hospital_new": "hospital",
+  "/smart-solutions-hospital_new_ver02": "hospital",
+  "/smart-solutions-learning_new": "learning",
+  "/smart-solutions-learning_new_ver02": "learning",
+  "/smart-solutions-logistics_new": "logistics",
+  "/smart-solutions-logistics_new_ver02": "logistics",
+  "/smart-solutions-organized_communication_cables_new": "cables",
+  "/smart-solutions-organized_communication_cables_new_ver02": "cables",
+  "/smart-solutions_autonomous_new": "autonomous",
+  "/smart-solutions_autonomous_new_ver02": "autonomous",
+  "/smart-solutions-cybersecurity_new": "cybersecurity",
+  "/smart-solutions-cybersecurity_new_ver02": "cybersecurity",
+  "/smart-solutions-utility_new": "utility",
+  "/smart-solutions-utility_new_ver02": "utility",
+  "/smart-solutions-cloudservice_new": "cloud",
+  "/smart-solutions-cloudservice_new_ver02": "cloud",
+};
