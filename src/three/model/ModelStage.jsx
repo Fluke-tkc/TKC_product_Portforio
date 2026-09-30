@@ -5,6 +5,7 @@ import { Environment, Lightformer, OrbitControls } from "@react-three/drei";
 import { Bloom, BrightnessContrast, EffectComposer, HueSaturation, N8AO, SMAA, ToneMapping, Vignette } from "@react-three/postprocessing";
 import { ToneMappingMode } from "postprocessing";
 import { HotspotPins } from "../HotspotPins";
+import { Showroom } from "./showroom";
 import { prefersReducedMotion } from "../../components/ui/WebGLBoundary";
 
 // ---------- hotspot objects: hover outline + click to select ----------
@@ -113,7 +114,7 @@ function fitView({ position, target }, aspect, maxFactor) {
   return { target: t, pos: new THREE.Vector3(...position).sub(t).multiplyScalar(k).add(t) };
 }
 
-function CameraRig({ home, focus, viewShift }) {
+function CameraRig({ home, focus, viewShift, autoRotate = true }) {
   const controls = useThree((s) => s.controls);
   const camera = useThree((s) => s.camera);
   const size = useThree((s) => s.size);
@@ -157,7 +158,7 @@ function CameraRig({ home, focus, viewShift }) {
       camera.position.lerp(g.pos, k);
       controls.target.lerp(g.target, k);
       if (camera.position.distanceToSquared(g.pos) < 0.02 && controls.target.distanceToSquared(g.target) < 0.02) goal.current = null;
-    } else if (!focus && !interacting.current && !reduceMotion.current && performance.now() - lastInteraction.current > IDLE_MS) {
+    } else if (autoRotate && !focus && !interacting.current && !reduceMotion.current && performance.now() - lastInteraction.current > IDLE_MS) {
       controls.autoRotate = true;
     }
     shift.current.lerp(TMP.set(viewShift[0], viewShift[1]), k);
@@ -172,7 +173,8 @@ function CameraRig({ home, focus, viewShift }) {
 
 export function ModelStage({ scene, hotspots, activeIndex, onSelect, isNarrow }) {
   // baked scenes (Blender lightmaps) carry their own light and AO; anchors come from pins in the glTF
-  const { Component, home, maxDistance = 260, baked, sky, grade } = scene;
+  // ownLights: the scene brings its own (time-of-day) lights
+  const { Component, home, maxDistance = 260, baked, sky, grade, ownLights } = scene;
   const [anchors, setAnchors] = useState(scene.anchors || {});
   const [hovered, setHovered] = useState(null);
   const occluder = useRef();
@@ -203,7 +205,7 @@ export function ModelStage({ scene, hotspots, activeIndex, onSelect, isNarrow })
       setHovered,
       select: (id) => onSelect(hotspots.findIndex((h) => h.id === id)),
       register: (id, g) => {
-        if (g) groups.current[id] = g;
+        if (g) (groups.current[id] ||= new Set()).add(g); // one hotspot may span several groups
       },
     }),
     [onSelect, hotspots]
@@ -211,7 +213,7 @@ export function ModelStage({ scene, hotspots, activeIndex, onSelect, isNarrow })
   // Meshes of the hovered / selected hotspot, handed straight to the outline effect.
   const outlined = useMemo(() => {
     const out = [];
-    new Set([hovered, activeId]).forEach((id) => id && groups.current[id]?.traverse((o) => o.isMesh && !o.userData.noHighlight && o.material !== highlightMaterial && out.push(o)));
+    new Set([hovered, activeId]).forEach((id) => id && groups.current[id]?.forEach((g) => g.traverse((o) => o.isMesh && !o.userData.noHighlight && o.material !== highlightMaterial && out.push(o))));
     return out;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hovered, activeId, mounted]);
@@ -229,8 +231,8 @@ export function ModelStage({ scene, hotspots, activeIndex, onSelect, isNarrow })
   return (
     <HotContext.Provider value={ctx}>
       <Backdrop colors={sky} />
-      {!baked && <hemisphereLight args={["#cfe3ff", "#b9a88f", 0.25]} />}
-      {!baked && <directionalLight
+      {!baked && !ownLights && <hemisphereLight args={["#cfe3ff", "#b9a88f", 0.25]} />}
+      {!baked && !ownLights && <directionalLight
         castShadow
         position={[70, 95, 55]}
         intensity={1.9}
@@ -254,8 +256,10 @@ export function ModelStage({ scene, hotspots, activeIndex, onSelect, isNarrow })
         <Lightformer form="ring" intensity={1.5} color="#5ee7ff" position={[0, 20, -140]} scale={40} />
       </Environment>
 
+      {baked && scene.base && <Showroom base={scene.base} reach={maxDistance} top={scene.standTop ?? -2.1} theme={scene.showroom} />}
+
       <group ref={group}>
-        <Component onAnchors={setAnchors} />
+        <Component onAnchors={setAnchors} activeId={activeId} />
       </group>
 
       <HotspotPins pins={pins} activeIndex={activeIndex} visible onSelect={onSelect} occlude={[occluder]} />
@@ -272,7 +276,7 @@ export function ModelStage({ scene, hotspots, activeIndex, onSelect, isNarrow })
         minPolarAngle={0.12}
         maxPolarAngle={1.38}
       />
-      <CameraRig home={home} focus={focus} viewShift={viewShift} />
+      <CameraRig home={home} focus={focus} viewShift={viewShift} autoRotate={scene.autoRotate} />
 
       <EffectComposer multisampling={0} disableNormalPass>
         {!isNarrow && !baked && <N8AO aoRadius={3} intensity={2.2} distanceFalloff={1.2} halfRes quality="medium" />}

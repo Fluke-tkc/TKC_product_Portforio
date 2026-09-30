@@ -30,6 +30,7 @@ function SmartLogistics({ onAnchors }) {
 export default {
   Component: SmartLogistics,
   baked: true,
+  base: BASE,
   home: { position: [74, 60, 84], target: [-4, 2, -3] },
   maxDistance: 230,
   sky: ["#4a7fc4", "#e3edf5", "#aebfd2"],

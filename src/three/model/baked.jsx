@@ -99,12 +99,11 @@ function prepare(scene, lightmaps, intensity, clip) {
     const key = `${src.uuid}|${vertexLit ? "v" : atlas}|${clipped ? "c" : ""}`;
     if (!cache.has(key)) {
       const color = src.color ? src.color.clone() : new THREE.Color(1, 1, 1);
-      cache.set(
-        key,
-        vertexLit
-          ? new THREE.MeshBasicMaterial({ color: color.multiplyScalar(intensity), vertexColors: true, clippingPlanes: clipped ? clip : null })
-          : new THREE.MeshBasicMaterial({ color, lightMap: lightmaps[atlas] || null, lightMapIntensity: Math.PI * intensity })
-      );
+      const m = vertexLit
+        ? new THREE.MeshBasicMaterial({ color: color.multiplyScalar(intensity), vertexColors: true, clippingPlanes: clipped ? clip : null })
+        : new THREE.MeshBasicMaterial({ color, lightMap: lightmaps[atlas] || null, lightMapIntensity: Math.PI * intensity });
+      m.userData = { atlas: vertexLit ? null : atlas, base: m.color.clone() }; // a demo may tint a whole atlas (lighting scenes)
+      cache.set(key, m);
     }
     return cache.get(key);
   };
@@ -113,6 +112,7 @@ function prepare(scene, lightmaps, intensity, clip) {
   const anim = [];
   const movers = []; // walkers (walk) and cars (drive) following a polyline path
   const sliders = []; // automatic doors, gate flaps and car-park barriers
+  const leds = []; // LED meshes: the selected hotspot pulses its own, reactions may drive the rest
   const toGroup = [];
   scene.updateMatrixWorld(true);
   scene.traverse((o) => {
@@ -136,6 +136,8 @@ function prepare(scene, lightmaps, intensity, clip) {
     } else if (x.kind === "led" || name.startsWith("led_")) {
       const [c, k] = LED_COLORS[name] || LED_COLORS.led_cyan;
       o.material = new THREE.MeshBasicMaterial({ color: new THREE.Color(c).multiplyScalar(k), toneMapped: false, clippingPlanes: x.kind === "move" ? clip : null });
+      if (!o.geometry.boundingSphere) o.geometry.computeBoundingSphere();
+      leds.push({ mesh: o, base: o.material.color.clone(), hot: x.hot, at: o.geometry.boundingSphere.center.clone().applyMatrix4(o.matrixWorld) });
     } else if (x.kind === "screen" || name.startsWith("screen_")) {
       o.material = screenMaterial(name);
     } else {
@@ -160,7 +162,14 @@ function prepare(scene, lightmaps, intensity, clip) {
     if (u.closed) pts.push(pts[0].clone());
     const cum = [0];
     for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + pts[i].distanceTo(pts[i - 1]));
-    u.run = { pts, cum, limbs: o.children.filter((c) => c.userData.limb) };
+    const lamps = [];
+    o.traverse((c) => {
+      if (c.isMesh && c.material.toneMapped === false && c.material.isMeshBasicMaterial) {
+        c.userData.c0 = c.material.color.clone(); // head / tail lights flash when the car is clicked
+        lamps.push(c);
+      }
+    });
+    u.run = { pts, cum, limbs: o.children.filter((c) => c.userData.limb), lamps };
     o.add(u.blob ? blob(u.blob[0], u.blob[1], clip) : u.walk ? blob(0.9, 0.9, clip) : blob(5.4, 2.5, clip));
   });
   anim.forEach((o) => {
@@ -172,7 +181,7 @@ function prepare(scene, lightmaps, intensity, clip) {
     o.userData.q0 = o.quaternion.clone();
     o.userData.open = 0;
   });
-  return { pins, hot, anim, movers, sliders };
+  return { pins, hot, anim, movers, sliders, leds, materials: [...cache.values()] };
 }
 
 // Put `out` at distance d along the path (wrapping) and return the yaw that faces along it.
@@ -188,10 +197,29 @@ function along({ pts, cum }, d, out) {
 }
 
 const Z_AXIS = new THREE.Vector3(0, 0, 1);
+
+function moverOf(o) {
+  while (o && !(o.userData.walk || o.userData.drive)) o = o.parent;
+  return o;
+}
+
+// expanding ring on the ground where a person / car was clicked
+function pokeRing() {
+  const m = new THREE.Mesh(
+    new THREE.RingGeometry(0.8, 1, 48).rotateX(-Math.PI / 2),
+    new THREE.MeshBasicMaterial({ color: new THREE.Color("#5ee7ff").multiplyScalar(2), transparent: true, depthWrite: false, toneMapped: false })
+  );
+  m.visible = false;
+  m.raycast = () => {};
+  return m;
+}
 const LIFT = new THREE.Quaternion();
 
 // clip = [half width, half depth] of the base: people and cars are cut off cleanly where they leave it
-export function BakedModel({ url, lightmaps: lightmapUrls, intensity = 1, clip: base, views, onAnchors }) {
+// activeId: the selected hotspot, whose moving parts switch to a demo (doors open, fans speed up, LEDs pulse);
+// reactions: optional scene-specific overlay shown for the selected hotspot (see reactions.jsx). A scene may take a
+// mover over (userData.scripted: it positions it itself) or hold a door / barrier (userData.override = 0 | 1).
+export function BakedModel({ url, lightmaps: lightmapUrls, intensity = 1, clip: base, views, onAnchors, activeId, reactions: Reactions }) {
   const gl = useThree((s) => s.gl);
   const clip = useMemo(
     () =>
@@ -211,11 +239,16 @@ export function BakedModel({ url, lightmaps: lightmapUrls, intensity = 1, clip: 
   const gltf = useGLTF(url, "/draco/");
   const lightmaps = useLightmaps(lightmapUrls);
   // prepare() regroups nodes, so work on a clone: the cached glTF stays intact for the next visit
-  const { root, pins, hot, anim, movers, sliders } = useMemo(() => {
+  const { root, pins, hot, anim, movers, sliders, leds, materials } = useMemo(() => {
     const root = gltf.scene.clone(true);
     return { root, ...prepare(root, lightmaps, intensity, clip) };
   }, [gltf, lightmaps, intensity, clip]);
   const t = useRef(0);
+  const active = useRef(activeId);
+  active.current = activeId;
+  const poke = useRef({ at: -9, pos: new THREE.Vector3() });
+  const ring = useMemo(() => pokeRing(), []);
+  useEffect(() => () => ring.geometry.dispose() || ring.material.dispose(), [ring]);
 
   useEffect(() => {
     const anchors = {};
@@ -235,9 +268,10 @@ export function BakedModel({ url, lightmaps: lightmapUrls, intensity = 1, clip: 
     t.current += dt;
     anim.forEach((o) => {
       const u = o.userData;
-      if (u.spin === "z") o.rotation.y += dt * (u.spin_speed ?? 6);
-      else if (u.spin === "x") o.rotation.x += dt * (u.spin_speed ?? 2.2);
-      else if (u.spin === "y") o.rotation.z -= dt * (u.spin_speed ?? 2.2); // Blender y = three -z
+      const fast = (u.hot && u.hot === active.current ? 3 : 1) * (u.mult ?? 1); // demo: the selected system runs flat out; mult: set by a demo (wind)
+      if (u.spin === "z") o.rotation.y += dt * (u.spin_speed ?? 6) * fast;
+      else if (u.spin === "x") o.rotation.x += dt * (u.spin_speed ?? 2.2) * fast;
+      else if (u.spin === "y") o.rotation.z -= dt * (u.spin_speed ?? 2.2) * fast; // Blender y = three -z
       if ("swing" in u) {
         // to-and-fro about Blender z (robot arm turret) or local y (shoulder pitch)
         const a = Math.sin(t.current * (u.swing_speed ?? 0.8) + u.swing) * (u.swing_amp ?? 0.6);
@@ -253,18 +287,39 @@ export function BakedModel({ url, lightmaps: lightmapUrls, intensity = 1, clip: 
     movers.forEach((o) => {
       const u = o.userData;
       const speed = u.walk || u.drive;
-      o.rotation.set(0, along(u.run, u.path_at + speed * t.current, o.position), 0);
-      if (u.walk) {
+      if (!u.scripted) o.rotation.set(0, along(u.run, u.path_at + speed * t.current, o.position), 0); // scripted: a scene drives it
+      const p = (t.current - (u.poked ?? -9)) / 1.1; // clicked: hop (people cheer, cars flash their lights)
+      const hop = p < 1 ? Math.sin(p * Math.PI) : 0;
+      o.position.y += hop * (u.walk ? 0.55 : 0.35);
+      if (u.walk && !u.scripted) {
         const phase = t.current * speed * 4.4;
         o.position.y += Math.abs(Math.sin(phase)) * 0.04;
-        u.run.limbs.forEach((l) => (l.rotation.z = l.userData.limb * Math.sin(phase) * 0.45));
-      }
+        u.run.limbs.forEach((l) => {
+          l.rotation.z = l.userData.limb * Math.sin(phase) * 0.45 * (1 - hop);
+          l.rotation.x = l.name.includes("arm") ? -l.userData.limb * 2.4 * hop : 0;
+        });
+      } else if (p < 1.2) u.run.lamps.forEach((m) => m.material.color.copy(m.userData.c0).multiplyScalar(p < 1 && Math.sin(p * 30) > 0 ? 5 : 1));
+    });
+    const pk = (t.current - poke.current.at) / 1.1;
+    ring.visible = pk < 1;
+    if (ring.visible) {
+      ring.position.copy(poke.current.pos);
+      ring.scale.setScalar(0.6 + pk * 3.4);
+      ring.material.opacity = 1 - pk;
+    }
+    leds.forEach((l) => {
+      const on = l.hot && l.hot === active.current;
+      if (on) l.mesh.material.color.copy(l.base).multiplyScalar(0.45 + 1.1 * Math.abs(Math.sin(t.current * 3 + l.at.x * 0.2)));
+      else if (l.mesh.userData.pulsed) l.mesh.material.color.copy(l.base);
+      l.mesh.userData.pulsed = on;
     });
     sliders.forEach((o) => {
       const u = o.userData;
       const who = u.sense_for || "walk";
-      const near = movers.some((m) => m.userData[who] && Math.hypot(m.position.x - u.home.x, m.position.z - u.home.z) < u.sense);
-      u.open = THREE.MathUtils.damp(u.open, near ? 1 : 0, u.lift ? 3.5 : 5, dt);
+      const demo = u.hot && u.hot === active.current; // selecting the hotspot opens its doors / lifts its barriers
+      const near = demo || movers.some((m) => m.userData[who] && Math.hypot(m.position.x - u.home.x, m.position.z - u.home.z) < u.sense);
+      const want = u.override ?? (near ? 1 : 0); // override: a demo holds it open (1) or shut (0)
+      u.open = THREE.MathUtils.damp(u.open, want, u.lift ? 3.5 : 5, dt);
       if (u.slide && u.slide_axis === "y") o.position.z = u.home.z - u.slide * u.slide_dist * u.open; // Blender y = three -z
       else if (u.slide) o.position.x = u.home.x + u.slide * u.slide_dist * u.open;
       else o.quaternion.copy(u.q0).multiply(LIFT.setFromAxisAngle(Z_AXIS, -1.35 * u.open)); // arm points along local -x
@@ -273,7 +328,21 @@ export function BakedModel({ url, lightmaps: lightmapUrls, intensity = 1, clip: 
 
   return (
     <group>
-      <primitive object={root} />
+      <primitive
+        object={root}
+        onClick={(e) => {
+          const m = moverOf(e.object);
+          if (!m || e.delta > 6) return;
+          e.stopPropagation();
+          m.userData.poked = t.current;
+          poke.current.at = t.current;
+          poke.current.pos.set(m.position.x, 0.2, m.position.z);
+        }}
+        onPointerOver={(e) => moverOf(e.object) && (document.body.style.cursor = "pointer")}
+        onPointerOut={() => (document.body.style.cursor = "")}
+      />
+      <primitive object={ring} />
+      {Reactions && <Reactions active={activeId} pins={pins} movers={movers} leds={leds} sliders={sliders} anim={anim} materials={materials} t={t} />}
       {Object.entries(hot).map(([id, g]) => (
         <Hot key={id} id={id}>
           <primitive object={g} />

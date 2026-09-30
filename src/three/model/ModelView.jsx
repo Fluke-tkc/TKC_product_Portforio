@@ -14,17 +14,20 @@ const SCENES = { building, hospital, learning, logistics, cables, autonomous };
 export default function ModelView({ id, hotspots, activeIndex, onSelect, isNarrow, className }) {
   const scene = SCENES[id];
   return (
-    <Canvas
-      className={className}
-      shadows
-      flat
-      dpr={isNarrow ? [1, 1.5] : [1, 1.75]}
-      gl={{ antialias: false, powerPreference: "high-performance", stencil: false }}
-      camera={{ fov: 35, near: 1, far: 1500, position: scene.home.position }}
-    >
-      <Suspense fallback={null}>
-        <ModelStage scene={scene} hotspots={hotspots} activeIndex={activeIndex} onSelect={onSelect} isNarrow={isNarrow} />
-      </Suspense>
-    </Canvas>
+    <>
+      <Canvas
+        className={className}
+        shadows
+        flat
+        dpr={isNarrow ? [1, 1.5] : [1, 1.75]}
+        gl={{ antialias: false, powerPreference: "high-performance", stencil: false }}
+        camera={{ fov: 35, near: 1, far: 1500, position: scene.home.position }}
+      >
+        <Suspense fallback={null}>
+          <ModelStage scene={scene} hotspots={hotspots} activeIndex={activeIndex} onSelect={onSelect} isNarrow={isNarrow} />
+        </Suspense>
+      </Canvas>
+      {scene.Panel && <scene.Panel hidden={activeIndex >= 0} activeId={hotspots[activeIndex]?.id} />}
+    </>
   );
 }

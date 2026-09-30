@@ -1,0 +1,255 @@
+.left,
+.right {
+  position: absolute;
+  z-index: 35;
+  font-family: "Prompt", "Outfit", sans-serif;
+  color: #fff;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.left {
+  top: 146px;
+  left: 24px;
+  width: 272px;
+}
+
+.right {
+  top: 76px;
+  right: 24px;
+  width: 292px;
+}
+
+.hidden .left,
+.hidden .right,
+.narrow.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+}
+
+.stats,
+.controls {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(10, 18, 30, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(14px);
+}
+
+.controls {
+  display: grid;
+  gap: 11px;
+}
+
+.clockRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.clock {
+  font: 600 26px/1 "DM Mono", ui-monospace, monospace;
+  letter-spacing: 0.02em;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 9px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.tileLabel {
+  font: 500 10px/1.2 "Prompt", sans-serif;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tileValue {
+  font: 600 16px/1 "DM Mono", ui-monospace, monospace;
+  color: #5ee7ff;
+}
+
+.tileValue small {
+  margin-left: 3px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.explain {
+  margin-top: 10px;
+  font: 300 12.5px/1.5 "Prompt", sans-serif;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 7px;
+  font: 600 10.5px/1 "Prompt", sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.value {
+  font-family: "DM Mono", ui-monospace, monospace;
+  letter-spacing: 0;
+  color: #5ee7ff;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.play {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(94, 231, 255, 0.14);
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.slider {
+  flex: 1;
+  accent-color: #5ee7ff;
+  cursor: pointer;
+}
+
+.segment {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.segment button,
+.layer,
+.layerOn {
+  flex: 1;
+  padding: 7px 6px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  font: 500 12.5px/1 "Prompt", sans-serif;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.segment button:hover,
+.layer:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.segment .on {
+  background: #fff;
+  color: #0b1f33;
+  font-weight: 600;
+}
+
+.layerGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+}
+
+.layer,
+.layerOn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.layerOn {
+  color: #0b1f33;
+  font-weight: 600;
+}
+
+.layerOn[data-layer="energy"] {
+  background: #ffd23f;
+}
+
+.layerOn[data-layer="hvac"] {
+  background: #4fd1ff;
+}
+
+.layerOn[data-layer="network"] {
+  background: #a3acff;
+}
+
+.layerOn[data-layer="security"] {
+  background: #ff8a80;
+}
+
+.segment button:focus-visible,
+.layer:focus-visible,
+.layerOn:focus-visible,
+.play:focus-visible,
+.toggle:focus-visible {
+  outline: 2px solid #5ee7ff;
+  outline-offset: 2px;
+}
+
+/* phones: one pill that opens a sheet */
+.narrow {
+  position: absolute;
+  z-index: 35;
+  top: 112px;
+  left: 12px;
+  right: 12px;
+  transition: opacity 0.3s ease;
+}
+
+.toggle {
+  display: block;
+  margin-left: auto;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(10, 18, 30, 0.7);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  font: 500 13px/1 "Prompt", sans-serif;
+  cursor: pointer;
+}
+
+.sheet {
+  display: grid;
+  gap: 8px;
+  max-height: calc(100dvh - 240px);
+  margin-top: 8px;
+  overflow-y: auto;
+}

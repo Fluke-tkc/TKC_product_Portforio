@@ -4,7 +4,9 @@ A cut-away learning hall at golden hour (front wall and roof removed, exposed ro
 ceiling): the adaptive-learning media wall with teacher, AI tutor robot and hologram; tablet desks; an iMac
 row; a library corner with beanbags; cloud-LMS group tables under a cloud hologram; proctored exam pods with
 VR headsets; a smart IoT ceiling (ring light, projector, sensors, blinds). Outside: campus plaza, bus bay with
-a school bus, basketball court with bleachers, playground and school garden, city skyline behind.
+a school bus, basketball court with bleachers, playground and school garden; behind the hall the rest of the
+school: classroom block with open corridors and rooftop solar, sports hall, data centre and network mast,
+battery container, covered walkway.
 
 blender -b --factory-startup --python public/Blender/scripts/smart_learning.py
 Coordinates: Z up, metres. The viewer looks in from the front-right (+X, -Y).
@@ -300,7 +302,7 @@ def campus():
             A.tree(f"stree{k}", (x, -17.5, 0.16), h=6.0 + rnd.random(), spread=0.9, seed=630 + k)
         if not -10 < x + 4 < 10:
             L.street_light(f"lamp{k}", (x + 4, -20.6, 0.16), rot_z=-math.pi / 2, h=6.0)
-    for k, (x, y) in enumerate(((-38, 18), (-22, 25), (-10, 22), (4, 21), (20, 20), (38, 16), (39, 26), (-39, 8))):
+    for k, (x, y) in enumerate(((-38, 18), (38, 16), (39.5, 20.5), (-39, 8), (-37.5, 26.5))):
         A.tree(f"gtree{k}", (x, y, 0.16), h=6.5 + rnd.random() * 2, spread=1.0, seed=650 + k)
     # basketball court with bleachers and a game on
     E.basketball_court("court", 21.0, -4.0, 37.0, 10.0)
@@ -332,14 +334,136 @@ def campus():
         box(f"vegsoil{i}", (4.8, 0.9, 0.02), (-35.5, -6.2 + i * 1.8, 0.6), "vegbed", bevel=0)
         for k in range(8):
             sphere(f"veg{i}_{k}", 0.2, (-37.6 + k * 0.6, -6.2 + i * 1.8, 0.72), ("lime", "leafv", "flower_red", "orange")[i], scale=(1, 1, 0.7), subdiv=1)
-    # skyline behind
-    for i, (x, y, w, d, h, mat) in enumerate(((-30, 27.5, 10, 6, 44, "tower_blue"), (-12, 28.0, 12, 5, 58, "tower_teal"), (8, 27.5, 10, 6, 40, "tower_blue"), (28, 27.0, 12, 7, 52, "tower_teal"))):
-        pts = A.outline(A.rect_poly(x, y, w, d), 1.0)
-        A.solid(f"tower{i}", pts, 0.16, h, mat)
-        A.mullions(f"tower{i}_mull", A.outline(A.rect_poly(x, y, w + 0.1, d + 0.1), 1.05), 0.16, h, spacing=1.6, size=(0.08, 0.12), mat="tower_frame")
-        for zz in range(4, int(h), 4):
-            A.ring(f"tower{i}_band{zz}", A.outline(A.rect_poly(x, y, w + 0.2, d + 0.2), 1.1), pts, zz, 0.25, "tower_frame")
-        A.solid(f"tower{i}_cap", A.outline(A.rect_poly(x, y, w - 1, d - 1), 0.6), 0.16 + h, 1.2, "tower_frame")
+
+
+# ---------------------------------------------------------------- the rest of the school (behind the hall)
+# In place of the anonymous city towers: a three-storey classroom block with open corridors (as Thai schools
+# are built) and solar on its roof, a vaulted sports hall, the campus data centre with its network mast, a
+# battery container, and a covered walkway from the hall's back door to the classrooms.
+SCHOOL = (-34.0, -6.0, 22.5, 30.5)  # classroom block: x0, x1, y0, y1 (a 2 m open corridor along the front)
+S_FH, S_N = 3.6, 3
+S_TOP = 0.18 + S_N * S_FH
+GYM = (0.0, 18.0, 22.0, 31.0)
+DC = (22.5, 30.0, 23.0, 28.5)
+MAST = (37.4, 24.2)
+CLASS_COLOURS = ("orange", "lime", "sky_blue", "flower_pink", "flower_yellow", "purple", "mint")
+
+
+def classroom_block():
+    L.set_group("static_tower")
+    x0, x1, y0, y1 = SCHOOL
+    cx, w = (x0 + x1) / 2, x1 - x0
+    front = y0 + 2.0  # classroom fronts, behind the corridor
+    box("sch_rooms", (w, y1 - front, S_TOP - 0.18), (cx, (front + y1) / 2, 0.18), "hosp_white", bevel=0.03)
+    rooms = 7
+    rw = w / rooms
+    for k in range(S_N):
+        z = 0.18 + k * S_FH
+        if k > 0:  # corridor slab, coloured edge band, low wall and handrail
+            box(f"sch_corr{k}", (w, 2.0, 0.25), (cx, y0 + 1.0, z - 0.25), "hosp_white", bevel=0.02)
+            box(f"sch_band{k}", (w + 0.1, 0.1, 0.32), (cx, y0 - 0.02, z - 0.3), "purple", bevel=0)
+            box(f"sch_wall{k}", (w, 0.12, 0.55), (cx, y0 + 0.08, z), "hosp_white", bevel=0.01)
+            box(f"sch_rail{k}", (w, 0.06, 0.06), (cx, y0 + 0.08, z + 1.0), "steel", bevel=0)
+            for p in range(int(w / 2) + 1):
+                box(f"sch_post{k}_{p}", (0.05, 0.05, 0.45), (x0 + p * w / int(w / 2), y0 + 0.08, z + 0.55), "steel", bevel=0)
+        for r in range(rooms):
+            rx = x0 + (r + 0.5) * rw
+            box(f"sch_door{k}{r}", (0.95, 0.06, 2.1), (rx - rw * 0.3, front - 0.03, z + 0.02), CLASS_COLOURS[(r + k) % 7], bevel=0.01)
+            box(f"sch_win{k}{r}", (rw * 0.48, 0.06, 1.3), (rx + rw * 0.14, front - 0.03, z + 1.0), "tower_glass", bevel=0)
+            box(f"sch_sill{k}{r}", (rw * 0.5, 0.12, 0.06), (rx + rw * 0.14, front - 0.06, z + 0.96), "hosp_white", bevel=0)
+        box(f"sch_win_e{k}", (0.06, y1 - front - 1.2, 1.4), (x1 + 0.03, (front + y1) / 2, z + 1.0), "tower_glass", bevel=0)
+    for r in range(rooms + 1):  # columns carrying the corridors and the roof
+        box(f"sch_col{r}", (0.32, 0.32, S_TOP - 0.18), (x0 + r * rw, y0 + 0.16, 0.18), "hosp_white", bevel=0.02)
+    box("sch_roof", (w + 0.6, y1 - y0 + 0.6, 0.3), (cx, (y0 + y1) / 2, S_TOP), "hosp_white", bevel=0.03)
+    box("sch_roof_band", (w + 0.64, y1 - y0 + 0.64, 0.12), (cx, (y0 + y1) / 2, S_TOP + 0.06), "purple", bevel=0)
+    # sign board on the front edge of the roof, and the solar array behind it
+    box("sch_signboard", (13.0, 0.25, 1.9), (cx - 5.0, y0 + 0.4, S_TOP + 0.3), "hosp_white", bevel=0.05)
+    L.text_mesh("sch_sign", "SMART SCHOOL", (cx - 5.0, y0 + 0.22, S_TOP + 0.75), 1.25, 0.1, "purple")
+    base = S_TOP + 0.3
+    for rr in range(3):
+        y = y0 + 2.4 + rr * 1.95
+        box(f"sch_pvrail{rr}", (w - 2.2, 0.08, 0.5), (cx, y + 0.5, base), "aluminium", bevel=0.01)
+        for cc in range(17):
+            x = x0 + 1.5 + cc * 1.55
+            box(f"sch_pv{rr}_{cc}", (1.45, 1.5, 0.05), (x, y, base + 0.55), "solar", bevel=0.015, rot=(0.42, 0, 0))
+            box(f"sch_pvf{rr}_{cc}", (1.49, 1.54, 0.03), (x, y, base + 0.54), "aluminium", bevel=0.01, rot=(0.42, 0, 0))
+    # glazed stair tower at the east end
+    sx0 = x1
+    box("sch_stair", (3.0, 5.2, S_TOP + 1.6 - 0.18), (sx0 + 1.5, y0 + 2.6, 0.18), "tower_glass", bevel=0.02)
+    for k in range(S_N + 1):
+        box(f"sch_stair_band{k}", (3.06, 5.26, 0.18), (sx0 + 1.5, y0 + 2.6, 0.18 + k * S_FH), "hosp_white", bevel=0)
+    box("sch_stair_cap", (3.2, 5.4, 0.3), (sx0 + 1.5, y0 + 2.6, S_TOP + 1.42), "purple", bevel=0.02)
+    # students walking the corridors
+    for k, z in ((0, 0.18 + S_FH), (1, 0.18 + 2 * S_FH)):
+        path = racetrack(x0 + 1.0, y0 + 0.6, x1 - 1.0, y0 + 1.5, 0.44)
+        for j in range(2):
+            L.walker(f"cor{k}{j}", path, 1.0, j * L.path_length(path, True) / 2 + k * 7.0, seed=900 + k * 2 + j, z=z, outfit=("student", "student2")[j], h=1.5)
+
+
+def sports_hall():
+    L.set_group("static_tower")
+    x0, x1, y0, y1 = GYM
+    cx, cy, w, d = (x0 + x1) / 2, (y0 + y1) / 2, x1 - x0, y1 - y0
+    wall = 7.0
+    box("gym_body", (w, d, wall), (cx, cy, 0.18), "hosp_white", bevel=0.04)
+    box("gym_band", (w + 0.06, d + 0.06, 0.45), (cx, cy, 0.18 + wall - 0.45), "orange", bevel=0)
+    # the vault's lower half stays inside the walls, so only the arch shows (its end caps are the gables)
+    cyl("gym_roof", d / 2, w - 0.04, (x0 + 0.02, cy, 0.18 + wall), "court_blue", verts=40, rot=(0, math.pi / 2, 0))
+    for k in range(1, 4):
+        cyl(f"gym_rib{k}", d / 2 + 0.06, 0.18, (x0 - 0.09 + k * w / 4, cy, 0.18 + wall), "hosp_white", verts=40, rot=(0, math.pi / 2, 0))
+    box("gym_clerestory", (w - 2.0, 0.06, 1.1), (cx, y0 - 0.03, 4.3), "tower_glass", bevel=0)
+    box("gym_clerestory_e", (0.06, d - 2.0, 1.1), (x1 + 0.03, cy, 4.3), "tower_glass", bevel=0)
+    box("gym_entry", (6.0, 0.06, 3.0), (cx - 3.0, y0 - 0.03, 0.18), "glass", bevel=0)
+    for i in range(4):
+        box(f"gym_entry_mull{i}", (0.1, 0.1, 3.0), (cx - 6.0 + i * 2.0, y0 - 0.05, 0.18), "hosp_white", bevel=0)
+    box("gym_canopy", (7.0, 2.0, 0.22), (cx - 3.0, y0 - 1.0, 3.3), "orange", bevel=0.03)
+    L.text_mesh("gym_sign", "SPORTS HALL", (cx + 4.2, y0 - 0.08, 3.8), 0.75, 0.06, "purple")
+
+
+def data_centre():
+    L.set_group("static_tower")
+    x0, x1, y0, y1 = DC
+    cx, cy, w, d = (x0 + x1) / 2, (y0 + y1) / 2, x1 - x0, y1 - y0
+    box("dc_body", (w, d, 3.6), (cx, cy, 0.18), "robot_white", bevel=0.04)
+    box("dc_band", (w + 0.04, d + 0.04, 0.3), (cx, cy, 3.5), "accent_blue", bevel=0)
+    box("dc_door", (1.1, 0.05, 2.2), (x0 + 1.2, y0 - 0.02, 0.18), "accent_blue", bevel=0)
+    box("dc_led", (w - 3.0, 0.03, 0.06), (cx + 0.8, y0 - 0.02, 2.9), "led_cyan", bevel=0)
+    L.text_mesh("dc_txt", "DATA CENTER", (cx + 0.9, y0 - 0.04, 1.9), 0.48, 0.04, "accent_blue")
+    for k in range(3):  # condensers on the roof
+        x = x0 + 1.4 + k * 2.3
+        box(f"dc_cond{k}", (1.8, 1.2, 0.9), (x, cy, 3.8), "aluminium", bevel=0.04)
+        cyl(f"dc_cond{k}_fan", 0.42, 0.05, (x, cy, 4.7), "frame_dark", verts=20)
+    # the campus network mast: fibre in from the street, 5G / Wi-Fi backhaul out
+    mx, my = MAST
+    box("mast_base", (1.8, 1.8, 0.4), (mx, my, 0.18), "concrete", bevel=0.04)
+    cyl("mast", 0.34, 17.0, (mx, my, 0.58), "steel", verts=12, r2=0.16)
+    cyl("mast_deck", 1.0, 0.12, (mx, my, 13.6), "frame", verts=16)
+    for k in range(3):
+        a = k * math.tau / 3
+        box(f"mast_ant{k}", (0.26, 0.5, 1.7), (mx + math.cos(a) * 0.55, my + math.sin(a) * 0.55, 14.2), "white", bevel=0.04, rot=(0, 0, a))
+    sphere("mast_dish", 0.6, (mx - 0.4, my - 0.4, 11.5), "white", scale=(1, 0.35, 1), rot=(0.3, 0, 0.8))
+    sphere("mast_beacon", 0.12, (mx, my, 17.65), "led_red")
+    box("mast_cabinet", (1.2, 0.7, 1.6), (mx - 1.8, my, 0.18), "panel_grey", bevel=0.03)
+    # battery container with its inverter
+    box("bess", (5.0, 2.4, 2.6), (32.6, 29.3, 0.18), "robot_white", bevel=0.04)
+    box("bess_stripe", (5.02, 2.42, 0.3), (32.6, 29.3, 1.9), "purple", bevel=0)
+    L.text_mesh("bess_txt", "BESS", (31.4, 28.06, 1.1), 0.45, 0.03, "purple")
+    box("bess_led", (0.6, 0.02, 0.08), (33.9, 28.08, 1.5), "led_green", bevel=0)
+    box("inverter", (1.0, 0.6, 1.4), (36.2, 29.3, 0.18), "robot_white", bevel=0.03)
+
+
+def walkway():
+    """Covered walkway from the hall's back door to the classroom block."""
+    L.set_group("static_site")
+    x, y0, y1 = -16.0, HY1 + 0.5, SCHOOL[2]
+    box("campus_paving", (72.0, 9.4, 0.02), (1.0, 26.3, 0.16), "paving", bevel=0)
+    box("walk_path", (2.4, 21.6 - y0, 0.02), (x, (y0 + 21.6) / 2, 0.16), "terrazzo", bevel=0)  # meets the campus paving
+    box("walk_roof", (2.8, y1 - y0 + 0.4, 0.14), (x, (y0 + y1) / 2, 3.0), "purple", bevel=0.02)
+    for dy in (0.6, (y1 - y0) / 2, y1 - y0 - 0.6):
+        for dx in (-1.2, 1.2):
+            cyl(f"walk_col{dx}{dy:.1f}", 0.07, 2.84, (x + dx, y0 + dy, 0.16), "silver", verts=10)
+    box("back_door", (1.8, 0.05, 2.4), (x, HY1 + 0.52, FLOOR), "purple", bevel=0.01)
+    box("back_door_frame", (2.0, 0.04, 2.55), (x, HY1 + 0.51, FLOOR), "robot_white", bevel=0)
 
 
 # ---------------------------------------------------------------- life
@@ -432,12 +556,17 @@ def lighting(sun_elev=30, sun_dir=(0.72, 0.62)):
 ATLASES = {
     "building": ["static_building", "hot:ai-learning", "hot:cloud-lms", "hot:assessment", "hot:iot-classrooms"],
     "site": ["static_site"],
+    "tower": ["static_tower"],
 }
 
 
 def build():
     L.reset_scene()
     campus()
+    classroom_block()
+    sports_hall()
+    data_centre()
+    walkway()
     shell()
     ai_wall()
     library()

@@ -2,6 +2,7 @@
 import * as THREE from "three";
 
 const clock = { value: 0 };
+const flashAt = { value: -99 }; // time of the last campaign switch: screens flash as the new content lands
 let running = false;
 function tick(now) {
   clock.value = now / 1000;
@@ -1016,16 +1017,104 @@ export function screenMaterial(name) {
     cache[key] = new THREE.ShaderMaterial({
       toneMapped: false,
       side: THREE.DoubleSide,
-      uniforms: { map: { value: map }, time: clock, gain: { value: key === "monitor" ? 1.2 : 1.8 } },
+      uniforms: { map: { value: map }, time: clock, flashAt, gain: { value: key === "monitor" ? 1.2 : 1.8 } },
       vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
-      fragmentShader: `uniform sampler2D map; uniform float time; uniform float gain; varying vec2 vUv;
+      fragmentShader: `uniform sampler2D map; uniform float time; uniform float flashAt; uniform float gain; varying vec2 vUv;
         void main(){
           vec3 c = texture2D(map, vUv).rgb;
           c = pow(c, vec3(2.2));
           float sweep = smoothstep(0.06, 0.0, abs(fract(vUv.x - vUv.y * 0.35 - time * 0.15) - 0.5));
-          gl_FragColor = vec4(c * gain + vec3(0.25, 0.7, 1.0) * sweep * 0.35, 1.0);
+          float since = time - flashAt;
+          float wipe = since < 0.6 ? smoothstep(0.08, 0.0, abs(vUv.x - since / 0.6)) : 0.0;
+          gl_FragColor = vec4(c * gain * (1.0 + 1.6 * exp(-since * 5.0)) + vec3(0.25, 0.7, 1.0) * (sweep * 0.35 + wipe * 2.0), 1.0);
         }`,
     });
   }
   return cache[key];
+}
+
+// ---------------------------------------------------------------- campaigns
+// One content platform drives every public screen of a scene: switching the campaign redraws them all at once.
+
+const CAMPAIGNS = {
+  promo: {
+    media: (ctx, w, h) => {
+      gradient(ctx, w, h, "#ff5e62", "#ff9966");
+      title(ctx, "MID-YEAR SALE", 44, 110, 70);
+      title(ctx, "UP TO 50% OFF", 44, 220, 96, "#fff3b0");
+      title(ctx, "Café · Retail · Level 1 · until Sunday", 46, 290, 34);
+    },
+    totem: (ctx, w, h) => {
+      gradient(ctx, w, h, "#ff5e62", "#ff9966");
+      title(ctx, "PROMO", 30, 90, 44);
+      title(ctx, "50%", 30, 260, 130, "#fff3b0");
+      title(ctx, "Level 1", 30, 360, 40);
+      roundRect(ctx, 30, 620, w - 60, 90, 20, "rgba(255,255,255,0.25)");
+      title(ctx, "Scan for coupon", 50, 678, 30);
+    },
+    ad: (ctx, w, h) => {
+      gradient(ctx, w, h, "#ff5e62", "#ffc15e");
+      title(ctx, "SALE", 30, 140, 90);
+      title(ctx, "50%", 30, 260, 110, "#fff3b0");
+    },
+  },
+  news: {
+    media: (ctx, w, h) => {
+      gradient(ctx, w, h, "#0b1f33", "#15406b");
+      title(ctx, "TKC NEWS", 44, 90, 56, "#5ee7ff");
+      ["Solar made 1.2 MWh today", "Town hall 15:00 · Sky garden", "Lift B service 22:00"].forEach((t, i) => title(ctx, `• ${t}`, 48, 170 + i * 62, 40));
+      ctx.fillStyle = "#1c7ed6";
+      ctx.fillRect(0, h - 44, w, 44);
+      title(ctx, "LIVE · 24 °C · AQI 32 good", 30, h - 12, 28);
+    },
+    totem: (ctx, w, h) => {
+      gradient(ctx, w, h, "#0b1f33", "#15406b");
+      title(ctx, "TODAY", 30, 80, 44, "#5ee7ff");
+      [["09:00", "Yoga · R"], ["12:00", "Food fair · G"], ["15:00", "Town hall"], ["18:00", "Live music"]].forEach(([a, b], i) => {
+        title(ctx, a, 30, 200 + i * 130, 40, "#ffd43b");
+        title(ctx, b, 30, 250 + i * 130, 32);
+      });
+    },
+    ad: (ctx, w, h) => {
+      gradient(ctx, w, h, "#0b1f33", "#1c7ed6");
+      title(ctx, "TOWN", 30, 130, 70);
+      title(ctx, "HALL", 30, 210, 70);
+      title(ctx, "15:00 today", 30, 290, 34, "#5ee7ff");
+    },
+  },
+  emergency: {
+    media: (ctx, w, h) => {
+      ctx.fillStyle = "#b3001b";
+      ctx.fillRect(0, 0, w, h);
+      title(ctx, "⚠ EVACUATE NOW", 44, 140, 100);
+      title(ctx, "Use the stairs · do not use the lifts", 48, 220, 40);
+      title(ctx, "Assembly point: front plaza  →", 48, 290, 40, "#ffe066");
+    },
+    totem: (ctx, w, h) => {
+      ctx.fillStyle = "#b3001b";
+      ctx.fillRect(0, 0, w, h);
+      title(ctx, "⚠", 120, 220, 160);
+      title(ctx, "EMERGENCY", 30, 360, 50);
+      title(ctx, "EXIT →", 30, 470, 70, "#ffe066");
+    },
+    ad: (ctx, w, h) => {
+      ctx.fillStyle = "#b3001b";
+      ctx.fillRect(0, 0, w, h);
+      title(ctx, "⚠", 110, 190, 150);
+      title(ctx, "EVACUATE", 30, 320, 56);
+    },
+  },
+};
+
+export function setCampaign(name) {
+  ["media", "totem", "ad"].forEach((key) => {
+    const mat = cache[key];
+    if (!mat?.uniforms) return;
+    const tex = mat.uniforms.map.value;
+    const ctx = tex.image.getContext("2d");
+    ctx.clearRect(0, 0, tex.image.width, tex.image.height);
+    (CAMPAIGNS[name]?.[key] || DRAW[key])(ctx, tex.image.width, tex.image.height);
+    tex.needsUpdate = true;
+  });
+  flashAt.value = clock.value;
 }

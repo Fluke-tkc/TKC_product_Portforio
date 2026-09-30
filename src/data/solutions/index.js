@@ -10,7 +10,7 @@ import cloud from "./cloud";
 import sceneMeta from "../sceneMeta.json";
 
 // Solutions that have a hand-built 3D model; the rest still use the image-depth scene.
-const MODELLED = new Set(["building", "hospital", "learning", "logistics", "cables"]);
+const MODELLED = new Set(["building", "hospital", "learning", "logistics", "cables", "autonomous"]);
 
 const withScene = (data) => ({
   ...data,

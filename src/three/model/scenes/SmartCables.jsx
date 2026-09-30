@@ -27,6 +27,8 @@ function SmartCables({ onAnchors }) {
 export default {
   Component: SmartCables,
   baked: true,
+  base: BASE,
+  standTop: -6.1, // the cables plinth shows a 6 m soil section
   home: { position: [20, 33, 74], target: [-2, -2, 7] }, // down the boulevard, like the artwork
   maxDistance: 220,
   sky: ["#4a86c8", "#eef0e6", "#b3c4d6"],

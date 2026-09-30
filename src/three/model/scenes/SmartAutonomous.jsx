@@ -29,6 +29,7 @@ function SmartAutonomous({ onAnchors }) {
 export default {
   Component: SmartAutonomous,
   baked: true,
+  base: BASE,
   home: { position: [72, 58, 82], target: [-2, 2, -2] },
   maxDistance: 230,
   sky: ["#4a7fc4", "#f1e6d6", "#aebfd2"], // warm horizon like the artwork's sunrise

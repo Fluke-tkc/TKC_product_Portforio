@@ -1,0 +1,21 @@
+.tag {
+  /* sits just under the hotspot pin (the pin label is above it) */
+  transform: translateY(44px);
+  padding: 7px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font: 500 13px/1.2 "Prompt", "Outfit", sans-serif;
+  color: #fff;
+  background: rgba(8, 20, 36, 0.78);
+  border: 1px solid rgba(94, 231, 255, 0.55);
+  box-shadow: 0 0 18px rgba(94, 231, 255, 0.35);
+  backdrop-filter: blur(8px);
+  animation: tagIn 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes tagIn {
+  from {
+    opacity: 0;
+    transform: translateY(54px) scale(0.92);
+  }
+}
