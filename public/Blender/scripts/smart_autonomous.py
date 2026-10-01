@@ -56,14 +56,6 @@ def pad(name, r, mat, h=0.16):
     return box(name, (x1 - x0, y1 - y0, h), ((x0 + x1) / 2, (y0 + y1) / 2, 0), mat, bevel=0)
 
 
-def tower(name, x, y, w, d, h, mat):
-    pts = A.outline(A.rect_poly(x, y, w, d), 1.0)
-    A.solid(name, pts, 0.16, h, mat)
-    A.mullions(f"{name}_mull", A.outline(A.rect_poly(x, y, w + 0.1, d + 0.1), 1.05), 0.16, h, spacing=1.6, size=(0.08, 0.12), mat="tower_frame")
-    for zz in range(4, int(h), 4):
-        A.ring(f"{name}_band{zz}", A.outline(A.rect_poly(x, y, w + 0.2, d + 0.2), 1.1), pts, zz, 0.25, "tower_frame")
-
-
 # ---------------------------------------------------------------- site
 
 def site():
@@ -104,9 +96,9 @@ def site():
         A.tree(f"ptree{k}", (x, y, 0.16), h=6.5 + rnd.random() * 1.5, spread=1.0, seed=40 + k)
     for k, (x, y, rz) in enumerate(((3.0, 9.8, 0.0), (13.0, 0.2, math.pi), (3.0, 0.2, math.pi))):
         L.bench(f"bench{k}", (x, y, 0.16), rot_z=rz)
-    # back: towers, chimneys, turbines, barn
-    tower("towerA", -6.0, 26.0, 9.0, 7.0, 32.0, "tower_blue")
-    tower("towerB", 2.25, 27.5, 6.5, 6.0, 24.0, "tower_teal")
+    # back: autonomy hub (drone port), robotic car-park tower, chimneys, turbines, barn
+    G.hub_tower("towerA", -6.0, 26.0, 9.0, 7.0, 32.0, "tower_blue", "AUTONOMY HUB", "auto_blue", "screen_fleet", seed=7)
+    T.parking_tower("towerB", 5.2, 27.5, 10.4, 6.4, levels=8, seed=8)
     G.chimney("chim_a", -39.0, 31.0, h=20.0)
     G.chimney("chim_b", -34.0, 31.2, h=16.0)
     cyl("silo", 1.6, 10.0, (-28.5, 31.0, 0.16), "panel_grey", verts=28)

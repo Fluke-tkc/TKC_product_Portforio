@@ -7,8 +7,10 @@ import learning from "./scenes/SmartLearning";
 import logistics from "./scenes/SmartLogistics";
 import cables from "./scenes/SmartCables";
 import autonomous from "./scenes/SmartAutonomous";
+import cybersecurity from "./scenes/SmartCybersecurity";
+import utility from "./scenes/SmartUtility";
 
-const SCENES = { building, hospital, learning, logistics, cables, autonomous };
+const SCENES = { building, hospital, learning, logistics, cables, autonomous, cybersecurity, utility };
 
 // Canvas for the modelled (fully 3D) solution scenes.
 export default function ModelView({ id, hotspots, activeIndex, onSelect, isNarrow, className }) {

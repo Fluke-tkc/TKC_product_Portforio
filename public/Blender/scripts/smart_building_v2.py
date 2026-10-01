@@ -9,8 +9,10 @@ Coordinates: Z up, metres. The viewer looks from the street corner at the front-
 import math
 import os
 import random
+import re
 import sys
 
+import bmesh
 import bpy
 from mathutils import Vector
 
@@ -32,11 +34,13 @@ FRAME = 0.8  # thickness of the top / bottom frames of every pod
 BAND = 0.35  # intermediate floor band
 
 # name, centre x, y, width, depth, corner radius, rotation, bottom z, storeys, storey height, use
+# A and B stand on the first-floor terrace, inside its planters: A within the left edge, B's front following the
+# terrace's curve (the entrance notch) instead of a box poking through the glass rail
 PODS = [
-    ("A", -26.0, -6.0, 14, 11, 3.0, 0.04, T1, 1, 4.6, "office"),
-    ("B", -11.0, -7.5, 22, 14, 3.5, -0.05, T1, 2, 4.2, "retail"),
+    ("A", -25.2, -6.0, 8, 11, 2.6, 0.0, T1, 1, 4.6, "office"),  # A, E and D are placed clear of B, C and F:
+    ("B", -10.0, -6.85, 20, 12.7, 3.5, 0.0, T1, 2, 4.2, "retail"),
     ("C", 12.0, -5.0, 20, 15, 4.0, 0.06, 16.2, 2, 4.2, "office"),
-    ("E", -22.0, 3.5, 16, 11, 3.0, -0.08, 18.6, 1, 4.6, "lounge"),
+    ("E", -22.0, 6.0, 16, 11, 3.0, -0.08, 18.6, 1, 4.6, "lounge"),  # pods may stack but never cut into each other
 ]
 
 
@@ -48,15 +52,24 @@ def _pod_top(p):
     return p[7] + pod_height(p[8], p[9])
 
 
-PODS.append(("D", -3.0, 1.5, 14, 13, 3.5, 0.18, _pod_top(PODS[1]), 2, 4.2, "office"))
+PODS.append(("D", -6.5, 1.5, 14, 13, 3.5, 0.1, _pod_top(PODS[1]), 2, 4.2, "office"))
 PODS.append(("F", 12.5, 6.0, 19, 13, 5.0, -0.04, _pod_top(PODS[2]), 1, 5.0, "lounge"))
 POD = {p[0]: p for p in PODS}
 CORE = (-6.0, 13.0, 9.0, 9.0)  # x, y, w, d (behind the pods)
 
 
-def pod_outline(p, inset=0.0, segs=8):
+# B's front runs 0.8 m inside the podium line (2 m inside the terrace edge, behind its planters), notch and all
+_B_FRONT = A.offset_poly(PODIUM_RAW, 0.8)
+POD_SHAPE = {"B": [(-20.0, A.facade_y(_B_FRONT, -20.0)), _B_FRONT[1], (0.0, A.facade_y(_B_FRONT, 0.0)), (0.0, -0.5), (-20.0, -0.5)]}
+
+
+def pod_raw(p):
     _, cx, cy, w, d, r, rot, *_ = p
-    return A.outline(A.rect_poly(cx, cy, w, d, rot), r, inset, segs)
+    return POD_SHAPE.get(p[0]) or A.rect_poly(cx, cy, w, d, rot)
+
+
+def pod_outline(p, inset=0.0, segs=8):
+    return A.outline(pod_raw(p), p[5], inset, segs)
 
 
 COL_R = 0.3
@@ -71,7 +84,8 @@ def pod_columns(p):
         n = max(2, round((span - 4.4) / 7.0) + 1)
         return [-(span / 2 - 2.2) + i * (span - 4.4) / (n - 1) for i in range(n)]
 
-    return [(cx + c * u - s * v, cy + s * u + c * v) for u in axis(w) for v in axis(d)]
+    inside = pod_outline(p, 1.6)  # a shaped pod (B) drops grid points that fall outside it
+    return [q for q in ((cx + c * u - s * v, cy + s * u + c * v) for u in axis(w) for v in axis(d)) if A.point_in_poly(q, inside)]
 
 
 # entrance: automatic doors in the shopfront, gates 2 m behind them, reception beyond
@@ -205,19 +219,90 @@ def building():
     # brand sign on the band above the entrance notch
     L.text_mesh("tkc_sign", "TKC", (-8.0, -13.9, L1_Z0 + 1.6), 1.5, 0.25, "brand", rot=(math.pi / 2, 0, -0.18))
     # --- service core
-    cx, cy, cw, cd = CORE
-    A.solid("core", A.outline(A.rect_poly(cx, cy, cw, cd), 1.2), T1, 34.5 - T1, "frame_dark", bevel=0.1)
+    core_tower()
     # --- stacked pods
     for p in PODS:
         name, x, y, w, d, r, rot, z0, storeys, sh, use = p
-        raw_p = A.rect_poly(x, y, w, d, rot)
+        raw_p = pod_raw(p)
         top = glass_volume(f"pod{name}", raw_p, r, z0, storeys, sh, use, ord(name), cols=pod_columns(p))
         above = {"B": ["D"], "C": ["F"], "A": ["E"]}.get(name, [])
         avoid = [footprints[k] for k in above] + ([core_fp] if name in ("D", "F", "E") else [])
         terrace(f"T{name}", raw_p, r, top, ord(name) * 7, trees=2 if name in ("A", "E", "C", "B") else 0, furniture=2 if name in ("E", "B") else 0, avoid=avoid)
 
 
-def _surface_below(x, y, z):
+CORE_Z = (T1, 34.5)
+
+
+def core_tower():
+    """Service / IoT core behind the pods: pale panels with floor bands and per-floor fins, a panoramic glass lift
+    on the front with its car, louvred plant floors on the sides, LED lines and a lettered parapet under the mast."""
+    cx, cy, cw, cd = CORE
+    z0, z1 = CORE_Z
+    r, fh = 1.2, 3.6
+    n = int((z1 - z0) / fh)
+    A.solid("core", A.outline(A.rect_poly(cx, cy, cw, cd), r), z0, z1 - z0, "panel_grey", bevel=0.1)
+    band_out = A.outline(A.rect_poly(cx, cy, cw + 0.16, cd + 0.16), r + 0.08)
+    band_in = A.outline(A.rect_poly(cx, cy, cw - 0.06, cd - 0.06), r - 0.03)
+    for k in range(1, n + 1):
+        A.ring(f"core_band{k}", band_out, band_in, z0 + k * fh - 0.15, 0.3, "white")
+    A.ring("core_parapet", A.outline(A.rect_poly(cx, cy, cw + 0.2, cd + 0.2), r + 0.1), A.outline(A.rect_poly(cx, cy, cw - 0.4, cd - 0.4), r - 0.2), z1, 0.9, "white")
+    front = cy - cd / 2
+    lift_w, plant = 2.8, (2, n - 1)  # the lift on the front face; louvred plant floors on the sides
+    bm = bmesh.new()
+    for (x, y), ang, _ in A._face_stations(cx, cy, cw, cd, r + 0.3, 1.2):
+        on_front = abs(y - front) < 0.01
+        on_side = abs(abs(x - cx) - cw / 2) < 0.01
+        if on_front and abs(x - cx) < lift_w / 2 + 0.4:
+            continue
+        for k in range(n):
+            if on_side and k in plant and abs(y - cy) < 2.6:
+                continue
+            A._bm_box(bm, (x, y, z0 + k * fh + 0.15 + (fh - 0.3) / 2), (0.08, 0.22, fh - 0.3), ang)
+    L._finish(bm, "core_fins", "white")
+    for s in (-1, 1):  # louvres on the plant floors
+        for k in plant:
+            for j in range(11):
+                box(f"core_louvre{s + 1}{k}_{j}", (0.12, 5.0, 0.08), (cx + s * (cw / 2 + 0.06), cy, z0 + k * fh + 0.4 + j * 0.27), "frame_dark", bevel=0)
+    # panoramic lift: glass shaft standing proud of the front face, the car halfway up, overrun cap on top
+    ly = front - 0.75
+    box("lift_glass", (lift_w, 1.5, z1 + 1.6 - z0), (cx, ly, z0), "glass", bevel=0)
+    for sx in (-1, 1):
+        box(f"lift_post{sx + 1}", (0.14, 0.14, z1 + 1.6 - z0), (cx + sx * lift_w / 2, front - 1.5, z0), "white", bevel=0)
+    for k in range(1, n + 1):
+        box(f"lift_ring{k}", (lift_w + 0.1, 1.55, 0.12), (cx, ly, z0 + k * fh - 0.06), "white", bevel=0)
+    box("lift_cap", (lift_w + 0.3, 1.8, 0.4), (cx, ly, z1 + 1.6), "white", bevel=0.04)
+    box("lift_car", (2.0, 1.1, 2.4), (cx, ly, z0 + 2 * fh + 0.3), "robot_white", bevel=0.05)
+    box("lift_car_led", (1.8, 0.02, 0.06), (cx, ly - 0.56, z0 + 2 * fh + 2.5), "led_cyan", bevel=0)
+    for sx in (-1, 1):
+        box(f"core_led{sx + 1}", (0.06, 0.04, z1 - z0), (cx + sx * (lift_w / 2 + 0.9), front - 0.03, z0), "led_cyan", bevel=0)
+    L.text_mesh("core_label", "SMART BUILDING", (cx, front - 0.14, z1 + 0.22), 0.52, 0.05, "brand", resolution=3)
+
+
+def clip_terraces():
+    """Terrace planters, hedges, rails and vines stop where a pod stands on (or just above) the terrace: they used
+    to run straight through that pod's floor and glass."""
+    bpy.context.view_layer.update()
+    levels = {"T1": T1, **{f"T{p[0]}": _pod_top(p) for p in PODS}}
+    parts = ("_planter", "_soil", "_bush", "_rail", "_vines")  # prefixes: also _bush2, _railcap
+    removed = 0
+    for tname, tz in levels.items():
+        cuts = [pod_outline(p, -0.15) for p in PODS if tz - 0.2 <= p[7] <= tz + 2.0]
+        if not cuts:
+            continue
+        for ob in [o for o in bpy.data.objects if o.type == "MESH" and o.name.startswith(tuple(tname + s for s in parts))]:
+            bm = bmesh.new()
+            bm.from_mesh(ob.data)
+            mw = ob.matrix_world
+            dead = [f for f in bm.faces if any(A.point_in_poly(tuple((mw @ f.calc_center_median()).xy), c) for c in cuts)]
+            if dead:
+                bmesh.ops.delete(bm, geom=dead, context="FACES")
+                bm.to_mesh(ob.data)
+                removed += len(dead)
+            bm.free()
+    print("clip_terraces: removed", removed, "faces")
+
+
+def _surface_below(x, y, z, with_object=False):
     """Height of the first solid surface under (x, y, z), looking through glass and foliage."""
     scene = bpy.context.scene
     dg = bpy.context.evaluated_depsgraph_get()
@@ -225,11 +310,32 @@ def _surface_below(x, y, z):
     while True:
         hit, loc, _n, _i, ob, _m = scene.ray_cast(dg, origin, Vector((0, 0, -1)))
         if not hit:
-            return 0.0
+            return (0.0, None) if with_object else 0.0
         mat = ob.data.materials[0].name if ob.data.materials else ""
         if ob.get("kind") != "glass" and not mat.startswith(("leaf", "glass")):
-            return loc.z
+            return (loc.z, ob) if with_object else loc.z
         origin = loc - Vector((0, 0, 0.01))
+
+
+def overhang_legs():
+    """Columns under every pod edge that overhangs open space (the structural grid alone left the cantilevered
+    rims floating): stations every ~5.5 m just inside the rim, skipped near an existing column and wherever the
+    ground below is a planter, tree pit or café set rather than a deck."""
+    bpy.context.view_layer.update()
+    cols = [c for p in PODS for c in pod_columns(p)] + list(PODIUM_COLS)
+    added = 0
+    for p in PODS:
+        name, z0 = p[0], p[7]
+        for i, ((x, y), _) in enumerate(A.stations(pod_outline(p, 1.1), 5.5)):
+            if any(math.hypot(x - cx, y - cy) < 3.2 for cx, cy in cols):
+                continue
+            ground, ob = _surface_below(x, y, z0 - 0.4, with_object=True)
+            if z0 - ground < 0.6 or ob is None or re.search(r"planter|_pit|soil|cafe|tree|bush|rail|sofa|_pl\d", ob.name):
+                continue
+            cyl(f"leg{name}{i}", COL_R + 0.1, z0 - ground, (x, y, ground), "frame", verts=24)
+            cols.append((x, y))
+            added += 1
+    print("overhang_legs: added", added)
 
 
 def structure():
@@ -247,6 +353,7 @@ def structure():
     for i, (x, y) in enumerate(PODIUM_COLS):
         cyl(f"pcol{i}", COL_R + 0.05, L1_Z0 - 0.16, (x, y, 0.16), "white", verts=20)
         cyl(f"pcolL1{i}", COL_R, L1_H - 2 * FRAME, (x, y, L1_Z0 + FRAME), "white", verts=20)
+    overhang_legs()
 
 
 def entrance(shop):
@@ -564,12 +671,7 @@ def background_towers():
     L.set_group("static_site")
     specs = [(-36, 34, 12, 10, 58), (-20, 35.5, 14, 8, 44), (16, 34.5, 12, 10, 64), (-40.5, 12, 6, 14, 38)]
     for i, (x, y, w, d, h) in enumerate(specs):
-        pts = A.outline(A.rect_poly(x, y, w, d), 1.0)
-        A.solid(f"tower{i}", pts, 0.16, h, "tower_glass" if i % 2 else "tower_glass2")
-        A.mullions(f"tower{i}_mull", A.outline(A.rect_poly(x, y, w + 0.1, d + 0.1), 1.05), 0.16, h, spacing=1.6, size=(0.08, 0.12), mat="tower_frame")
-        for zz in range(4, int(h), 4):
-            A.ring(f"tower{i}_band{zz}", A.outline(A.rect_poly(x, y, w + 0.2, d + 0.2), 1.1), pts, zz, 0.25, "tower_frame")
-        A.solid(f"tower{i}_cap", A.outline(A.rect_poly(x, y, w - 1, d - 1), 0.6), 0.16 + h, 1.2, "tower_frame")
+        A.office_tower(f"tower{i}", x, y, w, d, h, glass="tower_glass" if i % 2 else "tower_glass2", seed=7 + i, mast=i == 2, style=i % 2)
 
 
 def lighting(sun_elev=24, sun_azim=205):
@@ -654,6 +756,7 @@ def build():
     L.reset_scene()
     street_level()
     building()
+    clip_terraces()
     roof_systems()
     signage_and_security()
     background_towers()

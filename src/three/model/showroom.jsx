@@ -20,6 +20,10 @@ const THEMES = {
     colors: { floor: ["#d9b98c", 0.7], rug: ["#5b4a8a", 0.9], wall: ["#f7f1e6", 0.9], slats: ["#e6a15a", 0.65], frame: ["#6d5a8e", 0.45], stand: ["#3b335e", 0.55], trim: ["#5b4a8a", 0.4], pot: ["#f2e8da", 0.55] },
     sky: "#fff3e0", ground: "#8a7768", sun: "#fff0d8",
   },
+  warehouse: {
+    colors: { floor: ["#c9ccd0", 0.7], rug: ["#2f4a6b", 0.9], wall: ["#eef0f2", 0.9], slats: ["#9aa7b4", 0.6], frame: ["#3b4a5c", 0.45], stand: ["#27374a", 0.55], trim: ["#f2b632", 0.4], pot: ["#dfe3e7", 0.55] },
+    sky: "#eef5ff", ground: "#7d8894", sun: "#ffffff",
+  },
 };
 
 // base: diorama half size [x, z]; reach: how far the camera may pull back (the walls stay beyond it)

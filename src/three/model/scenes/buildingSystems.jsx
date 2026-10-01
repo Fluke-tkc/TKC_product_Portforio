@@ -201,11 +201,11 @@ const GREEN = new THREE.Color(0.4, 3, 0.9);
 
 // pods of the building: name, centre x, y, width, depth, rotation, first floor z, storeys, storey height
 const PODS = [
-  ["A", -26, -6, 14, 11, 0.04, 11.3, 1, 4.6],
-  ["B", -11, -7.5, 22, 14, -0.05, 11.3, 2, 4.2],
+  ["A", -25.2, -6, 8, 11, 0, 11.3, 1, 4.6],
+  ["B", -10, -5.85, 20, 10.7, 0, 11.3, 2, 4.2], // B is shaped (its front follows the terrace curve): a box inside it
   ["C", 12, -5, 20, 15, 0.06, 16.2, 2, 4.2],
-  ["E", -22, 3.5, 16, 11, -0.08, 18.6, 1, 4.6],
-  ["D", -3, 1.5, 14, 13, 0.18, 21.65, 2, 4.2],
+  ["E", -22, 6, 16, 11, -0.08, 18.6, 1, 4.6],
+  ["D", -6.5, 1.5, 14, 13, 0.1, 21.65, 2, 4.2],
   ["F", 12.5, 6, 19, 13, -0.04, 26.55, 1, 5.0],
 ];
 const CORE = [-6, 13];
@@ -222,7 +222,7 @@ function ring(cx, cy, w, d, rot, z, inset) {
 
 // generation (solar on pods D and F, the rooftop turbine) -> inverter on the core -> riser -> main board
 const GEN = {
-  solarD: [W(-4.5, 0.5, 32.9), W(-4.5, 6.5, 33.4), W(-6, 12, ROOF_Z)],
+  solarD: [W(-8, 0.5, 32.9), W(-8, 6.5, 33.4), W(-6, 12, ROOF_Z)],
   solarF: [W(9, 4.5, 34.1), W(2, 9, 34.6), W(-6, 13, ROOF_Z)],
   wind: [W(18.7, 9.2, 40), W(18.7, 9.2, 34.2), W(6, 12, 34.8), W(-5, 13, ROOF_Z)],
 };
@@ -341,7 +341,7 @@ export function HvacNetwork() {
         </group>
       ))}
       <Tag position={W(16.8, 2.5, 38)}>{tx.chw(cool)}</Tag>
-      <Tag position={W(-26, -6, 20)}>{tx.zones}</Tag>
+      <Tag position={W(-25.2, -6, 20)}>{tx.zones}</Tag>
     </group>
   );
 }

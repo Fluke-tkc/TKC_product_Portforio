@@ -12,33 +12,11 @@ import { Cone, Packets, Rings, Rising, Tag } from "../reactions";
 import dock from "./buildingDemos.module.css";
 import cards from "./buildingDemos2.module.css";
 import panel from "./buildingSystems.module.css";
-import { ADD, Box, NOOP, Seg, TH, glow, now, usePhase, useTint } from "./demoKit";
-import { APS, CEIL, NetNetwork, PowerNetwork, SKY_CLOUD, SkyCloud, W } from "./learningNetworks";
+import { ADD, Box, NOOP, Pops, Seg, TH, glow, now, usePhase, useTint } from "./demoKit";
+import { APS, CEIL, HALL_Z, NetNetwork, PowerNetwork, SKY_CLOUD, SkyCloud, W, WH } from "./learningNetworks";
 import { ldemo, lsys } from "./learningStore";
 
-const FL = 0.3;
-
-// small glowing balls that pop up over a list of points: shown[i] (0..1) decides each one's size, colors[i] its colour
-function Pops({ points, shown, colors, size = 0.14, dy = 0.5 }) {
-  const geo = useMemo(() => new THREE.SphereGeometry(size, 12, 10), [size]);
-  const mat = useMemo(() => new THREE.MeshBasicMaterial({ toneMapped: false }), []);
-  useEffect(() => () => [geo, mat].forEach((x) => x.dispose()), [geo, mat]);
-  const ref = useRef();
-  const m4 = useMemo(() => new THREE.Matrix4(), []);
-  const c = useMemo(() => new THREE.Color(), []);
-  useFrame(({ clock }) => {
-    const mesh = ref.current;
-    points.forEach((p, i) => {
-      const s = shown(i) * (1 + 0.12 * Math.sin(clock.elapsedTime * 6 + i));
-      m4.makeScale(s, s, s).setPosition(p[0], p[1] + dy, p[2]);
-      mesh.setMatrixAt(i, m4);
-      mesh.setColorAt(i, c.set(colors(i)).multiplyScalar(2.4));
-    });
-    mesh.instanceMatrix.needsUpdate = true;
-    if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
-  });
-  return <instancedMesh ref={ref} args={[geo, mat, points.length]} frustumCulled={false} raycast={NOOP} />;
-}
+const FL = 0.3 + HALL_Z; // the lifted hall floor
 
 // discs on the floor (heat map, seat lights): colors(i) per point
 function Discs({ points, colors, radius = 0.55, opacity = 0.45 }) {
@@ -54,7 +32,7 @@ const TABLES = [[-16, 0.6], [-12.2, 0.6], [-8.4, 0.6]];
 const SEATS = [[-0.6, -0.95], [0.6, -0.95], [-0.6, 0.95], [0.6, 0.95]];
 const DEVICES = TABLES.flatMap(([cx, cy]) => SEATS.map(([sx, sy]) => W(cx + sx, cy + sy * 0.42, FL + 0.8)));
 const TABLE_TOPS = TABLES.map(([cx, cy]) => W(cx, cy, FL + 1.0));
-const LMS_CLOUD = W(-12.2, 0.6, 5.0);
+const LMS_CLOUD = WH(-12.2, 0.6, 5.0);
 const HOMES = [W(-41, -31, 2), W(-24, -31.6, 2), W(-6, -31.6, 2), W(40.5, -31, 2)];
 const CART = W(-18.9, -1.4, FL + 1.1);
 const KIOSK = W(-17.4, -6.5, FL + 1.6);
@@ -152,10 +130,10 @@ function LmsDemo({ movers }) {
 // ---------------------------------------------------------------- 2 IoT-enabled smart classroom
 
 const MODE_TINT = { empty: new THREE.Color(0.3, 0.33, 0.46), present: new THREE.Color(0.68, 0.7, 0.8), exam: new THREE.Color(1.06, 1.06, 1.04), lesson: null };
-const DIFFUSERS = [-16, -10, -4, 2, 8, 14].map((x) => W(x, 13.2, 6.4));
-const PROJECTOR = new THREE.Vector3(...W(-8, 9, 6.7));
-const SCREEN = new THREE.Vector3(...W(-7.6, 15.9, 4.1));
-const CAMS = [W(-11, -7.7, 7.3), W(7, -7.7, 7.3)];
+const DIFFUSERS = [-16, -10, -4, 2, 8, 14].map((x) => WH(x, 13.2, 6.4));
+const PROJECTOR = new THREE.Vector3(...WH(-8, 9, 6.7));
+const SCREEN = new THREE.Vector3(...WH(-7.6, 15.9, 4.1));
+const CAMS = [WH(-11, -7.7, 7.3), WH(7, -7.7, 7.3)];
 const PURIFIER = W(15.2, 3.5, FL);
 const TEACHER = W(-6, 14.5, FL + 2.3);
 const AI_STUDENTS = [9.8, 11.9].flatMap((dy) => [-11.4, -8, -4.6, -1.2].flatMap((x) => [-0.33, 0.33].map((sx) => W(x + sx, dy - 0.55, FL))));
@@ -230,12 +208,12 @@ function IotClassDemo({ materials }) {
       {occupied && mode !== "present" && <Airflow from={DIFFUSERS} />}
       {mode === "present" && <Beam from={PROJECTOR} to={SCREEN} />}
       {mode === "exam" && CAMS.map((c, i) => <Cone key={i} at={c} target={W(8.2, -2.6, FL)} length={9} spread={0.45} sweep={0.5} color="#ff6b6b" />)}
-      <Tag position={W(-1, 5.3, 4.4)}>{tx[mode]}</Tag>
+      <Tag position={WH(0, 7, 4.4)}>{tx[mode]}</Tag>
       <Tag position={W(-14, 0, CEIL - 0.9)}>{tx.people(occupied ? 34 : 0)}</Tag>
       {vp >= 0 && <Tag position={TEACHER}>{tx.voice[vp]}</Tag>}
       {cp >= 0 && (
         <>
-          {cp >= 1 && <Airflow from={[W(15.8, 3, 3.2), W(15.8, 9, 3.2), W(15.8, 13, 3.2)]} color="#b2f2bb" drop={5} dir={[-1, 0, 0]} />}
+          {cp >= 1 && <Airflow from={[WH(15.8, 3, 3.2), WH(15.8, 9, 3.2), WH(15.8, 13, 3.2)]} color="#b2f2bb" drop={5} dir={[-1, 0, 0]} />}
           <Rings at={[PURIFIER[0], FL + 0.05, PURIFIER[2]]} radius={3} color={cp === 0 ? "#ff6b6b" : "#63e6be"} period={1.1} />
           <Tag position={[PURIFIER[0] - 1, 3.2, PURIFIER[2]]}>
             <span className={cp === 0 ? cards.warn : cp === 2 ? cards.ok : undefined}>{tx.co2[cp]}</span>
@@ -245,7 +223,7 @@ function IotClassDemo({ materials }) {
       {heat && (
         <>
           <Discs points={ENGAGE} colors={engageColor} />
-          <Tag position={W(-6.3, 10.8, 3.2)}>{tx.heat}</Tag>
+          <Tag position={WH(-6.3, 10.8, 3.2)}>{tx.heat}</Tag>
         </>
       )}
     </group>
@@ -256,9 +234,9 @@ function IotClassDemo({ materials }) {
 
 const TABLETS = [9.8, 11.9].flatMap((dy) => [-11.4, -8, -4.6, -1.2].flatMap((x) => [-0.33, 0.33].map((sx) => W(x + sx, dy + 0.02, FL + 0.8))));
 const HEADS = AI_STUDENTS.map((p) => [p[0], p[1] + 1.25, p[2]]);
-const BRAIN = W(-7.6, 12.4, 6.2);
+const BRAIN = WH(-7.6, 12.4, 6.2);
 const ROBOT = W(-11.2, 14.4, FL + 1.3);
-const WALL = W(-7.6, 15.6, 5.0);
+const WALL = WH(-7.6, 15.6, 5.0);
 const LEVEL_COLORS = ["#ff6b6b", "#ffa94d", "#ffd43b", "#8ce99a", "#4dabf7"];
 const LEVELS = HEADS.map((_, i) => ((i * 7 + 3) % 5) + 1);
 const RIGHT = HEADS.map((_, i) => (i * 5 + 1) % 4 !== 0);
@@ -319,11 +297,11 @@ function AiDemo() {
 // ---------------------------------------------------------------- 4 professional assessment & certificate
 
 const CHECKIN = W(1.6, -6.7, FL);
-const PROCTOR = W(15.05, 1.8, 3.4);
-const CERT = W(1.52, -2, 2.3);
+const PROCTOR = WH(15.05, 1.8, 3.4);
+const CERT = WH(1.52, -2, 2.3);
 const FLAGGED = 4; // the middle seat, clear of the dock and the info panel
 const VR_PODS = [0, 5, 7];
-const SKY_CERT = W(11.5, 0.2, 5.4); // over the right-hand seats, clear of the hotspot label
+const SKY_CERT = WH(11, -2.6, 3); // above the seats, mid-view: below the score tag, left of the info panel
 
 function VrPractical({ at }) {
   const geo = useMemo(() => new THREE.TorusKnotGeometry(0.34, 0.1, 64, 8), []);
@@ -581,7 +559,7 @@ export function LearningReactions({ active, movers, materials }) {
       {active === "iot-classrooms" && <IotClassDemo materials={materials} />}
       {active === "ai-learning" && <AiDemo />}
       {active === "assessment" && <ExamDemo />}
-      {active === "iot-classrooms" && <Rising at={W(-2, 5.3, 6.3)} spread={2.2} count={16} height={1.2} color="#5ee7ff" speed={0.8} size={0.06} />}
+      {active === "iot-classrooms" && <Rising at={WH(-2, 5.3, 6.3)} spread={2.2} count={16} height={1.2} color="#5ee7ff" speed={0.8} size={0.06} />}
     </>
   );
 }

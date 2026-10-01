@@ -11,7 +11,9 @@ import { Packets, Rings, Tag } from "../reactions";
 import { ADD, NOOP, glow } from "./demoKit";
 
 export const W = (x, y, z) => [x, z, -y];
-export const CEIL = 7.4;
+export const HALL_Z = 7.2; // the learning hall sits on the Learning Commons: its contents are this much higher
+export const WH = (x, y, z) => W(x, y, z + HALL_Z); // a point in the hall, given at its old ground-level height
+export const CEIL = 7.4 + HALL_Z;
 
 // ---------------------------------------------------------------- power
 const P = {
@@ -50,7 +52,7 @@ export function PowerNetwork() {
       <Tag position={W(-20, 26.9, 14.2)}>{tx.solar(v.solar)}</Tag>
       <Tag position={W(32.6, 29.3, 4.6)}>{tx.bess(v.bess)}</Tag>
       <Tag position={W(41, 2, 3.2)}>{tx.grid(grid)}</Tag>
-      <Tag position={W(0, 16.4, 10.2)}>{tx.load(v.load, Math.round((v.solar / v.load) * 100))}</Tag>
+      <Tag position={WH(0, 16.4, 10.2)}>{tx.load(v.load, Math.round((v.solar / v.load) * 100))}</Tag>
     </group>
   );
 }

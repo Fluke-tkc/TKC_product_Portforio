@@ -256,7 +256,8 @@ export function BakedModel({ url, lightmaps: lightmapUrls, intensity = 1, clip: 
       const v = views?.[id] || {};
       const offset = v.offset || [14, 10, 18];
       anchors[id] = {
-        pin: [p.x, p.y, p.z],
+        pin: v.pin || [p.x, p.y, p.z], // a view may move its label where the camera sees it best
+        focusPin: v.focusPin, // where the label sits while its own hotspot is open (default: pin)
         target: v.target || [p.x, p.y - (v.drop ?? 1.5), p.z],
         position: v.position || [p.x + offset[0], p.y + offset[1], p.z + offset[2]],
       };
@@ -273,8 +274,9 @@ export function BakedModel({ url, lightmaps: lightmapUrls, intensity = 1, clip: 
       else if (u.spin === "x") o.rotation.x += dt * (u.spin_speed ?? 2.2) * fast;
       else if (u.spin === "y") o.rotation.z -= dt * (u.spin_speed ?? 2.2) * fast; // Blender y = three -z
       if ("swing" in u) {
-        // to-and-fro about Blender z (robot arm turret) or local y (shoulder pitch)
-        const a = Math.sin(t.current * (u.swing_speed ?? 0.8) + u.swing) * (u.swing_amp ?? 0.6);
+        // to-and-fro about Blender z (robot arm turret) or local y (shoulder pitch); a demo may freeze it with
+        // hold (the clock value to show) and resume it where it stopped with toff (time spent paused)
+        const a = Math.sin((u.hold ?? t.current - (u.toff ?? 0)) * (u.swing_speed ?? 0.8) + u.swing) * (u.swing_amp ?? 0.6);
         if (u.swing_axis === "y") o.rotation.z = u.rot0.z - a;
         else o.rotation.y = u.rot0.y + a;
       }

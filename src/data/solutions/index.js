@@ -10,7 +10,7 @@ import cloud from "./cloud";
 import sceneMeta from "../sceneMeta.json";
 
 // Solutions that have a hand-built 3D model; the rest still use the image-depth scene.
-const MODELLED = new Set(["building", "hospital", "learning", "logistics", "cables", "autonomous"]);
+const MODELLED = new Set(["building", "hospital", "learning", "logistics", "cables", "autonomous", "cybersecurity", "utility"]);
 
 const withScene = (data) => ({
   ...data,
@@ -42,12 +42,13 @@ export const SOLUTIONS = [
   withScene(cables),
   withScene(autonomous),
   withScene(cybersecurity),
-  { id: "farm", title: { en: "Smart Farming", th: "ระบบเกษตรนวัตกรรมอัจฉริยะ" }, comingSoon: true },
+  // no scene of its own: the card opens the farm platform
+  { id: "farm", title: { en: "Smart Farming", th: "ระบบเกษตรนวัตกรรมอัจฉริยะ" }, href: "https://myfarmsuk.com/", card: "/scenes/farm/card.webp" },
   withScene(utility),
   withScene(cloud),
 ];
 
-export const getSolution = (id) => SOLUTIONS.find((s) => s.id === id && !s.comingSoon);
+export const getSolution = (id) => SOLUTIONS.find((s) => s.id === id && !s.comingSoon && !s.href);
 
 // Content for the current language, falling back to English until a Thai transcription exists.
 export const localized = (hotspot, lang) => hotspot[lang] || hotspot.en;

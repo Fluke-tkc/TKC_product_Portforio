@@ -374,3 +374,121 @@ def facade_y(pts, x):
         if x1 != x2 and (x1 - x) * (x2 - x) <= 0:
             ys.append(y1 + (y2 - y1) * (x - x1) / (x2 - x1))
     return min(ys)
+
+
+# ------------------------------------------------------------------ background office tower
+
+FLOOR_H = 3.6
+
+
+def _box_outline(cx, cy, w, d, r):
+    return outline(rect_poly(cx, cy, w, d), r, segs=4)  # 4 segments per corner is plenty at tower scale
+
+
+def _face_stations(cx, cy, w, d, margin, spacing):
+    """Points along the four straight faces of a w x d box, `margin` clear of each corner:
+    ((x, y), face angle, index along the face). With margin 0 each corner is listed once."""
+    out = []
+    for ax, ay, bx, by in ((-1, -1, 1, -1), (1, -1, 1, 1), (1, 1, -1, 1), (-1, 1, -1, -1)):
+        x0, y0, x1, y1 = cx + ax * w / 2, cy + ay * d / 2, cx + bx * w / 2, cy + by * d / 2
+        side = math.hypot(x1 - x0, y1 - y0)
+        n = max(1, round((side - 2 * margin) / spacing))
+        ang = math.atan2(y1 - y0, x1 - x0)
+        for k in range(n + (margin > 0)):
+            t = (margin + (side - 2 * margin) * k / n) / side
+            out.append(((x0 + (x1 - x0) * t, y0 + (y1 - y0) * t), ang, k))
+    return out
+
+
+def _curtain(name, cx, cy, w, d, r, z, floors, glass, frame, fins=False):
+    """Glass shaft with a slab edge at the foot of every floor and mullions; every third mullion is a deep fin
+    (every one with `fins`).
+    Mullions are one piece per floor: small loose parts bake vertex-lit, while a full-height strip only gets a
+    texel or two of lightmap across and shows as a dark seam."""
+    solid(f"{name}_glass", _box_outline(cx, cy, w, d, r), z, floors * FLOOR_H, glass)
+    edge_out = _box_outline(cx, cy, w + 0.14, d + 0.14, r + 0.07)
+    edge_in = _box_outline(cx, cy, w - 0.06, d - 0.06, r - 0.03)
+    band = 0.3
+    for k in range(floors):
+        ring(f"{name}_slab{k}", edge_out, edge_in, z + k * FLOOR_H, band, frame)
+    bm = bmesh.new()
+    for (x, y), ang, i in _face_stations(cx, cy, w, d, r + 0.35, 1.5):
+        deep = 0.4 if fins or i % 3 == 0 else 0.13
+        for k in range(floors):
+            _bm_box(bm, (x, y, z + k * FLOOR_H + band + (FLOOR_H - band) / 2), (0.07, deep, FLOOR_H - band), ang)
+    L._finish(bm, f"{name}_mull", frame)
+
+
+def office_tower(name, x, y, w, d, h, glass="tower_glass", frame="tower_frame", seed=1, mast=False, style=0, roof="plant", z0=0.16):
+    """Background office tower about h tall, entrance facing -y: a recessed glass lobby under the overhang
+    (on columns) with a canopy, a curtain-wall shaft with floor slab edges and fins, a set-back upper shaft
+    over a sky-garden terrace, and a roof with parapet, plant room, fans, a cleaning gantry, red aviation
+    lights and an optional mast. style 1 (for a neighbour) has fins on every mullion and a crown screen of
+    fins rising above the roof. roof="deck" leaves the roof clear (parapet and lights only) for the caller's
+    own kit, e.g. a drone port; the upper shaft (and so the deck) is (w - 1.8) x (d - 1.8). Returns the levels of
+    the upper shaft's foot and of the roof deck."""
+    fins = style == 1
+    rnd = random.Random(seed)
+    r = max(0.3, min(0.6, min(w, d) * 0.08))
+    lobby = 5.2
+    # lobby: glass box set back 0.8 m, the tower above carried on columns
+    solid(f"{name}_lobby", _box_outline(x, y, w - 1.6, d - 1.6, 0.3), z0, lobby, glass)
+    bm = bmesh.new()
+    for (px, py), ang, _ in _face_stations(x, y, w - 1.6, d - 1.6, 0.6, 1.2):
+        _bm_box(bm, (px, py, z0 + lobby / 2), (0.06, 0.1, lobby), ang)
+    L._finish(bm, f"{name}_lobby_mull", frame)
+    for c, ((px, py), _, _) in enumerate(_face_stations(x, y, w - 0.7, d - 0.7, 0.0, 4.2)):
+        L.cyl(f"{name}_col{c}", 0.2, lobby, (px, py, z0), frame, verts=16)
+    fy = y - d / 2
+    cw = min(4.2, w - 2.4)
+    L.box(f"{name}_door", (min(2.6, cw - 0.6), 0.08, 2.7), (x, fy + 0.76, z0), "frame_dark", bevel=0.01)
+    L.box(f"{name}_canopy", (cw, 2.2, 0.16), (x, fy - 0.3, z0 + 3.3), frame, bevel=0.03)
+    for s in (-1, 1):
+        L.cyl(f"{name}_canopy_col{s + 1}", 0.07, 3.3, (x + s * (cw / 2 - 0.2), fy - 1.25, z0), "silver", verts=10)
+    zs = z0 + lobby + 0.5
+    solid(f"{name}_transfer", _box_outline(x, y, w + 0.2, d + 0.2, r + 0.1), z0 + lobby, 0.5, frame)
+    # shaft, set-back terrace, upper shaft
+    n2 = max(2, round(h * 0.2 / FLOOR_H))
+    n1 = max(2, round((h - zs - 0.3 - n2 * FLOOR_H) / FLOOR_H))
+    _curtain(name, x, y, w, d, r, zs, n1, glass, frame, fins)
+    zb = zs + n1 * FLOOR_H
+    w2, d2 = w - 1.8, d - 1.8
+    solid(f"{name}_terrace", _box_outline(x, y, w + 0.2, d + 0.2, r + 0.1), zb, 0.3, frame)
+    ring(f"{name}_terrace_rail", _box_outline(x, y, w + 0.2, d + 0.2, r + 0.1), _box_outline(x, y, w, d, r), zb + 0.3, 1.0, frame)
+    for s in (-1, 1):  # sky garden: hedges along the front and back terrace
+        L.box(f"{name}_hedge{s + 1}", (w2, 0.5, 0.75), (x, y + s * (d / 2 - 0.45), zb + 0.3), "leaf", bevel=0.12)
+    r2 = max(0.3, r - 0.3)
+    _curtain(f"{name}_up", x, y, w2, d2, r2, zb + 0.3, n2, glass, frame, fins)
+    zt = zb + 0.3 + n2 * FLOOR_H
+    solid(f"{name}_roof", _box_outline(x, y, w2 + 0.2, d2 + 0.2, r2 + 0.1), zt, 0.3, frame)
+    ring(f"{name}_parapet", _box_outline(x, y, w2 + 0.2, d2 + 0.2, r2 + 0.1), _box_outline(x, y, w2 - 0.3, d2 - 0.3, max(0.25, r2 - 0.15)), zt + 0.3, 1.2, frame)
+    zr = zt + 0.3
+    if fins:  # crown screen: the fins run on 3 m past the roof, tied by a ring
+        bm = bmesh.new()
+        for (fx, fy_), ang, _ in _face_stations(x, y, w2, d2, r2 + 0.35, 1.5):
+            _bm_box(bm, (fx, fy_, zr + 1.5), (0.07, 0.4, 3.0), ang)
+        L._finish(bm, f"{name}_crown_fins", frame)
+        ring(f"{name}_crown", _box_outline(x, y, w2 + 0.4, d2 + 0.4, r2 + 0.2), _box_outline(x, y, w2 + 0.1, d2 + 0.1, r2 + 0.05), zr + 2.75, 0.25, frame)
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            L.sphere(f"{name}_avl{sx + 1}{sy + 1}", 0.12, (x + sx * (w2 / 2 - 0.25), y + sy * (d2 / 2 - 0.25), zr + 1.32), "led_red", subdiv=1)
+    if roof != "plant":
+        return zb + 0.3, zr
+    # roof: plant room with louvres and fans, cleaning gantry, mast
+    pw, pd = w2 * 0.5, d2 * 0.5
+    px = x + (rnd.random() - 0.5) * max(0.0, w2 - pw - 1.6)
+    py = y + d2 * 0.12
+    L.box(f"{name}_plant", (pw, pd, 2.6), (px, py, zr), "panel_grey", bevel=0.04)
+    for k in range(5):
+        L.box(f"{name}_louvre{k}", (pw - 0.5, 0.06, 0.1), (px, py - pd / 2 - 0.03, zr + 0.45 + k * 0.38), "frame_dark", bevel=0)
+    for k, dx in enumerate((-pw / 4, pw / 4)):
+        L.cyl(f"{name}_fan{k}", 0.5, 0.45, (px + dx, py, zr + 2.6), "steel", verts=20)
+        L.cyl(f"{name}_fangrille{k}", 0.42, 0.03, (px + dx, py, zr + 3.05), "frame_dark", verts=20)
+    gx = x + w2 / 2 - 1.1
+    L.box(f"{name}_bmu", (1.0, 0.7, 0.8), (gx, y - d2 / 2 + 1.1, zr), "white", bevel=0.04)
+    L.box(f"{name}_bmu_arm", (0.16, 1.9, 0.16), (gx, y - d2 / 2 + 0.25, zr + 1.2), "white", bevel=0.02)
+    L.box(f"{name}_bmu_post", (0.16, 0.16, 0.4), (gx, y - d2 / 2 + 0.95, zr + 0.8), "white", bevel=0.02)
+    if mast:
+        L.cyl(f"{name}_mast", 0.16, 7.0, (px, py, zr + 2.6), "frame", verts=12, r2=0.06)
+        L.sphere(f"{name}_mast_light", 0.14, (px, py, zr + 9.7), "led_red", subdiv=1)
+    return zb + 0.3, zr

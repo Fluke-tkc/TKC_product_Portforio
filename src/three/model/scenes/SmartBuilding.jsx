@@ -4,6 +4,7 @@ import { BakedModel } from "../baked";
 import { BuildingPanel, BuildingReactions } from "./buildingSystems";
 
 const DIR = "/models/baked/smart_building";
+const V = "?v=5"; // bump after every re-bake so open tabs and caches fetch the new model
 const BASE = [44, 40]; // half size of the plinth: moving cars are cut off where they leave it
 
 // Camera for each hotspot: an offset from its pin, or an absolute position (three.js axes, +z is the
@@ -24,8 +25,8 @@ const views = {
 function SmartBuilding({ onAnchors, activeId }) {
   return (
     <BakedModel
-      url={`${DIR}.glb`}
-      lightmaps={{ building: `${DIR}_building.webp`, site: `${DIR}_site.webp` }}
+      url={`${DIR}.glb${V}`}
+      lightmaps={{ building: `${DIR}_building.webp${V}`, site: `${DIR}_site.webp${V}` }}
       intensity={2}
       clip={BASE}
       views={views}

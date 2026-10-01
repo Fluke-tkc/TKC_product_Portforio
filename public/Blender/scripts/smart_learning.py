@@ -21,6 +21,7 @@ from mathutils import Vector
 
 sys.path.append(os.path.dirname(__file__))
 import tkc_arch as A  # noqa: E402
+import tkc_cyber as K  # noqa: E402
 import tkc_edu as E  # noqa: E402
 import tkc_lib as L  # noqa: E402
 import tkc_med as M  # noqa: E402
@@ -39,6 +40,11 @@ BASE = (42.0, 32.0)
 ROAD_Y = -25.0
 BACK = -math.pi / 2  # screens on the back wall face -y
 JOISTS = (-14.0, -8.0, -2.0, 4.0, 10.0)  # roof joists, one over each front column
+# The hall is built at ground level (all its numbers above are hall-local) and then lifted by Z onto a glass
+# podium, the Learning Commons, which is set back 3 m all round so the pavilion floats over it.
+Z = 7.2
+PODIUM = (-17.0, 13.0, -5.0, 13.0)  # x0, x1, y0, y1
+TOWER = (27.0, 17.0, 8.0, 6.5)  # innovation tower: x, y, w, d
 
 
 def rect(x0, y0, x1, y1):
@@ -252,12 +258,138 @@ def entrance():
             for k, (fy, fz, sy, sz) in enumerate(((0, 0, 2.0, 0.06), (0, 3.18, 2.0, 0.06), (-0.97, 0, 0.06, 3.26), (0.97, 0, 0.06, 3.26))):
                 parts.append(box(f"door{side}_f{k}", (0.06, sy, sz), (0, fy, fz), "robot_white", bevel=0))
         L.place(L.rigid(parts, f"door{side}"), (HX0 - 0.25, sum(DOOR_Y) / 2 + side * 1.0, FLOOR), 0.0, slide=side, slide_axis="y", slide_dist=1.9, sense=3.2)
-    L.set_group("static_site")
-    box("ent_canopy", (4.6, 6.6, 0.3), (HX0 - 2.8, sum(DOOR_Y) / 2, 3.7), "hosp_white", bevel=0.05)
-    box("ent_canopy_band", (4.62, 6.62, 0.1), (HX0 - 2.8, sum(DOOR_Y) / 2, 3.72), "purple", bevel=0)
-    for dy in (-3.0, 3.0):
-        cyl(f"ent_col{dy}", 0.12, 3.7 - 0.16, (HX0 - 4.8, sum(DOOR_Y) / 2 + dy, 0.16), "silver", verts=12)
     L.text_mesh("ent_sign", "LEARNING CENTRE", (HX0 - 0.5 - 0.04, sum(DOOR_Y) / 2 + 3.4, 4.6), 0.4, 0.05, "purple", rot=(math.pi / 2, 0, -math.pi / 2))
+
+
+# ---------------------------------------------------------------- the lifted pavilion: podium, envelope, access
+
+def hall_envelope():
+    """Built after the lift (absolute heights): a deep slab under the floating hall with a lit edge and downlights,
+    a glass front between the columns, a glass roof over the joists with a diagrid and a lit brim."""
+    L.set_group("static_building")
+    zf = Z + FLOOR
+    out = A.outline(rect(HX0 - 0.5, HY0 - 0.5, HX1 + 0.5, HY1 + 0.5), 0.8)
+    A.solid("pav_underslab", out, Z - 0.9, 0.9, "hosp_white", bevel=0.12)
+    A.ring("pav_edge_led", A.outline(rect(HX0 - 0.53, HY0 - 0.53, HX1 + 0.53, HY1 + 0.53), 0.83), A.outline(rect(HX0 - 0.48, HY0 - 0.48, HX1 + 0.48, HY1 + 0.48), 0.78), Z - 0.55, 0.1, "led_cyan")
+    A.downlights("pav_dl", rect(HX0 + 0.5, HY0 + 0.5, HX1 - 0.5, HY1 - 0.5), Z - 0.92, spacing=3.0, mat="led_white")
+    box("pav_front_glass", (HX1 - HX0, 0.04, CEIL - FLOOR), ((HX0 + HX1) / 2, HY0 - 0.3, zf), "glass", bevel=0)
+    for k in range(19):
+        x = HX0 + k * (HX1 - HX0) / 18
+        for j in range(2):
+            box(f"pav_mull{k}_{j}", (0.07, 0.12, (CEIL - FLOOR) / 2), (x, HY0 - 0.3, zf + j * (CEIL - FLOOR) / 2), "robot_white", bevel=0)
+    box("pav_transom", (HX1 - HX0, 0.14, 0.1), ((HX0 + HX1) / 2, HY0 - 0.3, zf + 3.0), "robot_white", bevel=0)
+    roof = rect(HX0 - 0.25, HY0 - 0.25, HX1 + 0.25, HY1 + 0.25)
+    A.solid("pav_roof_glass", roof, Z + TOP + 0.02, 0.06, "glass")
+    K.diagrid_roof("pav_roof", A.outline(roof, 0.3, 0.4), Z + TOP + 0.08, pitch=4.5, depth=0.28)
+    brim_o = A.outline(rect(HX0 - 1.6, HY0 - 1.6, HX1 + 1.6, HY1 + 1.6), 1.6)
+    brim_i = A.outline(rect(HX0 - 0.2, HY0 - 0.2, HX1 + 0.2, HY1 + 0.2), 0.2)
+    A.ring("pav_brim", brim_o, brim_i, Z + TOP + 0.08, 0.45, "hosp_white")
+    A.ring("pav_brim_band", A.outline(rect(HX0 - 1.62, HY0 - 1.62, HX1 + 1.62, HY1 + 1.62), 1.62), A.outline(rect(HX0 - 1.56, HY0 - 1.56, HX1 + 1.56, HY1 + 1.56), 1.58), Z + TOP + 0.2, 0.14, "purple")
+    L.text_mesh("pav_name", "SMART LEARNING HUB", (-2.0, HY0 - 1.64, Z + TOP + 0.1), 0.34, 0.03, "purple", resolution=3)
+
+
+def podium_commons():
+    """The ground floor under the pavilion: a glass Learning Commons with a maker lab, a cafe and a robot host."""
+    L.set_group("static_building")
+    x0, x1, y0, y1 = PODIUM
+    h = Z - 0.9 - 0.16
+    box("com_floor", (x1 - x0, y1 - y0, 0.14), ((x0 + x1) / 2, (y0 + y1) / 2, 0.16), "terrazzo", bevel=0)
+    box("com_back", (x1 - x0, 0.3, h), ((x0 + x1) / 2, y1 - 0.15, 0.16), "hosp_white", bevel=0.02)
+    for name, gx, gy, w, d in (("com_glass_f", (x0 + x1) / 2, y0, x1 - x0, 0.04), ("com_glass_l", x0, (y0 + y1) / 2, 0.04, y1 - y0), ("com_glass_r", x1, (y0 + y1) / 2, 0.04, y1 - y0)):
+        box(name, (w, d, h - 0.2), (gx, gy, 0.3), "glass", bevel=0)
+    for k in range(16):
+        x = x0 + k * (x1 - x0) / 15
+        for j in range(2):
+            box(f"com_mull{k}_{j}", (0.08, 0.12, (h - 0.2) / 2), (x, y0, 0.3 + j * (h - 0.2) / 2), "robot_white", bevel=0)
+    for s, x in ((-1, x0), (1, x1)):
+        for k in range(10):
+            box(f"com_mull_side{s}_{k}", (0.12, 0.08, h - 0.2), (x, y0 + k * (y1 - y0) / 9, 0.3), "robot_white", bevel=0)
+    box("com_sill", (x1 - x0, 0.3, 0.14), ((x0 + x1) / 2, y0, 0.16), "purple", bevel=0)
+    L.text_mesh("com_sign", "LEARNING COMMONS", (-9.0, y0 - 0.06, 4.6), 0.5, 0.04, "purple", resolution=3)
+    for k, x in enumerate((-1.0, 1.0)):  # main doors, parted
+        box(f"com_door{k}", (1.4, 0.05, 2.8), (x * 1.6, y0 - 0.2, 0.3), "glass", bevel=0)
+    # reception with the robot host
+    M.curved_desk("com_desk", (0.0, 3.0), 1.4, 1.9, math.radians(200), math.radians(340), 0.3)
+    M.humanoid_robot("com_robot", (0.0, 3.4, 0.3), rot_z=-math.pi / 2)
+    # maker lab: benches with 3D printers, robot kits and a laser cutter
+    rnd = random.Random(870)
+    for i, (bx, by) in enumerate(((-13.5, 0.5), (-13.5, 4.5), (-8.5, 0.5), (-8.5, 4.5))):
+        box(f"mk_bench{i}", (3.4, 1.3, 0.9), (bx, by, 0.3), "wood_desk", bevel=0.03)
+        for k in range(2):
+            px = bx - 0.8 + k * 1.6
+            box(f"mk_print{i}{k}", (0.6, 0.6, 0.65), (px, by, 1.2), "robot_white", bevel=0.03)
+            box(f"mk_print{i}{k}_win", (0.44, 0.02, 0.4), (px, by - 0.31, 1.32), "led_cyan", bevel=0)
+            box(f"mk_kit{i}{k}", (0.3, 0.22, 0.14), (px + 0.45, by + 0.35, 1.2), rnd.choice(("orange", "lime", "sky_blue")), bevel=0.02)
+        for s in range(2):
+            L.human(f"maker{i}{s}", (bx - 0.8 + s * 1.6, by - 1.1, 0.3), rot_z=math.pi / 2, seed=880 + i * 2 + s, outfit=("student", "student2")[s], h=1.55)
+    box("mk_laser", (1.8, 1.0, 1.0), (-15.6, 10.6, 0.3), "panel_grey", bevel=0.04)
+    box("mk_laser_lid", (1.7, 0.9, 0.06), (-15.6, 10.6, 1.3), "orange", bevel=0.01)
+    E.bookshelf("mk_shelf", (-11.0, y1 - 0.5, 0.3), rot_z=0.0, w=3.0, h=2.4, seed=885)
+    # cafe on the right
+    box("cafe_counter", (5.0, 0.8, 1.05), (8.0, y1 - 1.2, 0.3), "wood_desk", bevel=0.04)
+    box("cafe_counter_top", (5.1, 0.9, 0.05), (8.0, y1 - 1.2, 1.35), "purple", bevel=0.01)
+    M.screen_at("cafe_menu", (2.4, 1.0), (8.0, y1 - 0.32, 3.0), -math.pi / 2, "screen_cafe", bezel=0.05)
+    L.human("barista", (8.0, y1 - 0.6, 0.3), rot_z=-math.pi / 2, seed=890, outfit="teacher")
+    for i, (cx, cy) in enumerate(((4.5, 0.5), (8.5, 0.5), (11.0, 3.6), (4.5, 5.6), (8.5, 6.4))):
+        L.cafe_set(f"com_cafe{i}", (cx, cy, 0.3), seed=891 + i, chairs=3)
+    for k, (x, y) in enumerate(((-16.2, -4.2), (12.2, -4.2), (-3.2, 12.2))):
+        L.potted_plant(f"com_plant{k}", (x, y, 0.3), h=1.8, seed=897 + k, pot="purple")
+
+
+def sky_access():
+    """Entrance to the lifted hall: a landing outside its doors, a glass lift and a stair tower down to the plaza."""
+    L.set_group("static_site")
+    zf = Z + FLOOR
+    lx0, lx1, ly0, ly1 = HX0 - 4.4, HX0 - 0.25, -7.2, -0.9
+    box("landing", (lx1 - lx0, ly1 - ly0, 0.5), ((lx0 + lx1) / 2, (ly0 + ly1) / 2, zf - 0.5), "hosp_white", bevel=0.04)
+    box("landing_led", (lx1 - lx0, 0.04, 0.06), ((lx0 + lx1) / 2, ly0 - 0.02, zf - 0.3), "led_cyan", bevel=0)
+    for name, a, b in (("rail_f", (lx0, ly0), (lx1, ly0)), ("rail_l", (lx0, ly0), (lx0, ly1))):
+        (ax, ay), (bx, by) = a, b
+        ln, ang = math.hypot(bx - ax, by - ay), math.atan2(by - ay, bx - ax)
+        box(f"landing_{name}", (ln, 0.04, 1.1), ((ax + bx) / 2, (ay + by) / 2, zf), "glass", bevel=0, rot=(0, 0, ang))
+        box(f"landing_{name}_cap", (ln, 0.08, 0.06), ((ax + bx) / 2, (ay + by) / 2, zf + 1.1), "silver", bevel=0, rot=(0, 0, ang))
+    cyl("landing_col", 0.22, zf - 0.5 - 0.16, (lx0 + 0.4, ly0 + 0.4, 0.16), "hosp_white", verts=20)
+    K.glass_lift("hall_lift", (lx0 + 2.0, ly1 + 1.2, 0.16), zf + 3.0, car_z=zf)
+    sx, sy = lx0 + 2.0, ly1 + 5.0
+    box("stair_tower", (3.6, 4.4, zf + 3.6), (sx, sy, 0.16), "hosp_white", bevel=0.05)
+    box("stair_tower_glass", (0.06, 3.4, zf + 2.0), (sx - 1.83, sy, 0.8), "tower_glass", bevel=0)
+    box("stair_tower_cap", (3.8, 4.6, 0.3), (sx, sy, zf + 3.76), "purple", bevel=0.03)
+    box("stair_door", (1.2, 0.05, 2.3), (sx, sy - 2.23, 0.16), "purple", bevel=0.01)
+
+
+def raise_hall(before):
+    """Lift everything built since `before` (the hall and its contents) by Z; children ride with their parents."""
+    for o in bpy.data.objects:
+        if o not in before and o.parent is None:
+            o.location.z += Z
+
+
+def innovation_tower():
+    """A stack of glass boxes, each turned and offset from the last, lit slab edges, an observatory dome on top."""
+    L.set_group("static_tower")
+    x, y, w, d = TOWER
+    z = 0.18
+    fh, n = 5.0, 8
+    for i in range(n):
+        dx, dy, rot = (0.9 if i % 2 else -0.9), (0.5 if i % 2 else -0.5), (0.07 if i % 2 else -0.05)
+        body = A.outline(A.rect_poly(x + dx, y + dy, w, d, rot), 0.6)
+        A.solid(f"itow_box{i}", body, z + 0.4, fh - 0.4, ("tower_glass", "tower_glass2")[i % 2])
+        slab = A.outline(A.rect_poly(x + dx, y + dy, w + 0.5, d + 0.5, rot), 0.85)
+        A.solid(f"itow_slab{i}", slab, z, 0.4, "hosp_white", bevel=0.05)
+        A.ring(f"itow_led{i}", A.outline(A.rect_poly(x + dx, y + dy, w + 0.54, d + 0.54, rot), 0.87), A.outline(A.rect_poly(x + dx, y + dy, w + 0.46, d + 0.46, rot), 0.83), z + 0.14, 0.08, "led_cyan" if i % 2 else "led_pink")
+        bmo = A.outline(A.rect_poly(x + dx, y + dy, w + 0.08, d + 0.08, rot), 0.64)
+        bm_parts = A.stations(bmo, 1.6)
+        for k, ((mx, my), ang) in enumerate(bm_parts):
+            box(f"itow_mull{i}_{k}", (0.06, 0.1, fh - 0.4), (mx, my, z + 0.4), "hosp_white", bevel=0, rot=(0, 0, ang))
+        z += fh
+    A.solid("itow_roof", A.outline(A.rect_poly(x - 0.9, y - 0.5, w + 0.5, d + 0.5, -0.05), 0.85), z, 0.4, "hosp_white", bevel=0.05)
+    cyl("itow_drum", 2.5, 1.4, (x - 0.9, y - 0.5, z + 0.4), "hosp_white", verts=40)
+    sphere("itow_dome", 2.5, (x - 0.9, y - 0.5, z + 1.8), "white", subdiv=3)
+    box("itow_slit", (0.7, 0.16, 2.3), (x - 0.9, y - 2.98, z + 1.9), "darkgray", bevel=0.02)
+    L.text_mesh("itow_name", "INNOVATION TOWER", (x - 0.9, y - 0.5 - d / 2 - 0.3, 1.6), 0.5, 0.05, "purple", resolution=3)
+    box("itow_canopy", (4.0, 1.6, 0.18), (x - 0.9, y - 0.5 - d / 2 - 0.9, 3.2), "purple", bevel=0.03)
+    for s in (-1, 1):
+        cyl(f"itow_canopy_col{s + 1}", 0.07, 3.0, (x - 0.9 + s * 1.8, y - 0.5 - d / 2 - 1.5, 0.18), "silver", verts=10)
 
 
 # ---------------------------------------------------------------- campus
@@ -455,15 +587,15 @@ def data_centre():
 def walkway():
     """Covered walkway from the hall's back door to the classroom block."""
     L.set_group("static_site")
-    x, y0, y1 = -16.0, HY1 + 0.5, SCHOOL[2]
+    x, y0, y1 = -16.0, PODIUM[3], SCHOOL[2]  # from the Learning Commons' back door, under the pavilion
     box("campus_paving", (72.0, 9.4, 0.02), (1.0, 26.3, 0.16), "paving", bevel=0)
     box("walk_path", (2.4, 21.6 - y0, 0.02), (x, (y0 + 21.6) / 2, 0.16), "terrazzo", bevel=0)  # meets the campus paving
     box("walk_roof", (2.8, y1 - y0 + 0.4, 0.14), (x, (y0 + y1) / 2, 3.0), "purple", bevel=0.02)
     for dy in (0.6, (y1 - y0) / 2, y1 - y0 - 0.6):
         for dx in (-1.2, 1.2):
             cyl(f"walk_col{dx}{dy:.1f}", 0.07, 2.84, (x + dx, y0 + dy, 0.16), "silver", verts=10)
-    box("back_door", (1.8, 0.05, 2.4), (x, HY1 + 0.52, FLOOR), "purple", bevel=0.01)
-    box("back_door_frame", (2.0, 0.04, 2.55), (x, HY1 + 0.51, FLOOR), "robot_white", bevel=0)
+    box("back_door", (1.8, 0.05, 2.4), (x, y0 + 0.02, FLOOR), "purple", bevel=0.01)
+    box("back_door_frame", (2.0, 0.04, 2.55), (x, y0 + 0.01, FLOOR), "robot_white", bevel=0)
 
 
 # ---------------------------------------------------------------- life
@@ -471,10 +603,11 @@ def walkway():
 def life():
     loop = racetrack(-13.0, 3.6, 13.0, 7.0, 1.0)  # around the planted island
     loops = [
-        (A.offset_poly(loop, 0.4), 3, 1.1, ("student", "teacher", "student2"), FLOOR, 1.5),
-        (list(reversed(A.offset_poly(loop, -0.4))), 3, 1.0, ("student2", "student", None), FLOOR, 1.55),
-        (racetrack(2.5, -7.1, 14.2, 1.5, 0.8), 1, 0.8, ("teacher",), FLOOR, 1.72),  # proctor round the exam pods
-        (racetrack(HX0 - 10.0, -4.6, -9.5, -3.4, 0.59), 2, 1.15, ("student", None), FLOOR, 1.55),  # in / out of the doors
+        (A.offset_poly(loop, 0.4), 3, 1.1, ("student", "teacher", "student2"), FLOOR + Z, 1.5),
+        (list(reversed(A.offset_poly(loop, -0.4))), 3, 1.0, ("student2", "student", None), FLOOR + Z, 1.55),
+        (racetrack(2.5, -7.1, 14.2, 1.5, 0.8), 1, 0.8, ("teacher",), FLOOR + Z, 1.72),  # proctor round the exam pods
+        (racetrack(HX0 - 3.6, -4.6, -9.5, -3.4, 0.59), 2, 1.15, ("student", None), FLOOR + Z, 1.55),  # landing <-> hall doors
+        (racetrack(-5.5, -3.8, 3.0, -2.6, 0.5), 2, 1.0, ("student2", "teacher"), 0.3, 1.6),  # through the Learning Commons
         (racetrack(-38.0, -15.4, 38.0, -14.8, 0.29), 4, 1.25, ("student", None, "student2", "teacher"), 0.16, 1.6),  # plaza
         (racetrack(-38.0, -29.8, 38.0, -29.2, 0.29), 3, 1.25, (None, None, None), 0.16, 1.7),  # far sidewalk
     ]
@@ -550,7 +683,16 @@ def lighting(sun_elev=30, sun_dir=(0.72, 0.62)):
         a.color = (1.0, 0.9, 0.78)
         ob = bpy.data.objects.new(f"Hall{i}", a)
         L.COL.objects.link(ob)
-        ob.location = ((x0 + x1) / 2, (y0 + y1) / 2, CEIL - 0.2)
+        ob.location = ((x0 + x1) / 2, (y0 + y1) / 2, Z + CEIL - 0.2)
+    x0, x1, y0, y1 = PODIUM
+    a = bpy.data.lights.new("Commons", "AREA")
+    a.shape = "RECTANGLE"
+    a.size, a.size_y = (x1 - x0) * 0.85, (y1 - y0) * 0.85
+    a.energy = 3.0 * (x1 - x0) * (y1 - y0)
+    a.color = (1.0, 0.93, 0.85)
+    ob = bpy.data.objects.new("Commons", a)
+    L.COL.objects.link(ob)
+    ob.location = ((x0 + x1) / 2, (y0 + y1) / 2, Z - 1.1)
 
 
 ATLASES = {
@@ -567,6 +709,7 @@ def build():
     sports_hall()
     data_centre()
     walkway()
+    before = set(bpy.data.objects)
     shell()
     ai_wall()
     library()
@@ -576,6 +719,11 @@ def build():
     spine()
     iot_ceiling()
     entrance()
+    raise_hall(before)
+    hall_envelope()
+    podium_commons()
+    sky_access()
+    innovation_tower()
     life()
     lighting()
     for name, groups in ATLASES.items():

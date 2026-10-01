@@ -31,7 +31,7 @@ export const WEATHER = {
   windy: { solar: 1.1, wind: 3.2, spin: 2.6, sky: new THREE.Color(0.9, 0.94, 1) },
   rain: { solar: 0.2, wind: 1.6, spin: 1.5, sky: new THREE.Color(0.42, 0.47, 0.56) },
 };
-const ARRAYS = [W(-4.5, 0.5, 32.9), W(9, 4.5, 34.1)];
+const ARRAYS = [W(-8, 0.5, 32.9), W(9, 4.5, 34.1)];
 const TOWERS = [W(16, 34.5, 64.4), W(-20, 35.5, 44.4)];
 const ROOF = [W(9, 4.5, 36)];
 
@@ -163,7 +163,7 @@ export const NETS = {
   lora: { name: "LoRa", ms: 1200, period: 6, color: "#63e6be" },
 };
 // pods: name, centre x, y, roof height (Blender)
-const POD_TOPS = [["A", -26, -6, 17.5], ["B", -11, -7.5, 21.7], ["C", 12, -5, 26.6], ["E", -22, 3.5, 24.8], ["D", -3, 1.5, 32], ["F", 12.5, 6, 33.2]];
+const POD_TOPS = [["A", -25.2, -6, 17.5], ["B", -10, -6.5, 21.7], ["C", 12, -5, 26.6], ["E", -22, 6, 24.8], ["D", -6.5, 1.5, 32], ["F", 12.5, 6, 33.2]];
 
 const reading = (tick, i) => {
   const r = (k) => Math.sin(tick * 1.7 + i * 3.1 + k) * 0.5 + 0.5;
@@ -376,7 +376,7 @@ export function MotionDemo({ movers }) {
 
 const TANK = W(-3.5, 15.5, 34.5);
 // one water feed per pod, 2 m above its first floor (clear of the power feeds and the air ducts)
-const WATER = [["A", -26, -6, 11.3], ["B", -11, -7.5, 11.3], ["C", 12, -5, 16.2], ["E", -22, 3.5, 18.6], ["D", -3, 1.5, 21.65], ["F", 12.5, 6, 26.55]].map(([name, x, y, z0]) => ({
+const WATER = [["A", -25.2, -6, 11.3], ["B", -10, -6.5, 11.3], ["C", 12, -5, 16.2], ["E", -22, 6, 18.6], ["D", -6.5, 1.5, 21.65], ["F", 12.5, 6, 26.55]].map(([name, x, y, z0]) => ({
   name,
   points: [W(-3.5, 15.5, z0 + 2.8), W(x, y, z0 + 2.8)],
 }));

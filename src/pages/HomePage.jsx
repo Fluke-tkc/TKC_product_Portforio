@@ -83,6 +83,10 @@ export default function HomePage() {
         setToast(t.soonToast);
         return;
       }
+      if (s.href) {
+        window.location.assign(s.href);
+        return;
+      }
       setEntering(i);
       sessionStorage.setItem(STORAGE_KEY, String(-i * STEP));
       setTimeout(() => navigate(`/solutions/${s.id}`), 1150);
@@ -248,7 +252,7 @@ function CardGrid({ lang, onOpen }) {
     <div className={styles.grid}>
       {SOLUTIONS.map((s, i) => (
         <button key={s.id} type="button" className={styles.gridCard} onClick={() => onOpen(i)}>
-          <img src={s.comingSoon ? "/scenes/farm/card.webp" : `${s.scene.base}/card.webp`} alt="" loading="lazy" />
+          <img src={s.card || `${s.scene.base}/card.webp`} alt="" loading="lazy" />
           <span>{s.title[lang] || s.title.en}</span>
         </button>
       ))}
@@ -278,7 +282,7 @@ function Ring({ ring, lang, t, front, entering, onFrontChange, onOpen }) {
     Promise.all(
       SOLUTIONS.map((s, i) =>
         createCardTexture({
-          image: s.comingSoon ? "/scenes/farm/card.webp" : `${s.scene.base}/card.webp`,
+          image: s.card || `${s.scene.base}/card.webp`,
           index: i + 1,
           title: cardTitle(s, lang),
           cta: s.comingSoon ? "" : t.cta,

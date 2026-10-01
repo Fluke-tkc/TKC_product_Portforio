@@ -12,6 +12,7 @@ from mathutils import Vector
 import tkc_arch as A
 import tkc_cable as C
 import tkc_lib as L
+import tkc_logi as G
 import tkc_med as M
 from tkc_lib import box, cyl, group, sphere
 
@@ -445,3 +446,73 @@ def crops(name, x0, x1, y0, y1, z, pitch=1.0, step=0.9, seed=0):
         x += pitch
         k += 1
     A.foliage(f"{name}_plants", clumps, mats=("crop", "crop_dark"), subdiv=1)
+
+
+def _stored_car(name, loc, rot_z, paint):
+    """A light car for rows seen through glass: bevelled body, glass cabin, roof, wheels, lamps (~300 tris)."""
+    at = _at(loc, rot_z)
+    r = (0, 0, rot_z)
+    box(f"{name}_body", (4.3, 1.76, 0.62), at(0, 0, 0.24), paint, bevel=0.12, segments=1, rot=r)
+    box(f"{name}_cabin", (2.3, 1.58, 0.5), at(-0.2, 0, 0.86), "carglass", bevel=0.14, segments=1, rot=r)
+    box(f"{name}_roof", (2.0, 1.5, 0.06), at(-0.25, 0, 1.36), paint, bevel=0.03, segments=1, rot=r)
+    for dx in (-1.35, 1.35):
+        for side in (-1, 1):
+            cyl(f"{name}_w{dx}{side}", 0.32, 0.22, at(dx, side * 0.78 + 0.11, 0.32), "tyre", verts=10, rot=(math.pi / 2, 0, rot_z))
+    for dy in (-0.55, 0.55):
+        box(f"{name}_hl{dy}", (0.03, 0.3, 0.08), at(2.16, dy, 0.62), "led_white", bevel=0, rot=r)
+        box(f"{name}_tl{dy}", (0.03, 0.3, 0.08), at(-2.16, dy, 0.66), "led_red", bevel=0, rot=r)
+
+
+def parking_tower(name, x, y, w, d, levels=8, seed=0, z0=0.16):
+    """Automated (robotic) car-park tower for a back row, front facing -y: a glazed front showing two cars per
+    deck on robot pallets with a bay light each and a pallet mover in the aisle behind, white ends with a blue
+    lift-shaft stripe, slab edges lit in cyan, a ground-floor hand-over bay (turntable with a pod car, parking
+    screen, EV chargers, the sign on its fascia) and a solar canopy on the roof."""
+    rnd = random.Random(seed)
+    y0 = y - d / 2
+    g, lh = 3.6, 2.4
+    top = z0 + g + levels * lh
+    for s in (-1, 1):
+        box(f"{name}_end{s + 1}", (0.3, d, top - z0), (x + s * (w / 2 - 0.15), y, z0), "robot_white", bevel=0)
+        box(f"{name}_stripe{s + 1}", (0.04, 0.6, top - z0 - g), (x + s * (w / 2 + 0.01), y + d / 4, z0 + g), "auto_blue", bevel=0)
+    box(f"{name}_back", (w - 0.6, 0.3, top - z0), (x, y + d / 2 - 0.15, z0), "robot_white", bevel=0)
+    box(f"{name}_glass", (w - 0.6, 0.04, top - z0 - g), (x, y0 + 0.12, z0 + g), "glass", bevel=0)
+    cyl(f"{name}_col", 0.18, g - 0.25, (x, y0 + 0.35, z0), "robot_white", verts=16)
+    mull = []
+    for k in range(levels + 1):
+        zk = z0 + g + k * lh
+        box(f"{name}_slab{k}", (w - 0.62, d - 0.32, 0.25), (x, y - 0.15, zk - 0.25), "concrete", bevel=0)  # between the walls
+        box(f"{name}_edge{k}", (w - 0.6, 0.03, 0.05), (x, y0 - 0.02, zk - 0.17), "led_cyan", bevel=0)
+        if k == levels:
+            break
+        for i in range(1, int((w - 0.6) / 1.3)):
+            mull.append(("frame", (x - (w - 0.6) / 2 + i * 1.3, y0 + 0.08, zk), (0.06, 0.1, lh - 0.25)))
+        for j, cx in enumerate((x - w / 4 - 0.05, x + w / 4 + 0.05)):
+            mull.append(("darkgray", (cx, y0 + 1.5, zk), (4.7, 2.1, 0.1)))  # robot pallet
+            parked = rnd.random() < 0.8
+            if parked:
+                _stored_car(f"{name}_car{k}{j}", (cx + rnd.uniform(-0.15, 0.15), y0 + 1.5, zk + 0.1), rnd.choice((0.0, math.pi)), rnd.choice(("white", "silver", "navy", "red", "black", "robot_white")))
+            box(f"{name}_bay{k}{j}", (0.3, 0.12, 0.08), (cx, y0 + 0.6, zk + lh - 0.4), "led_red" if parked else "led_green", bevel=0)
+        if rnd.random() < 0.4:  # the pallet mover between the rows
+            mx = x + rnd.uniform(-w / 4, w / 4)
+            mull.append(("darkgray", (mx, y0 + 3.3, zk), (2.2, 1.2, 0.18)))
+            box(f"{name}_mover{k}", (2.2, 0.03, 0.04), (mx, y0 + 2.69, zk + 0.08), "led_cyan", bevel=0)
+    G._boxes_mesh(f"{name}_kit", mull)
+    # ground floor: hand-over bay with a turntable and a pod car; lobby with door and screen; EV chargers
+    cyl(f"{name}_turntable", 2.1, 0.05, (x - w / 4, y0 + 2.7, z0), "darkgray", verts=40)
+    cyl(f"{name}_turntable_led", 2.13, 0.02, (x - w / 4, y0 + 2.7, z0 + 0.04), "led_cyan", verts=40)
+    robotaxi(f"{name}_pod", (x - w / 4, y0 + 2.7, z0 + 0.05), rot_z=0.35, marker=False)
+    for k in range(2):
+        ev_charger(f"{name}_ev{k}", (x - w / 2 + 0.55, y0 + 1.6 + k * 2.2, z0), 0.0)
+    box(f"{name}_lobby_glass", (w / 2 - 0.6, 0.04, g - 0.3), (x + w / 4, y0 + 0.9, z0), "glass", bevel=0)
+    box(f"{name}_lobby_door", (1.2, 0.06, 2.3), (x + w / 4 - 1.0, y0 + 0.88, z0), "frame_dark", bevel=0.01)
+    M.screen_at(f"{name}_scr", (1.6, 0.9), (x + w / 4 + 1.1, y0 + 0.85, z0 + 1.9), -math.pi / 2, "screen_parking", bezel=0.05, depth=0.06)
+    box(f"{name}_fascia", (w, 0.14, 0.7), (x, y0 - 0.07, z0 + g - 0.95), "robot_white", bevel=0.02)
+    L.text_mesh(f"{name}_sign", "AUTO PARKING · EV", (x, y0 - 0.15, z0 + g - 0.85), 0.45, 0.04, "auto_blue", resolution=3)
+    box(f"{name}_p", (1.8, 0.15, 1.8), (x + w / 2 - 1.3, y0 - 0.1, top - 2.1), "auto_blue", bevel=0.05)
+    L.text_mesh(f"{name}_p_txt", "P", (x + w / 2 - 1.3, y0 - 0.19, top - 1.85), 1.4, 0.05, "robot_white", resolution=3)
+    # roof: solar canopy on four columns
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            cyl(f"{name}_pvcol{sx + 1}{sy + 1}", 0.1, 2.5, (x + sx * (w / 2 - 0.8), y + sy * (d / 2 - 0.8), top), "robot_white", verts=10)
+    box(f"{name}_pv", (w - 1.0, d - 1.0, 0.1), (x, y, top + 2.5), "solar", bevel=0.02, rot=(0.1, 0, 0))

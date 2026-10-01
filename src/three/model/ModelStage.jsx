@@ -219,7 +219,7 @@ export function ModelStage({ scene, hotspots, activeIndex, onSelect, isNarrow })
   }, [hovered, activeId, mounted]);
   useHighlight(outlined);
 
-  const pins = useMemo(() => hotspots.filter((h) => anchors[h.id]).map((h) => ({ id: h.id, title: h.title, position: anchors[h.id].pin })), [hotspots, anchors]);
+  const pins = useMemo(() => hotspots.filter((h) => anchors[h.id]).map((h) => ({ id: h.id, title: h.title, position: (h.id === activeId && anchors[h.id].focusPin) || anchors[h.id].pin })), [hotspots, anchors, activeId]);
   const focus = (activeId && anchors[activeId]) || null;
   const viewShift = !focus ? [0, 0] : isNarrow ? [0, size.height * 0.19] : [Math.min(420, size.width * 0.4) / 2 + 12, 0];
 

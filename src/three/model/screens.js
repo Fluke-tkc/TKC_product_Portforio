@@ -926,7 +926,654 @@ const DRAW = {
     ctx.closePath();
     ctx.fill();
   }),
+  // ---- 07 cyber security
+  soc_alerts: (ctx, w, h) => {
+    gradient(ctx, w, h, "#07121f", "#0d2640");
+    title(ctx, "SIEM · ALERTS", 24, 52, 36, "#5ee7ff");
+    [
+      ["CRITICAL", "#ff6b6b", "Ransomware beacon  10.4.2.17"],
+      ["HIGH", "#ff922b", "VPN brute force  x312"],
+      ["HIGH", "#ff922b", "Phishing link clicked"],
+      ["MEDIUM", "#ffd43b", "New admin account"],
+      ["LOW", "#74c0fc", "Port scan from 45.x.x.x"],
+      ["LOW", "#74c0fc", "Expired certificate"],
+    ].forEach(([sev, c, text], i) => {
+      const y = 84 + i * 50;
+      roundRect(ctx, 24, y, 128, 34, 8, c);
+      ctx.fillStyle = "#081523";
+      ctx.font = "700 18px Prompt, sans-serif";
+      ctx.fillText(sev, 34, y + 24);
+      ctx.fillStyle = "#e7f5ff";
+      ctx.font = "500 22px Prompt, sans-serif";
+      ctx.fillText(text, 166, y + 25);
+    });
+    bars(ctx, 24, h - 90, w - 48, 70, 24, "#1c7ed6", 7);
+  },
+  soc_net: (ctx, w, h) => {
+    gradient(ctx, w, h, "#07121f", "#0b2a45");
+    title(ctx, "NETWORK · NGFW / IPS / NAC", 24, 50, 32, "#5ee7ff");
+    const cx = w / 2;
+    const cy = h * 0.56;
+    const nodes = Array.from({ length: 9 }, (_, i) => [cx + Math.cos((i / 9) * Math.PI * 2) * w * 0.34, cy + Math.sin((i / 9) * Math.PI * 2) * h * 0.3]);
+    ctx.lineWidth = 3;
+    nodes.forEach(([x, y], i) => {
+      ctx.strokeStyle = i === 3 ? "#ff6b6b" : "rgba(94,231,255,0.7)";
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+      ctx.fillStyle = i === 3 ? "#ff6b6b" : "#5ee7ff";
+      ctx.beginPath();
+      ctx.arc(x, y, 12, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.fillStyle = "#1c7ed6";
+    ctx.beginPath();
+    for (let k = 0; k < 6; k++) ctx.lineTo(cx + Math.cos((k * Math.PI) / 3) * 44, cy + Math.sin((k * Math.PI) / 3) * 44);
+    ctx.closePath();
+    ctx.fill();
+    const [bx, by] = nodes[3];
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(bx - 7, by - 7);
+    ctx.lineTo(bx + 7, by + 7);
+    ctx.moveTo(bx + 7, by - 7);
+    ctx.lineTo(bx - 7, by + 7);
+    ctx.stroke();
+    ctx.fillStyle = "#e7f5ff";
+    ctx.font = "500 22px Prompt, sans-serif";
+    ctx.fillText("Blocked today 12,480 · DDoS mitigated", 24, h - 22);
+  },
+  soc_map: (ctx, w, h) => {
+    ctx.fillStyle = "#06101c";
+    ctx.fillRect(0, 0, w, h);
+    worldMap(ctx, 0, 40, w, h - 40);
+    title(ctx, "THREAT MAP · LIVE", 20, 34, 28, "#5ee7ff");
+  },
+  soc_kpi: (ctx, w, h) => {
+    gradient(ctx, w, h, "#07121f", "#102f4d");
+    title(ctx, "SOC · 24/7", 24, 50, 34, "#5ee7ff");
+    [
+      ["MTTD", "4 min", "#51cf66"],
+      ["MTTR", "18 min", "#51cf66"],
+      ["Events/s", "42k", "#74c0fc"],
+      ["Open cases", "3", "#ffd43b"],
+    ].forEach(([k, v, c], i) => {
+      const x = 24 + (i % 2) * ((w - 60) / 2 + 12);
+      const y = 76 + Math.floor(i / 2) * 120;
+      roundRect(ctx, x, y, (w - 60) / 2, 104, 14, "rgba(255,255,255,0.08)");
+      ctx.fillStyle = "#a5d8ff";
+      ctx.font = "500 22px Prompt, sans-serif";
+      ctx.fillText(k, x + 16, y + 34);
+      title(ctx, v, x + 16, y + 86, 46, c);
+    });
+    donut(ctx, w / 2, h - 60, 44, [
+      [0.1, "#ff6b6b"],
+      [0.25, "#ff922b"],
+      [0.65, "#1c7ed6"],
+    ]);
+  },
+  edr: (ctx, w, h) => {
+    gradient(ctx, w, h, "#0b3d2e", "#0f5132");
+    ctx.fillStyle = "#51cf66";
+    ctx.beginPath();
+    ctx.moveTo(52, 34);
+    ctx.lineTo(84, 46);
+    ctx.quadraticCurveTo(84, 96, 52, 112);
+    ctx.quadraticCurveTo(20, 96, 20, 46);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 7;
+    ctx.beginPath();
+    ctx.moveTo(38, 72);
+    ctx.lineTo(50, 84);
+    ctx.lineTo(68, 60);
+    ctx.stroke();
+    title(ctx, "EDR · Protected", 104, 62, 30);
+    ctx.fillStyle = "#d3f9d8";
+    ctx.font = "500 22px Prompt, sans-serif";
+    ["Encryption ✓", "DLP ✓", "Patched ✓"].forEach((t, i) => ctx.fillText(t, 104 + (i % 2) * 110, 100 + Math.floor(i / 2) * 34));
+    bars(ctx, 20, h - 50, w - 40, 36, 16, "#40c057", 5);
+  },
+  code: (ctx, w, h) => {
+    ctx.fillStyle = "#0d1117";
+    ctx.fillRect(0, 0, w, h);
+    let s = 17;
+    for (let i = 0; i < 9; i++) {
+      s = (s * 9301 + 49297) % 233280;
+      const indent = (i % 3) * 22;
+      const len = 60 + (s / 233280) * (w - 140);
+      if (i === 5) {
+        ctx.fillStyle = "rgba(255,107,107,0.35)";
+        ctx.fillRect(0, 14 + i * 20, w, 18);
+      }
+      ctx.fillStyle = ["#79c0ff", "#d2a8ff", "#a5d6ff", "#7ee787", "#ffa657"][i % 5];
+      ctx.fillRect(20 + indent, 18 + i * 20, len * 0.4, 10);
+      ctx.fillStyle = "#c9d1d9";
+      ctx.fillRect(28 + indent + len * 0.4, 18 + i * 20, len * 0.5, 10);
+    }
+    ctx.fillStyle = "#ff6b6b";
+    ctx.font = "700 16px monospace";
+    ctx.fillText("SAST: SQL injection · line 42", 20, h - 10);
+  },
+  cyber_range: (ctx, w, h) => {
+    gradient(ctx, w, h, "#12072b", "#0b2a45");
+    title(ctx, "CYBER RANGE · RED vs BLUE", 28, 56, 40, "#fff");
+    [
+      ["RED TEAM", 0.42, "#ff6b6b"],
+      ["BLUE TEAM", 0.78, "#4dabf7"],
+    ].forEach(([name, v, c], i) => {
+      const y = 100 + i * 86;
+      ctx.fillStyle = c;
+      ctx.font = "700 28px Prompt, sans-serif";
+      ctx.fillText(name, 28, y + 34);
+      roundRect(ctx, 220, y + 8, w - 400, 36, 18, "rgba(255,255,255,0.12)");
+      roundRect(ctx, 220, y + 8, (w - 400) * v, 36, 18, c);
+      title(ctx, `${Math.round(v * 1000)} pts`, w - 160, y + 36, 30, "#fff");
+    });
+    ctx.fillStyle = "#ffd43b";
+    ctx.font = "700 26px Prompt, sans-serif";
+    ctx.fillText("Drill: ransomware outbreak · 00:42:17", 28, h - 24);
+  },
+  consult: (ctx, w, h) => {
+    gradient(ctx, w, h, "#f8f9fa", "#dbe4ff");
+    title(ctx, "Security Readiness Review", 32, 60, 40, "#1c3d7a");
+    ["ISO/IEC 27001 controls", "PDPA data mapping", "Pen test & red team", "Cyber drill plan"].forEach((t, i) => {
+      const y = 104 + i * 44;
+      roundRect(ctx, 32, y - 24, 30, 30, 8, i < 3 ? "#37b24d" : "#adb5bd");
+      ctx.fillStyle = "#1c3d7a";
+      ctx.font = "500 26px Prompt, sans-serif";
+      ctx.fillText(t, 76, y);
+    });
+    donut(ctx, w - 130, h / 2 + 16, 86, [
+      [0.86, "#1c7ed6"],
+      [0.14, "#dee2e6"],
+    ]);
+    title(ctx, "86%", w - 172, h / 2 + 30, 40, "#1c3d7a");
+  },
+  threat_map: (ctx, w, h) => {
+    ctx.fillStyle = "#06101c";
+    ctx.fillRect(0, 0, w, h);
+    worldMap(ctx, 180, 20, w - 200, h - 30);
+    title(ctx, "THREAT INTEL", 22, 60, 30, "#5ee7ff");
+    [
+      ["IOC feed", "3,204"],
+      ["Dark web", "12 hits"],
+      ["Fraud", "2 blocked"],
+      ["SIGINT", "live"],
+    ].forEach(([k, v], i) => {
+      ctx.fillStyle = "#a5d8ff";
+      ctx.font = "500 20px Prompt, sans-serif";
+      ctx.fillText(k, 22, 120 + i * 76);
+      title(ctx, v, 22, 150 + i * 76, 28, i === 1 ? "#ff8787" : "#fff");
+    });
+  },
+  threat_feed: (ctx, w, h) => {
+    ctx.fillStyle = "#0b1622";
+    ctx.fillRect(0, 0, w, h);
+    title(ctx, "IOC · MISP / TIP", 24, 50, 32, "#5ee7ff");
+    [
+      ["IP", "185.220.x.x", "C2 server", "#ff6b6b"],
+      ["DOMAIN", "login-secure[.]xyz", "Phishing", "#ff922b"],
+      ["HASH", "9f2c…a71e", "Ransomware", "#ff6b6b"],
+      ["CVE", "CVE-2026-1234", "Exploited", "#ffd43b"],
+      ["FORUM", "Dark web leak", "Credentials", "#b197fc"],
+    ].forEach(([t, v, tag, c], i) => {
+      const y = 94 + i * 64;
+      ctx.fillStyle = "#74c0fc";
+      ctx.font = "700 20px monospace";
+      ctx.fillText(t, 24, y);
+      ctx.fillStyle = "#e7f5ff";
+      ctx.font = "500 24px monospace";
+      ctx.fillText(v, 150, y);
+      roundRect(ctx, w - 230, y - 26, 200, 34, 10, c);
+      ctx.fillStyle = "#081523";
+      ctx.font = "700 20px Prompt, sans-serif";
+      ctx.fillText(tag, w - 216, y - 2);
+    });
+  },
+  icon_lock: badge(["#74c0fc", "#1864ab"], (ctx, w, h) => {
+    ctx.beginPath();
+    ctx.arc(w / 2, h * 0.42, w * 0.13, Math.PI, 0);
+    ctx.stroke();
+    roundRect(ctx, w * 0.3, h * 0.42, w * 0.4, h * 0.3, 14, "#fff");
+    ctx.fillStyle = "#1864ab";
+    ctx.beginPath();
+    ctx.arc(w / 2, h * 0.55, w * 0.045, 0, Math.PI * 2);
+    ctx.fill();
+  }),
+  // 09 Smart Utility: the energy operations centre's wall, the chargers, meters, batteries and the P2P market
+  ems_grid: (ctx, w, h) => {
+    gradient(ctx, w, h, "#06131f", "#0d2b45");
+    title(ctx, "GRID OVERVIEW · 22 kV", 24, 46, 30, "#5ee7ff");
+    const hub = [w * 0.22, h * 0.55];
+    const zones = [
+      ["Homes", 0.62, 0.3, "#51cf66"],
+      ["EV park", 0.8, 0.46, "#ffd43b"],
+      ["Offices", 0.66, 0.66, "#74c0fc"],
+      ["BESS", 0.44, 0.84, "#b197fc"],
+      ["Solar+Wind", 0.4, 0.26, "#8ce99a"],
+    ];
+    zones.forEach(([name, u, v, c]) => {
+      ctx.strokeStyle = c;
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo(...hub);
+      ctx.lineTo(w * u, h * v);
+      ctx.stroke();
+      ctx.fillStyle = c;
+      ctx.beginPath();
+      ctx.arc(w * u, h * v, 16, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#dbeafe";
+      ctx.font = "500 20px Prompt, sans-serif";
+      ctx.fillText(name, w * u + 22, h * v + 7);
+    });
+    roundRect(ctx, hub[0] - 50, hub[1] - 30, 100, 60, 12, "#1c7ed6");
+    title(ctx, "SUB", hub[0] - 28, hub[1] + 10, 26);
+    title(ctx, "50.00 Hz", w - 190, h - 26, 30, "#51cf66");
+  },
+  ems_load: (ctx, w, h) => {
+    gradient(ctx, w, h, "#07121f", "#102f4d");
+    title(ctx, "LOAD vs FORECAST · MW", 24, 46, 30, "#5ee7ff");
+    const x0 = 40, y0 = 80, cw = w - 70, ch = h - 150;
+    ctx.fillStyle = "rgba(255,107,107,0.16)";
+    ctx.fillRect(x0 + cw * 0.68, y0, cw * 0.14, ch); // the evening peak window
+    const curve = (k, f) => y0 + ch * (0.78 - 0.5 * Math.sin(Math.PI * Math.min(1, k * 1.05)) ** 2 * f - (k > 0.68 && k < 0.82 ? 0.18 * f : 0));
+    [["#74c0fc", 1, []], ["#ffd43b", 0.86, [10, 8]]].forEach(([c, f, dash]) => {
+      ctx.setLineDash(dash);
+      ctx.strokeStyle = c;
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      for (let i = 0; i <= 48; i++) {
+        const k = i / 48;
+        i ? ctx.lineTo(x0 + cw * k, curve(k, f)) : ctx.moveTo(x0, curve(k, f));
+      }
+      ctx.stroke();
+    });
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#a5d8ff";
+    ctx.font = "500 20px Prompt, sans-serif";
+    ctx.fillText("00:00", x0, h - 44);
+    ctx.fillText("18:00", x0 + cw * 0.68, h - 44);
+    title(ctx, "Peak −12% with DR", x0, h - 12, 26, "#51cf66");
+  },
+  ems_dr: (ctx, w, h) => {
+    gradient(ctx, w, h, "#1a0f05", "#3d2306");
+    title(ctx, "DEMAND RESPONSE", 24, 46, 32, "#ffd43b");
+    title(ctx, "Event #42 · 17:30–19:00", 24, 92, 26, "#fff3bf");
+    [
+      ["HVAC setpoint +1°C", 0.42, "#74c0fc"],
+      ["EV charging paused", 0.3, "#ffd43b"],
+      ["BESS discharge", 0.8, "#b197fc"],
+      ["Homes (opt-in)", 0.55, "#51cf66"],
+    ].forEach(([k, v, c], i) => {
+      const y = 130 + i * 70;
+      ctx.fillStyle = "#ffe8cc";
+      ctx.font = "500 22px Prompt, sans-serif";
+      ctx.fillText(k, 24, y + 22);
+      roundRect(ctx, 290, y, w - 320, 28, 10, "rgba(255,255,255,0.12)");
+      roundRect(ctx, 290, y, (w - 320) * v, 28, 10, c);
+    });
+    title(ctx, "−2.4 MW shed", 24, h - 24, 34, "#51cf66");
+  },
+  ems_kpi: (ctx, w, h) => {
+    gradient(ctx, w, h, "#06131f", "#0b2a3f");
+    title(ctx, "TODAY", 24, 50, 34, "#5ee7ff");
+    [
+      ["Renewables", "46%", "#51cf66"],
+      ["Peak shaved", "2.4 MW", "#ffd43b"],
+      ["CO₂ saved", "18.5 t", "#8ce99a"],
+      ["Losses", "−9%", "#74c0fc"],
+    ].forEach(([k, v, c], i) => {
+      const x = 24 + (i % 2) * ((w - 60) / 2 + 12);
+      const y = 76 + Math.floor(i / 2) * 120;
+      roundRect(ctx, x, y, (w - 60) / 2, 104, 14, "rgba(255,255,255,0.08)");
+      ctx.fillStyle = "#a5d8ff";
+      ctx.font = "500 22px Prompt, sans-serif";
+      ctx.fillText(k, x + 16, y + 34);
+      title(ctx, v, x + 16, y + 86, 44, c);
+    });
+    donut(ctx, w / 2, h - 60, 44, [
+      [0.3, "#ffd43b"],
+      [0.16, "#8ce99a"],
+      [0.54, "#1c7ed6"],
+    ]);
+  },
+  meter: (ctx, w, h) => {
+    ctx.fillStyle = "#b9c9a8";
+    ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = "#1d2a14";
+    ctx.font = `700 ${h * 0.42}px monospace`;
+    ctx.fillText("02487.3", w * 0.06, h * 0.56);
+    ctx.font = `600 ${h * 0.2}px Prompt, sans-serif`;
+    ctx.fillText("kWh  ⇄ 1.8 kW", w * 0.06, h * 0.86);
+  },
+  bess: (ctx, w, h) => {
+    gradient(ctx, w, h, "#120a2b", "#2b1a66");
+    title(ctx, "BESS · 2.5 MWh", 16, 40, 28, "#d0bfff");
+    roundRect(ctx, 16, 70, w - 32, 46, 10, "rgba(255,255,255,0.15)");
+    roundRect(ctx, 16, 70, (w - 32) * 0.82, 46, 10, "#51cf66");
+    title(ctx, "SOC 82%", 28, 104, 26, "#0b2e13");
+    title(ctx, "▲ +1.2 MW", 16, h - 24, 30, "#8ce99a");
+  },
+  v2g: (ctx, w, h) => {
+    gradient(ctx, w, h, "#0b2a4a", "#1c7ed6");
+    title(ctx, "V2G ⇄ 7 kW", 16, h * 0.34, h * 0.2);
+    roundRect(ctx, 16, h * 0.5, w - 32, h * 0.16, 8, "rgba(255,255,255,0.25)");
+    roundRect(ctx, 16, h * 0.5, (w - 32) * 0.64, h * 0.16, 8, "#fff");
+    title(ctx, "64% · to grid", 16, h * 0.9, h * 0.14, "#d0ebff");
+  },
+  p2p: (ctx, w, h) => {
+    gradient(ctx, w, h, "#062a1f", "#0b4f3a");
+    title(ctx, "P2P ENERGY MARKET", 20, 42, 30, "#8ce99a");
+    [
+      ["House A → C", "3.2 kWh", "฿3.10"],
+      ["House B → EV", "5.0 kWh", "฿2.95"],
+      ["Battery → B", "2.1 kWh", "฿3.40"],
+    ].forEach(([who, kwh, price], i) => {
+      const y = 90 + i * 62;
+      roundRect(ctx, 16, y - 34, w - 32, 50, 10, "rgba(255,255,255,0.08)");
+      ctx.fillStyle = "#e6fcf5";
+      ctx.font = "500 24px Prompt, sans-serif";
+      ctx.fillText(who, 30, y);
+      ctx.fillText(kwh, w * 0.52, y);
+      title(ctx, price, w - 110, y, 24, "#ffd43b");
+    });
+    title(ctx, "Local 72% · Grid 28%", 20, h - 14, 24, "#63e6be");
+  },
+  icon_bolt: badge(["#ffd43b", "#f08c00"], (ctx, w, h) => {
+    ctx.beginPath();
+    ctx.moveTo(w * 0.56, h * 0.18);
+    ctx.lineTo(w * 0.32, h * 0.56);
+    ctx.lineTo(w * 0.5, h * 0.56);
+    ctx.lineTo(w * 0.44, h * 0.84);
+    ctx.lineTo(w * 0.7, h * 0.44);
+    ctx.lineTo(w * 0.52, h * 0.44);
+    ctx.closePath();
+    ctx.fill();
+  }),
+  icon_battery: badge(["#b197fc", "#5f3dc4"], (ctx, w, h) => {
+    ctx.lineWidth = 12;
+    ctx.strokeRect(w * 0.26, h * 0.34, w * 0.42, h * 0.32);
+    ctx.fillRect(w * 0.68, h * 0.44, w * 0.06, h * 0.12);
+    ctx.fillRect(w * 0.31, h * 0.39, w * 0.26, h * 0.22);
+  }),
+  icon_ev: badge(["#63e6be", "#087f5b"], (ctx, w, h) => {
+    roundRect(ctx, w * 0.3, h * 0.22, w * 0.3, h * 0.56, 14, "#fff");
+    ctx.fillStyle = "#087f5b";
+    ctx.beginPath();
+    ctx.moveTo(w * 0.48, h * 0.3);
+    ctx.lineTo(w * 0.38, h * 0.52);
+    ctx.lineTo(w * 0.46, h * 0.52);
+    ctx.lineTo(w * 0.42, h * 0.7);
+    ctx.lineTo(w * 0.53, h * 0.46);
+    ctx.lineTo(w * 0.46, h * 0.46);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(w * 0.6, h * 0.36);
+    ctx.quadraticCurveTo(w * 0.76, h * 0.4, w * 0.72, h * 0.6);
+    ctx.stroke();
+  }),
+  icon_home: badge(["#8ce99a", "#2b8a3e"], (ctx, w, h) => {
+    ctx.beginPath();
+    ctx.moveTo(w * 0.22, h * 0.5);
+    ctx.lineTo(w * 0.5, h * 0.24);
+    ctx.lineTo(w * 0.78, h * 0.5);
+    ctx.stroke();
+    ctx.fillRect(w * 0.31, h * 0.48, w * 0.38, h * 0.28);
+    ctx.fillStyle = "#2b8a3e";
+    ctx.fillRect(w * 0.45, h * 0.6, w * 0.1, h * 0.16);
+  }),
+  icon_meter: badge(["#74c0fc", "#1864ab"], (ctx, w, h) => {
+    ctx.beginPath();
+    ctx.arc(w / 2, h * 0.58, w * 0.24, Math.PI, 0);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(w / 2, h * 0.58);
+    ctx.lineTo(w * 0.64, h * 0.4);
+    ctx.stroke();
+    ctx.fillRect(w * 0.3, h * 0.66, w * 0.4, h * 0.08);
+  }),
+  icon_sun: badge(["#ffd43b", "#e67700"], (ctx, w, h) => {
+    ctx.beginPath();
+    ctx.arc(w / 2, h / 2, w * 0.13, 0, Math.PI * 2);
+    ctx.fill();
+    for (let k = 0; k < 8; k++) {
+      const a = (k * Math.PI) / 4;
+      ctx.beginPath();
+      ctx.moveTo(w / 2 + Math.cos(a) * w * 0.2, h / 2 + Math.sin(a) * h * 0.2);
+      ctx.lineTo(w / 2 + Math.cos(a) * w * 0.3, h / 2 + Math.sin(a) * h * 0.3);
+      ctx.stroke();
+    }
+  }),
+  // 10 Cloud Services: the artwork's colourful racks, the hub, analytics, contact centre, ERP, ledger, compliance
+  rackfront: (ctx, w, h) => {
+    ctx.fillStyle = "#0a0f1a";
+    ctx.fillRect(0, 0, w, h);
+    const cols = ["#ff4d6d", "#ff922b", "#ffd43b", "#51cf66", "#22b8cf", "#4dabf7", "#b197fc", "#f783ac"];
+    let s = 7;
+    for (let y = 8; y < h - 8; y += 14) {
+      ctx.fillStyle = "#1b2433";
+      ctx.fillRect(6, y, w - 12, 11);
+      for (let x = 10; x < w - 14; x += 10) {
+        s = (s * 9301 + 49297) % 233280;
+        if (s / 233280 < 0.62) {
+          ctx.fillStyle = cols[s % cols.length];
+          ctx.fillRect(x, y + 3, 6, 5);
+        }
+      }
+    }
+  },
+  ai: (ctx, w, h) => {
+    gradient(ctx, w, h, "#12082b", "#3b1d7a");
+    title(ctx, "AI MODEL STUDIO", 20, 40, 28, "#e599f7");
+    const nodes = [];
+    [3, 5, 5, 2].forEach((n, l) => {
+      for (let i = 0; i < n; i++) nodes.push([60 + l * ((w - 160) / 3), 80 + ((i + 0.5) * (h - 150)) / n, l]);
+    });
+    ctx.strokeStyle = "rgba(229,153,247,0.35)";
+    ctx.lineWidth = 2;
+    nodes.forEach(([x, y, l]) => nodes.filter((b) => b[2] === l + 1).forEach(([bx, by]) => (ctx.beginPath(), ctx.moveTo(x, y), ctx.lineTo(bx, by), ctx.stroke())));
+    nodes.forEach(([x, y, l]) => {
+      ctx.fillStyle = ["#74c0fc", "#b197fc", "#f783ac", "#51cf66"][l];
+      ctx.beginPath();
+      ctx.arc(x, y, 9, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    title(ctx, "Accuracy 97.4%", 20, h - 24, 26, "#8ce99a");
+  },
+  bigdata: (ctx, w, h) => {
+    gradient(ctx, w, h, "#06131f", "#0d2b45");
+    title(ctx, "DATA LAKE · 4.2 PB", 20, 40, 28, "#5ee7ff");
+    const cols = ["#ff6b6b", "#ff922b", "#ffd43b", "#51cf66", "#4dabf7", "#b197fc"];
+    cols.forEach((c, i) => {
+      const bh = (h - 110) * (0.25 + i * 0.13);
+      ctx.fillStyle = c;
+      ctx.fillRect(30 + i * ((w * 0.55) / 6), h - 30 - bh, (w * 0.55) / 6 - 10, bh);
+    });
+    donut(ctx, w * 0.8, h * 0.55, h * 0.22, [[0.34, "#4dabf7"], [0.22, "#ffd43b"], [0.18, "#ff6b6b"], [0.26, "#51cf66"]]);
+  },
+  bigdata2: (ctx, w, h) => {
+    gradient(ctx, w, h, "#07121f", "#102f4d");
+    title(ctx, "ETL PIPELINE · LIVE", 20, 40, 28, "#5ee7ff");
+    ["Collect", "Clean", "Store", "Analyse", "Insight"].forEach((k, i) => {
+      const x = 20 + i * ((w - 40) / 5);
+      roundRect(ctx, x, h * 0.35, (w - 40) / 5 - 14, h * 0.28, 10, ["#1c7ed6", "#0ca678", "#f08c00", "#7048e8", "#e64980"][i]);
+      ctx.fillStyle = "#fff";
+      ctx.font = "600 20px Prompt, sans-serif";
+      ctx.fillText(k, x + 10, h * 0.52);
+    });
+    line(ctx, 20, h * 0.7, w - 40, h * 0.25, "#8ce99a", 11);
+  },
+  crm: (ctx, w, h) => {
+    gradient(ctx, w, h, "#062a1f", "#0b4f3a");
+    title(ctx, "CLOUD CONTACT CENTER", 16, 36, 24, "#8ce99a");
+    [
+      ["🤖 Bot", "Hi! How can I help?", "#1c7ed6"],
+      ["👤 Customer", "Where is my order?", "#495057"],
+      ["🤖 Bot", "Arriving today 14:30", "#1c7ed6"],
+    ].forEach(([who, msg, c], i) => {
+      roundRect(ctx, i === 1 ? w * 0.3 : 16, 56 + i * 52, w * 0.66, 42, 10, c);
+      ctx.fillStyle = "#fff";
+      ctx.font = "500 18px Prompt, sans-serif";
+      ctx.fillText(`${who}: ${msg}`, (i === 1 ? w * 0.3 : 16) + 12, 83 + i * 52);
+    });
+    title(ctx, "Queue 3 · CSAT 4.8", 16, h - 16, 22, "#ffd43b");
+  },
+  erp: (ctx, w, h) => {
+    gradient(ctx, w, h, "#0b1f33", "#1c4f82");
+    title(ctx, "ERP ON CLOUD", 24, 50, 38, "#a5d8ff");
+    [
+      ["Finance", "฿12.4M", "#51cf66"],
+      ["Inventory", "8,420", "#ffd43b"],
+      ["Orders", "1,284", "#74c0fc"],
+      ["HR", "326", "#f783ac"],
+    ].forEach(([k, v, c], i) => {
+      const x = 24 + (i % 2) * ((w - 60) / 2 + 12);
+      const y = 80 + Math.floor(i / 2) * ((h - 100) / 2);
+      roundRect(ctx, x, y, (w - 60) / 2, (h - 120) / 2, 14, "rgba(255,255,255,0.1)");
+      ctx.fillStyle = "#d0ebff";
+      ctx.font = "500 26px Prompt, sans-serif";
+      ctx.fillText(k, x + 18, y + 40);
+      title(ctx, v, x + 18, y + 94, 48, c);
+    });
+  },
+  chain: (ctx, w, h) => {
+    gradient(ctx, w, h, "#1a0b2e", "#4c1d95");
+    title(ctx, "LEDGER", 14, 34, 24, "#f783ac");
+    for (let i = 0; i < 4; i++) {
+      const x = 14 + i * ((w - 20) / 4);
+      roundRect(ctx, x, h * 0.36, (w - 20) / 4 - 16, h * 0.4, 8, i % 2 ? "#7048e8" : "#e64980");
+      ctx.fillStyle = "#fff";
+      ctx.font = "600 16px monospace";
+      ctx.fillText(`#${4810 + i}`, x + 6, h * 0.6);
+      if (i < 3) {
+        ctx.fillStyle = "#ffd43b";
+        ctx.fillRect(x + (w - 20) / 4 - 16, h * 0.55, 16, 4);
+      }
+    }
+    title(ctx, "✓ verified", 14, h - 12, 20, "#8ce99a");
+  },
+  compliance: (ctx, w, h) => {
+    gradient(ctx, w, h, "#0b1f33", "#12395f");
+    title(ctx, "COMPLIANCE", 24, 46, 34, "#a5d8ff");
+    ["ISO 27001", "PDPA", "SOC 2", "ISO 22301", "CSA STAR"].forEach((k, i) => {
+      const y = 86 + i * 30;
+      ctx.fillStyle = "#51cf66";
+      ctx.font = "700 22px Prompt, sans-serif";
+      ctx.fillText("✓", 30, y);
+      ctx.fillStyle = "#e7f5ff";
+      ctx.font = "500 22px Prompt, sans-serif";
+      ctx.fillText(k, 64, y);
+    });
+  },
+  noc: (ctx, w, h) => {
+    ctx.fillStyle = "#07121f";
+    ctx.fillRect(0, 0, w, h);
+    title(ctx, "NOC · 1,284 servers", 14, 30, 22, "#5ee7ff");
+    for (let i = 0; i < 96; i++) {
+      const x = 14 + (i % 16) * ((w - 28) / 16);
+      const y = 46 + Math.floor(i / 16) * ((h - 60) / 6);
+      ctx.fillStyle = i === 37 ? "#ffd43b" : "#2f9e44";
+      ctx.fillRect(x, y, (w - 28) / 16 - 4, (h - 60) / 6 - 4);
+    }
+  },
+  icon_server: badge(["#74c0fc", "#1864ab"], (ctx, w, h) => {
+    for (let k = 0; k < 3; k++) roundRect(ctx, w * 0.28, h * (0.26 + k * 0.17), w * 0.44, h * 0.13, 6, "#fff");
+    ctx.fillStyle = "#1864ab";
+    for (let k = 0; k < 3; k++) ctx.fillRect(w * 0.33, h * (0.31 + k * 0.17), w * 0.08, h * 0.03);
+  }),
+  icon_headset: badge(["#63e6be", "#087f5b"], (ctx, w, h) => {
+    ctx.beginPath();
+    ctx.arc(w / 2, h * 0.52, w * 0.22, Math.PI, 0);
+    ctx.stroke();
+    roundRect(ctx, w * 0.24, h * 0.5, w * 0.1, h * 0.18, 6, "#fff");
+    roundRect(ctx, w * 0.66, h * 0.5, w * 0.1, h * 0.18, 6, "#fff");
+    ctx.beginPath();
+    ctx.moveTo(w * 0.29, h * 0.68);
+    ctx.quadraticCurveTo(w * 0.32, h * 0.8, w * 0.48, h * 0.78);
+    ctx.stroke();
+  }),
+  icon_erp: badge(["#ffc078", "#d9480f"], (ctx, w, h) => {
+    title(ctx, "ERP", w * 0.24, h * 0.6, w * 0.24);
+  }),
+  icon_chain: badge(["#e599f7", "#9c36b5"], (ctx, w, h) => {
+    roundRect(ctx, w * 0.22, h * 0.38, w * 0.22, h * 0.22, 6, "#fff");
+    roundRect(ctx, w * 0.56, h * 0.38, w * 0.22, h * 0.22, 6, "#fff");
+    ctx.beginPath();
+    ctx.moveTo(w * 0.44, h * 0.49);
+    ctx.lineTo(w * 0.56, h * 0.49);
+    ctx.stroke();
+  }),
+  icon_wind: badge(["#a5d8ff", "#1971c2"], (ctx, w, h) => {
+    ctx.beginPath();
+    ctx.moveTo(w / 2, h * 0.46);
+    ctx.lineTo(w / 2, h * 0.8);
+    ctx.stroke();
+    for (let k = 0; k < 3; k++) {
+      const a = -Math.PI / 2 + (k * Math.PI * 2) / 3;
+      ctx.beginPath();
+      ctx.moveTo(w / 2, h * 0.44);
+      ctx.lineTo(w / 2 + Math.cos(a) * w * 0.26, h * 0.44 + Math.sin(a) * h * 0.26);
+      ctx.stroke();
+    }
+  }),
 };
+
+// dotted world map (continents as ellipses) with attack arcs converging on Thailand
+function worldMap(ctx, x, y, w, h) {
+  const land = [
+    [0.2, 0.33, 0.13, 0.15],
+    [0.3, 0.68, 0.06, 0.15],
+    [0.49, 0.28, 0.06, 0.08],
+    [0.52, 0.58, 0.08, 0.15],
+    [0.68, 0.32, 0.17, 0.14],
+    [0.74, 0.5, 0.04, 0.06],
+    [0.84, 0.75, 0.07, 0.06],
+  ];
+  const step = Math.max(8, w / 90);
+  ctx.fillStyle = "#1f4f7a";
+  for (let py = 0; py < h; py += step)
+    for (let px = 0; px < w; px += step) {
+      const u = px / w;
+      const v = py / h;
+      if (land.some(([cx, cy, rx, ry]) => ((u - cx) / rx) ** 2 + ((v - cy) / ry) ** 2 < 1)) ctx.fillRect(x + px, y + py, step * 0.55, step * 0.55);
+    }
+  const target = [x + w * 0.73, y + h * 0.48];
+  [
+    [0.18, 0.3, "#ff6b6b"],
+    [0.48, 0.26, "#ff922b"],
+    [0.3, 0.7, "#ff6b6b"],
+    [0.62, 0.28, "#ffd43b"],
+    [0.84, 0.76, "#ff922b"],
+  ].forEach(([u, v, c]) => {
+    const sx = x + u * w;
+    const sy = y + v * h;
+    ctx.strokeStyle = c;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(sx, sy);
+    ctx.quadraticCurveTo((sx + target[0]) / 2, Math.min(sy, target[1]) - h * 0.25, target[0], target[1]);
+    ctx.stroke();
+    ctx.fillStyle = c;
+    ctx.beginPath();
+    ctx.arc(sx, sy, 6, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.fillStyle = "#5ee7ff";
+  ctx.beginPath();
+  ctx.arc(target[0], target[1], 10, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = "#5ee7ff";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.arc(target[0], target[1], 20, 0, Math.PI * 2);
+  ctx.stroke();
+}
 
 const PICK = [
   ["screen_media", "media", 1024, 420],
@@ -996,6 +1643,45 @@ const PICK = [
   ["screen_icon_car", "icon_car", 256, 256],
   ["screen_icon_arm", "icon_arm", 256, 256],
   ["screen_icon_robot", "icon_robot", 256, 256],
+  ["screen_soc_alerts", "soc_alerts", 640, 480],
+  ["screen_soc_net", "soc_net", 640, 480],
+  ["screen_soc_map", "soc_map", 640, 480],
+  ["screen_soc_kpi", "soc_kpi", 640, 480],
+  ["screen_edr", "edr", 320, 200],
+  ["screen_code", "code", 320, 200],
+  ["screen_cyber_range", "cyber_range", 800, 320],
+  ["screen_consult", "consult", 768, 300],
+  ["screen_threat_map", "threat_map", 1024, 440],
+  ["screen_threat_feed", "threat_feed", 1024, 440],
+  ["screen_icon_lock", "icon_lock", 256, 256],
+  ["screen_ems_grid", "ems_grid", 640, 480],
+  ["screen_ems_load", "ems_load", 640, 480],
+  ["screen_ems_dr", "ems_dr", 640, 480],
+  ["screen_ems_kpi", "ems_kpi", 640, 480],
+  ["screen_meter", "meter", 256, 140],
+  ["screen_bess", "bess", 320, 200],
+  ["screen_v2g", "v2g", 256, 180],
+  ["screen_p2p", "p2p", 480, 300],
+  ["screen_icon_bolt", "icon_bolt", 256, 256],
+  ["screen_icon_battery", "icon_battery", 256, 256],
+  ["screen_icon_ev", "icon_ev", 256, 256],
+  ["screen_icon_home", "icon_home", 256, 256],
+  ["screen_icon_meter", "icon_meter", 256, 256],
+  ["screen_icon_sun", "icon_sun", 256, 256],
+  ["screen_icon_wind", "icon_wind", 256, 256],
+  ["screen_rackfront", "rackfront", 128, 512],
+  ["screen_ai", "ai", 640, 400],
+  ["screen_bigdata2", "bigdata2", 640, 360],
+  ["screen_bigdata", "bigdata", 640, 360],
+  ["screen_crm", "crm", 480, 300],
+  ["screen_erp", "erp", 640, 360],
+  ["screen_chain", "chain", 360, 220],
+  ["screen_compliance", "compliance", 400, 240],
+  ["screen_noc", "noc", 480, 300],
+  ["screen_icon_server", "icon_server", 256, 256],
+  ["screen_icon_headset", "icon_headset", 256, 256],
+  ["screen_icon_erp", "icon_erp", 256, 256],
+  ["screen_icon_chain", "icon_chain", 256, 256],
 ];
 
 const cache = {};
