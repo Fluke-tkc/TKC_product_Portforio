@@ -9,8 +9,9 @@ import cables from "./scenes/SmartCables";
 import autonomous from "./scenes/SmartAutonomous";
 import cybersecurity from "./scenes/SmartCybersecurity";
 import utility from "./scenes/SmartUtility";
+import cloud from "./scenes/SmartCloud";
 
-const SCENES = { building, hospital, learning, logistics, cables, autonomous, cybersecurity, utility };
+const SCENES = { building, hospital, learning, logistics, cables, autonomous, cybersecurity, utility, cloud };
 
 // Canvas for the modelled (fully 3D) solution scenes.
 export default function ModelView({ id, hotspots, activeIndex, onSelect, isNarrow, className }) {

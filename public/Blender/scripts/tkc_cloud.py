@@ -116,6 +116,71 @@ def headset(name, center, s=2.0, mat="robot_white", accent="accent_blue"):
     sphere(f"{name}_mic", 0.12 * s, (cx - 0.15 * s, cy - 0.7 * s, cz - 0.75 * s), "led_cyan", subdiv=1)
 
 
+def glass_sphere(name, center, r, rib="white", meridians=10, rings=5):
+    """Glass globe on a cradle ring: meridian ribs and latitude rings in short pieces (vertex-lit)."""
+    cx, cy, cz = center
+    bm = bmesh.new()
+    bmesh.ops.create_uvsphere(bm, u_segments=40, v_segments=24, radius=r)
+    bmesh.ops.translate(bm, vec=Vector(center), verts=bm.verts)
+    L._finish(bm, f"{name}_glass", "glass", smooth=True)
+    segs = []
+    for k in range(meridians):
+        a = k * math.pi / meridians  # each meridian is a full great circle through the poles
+        pts = [Vector((cx + math.cos(a) * r * math.cos(t), cy + math.sin(a) * r * math.cos(t), cz + r * math.sin(t))) for t in [i * math.tau / 32 for i in range(33)]]
+        segs += [(p, q, 0.07) for p, q in zip(pts, pts[1:])]
+    for j in range(1, rings + 1):
+        t = -math.pi / 2 + j * math.pi / (rings + 1)
+        rr, zz = r * math.cos(t), cz + r * math.sin(t)
+        pts = [Vector((cx + math.cos(a) * rr, cy + math.sin(a) * rr, zz)) for a in [i * math.tau / 32 for i in range(33)]]
+        segs += [(p, q, 0.06) for p, q in zip(pts, pts[1:])]
+    C.tubes(f"{name}_ribs", segs, rib, verts=6)
+    M.disc_ring(f"{name}_equator", r + 0.12, r - 0.05, (cx, cy, cz - 0.12), 0.24, "led_cyan", n=64)
+
+
+def icon_orbit(name, center, r, icons, size=1.6):
+    """A ring of floating service icons (screen_icon_*) facing outwards, turning slowly about the hub."""
+    parts = []
+    with group("move"):
+        n = len(icons)
+        for k, kind in enumerate(icons):
+            a = k * math.tau / n
+            parts.append(L.plane(f"{name}_{kind}{k}", (size, size), (math.cos(a) * r, math.sin(a) * r, 0.4 * math.sin(a * 3)), f"screen_icon_{kind}",
+                                 rot=(math.pi / 2, 0, a + math.pi / 2)))
+        parts.append(M.disc_ring(f"{name}_track", r + 0.05, r - 0.05, (0, 0, -size / 2 - 0.2), 0.04, "holo", n=96))
+    body = L.rigid(parts, name)
+    body.location = center
+    body["spin"], body["spin_speed"] = "z", 0.12
+    return body
+
+
+def skybridge(name, a, b, z, w=3.0, glass="glass", frame="white"):
+    """Elevated glass walkway from a to b (xy) at deck level z: deck slab, glass balustrades with a rail, LED
+    lines under both edges and a fibre 'data line' along the floor."""
+    a, b = Vector((a[0], a[1], 0)), Vector((b[0], b[1], 0))
+    d = b - a
+    ln = d.length
+    ang = math.atan2(d.y, d.x)
+    c = (a + b) / 2
+    r = (0, 0, ang)
+    box(f"{name}_deck", (ln, w, 0.45), (c.x, c.y, z - 0.44), frame, bevel=0.04, rot=r)  # 1 cm proud of the decks it lands on
+    nx, ny = -math.sin(ang), math.cos(ang)
+    for s in (-1, 1):
+        ox, oy = c.x + nx * s * (w / 2 - 0.05), c.y + ny * s * (w / 2 - 0.05)
+        box(f"{name}_glass{s}", (ln, 0.04, 1.1), (ox, oy, z), glass, bevel=0, rot=r)
+        box(f"{name}_led{s}", (ln, 0.05, 0.06), (c.x + nx * s * w / 2, c.y + ny * s * w / 2, z - 0.4), "led_cyan", bevel=0, rot=r)
+        p0 = Vector((a.x + nx * s * (w / 2 - 0.05), a.y + ny * s * (w / 2 - 0.05), z + 1.1))
+        p1 = Vector((b.x + nx * s * (w / 2 - 0.05), b.y + ny * s * (w / 2 - 0.05), z + 1.1))
+        C.tubes(f"{name}_rail{s}", [(p, q, 0.04) for p, q in C.split([p0, p1], 2.5)], frame, verts=6)
+    box(f"{name}_fibre", (ln, 0.12, 0.02), (c.x, c.y, z), "led_blue", bevel=0, rot=r)
+
+
+def arc_band(cx, cy, r_in, r_out, a0, a1, n=24):
+    """Closed outline of a ring segment (outer arc a0 -> a1, inner arc back)."""
+    outer = [(cx + r_out * math.cos(a0 + (a1 - a0) * i / n), cy + r_out * math.sin(a0 + (a1 - a0) * i / n)) for i in range(n + 1)]
+    inner = [(cx + r_in * math.cos(a0 + (a1 - a0) * i / n), cy + r_in * math.sin(a0 + (a1 - a0) * i / n)) for i in range(n, -1, -1)]
+    return outer + inner
+
+
 # ------------------------------------------------------------------ data hall
 
 def rack(name, loc, rot_z=0.0, screen="screen_rackfront"):

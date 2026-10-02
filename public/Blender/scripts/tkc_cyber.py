@@ -311,7 +311,7 @@ def v_column(name, base, top_z, spread=2.6, axis=0.0, r=0.34, mat="white"):
     foot = Vector((x, y, z + 0.5))
     C.tubes(f"{name}_struts", [(foot, Vector((x + s * dx, y + s * dy, top_z)), r) for s in (-1, 1)], mat, verts=16)
     cyl(f"{name}_plinth", r * 2.2, 0.5, (x, y, z), "robot_white", verts=24, bevel=0.04)
-    cyl(f"{name}_led", r * 2.25, 0.04, (x, y, z + 0.46), "led_cyan", verts=24)
+    cyl(f"{name}_led", r * 2.25, 0.04, (x, y, z + 0.42), "led_cyan", verts=24)  # a band below the plinth top (flush, they z-fight)
 
 
 def glass_lift(name, loc, z_top, r=1.1, car_z=None):
