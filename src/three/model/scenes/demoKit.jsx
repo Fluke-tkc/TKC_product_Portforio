@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { along, stride, useActor } from "./buildingDemos";
 import dock from "./buildingDemos.module.css";
+import cards from "./buildingDemos2.module.css";
 
 export const NOOP = () => {};
 export const ADD = { transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false, side: THREE.DoubleSide };
@@ -204,5 +205,22 @@ export function LinkLines({ pairs, color = "#5ee7ff", max = 40 }) {
       <instancedMesh ref={tubes} args={[tubeGeo, tubeMat, max]} frustumCulled={false} raycast={NOOP} />
       <instancedMesh ref={dots} args={[dotGeo, dotMat, max]} frustumCulled={false} raycast={NOOP} />
     </group>
+  );
+}
+
+// the dock's stat card: rows of [label, value, fraction 0..1, colour]
+export function Bars({ rows }) {
+  return (
+    <div className={cards.card}>
+      {rows.map(([k, v, f, c]) => (
+        <div key={k} className={cards.bar}>
+          <span>{k}</span>
+          <i>
+            <u style={{ width: `${f * 100}%`, background: c }} />
+          </i>
+          <b>{v}</b>
+        </div>
+      ))}
+    </div>
   );
 }
