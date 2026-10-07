@@ -1,34 +1,19 @@
-// The room a baked diorama is displayed in: a dark stand under the plinth, a warm floor, tall windows full of
-// daylight and big potted plants around it (the "model on a table" look of the reference sites).
+// The room a baked diorama is displayed in. scene.showroom picks it: "room" (01) is the original showroom, a dark stand
+// under the plinth, a warm floor, tall windows full of daylight and big potted plants around it (the "model on a table"
+// look of the reference sites); every other name is a themed room from rooms.jsx.
 // It is real-time lit; the baked diorama itself is unlit, so these lights never touch it.
 import { useEffect, useMemo } from "react";
 import * as THREE from "three";
 import { Kit, tree } from "../live/kit";
+import { ThemedRoom } from "./rooms";
 
 const COLORS = {
   floor: ["#b99e80", 0.75], rug: ["#3a3f47", 0.95], wall: ["#e9e4db", 0.92], slats: ["#8c6546", 0.7], frame: ["#2c3139", 0.45],
   stand: ["#2b2f36", 0.55], trim: ["#454c57", 0.4], pot: ["#30343b", 0.6], bark: ["#7a5a3e", 0.9],
   leaf1: ["#6fb24f", 0.8], leaf2: ["#4f9a40", 0.8], leaf3: ["#8cc660", 0.8],
 };
-// per-location looks (scene.showroom): colour overrides and the room light
-const THEMES = {
-  hospital: {
-    colors: { floor: ["#dfe3e6", 0.55], rug: ["#5d8f98", 0.9], wall: ["#f4f7f8", 0.9], slats: ["#bfd8dc", 0.6], frame: ["#9fb1bd", 0.4], stand: ["#2f5561", 0.55], trim: ["#4a7a88", 0.4], pot: ["#eef2f4", 0.5] },
-    sky: "#f3f9ff", ground: "#8b99a3", sun: "#ffffff",
-  },
-  school: {
-    colors: { floor: ["#d9b98c", 0.7], rug: ["#5b4a8a", 0.9], wall: ["#f7f1e6", 0.9], slats: ["#e6a15a", 0.65], frame: ["#6d5a8e", 0.45], stand: ["#3b335e", 0.55], trim: ["#5b4a8a", 0.4], pot: ["#f2e8da", 0.55] },
-    sky: "#fff3e0", ground: "#8a7768", sun: "#fff0d8",
-  },
-  warehouse: {
-    colors: { floor: ["#c9ccd0", 0.7], rug: ["#2f4a6b", 0.9], wall: ["#eef0f2", 0.9], slats: ["#9aa7b4", 0.6], frame: ["#3b4a5c", 0.45], stand: ["#27374a", 0.55], trim: ["#f2b632", 0.4], pot: ["#dfe3e7", 0.55] },
-    sky: "#eef5ff", ground: "#7d8894", sun: "#ffffff",
-  },
-};
-
 // base: diorama half size [x, z]; reach: how far the camera may pull back (the walls stay beyond it)
-export function Showroom({ base, reach = 230, top = -2.1, theme }) {
-  const look = THEMES[theme];
+function Room({ base, reach = 230, top = -2.1 }) {
   const { meshes, mats, panes } = useMemo(() => {
     const [bx, bz] = base;
     const floorY = top - 14;
@@ -73,14 +58,14 @@ export function Showroom({ base, reach = 230, top = -2.1, theme }) {
       tree(k, [x, floorY + 10, z], { h, seed: s });
     }
     const mats = {};
-    for (const [key, [c, r]] of Object.entries({ ...COLORS, ...look?.colors })) mats[key] = new THREE.MeshStandardMaterial({ color: c, roughness: r, flatShading: key.startsWith("leaf") });
+    for (const [key, [c, r]] of Object.entries(COLORS)) mats[key] = new THREE.MeshStandardMaterial({ color: c, roughness: r, flatShading: key.startsWith("leaf") });
     const pane = new THREE.MeshBasicMaterial({ color: new THREE.Color(1.85, 1.9, 1.95), toneMapped: false });
     const panes = [
       { geo: new THREE.PlaneGeometry(win * 2, head - sill), pos: [0, (sill + head) / 2, -R - 1.5], rot: [0, 0, 0] },
       { geo: new THREE.PlaneGeometry(win * 2, head - sill), pos: [-R - 1.5, (sill + head) / 2, 0], rot: [0, Math.PI / 2, 0] },
     ];
     return { meshes: k.build(), mats: { ...mats, pane }, panes };
-  }, [base, reach, top, look]);
+  }, [base, reach, top]);
   useEffect(
     () => () => {
       meshes.forEach((m) => m.geometry.dispose());
@@ -91,8 +76,8 @@ export function Showroom({ base, reach = 230, top = -2.1, theme }) {
   );
   return (
     <group>
-      <hemisphereLight args={[look?.sky ?? "#fff3e2", look?.ground ?? "#8a7a66", 1.05]} />
-      <directionalLight position={[-160, 220, -120]} intensity={1.7} color={look?.sun ?? "#fff1dc"} />
+      <hemisphereLight args={["#fff3e2", "#8a7a66", 1.05]} />
+      <directionalLight position={[-160, 220, -120]} intensity={1.7} color="#fff1dc" />
       {meshes.map(({ key, geometry }) => (
         <mesh key={key} geometry={geometry} material={mats[key]} raycast={() => {}} />
       ))}
@@ -101,4 +86,8 @@ export function Showroom({ base, reach = 230, top = -2.1, theme }) {
       ))}
     </group>
   );
+}
+
+export function Showroom({ theme = "room", ...props }) {
+  return theme === "room" ? <Room {...props} /> : <ThemedRoom theme={theme} {...props} />;
 }

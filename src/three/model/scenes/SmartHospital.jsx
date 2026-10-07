@@ -37,7 +37,7 @@ export default {
   Component: SmartHospital,
   baked: true,
   base: BASE,
-  showroom: "hospital",
+  showroom: "atrium",
   Panel: HospitalPanel,
   home: { position: [70, 62, 78], target: [-4, 9, -6] }, // high enough to take in the inpatient tower and its helipad
   maxDistance: 220,

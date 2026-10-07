@@ -32,6 +32,7 @@ export default {
   Component: SmartCables,
   baked: true,
   base: BASE,
+  showroom: "cabling",
   Panel: CablesPanel,
   standTop: -6.1, // the cables plinth shows a 6 m soil section
   home: { position: [20, 33, 74], target: [-2, -2, 7] }, // down the boulevard, like the artwork

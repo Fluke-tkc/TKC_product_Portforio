@@ -189,7 +189,11 @@ const METHODS = {
   mobile: { color: "#a3acff", en: "Mobile QR / NFC", th: "มือถือ QR / NFC" },
   unknown: { color: "#ff4d4d", en: "Unknown face", th: "ใบหน้าไม่รู้จัก" },
 };
-const PEOPLE = ["Somchai P.", "Anna K.", "Krit S.", "Mali T.", "David L."];
+const PEOPLE = [
+  { en: "Somchai P.", th: "สมชาย พ." }, { en: "Anna K.", th: "แอนนา ก." }, { en: "Krit S.", th: "กฤษ ส." },
+  { en: "Mali T.", th: "มะลิ ท." }, { en: "David L.", th: "เดวิด ล." },
+];
+const STRANGER = { en: "Unknown", th: "ไม่ทราบชื่อ" };
 
 export function AccessDemo({ movers, sliders }) {
   const { language } = useLanguage();
@@ -240,7 +244,7 @@ export function AccessDemo({ movers, sliders }) {
 
   const log = (result) =>
     demo.set((d) => ({
-      log: [{ time: now(), who: st.current.method === "unknown" ? (th ? "ไม่ทราบชื่อ" : "Unknown") : PEOPLE[d.log.length % PEOPLE.length], method: st.current.method, result }, ...d.log].slice(0, 5),
+      log: [{ time: now(), who: st.current.method === "unknown" ? STRANGER : PEOPLE[d.log.length % PEOPLE.length], method: st.current.method, result }, ...d.log].slice(0, 5),
     }));
 
   useFrame(({ clock }) => {
@@ -528,7 +532,7 @@ export function DemoDock({ id }) {
               {s.log.length === 0 && <li className={styles.muted}>{d.empty}</li>}
               {s.log.map((e, i) => (
                 <li key={i}>
-                  <span>{e.time}</span> {e.who} · {language === "th" ? METHODS[e.method].th : METHODS[e.method].en} · <b className={e.result === "denied" ? styles.bad : styles.good}>{d[e.result]}</b>
+                  <span>{e.time}</span> {e.who[language] || e.who.en} · {language === "th" ? METHODS[e.method].th : METHODS[e.method].en} · <b className={e.result === "denied" ? styles.bad : styles.good}>{d[e.result]}</b>
                 </li>
               ))}
             </ul>

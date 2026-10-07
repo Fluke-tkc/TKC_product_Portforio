@@ -40,6 +40,7 @@ export default {
   Component: SmartCybersecurity,
   baked: true,
   base: BASE,
+  showroom: "soc",
   Panel: CyberPanel,
   home: { position: [72, 64, 94], target: [-4, 14, -4] }, // high enough to take in the Cyber Tower
   maxDistance: 240,

@@ -8,7 +8,7 @@ import * as THREE from "three";
 import { DepthDiorama, FOV, homeDistance, layoutFor, pointOnSurface, useSceneAssets, viewHalfSize } from "../three/DepthDiorama";
 import { CameraRig } from "../three/CameraRig";
 import { HotspotPins } from "../three/HotspotPins";
-import { InfoPanel, Lightbox } from "../components/ui/InfoPanel";
+import { InfoPanel, InfoSheet, Lightbox } from "../components/ui/InfoPanel";
 import { LangToggle } from "../components/ui/LangToggle";
 import { Loader } from "../components/ui/Loader";
 import { WebGLBoundary } from "../components/ui/WebGLBoundary";
@@ -59,6 +59,10 @@ function SolutionView({ solution }) {
   const [hint, setHint] = useState(true);
   const isNarrow = useMediaQuery("(max-width: 900px)");
   const isTouch = useMediaQuery("(hover: none)");
+  // phones: the info sheet starts folded on the Info tab; its Try it tab hosts the scene's dock
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [sheetTab, setSheetTab] = useState("info");
+  const [trySlot, setTrySlot] = useState(null);
 
   const hotspots = solution.hotspots;
   const activeIndex = hotspots.findIndex((h) => h.id === params.get("point"));
@@ -76,6 +80,17 @@ function SolutionView({ solution }) {
     [hotspots, setParams]
   );
   const step = useCallback((dir) => select((activeIndex + dir + hotspots.length) % hotspots.length), [activeIndex, hotspots.length, select]);
+  const pickTab = (id) => {
+    if (sheetOpen && sheetTab === id) setSheetOpen(false);
+    else {
+      setSheetTab(id);
+      setSheetOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    if (activeIndex < 0) setSheetOpen(false);
+  }, [activeIndex]);
 
   useEffect(() => {
     document.title = `${title} | TKC Smart Solutions`;
@@ -112,6 +127,7 @@ function SolutionView({ solution }) {
               activeIndex={activeIndex}
               onSelect={select}
               isNarrow={isNarrow}
+              panelSlot={isNarrow && active ? trySlot : undefined}
             />
           </Suspense>
         ) : (
@@ -147,7 +163,25 @@ function SolutionView({ solution }) {
         <LangToggle />
       </header>
 
-      {active && (
+      {active && isNarrow && (
+        <InfoSheet
+          content={active}
+          index={activeIndex}
+          total={hotspots.length}
+          lang={language}
+          open={sheetOpen}
+          tab={sheetTab}
+          hasTry={!!solution.model}
+          trySlot={setTrySlot}
+          onTab={pickTab}
+          onToggle={() => setSheetOpen((o) => !o)}
+          onClose={() => select(-1)}
+          onPrev={() => step(-1)}
+          onNext={() => step(1)}
+          onOpenInfographic={() => setLightbox(true)}
+        />
+      )}
+      {active && !isNarrow && (
         <InfoPanel
           content={active}
           index={activeIndex}

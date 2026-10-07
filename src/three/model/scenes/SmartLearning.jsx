@@ -38,7 +38,7 @@ export default {
   Component: SmartLearning,
   baked: true,
   base: BASE,
-  showroom: "school",
+  showroom: "library",
   Panel: LearningPanel,
   home: { position: [76, 66, 88], target: [-2, 9, -3] }, // high enough for the innovation tower
   maxDistance: 220,

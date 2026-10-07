@@ -38,6 +38,7 @@ export default {
   Component: SmartUtility,
   baked: true,
   base: BASE,
+  showroom: "energy",
   Panel: UtilityPanel,
   home: { position: [66, 60, 92], target: [0, 2, -2] },
   maxDistance: 240,

@@ -250,6 +250,22 @@
   outline-offset: 2px;
 }
 
+/* inside the phone sheet's Try it tab */
+:global([data-compact]) .dock {
+  position: static;
+  width: auto;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  animation: none;
+}
+
+:global([data-compact]) .head {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .pip {
     display: none;

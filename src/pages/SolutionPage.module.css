@@ -281,9 +281,21 @@
 
 @media (max-width: 900px) {
   .header {
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 14px 14px 30px;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 12px 26px;
+  }
+
+  .eyebrow,
+  .tagline {
+    display: none;
+  }
+
+  .titleBlock h1 {
+    font-size: 19px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .back span {
@@ -296,14 +308,6 @@
     justify-content: center;
   }
 
-  .titleBlock {
-    order: 3;
-    flex-basis: 100%;
-  }
-
-  .header > :last-child {
-    margin-left: auto;
-  }
 
   .dock {
     left: 12px;

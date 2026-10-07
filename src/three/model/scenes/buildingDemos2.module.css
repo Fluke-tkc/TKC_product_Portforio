@@ -8,6 +8,11 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* the phone sheet keeps only the controls */
+:global([data-compact]) .card {
+  display: none;
+}
+
 .cardHead {
   font: 600 11.5px/1.2 "Prompt", sans-serif;
   color: rgba(255, 255, 255, 0.75);

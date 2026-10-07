@@ -39,6 +39,7 @@ export default {
   Component: SmartCloud,
   baked: true,
   base: BASE,
+  showroom: "lounge",
   Panel: CloudPanel,
   home: { position: [66, 64, 92], target: [0, 8, -4] }, // high enough for the sphere on the Nexus tower
   maxDistance: 240,

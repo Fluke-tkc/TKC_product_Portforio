@@ -539,7 +539,7 @@ function TradeLog({ lang, on, styles: st }) {
     const id = setInterval(() => {
       const kw = -energyNow.grid;
       if (kw < 2) return;
-      setBlocks((b) => [{ n: (b[0]?.n ?? 18233) + 1, kw: Math.round(kw), to: b.length % 2 ? "Tower T1" : "Tower T2" }, ...b].slice(0, 3));
+      setBlocks((b) => [{ n: (b[0]?.n ?? 18233) + 1, kw: Math.round(kw), to: b.length % 2 ? "T1" : "T2" }, ...b].slice(0, 3));
     }, 2600);
     return () => clearInterval(id);
   }, [on]);
@@ -549,7 +549,7 @@ function TradeLog({ lang, on, styles: st }) {
     <ul className={st.log}>
       {blocks.map((b) => (
         <li key={b.n}>
-          <span>⛓ #{b.n.toLocaleString()}</span> {th ? `ขาย ${b.kw} kW → ${b.to} · ฿${(b.kw * 4.2).toFixed(0)}` : `${b.kw} kW → ${b.to} · ฿${(b.kw * 4.2).toFixed(0)}`} <b className={styles.ok}>✓</b>
+          <span>⛓ #{b.n.toLocaleString()}</span> {th ? `ขาย ${b.kw} kW → อาคาร ${b.to} · ฿${(b.kw * 4.2).toFixed(0)}` : `${b.kw} kW → Tower ${b.to} · ฿${(b.kw * 4.2).toFixed(0)}`} <b className={styles.ok}>✓</b>
         </li>
       ))}
     </ul>

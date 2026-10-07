@@ -23,9 +23,21 @@ function useIntro() {
   return v;
 }
 
+// On phones a tag near the edge would hang off the screen: keep its centre within the middle third horizontally
+// (tags are at most 64vw wide there), the height still follows the point it labels.
+const TAG_AT = new THREE.Vector3();
+function tagPosition(el, camera, size) {
+  const p = TAG_AT.setFromMatrixPosition(el.matrixWorld).project(camera);
+  const x = (p.x * 0.5 + 0.5) * size.width;
+  const y = (-p.y * 0.5 + 0.5) * size.height;
+  if (size.width > 900) return [x, y];
+  const m = size.width * 0.34;
+  return [Math.min(size.width - m, Math.max(m, x)), y];
+}
+
 export function Tag({ position, children }) {
   return (
-    <Html position={position} center zIndexRange={[9, 5]} style={{ pointerEvents: "none" }}>
+    <Html position={position} center calculatePosition={tagPosition} zIndexRange={[9, 5]} style={{ pointerEvents: "none" }}>
       <div className={styles.tag}>{children}</div>
     </Html>
   );

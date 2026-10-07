@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, OrbitControls } from "@react-three/drei";
@@ -169,6 +169,16 @@ function CameraRig({ home, focus, viewShift, autoRotate = true }) {
   return null;
 }
 
+// Panning may not carry the orbit target off the plinth: clamp it and move the camera back by the same overshoot.
+const OVER = new THREE.Vector3();
+function clampPan(controls, { x, z, y0, y1 }) {
+  const t = controls.target;
+  OVER.copy(t);
+  t.set(THREE.MathUtils.clamp(t.x, -x, x), THREE.MathUtils.clamp(t.y, y0, y1), THREE.MathUtils.clamp(t.z, -z, z));
+  OVER.sub(t);
+  if (OVER.lengthSq() > 1e-8) controls.object.position.sub(OVER);
+}
+
 // ---------- stage ----------
 
 export function ModelStage({ scene, hotspots, activeIndex, onSelect, isNarrow }) {
@@ -182,6 +192,12 @@ export function ModelStage({ scene, hotspots, activeIndex, onSelect, isNarrow })
   const camera = useThree((s) => s.camera);
   const size = useThree((s) => s.size);
   const activeId = activeIndex >= 0 ? hotspots[activeIndex].id : null;
+  // the half size of the plinth (plus a little) the orbit target must stay over; every hotspot view targets inside it
+  const panLimit = useMemo(() => {
+    const [bx, bz] = scene.base || [60, 60];
+    return { x: bx + 4, z: bz + 4, y0: (scene.standTop ?? -2.1) - 8, y1: 40 };
+  }, [scene]);
+  const onControlsChange = useCallback((e) => e?.target && clampPan(e.target, panLimit), [panLimit]);
 
   useEffect(() => {
     // intro: start high and far, then the rig glides to the home view
@@ -221,7 +237,10 @@ export function ModelStage({ scene, hotspots, activeIndex, onSelect, isNarrow })
 
   const pins = useMemo(() => hotspots.filter((h) => anchors[h.id]).map((h) => ({ id: h.id, title: h.title, position: (h.id === activeId && anchors[h.id].focusPin) || anchors[h.id].pin })), [hotspots, anchors, activeId]);
   const focus = (activeId && anchors[activeId]) || null;
-  const viewShift = !focus ? [0, 0] : isNarrow ? [0, size.height * 0.19] : [Math.min(420, size.width * 0.4) / 2 + 12, 0];
+  // keep the focused point clear of the info panel: beside it on desktop, above the phone sheet, or left of the
+  // sheet's column on a phone lying on its side (the same rule as the sheet's CSS)
+  const sideSheet = isNarrow && size.width > size.height && size.height <= 600;
+  const viewShift = !focus ? [0, 0] : sideSheet ? [Math.min(380, size.width * 0.46) / 2 + 8, 0] : isNarrow ? [0, size.height * 0.19] : [Math.min(420, size.width * 0.4) / 2 + 12, 0];
 
   useEffect(() => {
     // Only the hero structure hides pins behind it; raycasting the whole diorama every frame is wasteful.
@@ -275,6 +294,7 @@ export function ModelStage({ scene, hotspots, activeIndex, onSelect, isNarrow })
         maxDistance={maxDistance * (size.width < size.height ? 1.9 : 1)}
         minPolarAngle={0.12}
         maxPolarAngle={1.38}
+        onChange={onControlsChange}
       />
       <CameraRig home={home} focus={focus} viewShift={viewShift} autoRotate={scene.autoRotate} />
 

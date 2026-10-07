@@ -19,3 +19,16 @@
     transform: translateY(54px) scale(0.92);
   }
 }
+
+/* phones: tags wrap and shrink so they stay on screen */
+@media (max-width: 900px) {
+  .tag {
+    width: max-content;
+    max-width: 64vw;
+    padding: 6px 10px;
+    border-radius: 14px;
+    white-space: normal;
+    text-align: center;
+    font-size: 11.5px;
+  }
+}

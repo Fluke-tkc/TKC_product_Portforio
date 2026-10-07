@@ -42,6 +42,7 @@ export default {
   Panel: BuildingPanel,
   baked: true,
   base: BASE,
+  showroom: "room",
   home: { position: [84, 74, 98], target: [-2, 10, 0] },
   maxDistance: 230,
   sky: ["#3f7cc4", "#e6ecf1", "#b4c3d3"],

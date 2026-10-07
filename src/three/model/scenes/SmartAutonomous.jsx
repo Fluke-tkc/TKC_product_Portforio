@@ -35,6 +35,7 @@ export default {
   Component: SmartAutonomous,
   baked: true,
   base: BASE,
+  showroom: "lab",
   Panel: AutonomousPanel,
   home: { position: [72, 58, 82], target: [-2, 2, -2] },
   maxDistance: 230,
