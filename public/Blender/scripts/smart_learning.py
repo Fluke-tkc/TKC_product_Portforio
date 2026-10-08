@@ -45,6 +45,12 @@ JOISTS = (-14.0, -8.0, -2.0, 4.0, 10.0)  # roof joists, one over each front colu
 Z = 7.2
 PODIUM = (-17.0, 13.0, -5.0, 13.0)  # x0, x1, y0, y1
 TOWER = (27.0, 17.0, 8.0, 6.5)  # innovation tower: x, y, w, d
+# Bus bay cut into the sidewalk: 24 m at full depth with tapers in (10 m) and out (8 m), so the 9 m bus pulls in and
+# out on smooth S-curves without its body crossing the kerb (the swept body was checked against the kerb with both
+# axles on the path). It stops BUS_WAIT s to let students off and on.
+BAY = (-22.0, -12.0, 12.0, 20.0)  # x: taper start, full depth from, full depth to, taper end
+KERB_Y, BAY_Y, BUS_Y = -21.0, -17.6, -19.25  # road edge, back of the bay, centre line of the stopped bus
+BUS_V, BUS_EASE, BUS_WAIT = 7.0, 12.0, 9.0  # m/s, braking / pulling-away distance, seconds at the stop
 
 
 def rect(x0, y0, x1, y1):
@@ -295,7 +301,7 @@ def podium_commons():
     h = Z - 0.9 - 0.16
     box("com_floor", (x1 - x0, y1 - y0, 0.14), ((x0 + x1) / 2, (y0 + y1) / 2, 0.16), "terrazzo", bevel=0)
     box("com_back", (x1 - x0, 0.3, h), ((x0 + x1) / 2, y1 - 0.15, 0.16), "hosp_white", bevel=0.02)
-    for name, gx, gy, w, d in (("com_glass_f", (x0 + x1) / 2, y0, x1 - x0, 0.04), ("com_glass_l", x0, (y0 + y1) / 2, 0.04, y1 - y0), ("com_glass_r", x1, (y0 + y1) / 2, 0.04, y1 - y0)):
+    for name, gx, gy, w, d in (("com_glass_fl", (x0 - 0.9) / 2, y0, -0.9 - x0, 0.04), ("com_glass_fr", (x1 + 0.9) / 2, y0, x1 - 0.9, 0.04), ("com_glass_l", x0, (y0 + y1) / 2, 0.04, y1 - y0), ("com_glass_r", x1, (y0 + y1) / 2, 0.04, y1 - y0)):
         box(name, (w, d, h - 0.2), (gx, gy, 0.3), "glass", bevel=0)
     for k in range(16):
         x = x0 + k * (x1 - x0) / 15
@@ -308,6 +314,7 @@ def podium_commons():
     L.text_mesh("com_sign", "LEARNING COMMONS", (-9.0, y0 - 0.06, 4.6), 0.5, 0.04, "purple", resolution=3)
     for k, x in enumerate((-1.0, 1.0)):  # main doors, parted
         box(f"com_door{k}", (1.4, 0.05, 2.8), (x * 1.6, y0 - 0.2, 0.3), "glass", bevel=0)
+    box("com_path", (2.6, y0 - 0.15 + 8.0, 0.18), (0, (y0 - 0.15 - 8.0) / 2, 0), "terrazzo", bevel=0)  # plaza -> doors
     # reception with the robot host
     M.curved_desk("com_desk", (0.0, 3.0), 1.4, 1.9, math.radians(200), math.radians(340), 0.3)
     M.humanoid_robot("com_robot", (0.0, 3.4, 0.3), rot_z=-math.pi / 2)
@@ -405,12 +412,14 @@ def campus():
     for i in range(9):
         box(f"zebra{i}", (0.55, 5.0, 0.005), (18.0 + i * 1.1, ROAD_Y, 0.021), "paint_white", bevel=0)
     # sidewalk with a bus bay cut into it, plaza, lawn
-    for name, x0, x1 in (("sidewalk_w", -BASE[0], -9.25), ("sidewalk_e", 9.25, BASE[0])):
-        box(name, (x1 - x0, 5.0, 0.16), ((x0 + x1) / 2, -18.5, 0), "paving", bevel=0.03)
-    box("sidewalk_bay", (18.5, 1.6, 0.16), (0, -16.8, 0), "paving", bevel=0.03)
-    box("bus_bay", (18.5, 3.4, 0.02), (0, -19.3, 0), "asphalt", bevel=0)
-    box("bus_bay_paint", (16.0, 0.12, 0.005), (0, -17.7, 0.02), "flower_yellow", bevel=0)
-    L.text_mesh("bus_bay_txt", "BUS", (0.0, -19.3, 0.021), 1.2, 0.004, "flower_yellow", rot=(0, 0, 0))
+    t0, f0, f1, t1 = BAY
+    A.solid("sidewalk", [(-BASE[0], KERB_Y), (t0, KERB_Y), (f0, BAY_Y), (f1, BAY_Y), (t1, KERB_Y), (BASE[0], KERB_Y), (BASE[0], -16.0), (-BASE[0], -16.0)], 0, 0.16, "paving", bevel=0.03)
+    A.solid("bus_bay", [(t0, KERB_Y), (t1, KERB_Y), (f1, BAY_Y), (f0, BAY_Y)], 0, 0.02, "asphalt")
+    box("bus_bay_paint", (f1 - f0 - 1.0, 0.12, 0.005), (0, BAY_Y - 0.1, 0.02), "flower_yellow", bevel=0)
+    L.text_mesh("bus_bay_txt", "BUS", (-8.0, -19.3, 0.021), 1.2, 0.004, "flower_yellow", rot=(0, 0, 0))
+    cyl("busstop_pole", 0.04, 2.7, (6.6, -16.35, 0.16), "silver", verts=10)
+    box("busstop_plate", (0.6, 0.03, 0.45), (6.6, -16.39, 2.4), "accent_blue", bevel=0.01)
+    L.text_mesh("busstop_txt", "BUS STOP", (6.6, -16.41, 2.56), 0.12, 0.01, "white", resolution=3)
     box("plaza", (2 * BASE[0], 8.0, 0.16), (0, -12.0, 0), "terrazzo", bevel=0.03)
     for i in range(22):
         box(f"plaza_stripe{i}", (0.25, 7.8, 0.004), (-40 + i * 3.8, -12.0, 0.16), ("sky_blue", "flower_yellow", "flower_pink", "lime")[i % 4], bevel=0)
@@ -430,10 +439,12 @@ def campus():
     for i, (x0, y0) in enumerate(((-38.0, -13.9), (-26.0, -13.9), (14.0, -13.9), (28.0, -13.9))):
         M.flower_bed(f"bed_out{i}", x0, y0, x0 + 5.0, y0 + 1.4, 0.16, seed=620 + i)
     for k, x in enumerate(range(-38, 42, 8)):
-        if not -10 < x < 10:
+        if not -20 < x < 16:  # clear of the bus bay
             A.tree(f"stree{k}", (x, -17.5, 0.16), h=6.0 + rnd.random(), spread=0.9, seed=630 + k)
-        if not -10 < x + 4 < 10:
+        if not BAY[0] - 1 < x + 4 < BAY[3] + 1:
             L.street_light(f"lamp{k}", (x + 4, -20.6, 0.16), rot_z=-math.pi / 2, h=6.0)
+    for k, x in enumerate((-16.0, -6.0, 12.0)):  # along the bay the lamps stand at the back of the sidewalk
+        L.street_light(f"bay_lamp{k}", (x, -16.45, 0.16), rot_z=-math.pi / 2, h=6.0)
     for k, (x, y) in enumerate(((-38, 18), (38, 16), (39.5, 20.5), (-39, 8), (-37.5, 26.5))):
         A.tree(f"gtree{k}", (x, y, 0.16), h=6.5 + rnd.random() * 2, spread=1.0, seed=650 + k)
     # basketball court with bleachers and a game on
@@ -620,31 +631,155 @@ def life():
     with group("move"):  # the basketball bouncing on the court
         ball = sphere("ball", 0.12, (28.4, 3.0, 0.31), "court_orange", subdiv=2)
         ball["bob"], ball["bob_amp"], ball["bob_speed"], ball["bounce"] = 0.0, 0.9, 5.0, 1
-    traffic()
+    riders(*traffic())
+
+
+def s_curve(x0, x1, y0, y1, step=1.0):
+    """Lane change with flat ends (quintic smootherstep), a point every ~step m."""
+    n = max(2, round(abs(x1 - x0) / step))
+    return [(x0 + (x1 - x0) * k / n, y0 + (y1 - y0) * (k / n) ** 3 * ((k / n) * (6 * (k / n) - 15) + 10)) for k in range(n + 1)]
+
+
+def timeline(path, speed, stops, ease):
+    """Mirror of timeline() in src/three/model/baked.jsx: a mover brakes to each stop (d, wait) over `ease` m,
+    waits and pulls away again. Returns the parts (t0, dur, d0, D, e0, e1; D = 0 for a wait) and the cycle time."""
+    total = L.path_length(path, False)
+    at = {(total if total - d < 1e-3 else d): w for d, w in stops}
+    marks = sorted({0.0, total, *at})
+    parts, t = [], 0.0
+    for i, d0 in enumerate(marks):
+        if d0 in at:
+            parts.append((t, at[d0], d0, 0.0, 0.0, 0.0))
+            t += at[d0]
+        if i + 1 < len(marks):
+            D = marks[i + 1] - d0
+            e0 = min(ease, D / 2) if d0 in at else 0.0
+            e1 = min(ease, D / 2) if marks[i + 1] in at else 0.0
+            parts.append((t, (D + e0 + e1) / speed, d0, D, e0, e1))
+            t += (D + e0 + e1) / speed
+    return parts, t
+
+
+def distance_at(parts, cycle, speed, time):
+    tt = time % cycle
+    for t0, dur, d0, D, e0, e1 in parts:
+        if tt < t0 + dur:
+            break
+    if not D:
+        return d0
+    lt = tt - t0
+    if lt < 2 * e0 / speed:
+        return d0 + speed * speed * lt * lt / (4 * e0)
+    if lt > dur - 2 * e1 / speed:
+        return d0 + D - speed * speed * (dur - lt) ** 2 / (4 * e1)
+    return d0 + e0 + speed * (lt - 2 * e0 / speed)
+
+
+def axle_pose(path, d, front=2.6, rear=2.7):
+    """Both axles on the path (as baked.jsx places a mover with `axles`): centre and heading."""
+    total = L.path_length(path, False)
+    (fx, fy), _ = L.path_point(path, False, min(d + front, total - 1e-6))
+    (rx, ry), _ = L.path_point(path, False, max(d - rear, 0.0))
+    h = math.atan2(fy - ry, fx - rx)
+    return rx + math.cos(h) * rear, ry + math.sin(h) * rear, h
+
+
+def outline(x, y, h, hl, hw, n=4):
+    c, s = math.cos(h), math.sin(h)
+    pts = [(-hl + 2 * hl * i / n, -hw) for i in range(n + 1)] + [(-hl + 2 * hl * i / n, hw) for i in range(n + 1)]
+    return [(x + c * px - s * py, y + s * px + c * py) for px, py in pts]
+
+
+def bus_gap(lane, bus_path, parts, period, speed):
+    """Phase (m) for a through-car on `lane` (as long as the bus's round) that keeps it furthest from the bus."""
+    def clearance(phase):
+        worst = 99.0
+        for k in range(int(period / 0.1)):
+            t = k * 0.1
+            bx, by, bh = axle_pose(bus_path, distance_at(parts, period, speed, t))
+            (cx, cy), _ = L.path_point(lane, False, phase + speed * t)
+            if abs(bx) > BASE[0] + 6 or abs(cx) > BASE[0] + 4 or abs(bx - cx) > 9 or abs(by - cy) > 4:
+                continue
+            for px, py in outline(bx, by, bh, 4.62, 1.22):
+                worst = min(worst, max(abs(px - cx) - 2.2, abs(py - cy) - 0.88))
+        return worst
+
+    phase = max(range(0, int(L.path_length(lane, False))), key=clearance)
+    return phase, clearance(phase)
 
 
 def traffic():
-    """School bus pulls through the bus bay; all vehicles at one speed, through cars phased clear of it."""
-    v = 7.0
+    """The school bus pulls into the bay on S-curves, stops to let students off and on, and pulls out again. Through
+    cars run open lanes as long as the bus's round, so they share its period and keep the gap they start in."""
     lane_e, lane_w = ROAD_Y + 1.8, ROAD_Y - 1.8
     ex = BASE[0] + 7
-    loop = A.fillet_poly([(-ex, lane_e), (-13.5, lane_e), (-9.5, -19.3), (9.5, -19.3), (13.5, lane_e), (ex, lane_e), (ex, lane_w), (-ex, lane_w)], 3.0, 6)
-    total = L.path_length(loop, True)
-    n = max(1, int(total // (2 * (BASE[0] + 3))))
-    a = total / (2 * n)
-    loopers = [i * total / n for i in range(n)]
+    pts = [(-ex, lane_e)] + s_curve(-26.7, -2.7, lane_e, BUS_Y) + s_curve(2.6, 24.6, BUS_Y, lane_e) + [(ex, lane_e)]
+    path = [(round(x, 3), round(y, 3)) for x, y in pts]
+    stop = round(L.path_length(path[: path.index((-2.7, BUS_Y)) + 1], False) + 2.7, 3)  # bus centre at x = 0
+    parts, period = timeline(path, BUS_V, [(stop, BUS_WAIT)], BUS_EASE)
+    t_arr = next(p[0] for p in parts if p[2] == stop and not p[3])
     with group("move"):  # unique prefix: _parts() gathers by name, and "bus_" would also catch the bus bay
         E.school_bus("schoolbus", (0, 0, 0), 0.0)
-    bus = L.rigid(L._parts("schoolbus"), "schoolbus")
+    bits = L._parts("schoolbus")
+    leaves = []
+    for k, (hinge, fold) in enumerate(((3.32, -1), (4.18, 1))):  # door leaves fold into the stairwell
+        leaf = [o for o in bits if o.name.startswith(f"schoolbus_door{k}_")]
+        bits = [o for o in bits if o not in leaf]
+        leaf = L.rigid(leaf, f"schoolbus_door{k}", (hinge, 1.2, 0.0))
+        leaf["fold"] = fold
+        leaves.append(leaf)
+    bus = L.rigid(bits, "schoolbus")
+    for leaf in leaves:
+        leaf.parent = bus
     bus["blob"] = [9.6, 2.9]
-    L._on_path(bus, "drive", v, loop, True, loopers[0], 0.02)
-    for i, at in enumerate(loopers[1:]):
-        L.driver(f"car_loop{i}", loop, v, at, closed=True, paint="flower_purple")
-    lanes = {"east": [(-a, lane_e), (a, lane_e)], "west": [(a, lane_w), (-a, lane_w)]}
-    for i, (key, lane) in enumerate(lanes.items()):
-        phase, gap = L.best_phase(lane, loop, loopers, BASE[0])
-        print(f"traffic {key}: phase {phase} clearance {gap:.1f} m")
-        L.driver(f"car_{key}", lane, v, phase, closed=False, paint=("sky_blue", "robot_white")[i], kind=("car", "van")[i])
+    L._on_path(bus, "drive", BUS_V, path, False, 0.0, 0.02)
+    L.place(bus, (0.0, BUS_Y, 0.02), 0.0, stops=[stop, BUS_WAIT], ease=BUS_EASE, axles=[2.6, 2.7], t_at=0.0)  # vertex light baked in the bay
+    span = round(BUS_V * period, 3)
+    east = [(-ex, lane_e), (-ex + span, lane_e)]
+    phase, gap = bus_gap(east, path, parts, period, BUS_V)
+    print(f"bus: round {period:.2f} s, at the stop {t_arr:.2f} s; car_east phase {phase} m, clearance {gap:.2f} m")
+    L.driver("car_east", east, BUS_V, phase, closed=False, paint="sky_blue")
+    west = [(ex, lane_w), (ex - span, lane_w)]
+    for i, (paint, kind) in enumerate((("robot_white", "van"), ("flower_purple", "car"))):
+        L.driver(f"car_west{i}", west, BUS_V, i * span / 2, closed=False, paint=paint, kind=kind)
+    return t_arr, period
+
+
+def riders(t_arr, period):
+    """Students riding the bus. Each gets off, walks into the Learning Commons (the robot host, then the cafe),
+    comes back out to the stop and gets on again four buses later; at every stop two get off and two get on. While riding they are
+    hidden (the bus has its own seated students) - they appear and vanish inside the stairwell behind the closed door."""
+    spots = ((3.75, BUS_Y + 0.9, 0.56), (3.75, BUS_Y + 0.45, 0.76))  # in the stairwell: lower step, upper step
+    door = (3.75, BUS_Y + 1.27, 0.5)
+    speed, ease, rounds = 1.15, 0.4, 4  # the walk takes a little over three bus rounds
+    for j, o in enumerate((-0.2, 0.2)):
+        wx = (5.3, 4.7)[j]  # j = 1 waits nearer the door: it boards first, to the upper step
+        route = [spots[j], door, (3.75, -17.3, 0.16), (3.1 + o, -16.2, 0.16), (1.6 + o, -14.0, 0.16), (1.0 + o, -9.0, 0.16),
+                 (0.4 + o * 0.6, -6.6, 0.18), (0.2 + o * 0.6, -5.0, 0.3), (0.1 + o, -3.2, 0.3), (o * 1.2, 0.45, 0.3),  # robot host
+                 (-2.6 + o, 1.0, 0.3), (-2.6 + o, 5.0, 0.3), (1.0, 8.6 + o, 0.3), (6.8 + o, 9.9, 0.3), (6.8 + o, 10.85, 0.3),  # cafe
+                 (6.3 + o, 9.4, 0.3), (2.75 + o * 0.5, 7.0, 0.3), (2.75 + o * 0.5, 0.2, 0.3), (1.2 + o * 0.6, -1.6, 0.3),
+                 (0.55 + o * 0.6, -5.0, 0.3), (0.9 + o * 0.6, -6.6, 0.18), (2.0 + o, -9.0, 0.16), (3.0 + o, -14.0, 0.16),
+                 (wx, -16.0, 0.16), (wx, -16.9, 0.16), (3.75, -17.45, 0.16), door, spots[j]]  # waits at the kerb, gets on
+        path = [(round(x, 3), round(y, 3)) for x, y, _ in route]
+        cum = [0.0]
+        for a, b in zip(path, path[1:]):
+            cum.append(cum[-1] + math.hypot(b[0] - a[0], b[1] - a[1]))
+        d_host, d_cafe, d_kerb, total = (round(cum[i], 3) for i in (9, 14, 24, len(path) - 1))
+        # end wait: from getting on (door closes at BUS_WAIT - 0.6) to getting off one round later
+        w_end = period - BUS_WAIT + 2.5 + 2.4 * j
+        _, walk = timeline(path, speed, [(d_host, 3.0), (d_cafe, 0.0001), (d_kerb, 9.0), (total, w_end)], ease)
+        w_cafe = rounds * period - walk  # the cafe wait takes up the rest of the rounds
+        print(f"rider {j}: walking {walk - 12.0 - w_end:.1f} s, at the cafe {w_cafe:.1f} s")
+        assert w_cafe > 2.0, "route too long for the bus rounds"
+        stops = [d_host, 3.0, d_cafe, round(w_cafe, 3), d_kerb, 9.0, total, round(w_end, 3)]
+        cycle = rounds * period
+        hide = [cycle - w_end + 0.5 + 1.2 * j, cycle - (1.2 + 1.2 * j)]  # behind the closed door
+        for k in range(rounds):  # one pair gets off at every stop, each pair every `rounds` stops
+            name = f"rider{j}{k}"
+            ob = L.walker(name, path, speed, 0.0, closed=False, seed=990 + rounds * j + k, z=0.16, outfit=("student", "student2")[(j + k) % 2], h=1.55 + 0.04 * k)
+            t_at = -(t_arr + 1.5 + 1.2 * j + k * period) % cycle
+            L.place(ob, (18.0 + 1.0 * (rounds * j + k), -14.4, 0.16), 0.0, stops=stops, ease=ease, t_at=round(t_at, 3),
+                    hide=[round(h, 3) for h in hide], path_z=[z for _, _, z in route])  # placed in the open for the light bake
 
 
 # ---------------------------------------------------------------- light, output

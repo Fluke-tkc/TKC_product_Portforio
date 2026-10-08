@@ -7,6 +7,8 @@ const DIR = "/models/baked/smart_cybersecurity";
 const V = "?v=2"; // bump after every re-bake so open tabs and caches fetch the new model
 const BASE = [40, 31]; // half size of the plinth: moving cars are cut off where they leave it
 
+const SUN = [40, 0.55, -0.83]; // the bake sun (elevation, Blender xy direction), lights the normal maps
+
 // Camera for each hotspot (three.js axes: x right, y up, +z towards the street). The SOC, threat intelligence,
 // cyber range and consulting rooms are on the command deck (floor 10 m); the data hall is in the podium below it.
 const views = {
@@ -26,6 +28,7 @@ function SmartCybersecurity({ onAnchors, activeId }) {
     <BakedModel
       url={`${DIR}.glb${V}`}
       lightmaps={{ building: `${DIR}_building.webp${V}`, site: `${DIR}_site.webp${V}`, tower: `${DIR}_tower.webp${V}` }}
+      sun={SUN}
       intensity={2}
       clip={BASE}
       views={views}

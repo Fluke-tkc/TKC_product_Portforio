@@ -4,8 +4,10 @@ import { BakedModel } from "../baked";
 import { UtilityPanel, UtilityReactions } from "./utilityDemos";
 
 const DIR = "/models/baked/smart_utility";
-const V = "?v=1"; // bump after every re-bake so open tabs and caches fetch the new model
+const V = "?v=2"; // bump after every re-bake so open tabs and caches fetch the new model
 const BASE = [44, 33]; // half size of the plinth: through traffic is cut off where it leaves it
+
+const SUN = [42, 0.55, -0.83]; // the bake sun (elevation, Blender xy direction), lights the normal maps
 
 // Camera for each hotspot (three.js axes: x right, y up, +z towards the street).
 const views = {
@@ -24,6 +26,7 @@ function SmartUtility({ onAnchors, activeId }) {
     <BakedModel
       url={`${DIR}.glb${V}`}
       lightmaps={{ building: `${DIR}_building.webp${V}`, homes: `${DIR}_homes.webp${V}`, site: `${DIR}_site.webp${V}`, grid: `${DIR}_grid.webp${V}` }}
+      sun={SUN}
       intensity={2}
       clip={BASE}
       views={views}

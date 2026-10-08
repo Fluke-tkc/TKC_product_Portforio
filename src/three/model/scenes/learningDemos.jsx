@@ -56,7 +56,8 @@ function PhoneLinks({ movers }) {
       const u = (clock.elapsedTime / 2.6 + i * 0.37) % 1;
       p.lerpVectors(a, b, u);
       p.y += Math.sin(u * Math.PI) * 6;
-      m4.makeScale(1, 1, 1).setPosition(p);
+      const s = w.visible ? 1 : 0; // bus riders are hidden while on board
+      m4.makeScale(s, s, s).setPosition(p);
       ref.current.setMatrixAt(i, m4);
     });
     ref.current.instanceMatrix.needsUpdate = true;

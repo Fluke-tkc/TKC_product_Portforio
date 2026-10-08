@@ -7,6 +7,8 @@ const DIR = "/models/baked/smart_hospital";
 const V = "?v=2"; // bump after every re-bake so open tabs and caches fetch the new model
 const BASE = [40, 31]; // half size of the plinth: moving cars are cut off where they leave it
 
+const SUN = [36, 0.62, -0.78]; // the bake sun (elevation, Blender xy direction), lights the normal maps
+
 // Camera for each hotspot (three.js axes: x right, y up, +z towards the street).
 const views = {
   "data-analytics": { position: [-6, 15.5, 2], target: [-20, 7.2, -16] },
@@ -23,6 +25,7 @@ function SmartHospital({ onAnchors, activeId }) {
     <BakedModel
       url={`${DIR}.glb${V}`}
       lightmaps={{ building: `${DIR}_building.webp${V}`, site: `${DIR}_site.webp${V}`, tower: `${DIR}_tower.webp${V}` }}
+      sun={SUN}
       intensity={2}
       clip={BASE}
       views={views}

@@ -4,8 +4,10 @@ import { BakedModel } from "../baked";
 import { LearningPanel, LearningReactions } from "./learningDemos";
 
 const DIR = "/models/baked/smart_learning";
-const V = "?v=4"; // bump after every re-bake so open tabs and caches fetch the new model
+const V = "?v=5"; // bump after every re-bake so open tabs and caches fetch the new model
 const BASE = [42, 32]; // half size of the plinth: moving vehicles are cut off where they leave it
+
+const SUN = [30, 0.72, 0.62]; // the bake sun (elevation, Blender xy direction), lights the normal maps
 
 // Camera for each hotspot (three.js axes: x right, y up, +z towards the street). The hall is lifted 7.2 m onto
 // the Learning Commons (learningNetworks HALL_Z) and now has a glass roof with a diagrid over joists at y 14.6, so the
@@ -24,6 +26,7 @@ function SmartLearning({ onAnchors, activeId }) {
     <BakedModel
       url={`${DIR}.glb${V}`}
       lightmaps={{ building: `${DIR}_building.webp${V}`, site: `${DIR}_site.webp${V}`, tower: `${DIR}_tower.webp${V}` }}
+      sun={SUN}
       intensity={2}
       clip={BASE}
       views={views}

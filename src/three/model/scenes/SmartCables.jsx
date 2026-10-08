@@ -6,6 +6,8 @@ import { CablesPanel, CablesReactions } from "./cablesDemos";
 const DIR = "/models/baked/smart_cables";
 const BASE = [40, 34]; // half size of the plinth: moving cars are cut off where they leave it
 
+const SUN = [40, 0.62, -0.78]; // the bake sun (elevation, Blender xy direction), lights the normal maps
+
 // Camera for each hotspot (three.js axes: x right, y up, +z towards the viewer).
 const views = {
   "underground-cables": { position: [1, 4, 50], target: [-6.5, -0.5, 31], pin: [-11, 1, 32] }, // front section: cable ends right of the dock, the cross-section above them; label over the street
@@ -18,6 +20,7 @@ function SmartCables({ onAnchors, activeId }) {
     <BakedModel
       url={`${DIR}.glb`}
       lightmaps={{ building: `${DIR}_building.webp`, site: `${DIR}_site.webp` }}
+      sun={SUN}
       intensity={2}
       clip={BASE}
       views={views}

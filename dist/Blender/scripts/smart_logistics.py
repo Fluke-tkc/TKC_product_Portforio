@@ -274,7 +274,7 @@ def site():
     for k, x in enumerate(range(-40, 22, 8)):
         A.tree(f"stree{k}", (x, -18.6, 0.16), h=6.0 + rnd.random(), spread=0.9, seed=210 + k)
         L.street_light(f"lamp{k}", (x + 4, -22.6, 0.16), rot_z=-math.pi / 2, h=6.0)
-    for k, (x, y) in enumerate(((-38, 4), (-38, 18), (-36, 28), (-22, 27), (-8, 27), (40, 10), (40, -4), (41, 22))):
+    for k, (x, y) in enumerate(((-38, 4), (-38, 18), (-33, 23.5), (-19, 23.5), (-5, 23.5), (40, 10), (40, -4), (41, 22))):
         A.tree(f"gtree{k}", (x, y, 0.16), h=6.5 + rnd.random() * 2, spread=1.0, seed=230 + k)
     # yard: EV vans, containers, factory behind
     for k, y in enumerate((-4.8, -7.6, -10.4, -13.2)):
@@ -289,12 +289,10 @@ def site():
     box("factory_band", (12.04, 5.04, 0.5), (34.0, 29.5, 6.5), "container_red", bevel=0)
     G.chimney("chimney_a", 31.5, 30.2)
     G.chimney("chimney_b", 36.5, 30.2, h=19.0)
-    for i, (x, y, w, d, h, mat) in enumerate(((-36, 29.5, 8, 5, 34, "tower_blue"), (-24, 30.0, 10, 5, 46, "tower_teal"), (-10, 29.5, 9, 5, 30, "tower_blue"))):
-        pts = A.outline(A.rect_poly(x, y, w, d), 1.0)
-        A.solid(f"tower{i}", pts, 0.16, h, mat)
-        A.mullions(f"tower{i}_mull", A.outline(A.rect_poly(x, y, w + 0.1, d + 0.1), 1.05), 0.16, h, spacing=1.6, size=(0.08, 0.12), mat="tower_frame")
-        for zz in range(4, int(h), 4):
-            A.ring(f"tower{i}_band{zz}", A.outline(A.rect_poly(x, y, w + 0.2, d + 0.2), 1.1), pts, zz, 0.25, "tower_frame")
+    # back row: automated high-bay warehouse, logistics control tower with a drone port, cold-chain store
+    G.asrs_warehouse("tower0", -36, 29.5, 9, 5, 27, seed=7)
+    G.hub_tower("tower1", -24, 30.0, 10, 5, 46, "tower_teal", "TKC LOGISTICS", "truck_teal", "screen_route", seed=8)
+    G.cold_store("tower2", -10, 29.5, 11, 5, 13)
 
 
 # ---------------------------------------------------------------- life

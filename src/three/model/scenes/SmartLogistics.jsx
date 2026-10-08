@@ -7,6 +7,8 @@ const DIR = "/models/baked/smart_logistics";
 const V = "?v=3"; // bump after every re-bake so open tabs and caches fetch the new model
 const BASE = [44, 33]; // half size of the plinth: moving trucks are cut off where they leave it
 
+const SUN = [38, 0.62, -0.78]; // the bake sun (elevation, Blender xy direction), lights the normal maps
+
 // Camera for each hotspot (three.js axes: x right, y up, +z towards the street).
 const views = {
   "smart-scan": { position: [-8, 12, 13], target: [-7.5, 1.4, 0] }, // between the front columns: tunnel mid-view, packing station a1 behind it
@@ -22,6 +24,7 @@ function SmartLogistics({ onAnchors, activeId }) {
     <BakedModel
       url={`${DIR}.glb${V}`}
       lightmaps={{ building: `${DIR}_building.webp${V}`, site: `${DIR}_site.webp${V}` }}
+      sun={SUN}
       intensity={2}
       clip={BASE}
       views={views}

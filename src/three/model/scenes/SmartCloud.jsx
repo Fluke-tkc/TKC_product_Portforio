@@ -7,6 +7,8 @@ const DIR = "/models/baked/smart_cloud";
 const V = "?v=5"; // bump after every re-bake so open tabs and caches fetch the new model
 const BASE = [44, 33]; // half size of the plinth: through traffic is cut off where it leaves it
 
+const SUN = [42, 0.55, -0.83]; // the bake sun (elevation, Blender xy direction), lights the normal maps
+
 // Camera for each hotspot (three.js axes: x right, y up, +z towards the street). The campus is a hub and its
 // spokes: the AI Nexus tower in the middle, the sky ring at 7.8 m with skybridges to the data centre (left),
 // Big Data (right) and the crescent contact centre (back).
@@ -25,6 +27,7 @@ function SmartCloud({ onAnchors, activeId }) {
     <BakedModel
       url={`${DIR}.glb${V}`}
       lightmaps={{ building: `${DIR}_building.webp${V}`, campus: `${DIR}_campus.webp${V}`, tower: `${DIR}_tower.webp${V}`, site: `${DIR}_site.webp${V}` }}
+      sun={SUN}
       intensity={2}
       clip={BASE}
       views={views}

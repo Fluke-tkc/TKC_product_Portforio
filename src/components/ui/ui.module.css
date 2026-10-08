@@ -399,8 +399,8 @@
 }
 
 .lightbox img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: min(74vw, 1240px);
+  max-height: 74vh;
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
   cursor: default;
@@ -410,6 +410,12 @@
   position: absolute;
   top: 18px;
   right: 18px;
+}
+
+@media (max-width: 900px) {
+  .lightbox img {
+    max-width: 94vw; /* phones: the screen is small already */
+  }
 }
 
 @keyframes fade {

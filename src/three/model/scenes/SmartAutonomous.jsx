@@ -7,6 +7,8 @@ const DIR = "/models/baked/smart_autonomous";
 const V = "?v=4"; // bump after every re-bake so open tabs and caches fetch the new model
 const BASE = [44, 33]; // half size of the plinth: through traffic is cut off where it leaves it
 
+const SUN = [36, 0.62, -0.78]; // the bake sun (elevation, Blender xy direction), lights the normal maps
+
 // Camera for each hotspot (three.js axes: x right, y up, +z towards the viewer).
 const views = {
   "security-systems": { position: [0, 28, 48], target: [-26, 0, 22] }, // the compound, the control room and the fence, clear of the dock
@@ -21,6 +23,7 @@ function SmartAutonomous({ onAnchors, activeId }) {
     <BakedModel
       url={`${DIR}.glb${V}`}
       lightmaps={{ building: `${DIR}_building.webp${V}`, site: `${DIR}_site.webp${V}` }}
+      sun={SUN}
       intensity={2}
       clip={BASE}
       views={views}

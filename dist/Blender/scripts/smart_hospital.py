@@ -3,7 +3,9 @@
 A cut-away two-storey hospital hall (front wall and roof removed) in a vivid palette: sky-blue tiled
 atrium with a holographic management hub, curved reception, telemedicine workstations and a waiting
 lounge; an L-shaped upper floor with the data analytics centre, CT diagnostics, a patient ward and a
-lab; automatic entrances, an ER ambulance bay, a delivery drone and a street with traffic.
+lab; automatic entrances, an ER ambulance bay, a delivery drone and a street with traffic. Behind it the
+rest of the campus: inpatient tower with helipad and air ambulance, outpatient tower with rooftop solar,
+skybridge, energy centre (transformer, switchboard, generators, battery, liquid oxygen) and a car park.
 
 blender -b --factory-startup --python public/Blender/scripts/smart_hospital.py
 Coordinates: Z up, metres. The viewer looks in from the front-right (+X, -Y).
@@ -109,7 +111,7 @@ def mezzanine():
     # fascia branding over reception
     L.text_mesh("brand_txt", "SMART HOSPITAL", (-3.4, 11.94, MEZ_Z + 0.02), 0.62, 0.06, "accent_blue")
     box("brand_cross_v", (0.22, 0.06, 0.62), (-8.9, 11.94, MEZ_Z + 0.02), "cross_red", bevel=0.01)
-    box("brand_cross_h", (0.62, 0.06, 0.22), (-8.9, 11.94, MEZ_Z + 0.22), "cross_red", bevel=0.01)
+    box("brand_cross_h", (0.62, 0.05, 0.22), (-8.9, 11.945, MEZ_Z + 0.22), "cross_red", bevel=0.01)
     # columns carrying the slab edge
     for i, (x, y) in enumerate(((-19.0, 12.0), (-11.0, 12.0), (-3.0, 12.0), (5.0, 12.0), (11.0, 12.0), (HX1 - 0.4, 12.0), (-19.0, 4.0), (-19.0, -4.0), (-19.0, HY0 + 0.4))):
         cyl(f"column{i}", 0.34, MEZ_Z - FLOOR, (x, y, FLOOR), "hosp_white", verts=28)
@@ -403,7 +405,6 @@ def er_bay():
     for o in [o for o in L.COL.objects if o.name.startswith("amb_parked_lb_")]:
         o["grp"], o["kind"] = "move", "move"
         o["blink"] = 0.5 if "blue" in o.name else 0.0
-    L.human("paramedic_wait", (HX1 + 1.3, -8.0, 0.16), rot_z=math.pi / 2, seed=210, outfit="paramedic")
 
 
 # ---------------------------------------------------------------- site
@@ -431,7 +432,8 @@ def site():
             A.tree(f"stree{k}", (x, -18.2, 0.16), h=6.2 + rnd.random(), spread=0.9, seed=310 + k)
         if not HX1 < x + 4 < HX1 + 15:
             L.street_light(f"lamp{k}", (x + 4, -20.6, 0.16), rot_z=-math.pi / 2, h=6.0)
-    for k, (x, y) in enumerate(((-36, -6), (-36, 8), (-36, 22), (-22, 23.5), (-4, 25.5), (16.5, 23.5), (36, 22), (37, 12))):
+    box("campus_paving", (77.2, 6.1, 0.16), (0, 27.45, 0), "paving", bevel=0.02)
+    for k, (x, y) in enumerate(((-36, -6), (-36, 8), (-1.0, 27.4), (17.8, 27.6), (37, 12))):
         A.tree(f"gtree{k}", (x, y, 0.16), h=6.5 + rnd.random() * 2, spread=1.0, seed=330 + k)
     for i, (x0, y0) in enumerate(((-34.0, -15.6), (-24.0, -15.6), (-6.0, -15.6), (10.0, -15.6), (-38.8, -6.0), (-38.8, 5.0))):
         M.flower_bed(f"bed_out{i}", x0, y0, x0 + (4.0 if i < 4 else 1.4), y0 + (1.4 if i < 4 else 4.0), 0.16, seed=340 + i)
@@ -442,14 +444,6 @@ def site():
     L.text_mesh("monument_txt", "SMART HOSPITAL", (-29.4, -12.02, 0.62), 0.5, 0.05, "accent_blue")
     box("monument_cross_v", (0.3, 0.06, 0.9), (-32.4, -12.02, 0.5), "cross_red", bevel=0.01)
     box("monument_cross_h", (0.9, 0.06, 0.3), (-32.4, -12.02, 0.8), "cross_red", bevel=0.01)
-    # city behind
-    for i, (x, y, w, d, h, mat) in enumerate(((-30, 27.5, 10, 6, 40, "tower_blue"), (-13, 28.0, 12, 5, 54, "tower_teal"), (6, 27.5, 10, 6, 36, "tower_blue"), (27, 27.0, 12, 7, 48, "tower_teal"))):
-        pts = A.outline(A.rect_poly(x, y, w, d), 1.0)
-        A.solid(f"tower{i}", pts, 0.16, h, mat)
-        A.mullions(f"tower{i}_mull", A.outline(A.rect_poly(x, y, w + 0.1, d + 0.1), 1.05), 0.16, h, spacing=1.6, size=(0.08, 0.12), mat="tower_frame")
-        for zz in range(4, int(h), 4):
-            A.ring(f"tower{i}_band{zz}", A.outline(A.rect_poly(x, y, w + 0.2, d + 0.2), 1.1), pts, zz, 0.25, "tower_frame")
-        A.solid(f"tower{i}_cap", A.outline(A.rect_poly(x, y, w - 1, d - 1), 0.6), 0.16 + h, 1.2, "tower_frame")
 
 
 # ---------------------------------------------------------------- life: people, robots, vehicles, drone
@@ -572,9 +566,6 @@ def colour_and_brand():
         ln = math.hypot(x1 - x0, y1 - y0)
         box(f"fascia{i}", (ln, 0.05, 0.2), ((x0 + x1) / 2 + nx * 0.03, (y0 + y1) / 2 + ny * 0.03, MEZ_Z + 0.2), "accent_blue", bevel=0, rot=(0, 0, math.atan2(y1 - y0, x1 - x0)))
     # rooftop lettering and the base band
-    L.text_mesh("roof_txt", "SMART HOSPITAL", (-3.0, HY1 + 0.25, TOP + 0.08), 1.8, 0.35, "accent_blue")
-    box("roof_cross_v", (0.55, 0.35, 1.7), (-15.6, HY1 + 0.25, TOP + 0.08), "cross_red", bevel=0.04)
-    box("roof_cross_h", (1.7, 0.35, 0.55), (-15.6, HY1 + 0.25, TOP + 0.66), "cross_red", bevel=0.04)
     L.set_group("static_site")
     outer = A.outline(A.rect_poly(0, 0, 2 * BASE[0] + 0.08, 2 * BASE[1] + 0.08), 2.04)
     inner = A.outline(A.rect_poly(0, 0, 2 * BASE[0] - 0.1, 2 * BASE[1] - 0.1), 1.95)
@@ -646,6 +637,257 @@ def atrium_extras():
         M.bicycle(f"bike{k}", (-13.6 + k * 0.8, -20.1, 0.16), rot_z=math.pi / 2, colour=("flower_pink", "lime", "sky_blue", "orange", "flower_purple")[k])
 
 
+# ---------------------------------------------------------------- the rest of the campus (behind the hall)
+# In place of the anonymous city towers: the inpatient tower with a rooftop helipad and plant, the outpatient
+# tower with solar on its roof, a skybridge from the upper floor, the energy centre (grid transformer, main
+# switchboard, two standby generators, battery container, liquid-oxygen tank) and a staff car park.
+IPD = (-27.0, -3.0, 24.6, 30.4)  # inpatient tower: x0, x1, y0, y1
+IPD_LOBBY, IPD_FH, IPD_N = UP - 0.16, 3.7, 8  # lobby up to the upper-floor level, storey height, ward storeys
+IPD_TOP = UP + IPD_N * IPD_FH  # roof slab top
+OPD = (1.0, 15.0, 25.0, 30.4)  # outpatient tower
+OPD_FH, OPD_N = 3.9, 6
+OPD_TOP = 0.16 + OPD_N * OPD_FH
+PLANT = (20.6, 38.8, 21.8, 30.4)  # energy centre yard
+HELI = (-20.2, 27.5)  # helipad centre on the inpatient roof
+
+
+def inpatient_tower():
+    L.set_group("static_tower")
+    x0, x1, y0, y1 = IPD
+    cx, cy, w, d = (x0 + x1) / 2, (y0 + y1) / 2, x1 - x0, y1 - y0
+    # glass lobby under the ward storeys, with a canopy over the doors
+    box("ipd_lobby", (w - 1.6, d - 1.4, IPD_LOBBY), (cx, cy + 0.5, 0.16), "hosp_white", bevel=0.02)
+    box("ipd_lobby_glass", (w - 1.8, 0.05, IPD_LOBBY - 0.5), (cx, y0 + 0.62, 0.16), "glass", bevel=0)
+    for i in range(9):
+        box(f"ipd_lobby_mull{i}", (0.1, 0.1, IPD_LOBBY - 0.5), (x0 + 0.9 + i * (w - 1.8) / 8, y0 + 0.62, 0.16), "hosp_white", bevel=0)
+    box("ipd_canopy", (8.0, 2.6, 0.25), (cx + 5.0, y0 - 0.6, 3.6), "hosp_white", bevel=0.04)
+    box("ipd_canopy_led", (8.0, 0.04, 0.06), (cx + 5.0, y0 - 1.9, 3.64), "led_cyan", bevel=0)
+    for dx in (-3.6, 3.6):
+        cyl(f"ipd_canopy_col{dx}", 0.12, 3.44, (cx + 5.0 + dx, y0 - 1.6, 0.16), "silver", verts=12)
+    # ward storeys: white body, window band per storey, slab-edge bands, vertical fins, planter balconies
+    body_h = IPD_N * IPD_FH
+    box("ipd_body", (w, d, body_h), (cx, cy, UP), "hosp_white", bevel=0.04)
+    for k in range(IPD_N):
+        z = UP + k * IPD_FH
+        box(f"ipd_band_f{k}", (w + 0.5, 0.4, 0.32), (cx, y0 - 0.15, z), "hosp_white", bevel=0.02)
+        box(f"ipd_band_e{k}", (0.4, d + 0.5, 0.32), (x1 + 0.15, cy, z), "hosp_white", bevel=0.02)
+        if k < IPD_N - 1:  # the top storey carries the sign instead of windows
+            box(f"ipd_win_f{k}", (w - 0.8, 0.08, 2.0), (cx, y0 - 0.03, z + 0.85), "tower_glass", bevel=0)
+            box(f"ipd_line_f{k}", (w - 0.8, 0.06, 0.08), (cx, y0 - 0.06, z + 2.95), "accent_blue", bevel=0)
+        box(f"ipd_win_e{k}", (0.08, d - 0.8, 2.0), (x1 + 0.03, cy, z + 0.85), "tower_glass", bevel=0)
+    fins = 9
+    for i in range(fins):
+        x = x0 + 0.6 + i * (w - 1.2) / (fins - 1)
+        box(f"ipd_fin{i}", (0.2, 0.7, (IPD_N - 1) * IPD_FH), (x, y0 - 0.35, UP), "hosp_white", bevel=0.02)
+    rnd = random.Random(700)
+    for k in (1, 3, 5):
+        for i in range(0, fins - 1, 2):
+            x = x0 + 0.6 + (i + 0.5) * (w - 1.2) / (fins - 1)
+            z = UP + k * IPD_FH + 0.32
+            box(f"ipd_planter{k}{i}", (2.2, 0.45, 0.45), (x, y0 - 0.5, z), "planter", bevel=0.03)
+            for j in range(4):
+                sphere(f"ipd_shrub{k}{i}{j}", 0.3 + rnd.random() * 0.12, (x - 0.8 + j * 0.53, y0 - 0.5, z + 0.5), rnd.choice(A.FOLIAGE_MATS), scale=(1, 0.8, 0.8), subdiv=1)
+    # sign on the top storey: red cross and the name
+    top = UP + (IPD_N - 1) * IPD_FH
+    box("ipd_sign_panel", (w - 0.8, 0.12, IPD_FH - 0.5), (cx, y0 - 0.06, top + 0.4), "accent_blue", bevel=0.02)
+    L.text_mesh("ipd_sign", "SMART HOSPITAL", (cx + 1.6, y0 - 0.16, top + 1.15), 1.55, 0.12, "hosp_white")
+    box("ipd_cross_v", (0.7, 0.2, 2.4), (x0 + 2.4, y0 - 0.2, top + 0.65), "cross_red", bevel=0.03)
+    box("ipd_cross_h", (2.4, 0.16, 0.7), (x0 + 2.4, y0 - 0.18, top + 1.5), "cross_red", bevel=0.03)  # shallower: no coplanar faces
+    box("ipd_cross_bg", (3.0, 0.14, 3.0), (x0 + 2.4, y0 - 0.1, top + 0.35), "hosp_white", bevel=0.05)
+    # roof: parapet, lift overrun, plant (cooling towers, chillers, pipes)
+    outer = rect(x0 - 0.05, y0 - 0.05, x1 + 0.05, y1 + 0.05)
+    inner = rect(x0 + 0.3, y0 + 0.3, x1 - 0.3, y1 - 0.3)
+    A.ring("ipd_parapet", outer, inner, IPD_TOP, 1.0, "hosp_white")
+    A.ring("ipd_parapet_cap", outer, inner, IPD_TOP + 1.0, 0.12, "accent_blue")
+    box("ipd_overrun", (3.6, 3.0, 3.0), (-13.0, 28.4, IPD_TOP), "hosp_white", bevel=0.04)
+    box("ipd_overrun_door", (1.0, 0.05, 2.1), (-13.0, 26.88, IPD_TOP), "accent_blue", bevel=0)
+    for k, x in enumerate((-9.6, -6.0)):
+        box(f"ipd_ct{k}", (3.0, 3.0, 2.6), (x, 28.3, IPD_TOP), "panel_grey", bevel=0.05)
+        for j in range(5):  # louvres on the front
+            box(f"ipd_ct{k}_louvre{j}", (2.8, 0.05, 0.12), (x, 26.78, IPD_TOP + 0.4 + j * 0.4), "frame_dark", bevel=0)
+        cyl(f"ipd_ct{k}_shroud", 1.25, 0.7, (x, 28.3, IPD_TOP + 2.6), "frame_dark", verts=32)
+        box(f"ipd_chiller{k}", (3.2, 1.6, 1.5), (x, 25.9, IPD_TOP), "aluminium", bevel=0.04)
+        for j in range(3):
+            cyl(f"ipd_chiller{k}_fan{j}", 0.42, 0.06, (x - 1.0 + j * 1.0, 25.9, IPD_TOP + 1.5), "frame_dark", verts=20)
+    for k, (y, mat) in enumerate(((27.25, "duct_blue"), (27.55, "duct_orange"))):  # chilled water supply / return
+        cyl(f"ipd_pipe{k}", 0.13, 10.0, (-14.5, y, IPD_TOP + 0.5), mat, verts=12, rot=(0, math.pi / 2, 0))
+    # cooling-tower fans turn in the browser
+    for k, x in enumerate((-9.6, -6.0)):
+        with group("move"):
+            blades = [box(f"ctfan{k}_a", (2.0, 0.22, 0.04), (x, 28.3, IPD_TOP + 3.2), "black", bevel=0.01), box(f"ctfan{k}_b", (0.22, 2.0, 0.04), (x, 28.3, IPD_TOP + 3.2), "black", bevel=0.01)]
+        fan = L.rigid(blades, f"ctfan{k}", (x, 28.3, IPD_TOP + 3.2))
+        fan["spin"], fan["spin_speed"] = "z", 3.0 + k * 0.4
+    # helipad on steel legs over the west half of the roof
+    hx, hy = HELI
+    deck = IPD_TOP + 1.7
+    for k in range(8):
+        a = k * math.tau / 8 + math.pi / 8
+        cyl(f"hpad_leg{k}", 0.14, deck - IPD_TOP, (hx + math.cos(a) * 3.6, hy + math.sin(a) * 2.1, IPD_TOP), "steel", verts=10)
+    cyl("hpad_deck", 6.2, 0.35, (hx, hy, deck), "darkgray", verts=8, rot=(0, 0, math.pi / 8))
+    cyl("hpad_net", 6.6, 0.08, (hx, hy, deck + 0.1), "safety_yellow", verts=8, rot=(0, 0, math.pi / 8))
+    M.disc_ring("hpad_circle", 4.3, 3.95, (hx, hy, deck + 0.36), 0.01, "paint_white", n=48)
+    L.text_mesh("hpad_H", "H", (hx, hy - 1.3, deck + 0.36), 3.4, 0.01, "paint_white", rot=(0, 0, 0))
+    for k in range(8):
+        a = k * math.tau / 8
+        cyl(f"hpad_lamp{k}", 0.12, 0.12, (hx + math.cos(a) * 5.4, hy + math.sin(a) * 5.4, deck + 0.35), "led_green", verts=8)
+    cyl("windsock_pole", 0.05, 2.6, (x0 + 0.8, y1 - 0.8, IPD_TOP + 1.0), "silver", verts=8)
+    cyl("windsock", 0.22, 1.1, (x0 + 0.85, y1 - 0.8, IPD_TOP + 3.3), "orange", verts=10, r2=0.1, rot=(0, math.pi / 2, 0))
+
+
+def helicopter():
+    """Air ambulance parked on the helipad; the rotor idles (a demo in the browser flies it)."""
+    hx, hy = HELI
+    with group("move"):
+        box("heli_stripe", (3.5, 1.96, 0.2), (0.1, 0, 1.0), "cross_red", bevel=0.05)
+        sphere("heli_cabin", 1.0, (0.0, 0, 0.7), "robot_white", scale=(1.9, 0.95, 0.95), subdiv=2)
+        sphere("heli_glass", 0.86, (0.95, 0, 0.95), "carglass", scale=(1.15, 0.9, 0.72), subdiv=2)
+        cyl("heli_boom", 0.24, 3.9, (-1.4, 0, 1.45), "robot_white", verts=12, r2=0.11, rot=(0, -math.pi / 2, 0))
+        box("heli_fin", (0.7, 0.08, 1.0), (-5.1, 0, 1.3), "cross_red", bevel=0.03)
+        box("heli_tailplane", (0.4, 1.4, 0.06), (-4.7, 0, 1.45), "robot_white", bevel=0.01)
+        for s in (-1, 1):
+            box(f"heli_skid{s}", (3.3, 0.1, 0.1), (0.1, s * 0.85, 0.0), "silver", bevel=0.02)
+            for j, dx in enumerate((-0.8, 0.9)):
+                box(f"heli_strut{s}{j}", (0.08, 0.08, 0.45), (dx, s * 0.72, 0.05), "silver", bevel=0, rot=(s * 0.35, 0, 0))
+        cyl("heli_mast", 0.12, 0.45, (0.15, 0, 1.65), "darkgray", verts=10)
+        rotor = [box("heli_blade_a", (8.4, 0.28, 0.04), (0.15, 0, 2.08), "darkgray", bevel=0.01), box("heli_blade_b", (0.28, 8.4, 0.04), (0.15, 0, 2.08), "darkgray", bevel=0.01)]
+        tail = [box("heli_tr_a", (1.2, 0.03, 0.14), (-5.1, 0.12, 1.75), "darkgray", bevel=0), box("heli_tr_b", (0.14, 0.03, 1.2), (-5.1, 0.12, 1.2), "darkgray", bevel=0)]
+    parts = [o for o in L._parts("heli") if o not in rotor + tail]
+    body = L.rigid(parts, "heli_body")
+    main = L.rigid(rotor, "heli_rotor", (0.15, 0, 2.08))
+    main["spin"], main["spin_speed"] = "z", 1.5
+    main.parent = body
+    tr = L.rigid(tail, "heli_tailrotor", (-5.1, 0.12, 1.75))
+    tr["spin"], tr["spin_speed"] = "y", 3.0
+    tr.parent = body
+    L.place(body, (hx, hy, IPD_TOP + 2.07), math.radians(-25))
+
+
+def outpatient_tower():
+    L.set_group("static_tower")
+    x0, x1, y0, y1 = OPD
+    cx, cy, w, d = (x0 + x1) / 2, (y0 + y1) / 2, x1 - x0, y1 - y0
+    pts = A.outline(A.rect_poly(cx, cy, w, d), 0.8)
+    A.solid("opd_body", pts, 0.16, OPD_TOP - 0.16, "tower_teal")
+    A.mullions("opd_mull", A.outline(A.rect_poly(cx, cy, w + 0.1, d + 0.1), 0.85), 0.16, OPD_TOP - 0.16, spacing=1.5, size=(0.08, 0.12), mat="tower_frame")
+    for k in range(1, OPD_N + 1):
+        A.ring(f"opd_band{k}", A.outline(A.rect_poly(cx, cy, w + 0.3, d + 0.3), 0.95), pts, 0.16 + k * OPD_FH - 0.3, 0.3, "hosp_white")
+    A.ring("opd_parapet", A.outline(A.rect_poly(cx, cy, w + 0.3, d + 0.3), 0.95), A.outline(A.rect_poly(cx, cy, w - 0.4, d - 0.4), 0.6), OPD_TOP, 0.9, "hosp_white")
+    box("opd_entry_canopy", (5.0, 1.8, 0.22), (cx - 2.5, y0 - 0.8, 3.4), "hosp_white", bevel=0.03)
+    for dx in (-2.2, 2.2):
+        cyl(f"opd_entry_col{dx}", 0.1, 3.24, (cx - 2.5 + dx, y0 - 1.5, 0.16), "silver", verts=10)
+    L.text_mesh("opd_sign", "OUTPATIENT", (cx + 2.4, y0 - 0.2, OPD_TOP - 2.6), 0.9, 0.1, "hosp_white")
+    # rooftop solar array (tilted to the sun), its inverter, and the telemedicine / 5G mast
+    base = OPD_TOP + 0.05
+    for rr in range(3):
+        y = y0 + 1.3 + rr * 1.7
+        box(f"opd_pvrail{rr}", (w - 2.0, 0.08, 0.5), (cx, y + 0.45, base), "aluminium", bevel=0.01)
+        for cc in range(10):
+            x = x0 + 1.6 + cc * 1.19
+            box(f"opd_pv{rr}{cc}", (1.1, 1.3, 0.05), (x, y, base + 0.55), "solar", bevel=0.015, rot=(0.42, 0, 0))
+            box(f"opd_pvf{rr}{cc}", (1.14, 1.34, 0.03), (x, y, base + 0.54), "aluminium", bevel=0.01, rot=(0.42, 0, 0))
+    box("opd_inverter", (1.2, 0.6, 1.1), (x1 - 1.4, y1 - 0.9, base), "robot_white", bevel=0.03)
+    box("opd_inverter_led", (0.5, 0.02, 0.06), (x1 - 1.4, y1 - 1.21, base + 0.85), "led_green", bevel=0)
+    cyl("opd_mast", 0.12, 5.5, (x0 + 1.0, y1 - 0.9, base), "frame", verts=12, r2=0.07)
+    for k in range(3):
+        a = k * math.tau / 3
+        box(f"opd_ant{k}", (0.14, 0.3, 1.1), (x0 + 1.0 + math.cos(a) * 0.28, y1 - 0.9 + math.sin(a) * 0.28, base + 4.1), "white", bevel=0.03, rot=(0, 0, a))
+    sphere("opd_beacon", 0.1, (x0 + 1.0, y1 - 0.9, base + 5.6), "led_red")
+
+
+def skybridge():
+    """Glass link from the upper floor of the hall to the inpatient tower, with a nurse crossing."""
+    L.set_group("static_tower")
+    cx, y0, y1 = -8.0, HY1 + 0.5, IPD[2]
+    ln, cy = y1 - y0, (y0 + y1) / 2
+    box("bridge_floor", (3.0, ln, 0.35), (cx, cy, UP - 0.35), "hosp_white", bevel=0.02)
+    box("bridge_roof", (3.2, ln, 0.3), (cx, cy, UP + 3.0), "hosp_white", bevel=0.02)
+    box("bridge_led", (0.04, ln, 0.06), (cx + 1.62, cy, UP + 3.05), "led_cyan", bevel=0)
+    for side in (-1, 1):
+        box(f"bridge_glass{side}", (0.04, ln, 3.0), (cx + side * 1.45, cy, UP), "glass", bevel=0)
+        for k in range(5):
+            box(f"bridge_post{side}{k}", (0.1, 0.1, 3.0), (cx + side * 1.45, y0 + k * ln / 4, UP), "hosp_white", bevel=0)
+    L.walker("bridge_nurse", racetrack(cx - 0.6, y0 + 0.3, cx + 0.6, y1 - 0.3, 0.55), 0.9, 0.0, seed=720, z=UP, outfit="nurse")
+
+
+def energy_centre():
+    """Grid transformer -> main switchboard, two standby generators, a battery container, the LOX tank."""
+    L.set_group("static_site")
+    x0, x1, y0, y1 = PLANT
+    box("plant_pad", (x1 - x0, y1 - y0, 0.2), ((x0 + x1) / 2, (y0 + y1) / 2, 0.16), "concrete", bevel=0.03)
+    top = 0.36
+    # open fence: posts and three rails, a gate gap on the south side
+    for side, (ax, ay, bx, by) in enumerate(((x0, y0, 30.0, y0), (33.0, y0, x1, y0), (x1, y0, x1, y1), (x0, y0, x0, y1))):
+        ln = math.hypot(bx - ax, by - ay)
+        ang = math.atan2(by - ay, bx - ax)
+        for r, z in enumerate((0.1, 1.0, 1.9)):
+            box(f"fence{side}_rail{r}", (ln, 0.05, 0.05), ((ax + bx) / 2, (ay + by) / 2, top + z), "frame", bevel=0, rot=(0, 0, ang))
+        for k in range(1 if side >= 2 else 0, int(ln / 2) + 1):  # corners already have a post
+            t = k / max(1, int(ln / 2))
+            box(f"fence{side}_post{k}", (0.08, 0.08, 2.0), (ax + (bx - ax) * t, ay + (by - ay) * t, top), "frame", bevel=0)
+    # grid transformer with radiator fins and bushings
+    tx, ty = 23.2, 28.4
+    box("tx_body", (2.4, 1.7, 2.1), (tx, ty, top), "panel_grey", bevel=0.04)
+    for s in (-1, 1):
+        for k in range(6):
+            box(f"tx_fin{s}{k}", (0.05, 1.3, 1.7), (tx + s * (1.25 + k * 0.1), ty, top + 0.2), "panel_grey", bevel=0)
+    for k in range(3):
+        cyl(f"tx_bush{k}", 0.08, 0.7, (tx - 0.6 + k * 0.6, ty, top + 2.1), "white", verts=10)
+    box("tx_sign", (0.5, 0.03, 0.4), (tx, ty - 0.87, top + 1.3), "safety_yellow", bevel=0)
+    # main switchboard room
+    box("mdb_room", (4.2, 3.2, 3.2), (27.8, 28.5, top), "hosp_white", bevel=0.04)
+    box("mdb_trim", (4.3, 3.3, 0.2), (27.8, 28.5, top + 3.2), "accent_blue", bevel=0.02)
+    box("mdb_door", (1.2, 0.05, 2.2), (26.9, 26.88, top), "accent_blue", bevel=0)
+    for k in range(4):
+        box(f"mdb_louvre{k}", (1.4, 0.05, 0.1), (28.9, 26.88, top + 1.0 + k * 0.28), "frame_dark", bevel=0)
+    L.text_mesh("mdb_txt", "ENERGY CENTER", (27.8, 26.86, top + 2.55), 0.36, 0.03, "accent_blue")
+    # battery storage container with its own cooling unit
+    box("bess", (5.0, 2.4, 2.6), (34.6, 28.8, top), "robot_white", bevel=0.04)
+    box("bess_stripe", (5.02, 2.42, 0.3), (34.6, 28.8, top + 1.9), "accent_blue", bevel=0)
+    box("bess_hvac", (0.5, 1.4, 1.2), (37.35, 28.8, top + 0.6), "aluminium", bevel=0.03)
+    L.text_mesh("bess_txt", "BESS", (33.4, 27.58, top + 1.1), 0.45, 0.03, "accent_blue")
+    box("bess_led", (0.6, 0.02, 0.08), (35.9, 27.58, top + 1.5), "led_green", bevel=0)
+    # two standby generators (a hospital must never go dark), exhaust stacks and radiator ends
+    for k, (gx, gy) in enumerate(((27.2, 23.6), (34.2, 23.6))):
+        box(f"gen{k}_base", (5.8, 2.3, 0.4), (gx, gy, top), "frame_dark", bevel=0.02)
+        box(f"gen{k}", (5.6, 2.2, 2.3), (gx, gy, top + 0.4), "safety_yellow", bevel=0.05)
+        box(f"gen{k}_grille", (0.06, 1.9, 1.8), (gx + 2.83, gy, top + 0.6), "frame_dark", bevel=0)
+        box(f"gen{k}_door", (1.1, 0.04, 1.8), (gx - 1.2, gy - 1.11, top + 0.6), "safety_yellow", bevel=0.01)
+        cyl(f"gen{k}_stack", 0.18, 1.9, (gx - 1.8, gy + 0.4, top + 2.7), "steel", verts=12)
+        cyl(f"gen{k}_cap", 0.26, 0.08, (gx - 1.8, gy + 0.4, top + 4.6), "frame_dark", verts=12)
+        L.text_mesh(f"gen{k}_txt", f"GEN {k + 1}", (gx + 0.9, gy - 1.13, top + 1.35), 0.42, 0.03, "frame_dark")
+    # liquid oxygen: vacuum-insulated tank on legs and its ambient vaporisers
+    ox, oy = 22.4, 24.3
+    for k in range(4):
+        a = k * math.pi / 2 + math.pi / 4
+        cyl(f"lox_leg{k}", 0.08, 1.0, (ox + math.cos(a) * 0.8, oy + math.sin(a) * 0.8, top), "steel", verts=8)
+    cyl("lox_tank", 1.05, 6.4, (ox, oy, top + 1.0), "white", verts=28)
+    sphere("lox_dome", 1.05, (ox, oy, top + 7.4), "white", scale=(1, 1, 0.45), subdiv=2)
+    cyl("lox_band", 1.07, 0.35, (ox, oy, top + 5.2), "lime", verts=28)
+    L.text_mesh("lox_txt", "O2", (ox, oy - 1.08, top + 3.5), 0.8, 0.04, "lime")
+    for k in range(2):
+        vx = ox + 1.9 + k * 0.9
+        cyl(f"vap{k}", 0.18, 3.6, (vx, oy - 0.2, top), "aluminium", verts=6)
+        for j in range(6):
+            a = j * math.pi / 3
+            box(f"vap{k}_fin{j}", (0.36, 0.03, 3.6), (vx + math.cos(a) * 0.2, oy - 0.2 + math.sin(a) * 0.2, top), "aluminium", bevel=0, rot=(0, 0, a))
+
+
+def car_park():
+    """Staff car park in the back-left corner, some bays free, EV chargers at the ends."""
+    L.set_group("static_site")
+    x0, x1, y0, y1 = -38.6, -28.4, 24.6, 30.4
+    box("carpark", (x1 - x0, y1 - y0, 0.02), ((x0 + x1) / 2, (y0 + y1) / 2, 0.16), "asphalt", bevel=0)
+    rnd = random.Random(760)
+    for k in range(4):
+        x = x0 + 1.3 + k * 2.6
+        box(f"bay_line{k}", (0.1, 4.6, 0.005), (x + 1.3, y1 - 2.5, 0.18), "paint_white", bevel=0)
+        if k != 2:
+            L.car(f"staff_car{k}", (x, y1 - 2.5, 0.16), rot_z=math.pi / 2, paint=rnd.choice(("robot_white", "accent_blue", "silver", "cross_red")))
+    for k, x in enumerate((x0 + 0.4, x1 - 0.4)):
+        box(f"ev_charger{k}", (0.35, 0.25, 1.4), (x, y1 - 0.4, 0.18), "robot_white", bevel=0.03)
+        box(f"ev_charger{k}_led", (0.2, 0.02, 0.05), (x, y1 - 0.53, 1.3), "led_green", bevel=0)
+
+
 # ---------------------------------------------------------------- floating icons, light, output
 
 def icons():
@@ -698,12 +940,19 @@ def lighting(sun_elev=36, sun_dir=(0.62, -0.78)):
 ATLASES = {
     "building": ["static_building", "hot:data-analytics", "hot:smart-diagnostics", "hot:patient-care", "hot:hospital-management", "hot:safety-convenience"],
     "site": ["static_site"],
+    "tower": ["static_tower"],
 }
 
 
 def build():
     L.reset_scene()
     site()
+    inpatient_tower()
+    helicopter()
+    outpatient_tower()
+    skybridge()
+    energy_centre()
+    car_park()
     shell()
     mezzanine()
     data_room()

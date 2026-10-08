@@ -204,6 +204,14 @@ PALETTE = {
     "awning": ((0.2, 0.36, 0.5), 0.8),
     # autonomous (same softened saturation)
     "auto_blue": ((0.24, 0.46, 0.7), 0.3),
+    "cyber_navy": ((0.08, 0.13, 0.26), 0.35),
+    "cyber_floor": ((0.2, 0.3, 0.46), 0.6),
+    "cyber_glass": ((0.14, 0.25, 0.45), 0.12),
+    "roof_slate": ((0.25, 0.28, 0.33), 0.55),
+    "house_cream": ((0.93, 0.9, 0.83), 0.75),
+    "timber": ((0.4, 0.28, 0.19), 0.7),
+    "insulator": ((0.36, 0.55, 0.52), 0.25),
+    "grid_green": ((0.46, 0.56, 0.5), 0.5),
     "arm_orange": ((0.85, 0.5, 0.16), 0.35),
     "hazard_black": ((0.06, 0.06, 0.065), 0.6),
     "crop": ((0.24, 0.48, 0.17), 0.8),
@@ -500,13 +508,15 @@ def car(name, loc, rot_z=0.0, paint="white", length=4.4):
     box(f"{name}_grille", (0.03, 0.9, 0.12), at(2.2 * k, 0, 0.36), "darkgray", bevel=0.01, rot=(0, 0, rot_z))
 
 
-def text_mesh(name, text, loc, size, depth, mat, rot=(math.pi / 2, 0, 0), align="CENTER", **kw):
-    """Extruded 3D lettering converted to a mesh."""
+def text_mesh(name, text, loc, size, depth, mat, rot=(math.pi / 2, 0, 0), align="CENTER", resolution=None, **kw):
+    """Extruded 3D lettering converted to a mesh. `resolution` (curve steps, no bevel) keeps far signage light."""
     cu = bpy.data.curves.new(name, "FONT")
     cu.body = text
     cu.size = size
     cu.extrude = depth / 2
-    cu.bevel_depth = min(0.02, depth / 4)
+    cu.bevel_depth = min(0.02, depth / 4) if resolution is None else 0.0
+    if resolution is not None:
+        cu.resolution_u = resolution
     cu.align_x = align
     cu.align_y = "BOTTOM"
     tmp = bpy.data.objects.new(name + "_tmp", cu)
@@ -531,7 +541,7 @@ def person(name, loc, rot_z=0.0, mat="white", h=1.75, pose="stand"):
     for side in (-1, 1):
         lx = x - s * side * 0.1 + c * side * stride
         ly = y + c * side * 0.1 + s * side * stride
-        box(f"{name}_leg{side}", (0.14 * k, 0.16 * k, 0.86 * k), (lx, ly, z), mat, bevel=0.06 * k, rot=(0, side * stride * 1.2, rot_z))
+        box(f"{name}_leg{side}", (0.14 * k, 0.16 * k, 0.86 * k), (lx, ly, z), mat, bevel=0.06 * k, rot=(0, -side * stride * 1.2, rot_z))  # foot off-centre, top back at the hip
     box(f"{name}_torso", (0.26 * k, 0.44 * k, 0.62 * k), (x, y, z + 0.84 * k), mat, bevel=0.1 * k, rot=(0, 0, rot_z))
     for side in (-1, 1):
         ax = x - s * side * 0.27 * k
@@ -607,7 +617,7 @@ def human(name, loc, rot_z=0.0, seed=0, pose="stand", h=1.72, outfit=None):
         base = 0.52
     else:
         for side in (-1, 1):
-            box(f"{name}_leg{side}", (0.15 * k, 0.15 * k, 0.84 * k), at(side * stride, side * 0.1 * k, 0.0), pants, bevel=0.06 * k, rot=(0, side * stride * 1.3, rot_z))
+            box(f"{name}_leg{side}", (0.15 * k, 0.15 * k, 0.84 * k), at(side * stride, side * 0.1 * k, 0.0), pants, bevel=0.06 * k, rot=(0, -side * stride * 1.3, rot_z))  # foot off-centre, top back at the hip
             box(f"{name}_shoe{side}", (0.26 * k, 0.12 * k, 0.07 * k), at(side * stride + 0.05, side * 0.1 * k, 0.0), "cloth_black", bevel=0.03 * k, rot=(0, 0, rot_z))
         base = 0.82
     box(f"{name}_torso", (0.25 * k, 0.42 * k, 0.6 * k), at(0, 0, base), shirt, bevel=0.1 * k, rot=(0, 0, rot_z))
@@ -618,8 +628,8 @@ def human(name, loc, rot_z=0.0, seed=0, pose="stand", h=1.72, outfit=None):
             box(f"{name}_coattail", (0.28 * k, 0.46 * k, 0.36 * k), at(-0.02, 0, base - 0.34 * k), coat, bevel=0.06 * k, rot=(0, 0, rot_z))
     sleeve = coat or (shirt if rnd.random() < 0.7 else skin)
     for side in (-1, 1):
-        swing = -side * stride * 1.2
-        box(f"{name}_arm{side}", (0.11 * k, 0.11 * k, 0.55 * k), at(0, side * 0.27 * k, base + 0.03), sleeve, bevel=0.05 * k, rot=(0, swing, rot_z))
+        swing = side * stride * 1.2  # opposite the leg on that side; hand moved so the top stays at the shoulder
+        box(f"{name}_arm{side}", (0.11 * k, 0.11 * k, 0.55 * k), at(-side * stride * 0.65, side * 0.27 * k, base + 0.03), sleeve, bevel=0.05 * k, rot=(0, swing, rot_z))
     cyl(f"{name}_neck", 0.05 * k, 0.08 * k, at(0, 0, base + 0.6), skin, verts=10)
     sphere(f"{name}_head", 0.115 * k, at(0, 0, base + 0.78), skin, scale=(0.95, 0.88, 1.08), subdiv=2)
     sphere(f"{name}_hair", 0.12 * k, at(-0.015, 0, base + 0.82), cap or hair, scale=(1.0, 0.92, 0.85), subdiv=2)
@@ -752,7 +762,9 @@ def rigid(objs, name, pivot=(0.0, 0.0, 0.0)):
 
 
 def _parts(prefix):
-    return [o for o in COL.objects if o.name.startswith(prefix + "_")]
+    # only parts built in a "move" group: a static neighbour sharing the prefix (the 06 "shuttle_stop" shelter for
+    # the "shuttle", 03's "bus_bay" for a "bus") would otherwise be swallowed and drive off with the mover
+    return [o for o in COL.objects if o.name.startswith(prefix + "_") and o.get("grp") == "move"]
 
 
 def _top_centre(objs):

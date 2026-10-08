@@ -7,6 +7,8 @@ const DIR = "/models/baked/smart_building";
 const V = "?v=5"; // bump after every re-bake so open tabs and caches fetch the new model
 const BASE = [44, 40]; // half size of the plinth: moving cars are cut off where they leave it
 
+const SUN = [24, -0.55, -0.8]; // the bake sun (elevation, Blender xy direction), lights the normal maps
+
 // Camera for each hotspot: an offset from its pin, or an absolute position (three.js axes, +z is the
 // street front). Ground-level views stand in the plaza between the street trees (x = -40, -32 ... 16).
 const views = {
@@ -27,6 +29,7 @@ function SmartBuilding({ onAnchors, activeId }) {
     <BakedModel
       url={`${DIR}.glb${V}`}
       lightmaps={{ building: `${DIR}_building.webp${V}`, site: `${DIR}_site.webp${V}` }}
+      sun={SUN}
       intensity={2}
       clip={BASE}
       views={views}

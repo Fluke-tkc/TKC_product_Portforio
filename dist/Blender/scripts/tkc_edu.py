@@ -217,19 +217,74 @@ def bleachers(name, x0, x1, y, rows=4, face_y=1):
 
 
 def school_bus(name, loc, rot_z=0.0):
-    """Yellow school bus facing +x of rot_z (about 9 m)."""
+    """Flat-front yellow school bus facing +x of rot_z (9 m): a window row of separate glass panes, a windscreen,
+    seat rows with students inside, and a two-leaf folding door on the left (kerb) side ahead of the front wheels.
+    The door leaves are built as {name}_door0_* / {name}_door1_* so the caller can hinge them (fold)."""
     at = _at(loc, rot_z)
     r = (0, 0, rot_z)
-    body = L._arched(-4.5, 4.5, 0.35, (-2.9, 2.9), 0.55) + [(4.5, 1.2), (4.2, 1.35), (4.0, 2.9), (-4.5, 2.9)]
-    L.prism(f"{name}_body", body, 2.4, at(0, 0, 0), "bus_yellow", rot_z=rot_z, bevel=0.12)
+    hw, z0, zs, zt, zr = 1.22, 0.38, 1.42, 2.28, 2.92  # half width, body bottom, window sill, window top, roof
+    rear_ax, front_ax = -2.7, 2.6
+    # lower body: behind the door it is one piece with wheel arches; ahead of it the driver's side and a front cap
+    # frame an open stairwell (two steps) on the left
+    L.prism(f"{name}_body", L._arched(-4.5, 3.3, z0, (rear_ax, front_ax), 0.56) + [(3.3, zs), (-4.5, zs)], 2 * hw, at(0, 0, 0), "bus_yellow", rot_z=rot_z, bevel=0.06)
+    box(f"{name}_drv", (1.2, 1.32, zs - z0), at(3.9, -0.56, z0), "bus_yellow", bevel=0.04, rot=r)
+    box(f"{name}_cap", (0.3, 1.12, zs - z0), at(4.35, 0.66, z0), "bus_yellow", bevel=0.04, rot=r)
+    box(f"{name}_step1", (0.86, 0.38, 0.18), at(3.75, 0.99, z0), "darkgray", bevel=0.01, rot=r)
+    box(f"{name}_step2", (0.86, 0.5, 0.38), at(3.75, 0.55, z0), "darkgray", bevel=0.01, rot=r)
+    box(f"{name}_well", (0.02, 1.1, zs - 0.76), at(3.31, 0.66, 0.76), "darkgray", bevel=0, rot=r)
+    # window row: pillars between separate panes, glass set just inside them
     for side in (-1, 1):
-        box(f"{name}_win{side}", (7.2, 0.02, 0.8), at(-0.3, side * 1.21, 1.75), "carglass", bevel=0, rot=r)
-        box(f"{name}_stripe{side}", (8.9, 0.02, 0.1), at(0, side * 1.215, 1.25), "black", bevel=0, rot=r)
-        for dx in (-2.9, 2.9):
-            cyl(f"{name}_w{dx}{side}", 0.48, 0.3, at(dx, side * 1.0 + (0.15 if side > 0 else 0.15), 0.48), "tyre", verts=24, rot=(math.pi / 2, 0, rot_z), bevel=0.05)
-        L.text_mesh(f"{name}_txt{side}", "SCHOOL BUS", at(-0.3, side * 1.22, 2.62), 0.28, 0.02, "black", rot=(math.pi / 2, 0, rot_z + (0 if side < 0 else math.pi)))
-    box(f"{name}_ws", (0.02, 2.1, 0.9), at(4.05, 0, 1.75), "carglass", bevel=0, rot=(0, -0.08, rot_z))
-    box(f"{name}_stop", (0.04, 0.45, 0.45), at(1.6, -1.25, 1.45), "cross_red", bevel=0, rot=r)
-    for dy in (-0.8, 0.8):
-        box(f"{name}_hl{dy}", (0.04, 0.3, 0.14), at(4.5, dy, 0.8), "led_white", bevel=0, rot=r)
-        box(f"{name}_amber{dy}", (0.1, 0.18, 0.1), at(4.1, dy, 2.9), "orange", bevel=0, rot=r)
+        for k in range(9):
+            box(f"{name}_pil{side}_{k}", (0.12, 0.06, zt - zs), at(-4.38 + k * 0.954, side * (hw - 0.03), zs), "bus_yellow", bevel=0.01, rot=r)
+        for z, h in ((0.95, 0.08), (1.3, 0.06)):
+            x0, x1 = -4.5, (3.3 if side > 0 else 4.5)
+            box(f"{name}_rail{side}_{z}", (x1 - x0, 0.02, h), at((x0 + x1) / 2, side * (hw + 0.005), z), "black", bevel=0, rot=r)
+    box(f"{name}_pil_fl", (0.26, 0.06, zt - zs), at(4.33, hw - 0.03, zs), "bus_yellow", bevel=0.01, rot=r)
+    box(f"{name}_pil_fr", (0.12, 0.06, zt - zs), at(4.4, -(hw - 0.03), zs), "bus_yellow", bevel=0.01, rot=r)
+    box(f"{name}_glass_l", (7.63, 0.02, zt - zs), at(-0.565, hw - 0.07, zs), "glass", bevel=0, rot=r)
+    box(f"{name}_glass_r", (8.78, 0.02, zt - zs), at(0.01, -(hw - 0.07), zs), "glass", bevel=0, rot=r)
+    box(f"{name}_glass_b", (0.02, 2.2, zt - zs), at(-4.47, 0, zs), "glass", bevel=0, rot=r)
+    box(f"{name}_ws", (0.02, 2.24, zt - zs + 0.12), at(4.47, 0, zs - 0.12), "glass", bevel=0, rot=r)
+    for x, w, mat in ((4.48, 0.04, "black"), (-4.48, 0.06, "bus_yellow")):  # windscreen / emergency-door posts
+        box(f"{name}_post{x}", (w, 0.08, zt - zs), at(x, 0, zs), mat, bevel=0, rot=r)
+    box(f"{name}_roof", (9.0, 2 * hw, zr - zt), at(0, 0, zt), "bus_yellow", bevel=0.12, segments=3, rot=r)
+    for side in (-1, 1):
+        L.text_mesh(f"{name}_txt{side}", "SCHOOL BUS", at(-0.4, side * (hw + 0.005), 2.46), 0.26, 0.02, "black", rot=(math.pi / 2, 0, rot_z + (0 if side < 0 else math.pi)), resolution=3)
+    L.text_mesh(f"{name}_txt_f", "SCHOOL BUS", at(4.505, 0, 2.47), 0.2, 0.02, "black", rot=(math.pi / 2, 0, rot_z + math.pi / 2), resolution=3)
+    # bumpers, lights, mirrors, the stop arm on the driver's side
+    for x in (4.55, -4.55):
+        box(f"{name}_bumper{x}", (0.14, 2.3, 0.24), at(x, 0, z0), "black", bevel=0.03, rot=r)
+    box(f"{name}_grille", (0.02, 0.9, 0.22), at(4.51, 0, 0.62), "darkgray", bevel=0, rot=r)
+    for dy in (-1, 1):
+        box(f"{name}_hl{dy}", (0.03, 0.32, 0.16), at(4.51, dy * 0.82, 0.75), "led_white", bevel=0, rot=r)
+        box(f"{name}_tl{dy}", (0.03, 0.2, 0.26), at(-4.51, dy * 0.95, 0.8), "led_red", bevel=0, rot=r)
+        box(f"{name}_amber{dy}", (0.06, 0.2, 0.12), at(4.47, dy * 0.85, 2.72), "orange", bevel=0.01, rot=r)
+        box(f"{name}_red{dy}", (0.06, 0.2, 0.12), at(-4.47, dy * 0.85, 2.72), "cross_red", bevel=0.01, rot=r)
+        box(f"{name}_marm{dy}", (0.05, 0.3, 0.04), at(4.42, dy * 1.36, 2.05), "black", bevel=0, rot=r)
+        box(f"{name}_mirror{dy}", (0.06, 0.12, 0.35), at(4.42, dy * 1.5, 1.72), "black", bevel=0.02, rot=r)
+    cyl(f"{name}_stoparm", 0.22, 0.02, at(2.0, -hw - 0.02, 1.6), "cross_red", verts=8, rot=(math.pi / 2, 0, rot_z))
+    for dx in (rear_ax, front_ax):
+        for side in (-1, 1):
+            # cylinders extend along local -y once rotated upright: offset so they sit centred on side * 1.05
+            cyl(f"{name}_w{dx}{side}", 0.48, 0.3, at(dx, side * 1.05 + 0.15, 0.48), "tyre", verts=24, rot=(math.pi / 2, 0, rot_z), bevel=0.05)
+            cyl(f"{name}_hub{dx}{side}", 0.26, 0.02, at(dx, side * 1.2 + (0.02 if side > 0 else 0), 0.48), "silver", verts=16, rot=(math.pi / 2, 0, rot_z))
+    # inside: a dark floor at sill height (the lower body is solid), seat rows, the driver and a few students
+    box(f"{name}_floor", (7.6, 2.3, 0.02), at(-0.6, 0, zs), "darkgray", bevel=0, rot=r)
+    for k in range(8):
+        x = -3.9 + k * 0.9
+        for side in (-1, 1):
+            box(f"{name}_seat{k}{side}", (0.45, 0.9, 0.1), at(x + 0.24, side * 0.68, zs), "teal_dark", bevel=0.02, rot=r)
+            box(f"{name}_back{k}{side}", (0.08, 0.9, 0.52), at(x, side * 0.68, zs), "teal_dark", bevel=0.02, rot=r)
+    box(f"{name}_dseat", (0.45, 0.5, 0.1), at(3.75, -0.6, zs), "black", bevel=0.02, rot=r)
+    cyl(f"{name}_wheel", 0.2, 0.03, at(4.2, -0.6, 1.85), "black", verts=16, rot=(0, -1.1, rot_z))
+    L.human(f"{name}_driver", at(3.85, -0.6, zs + 0.1 - 0.44), rot_z=rot_z, seed=960, pose="sit", h=1.7, outfit="teacher")
+    for k, (row, side) in enumerate(((0, 1), (1, -1), (2, 1), (4, -1), (5, 1), (3, -1))):
+        L.human(f"{name}_pax{k}", at(-3.9 + row * 0.9 + 0.2, side * 0.68, zs + 0.1 - 0.44), rot_z=rot_z, seed=961 + k, pose="sit", h=1.45, outfit=("student", "student2")[k % 2])
+    # folding door: two leaves hinged at the edges of the opening (3.32 and 4.18), dark glass in black frames
+    for k, (hx, s) in enumerate(((3.32, 1), (4.18, -1))):
+        c = hx + s * 0.215
+        box(f"{name}_door{k}_pane", (0.39, 0.02, zt - 0.5), at(c, hw - 0.02, 0.48), "carglass", bevel=0, rot=r)
+        box(f"{name}_door{k}_top", (0.43, 0.04, 0.06), at(c, hw - 0.02, zt - 0.06), "black", bevel=0, rot=r)
+        box(f"{name}_door{k}_bot", (0.43, 0.04, 0.12), at(c, hw - 0.02, 0.42), "black", bevel=0, rot=r)
+        for px in (hx + s * 0.02, hx + s * 0.41):
+            box(f"{name}_door{k}_post{px:.2f}", (0.04, 0.04, zt - 0.42), at(px, hw - 0.02, 0.42), "black", bevel=0, rot=r)
