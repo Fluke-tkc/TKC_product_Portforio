@@ -15,6 +15,7 @@ import { Hot } from "./ModelStage";
 import { screenMaterial } from "./screens";
 import { addNormalMap, normalRule, normalUrl, sunDirection } from "./normalMaps";
 import { addInterior, isFacadeGlass } from "./interiors";
+import { glazeVehicles } from "./vehicleGlass";
 
 const LED_COLORS = {
   led_cyan: ["#40b8ff", 3.2],
@@ -117,7 +118,9 @@ function useNormalMaps(gltf) {
 // Lightmaps and vertex light both store half the baked light, hence the factor 2 (= intensity).
 function prepare(scene, lightmaps, intensity, clip, normals, sun) {
   const cache = new Map();
-  let movingGlass; // glass on a mover is cut off with it at the plinth edge
+  let movingGlass;
+  const clearGlass = (moving) => (moving && clip ? (movingGlass ??= Object.assign(glassMaterial.clone(), { clippingPlanes: clip })) : glassMaterial); // cut off with a mover at the plinth edge
+  const carGlass = []; // vehicle glass, made see-through with seats inside once every mesh is ready
   const baked = (src, name, atlas, vertexLit, clipped) => {
     const key = `${src.uuid}|${vertexLit ? "v" : atlas}|${clipped ? "c" : ""}`;
     if (!cache.has(key)) {
@@ -156,7 +159,7 @@ function prepare(scene, lightmaps, intensity, clip, normals, sun) {
       o.renderOrder = 3;
       o.raycast = () => {};
     } else if (x.kind === "glass" || name === "glass") {
-      o.material = x.kind === "move" && clip ? (movingGlass ??= Object.assign(glassMaterial.clone(), { clippingPlanes: clip })) : glassMaterial;
+      o.material = clearGlass(x.kind === "move");
       o.renderOrder = 2;
       o.raycast = () => {}; // see-through: never blocks clicks or hides pins
     } else if (x.kind === "led" || name.startsWith("led_")) {
@@ -168,6 +171,7 @@ function prepare(scene, lightmaps, intensity, clip, normals, sun) {
       o.material = screenMaterial(name);
     } else {
       o.material = baked(mat, name, x.atlas, x.kind === "vbake" || x.kind === "move", x.kind === "move");
+      if (name === "carglass") carGlass.push({ mesh: o, mover: x.kind === "move" });
     }
     // BVH keeps the pins' occlusion raycasts cheap. The tree lives on the cached geometry, so every
     // visit reuses it; each fresh clone must still switch to the accelerated raycast.
@@ -176,6 +180,7 @@ function prepare(scene, lightmaps, intensity, clip, normals, sun) {
       o.raycast = acceleratedRaycast;
     }
   });
+  glazeVehicles(scene, carGlass, clearGlass, clip);
   toGroup.forEach((o) => {
     const id = o.userData.hot;
     if (!hot[id]) hot[id] = new THREE.Group();

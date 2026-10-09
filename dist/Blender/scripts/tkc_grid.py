@@ -207,8 +207,10 @@ def control_house(name, loc, w=8.0, d=5.0, h=3.6, rot_z=0.0, label="SUBSTATION 1
     box(f"{name}_body", (w, d, h), at(0, 0, 0), "offwhite", bevel=0.05, rot=r)
     box(f"{name}_parapet", (w + 0.2, d + 0.2, 0.3), at(0, 0, h), "panel_grey", bevel=0.03, rot=r)
     box(f"{name}_door", (1.2, 0.06, 2.3), at(-w / 4, -d / 2 - 0.02, 0), "panel_grey", bevel=0.01, rot=r)
-    for k in range(3):
-        box(f"{name}_louvre{k}", (1.4, 0.05, 0.8), at(0.4 + k * 1.8, -d / 2 - 0.02, 1.6), "darkgray", bevel=0.01, rot=r)
+    x0, x1 = -w / 4 + 0.9, w / 2 - 0.3  # the wall between the door and the corner
+    n = max(1, int((x1 - x0 + 0.4) / 1.8))  # 1.4 m louvres at 1.8 m, as many as fit
+    for k in range(n):
+        box(f"{name}_louvre{k}", (1.4, 0.05, 0.8), at((x0 + x1) / 2 + (k - (n - 1) / 2) * 1.8, -d / 2 - 0.02, 1.6), "darkgray", bevel=0.01, rot=r)
     for k in range(2):
         box(f"{name}_ac{k}", (1.0, 0.8, 0.7), at(-w / 4 + k * w / 2, 0.6, h + 0.3), "robot_white", bevel=0.04, rot=r)
     cyl(f"{name}_ant", 0.04, 3.0, at(w / 2 - 0.6, d / 2 - 0.6, h + 0.3), "steel", verts=6)
