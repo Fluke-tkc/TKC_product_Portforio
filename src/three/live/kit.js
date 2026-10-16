@@ -87,7 +87,8 @@ export function rng(seed = 1) {
 
 export function tree(kit, [x, y, z], { h = 6, seed = 1, kind = "round" } = {}) {
   const r = rng(seed);
-  kit.cyl("bark", [x, y, z], 0.22 * (h / 6), h * 0.45, { seg: 6, r2: 0.14 * (h / 6) });
+  // the trunk runs up into the canopy (its lowest ball can sit as high as 0.61 h), so the crown never floats
+  kit.cyl("bark", [x, y, z], 0.22 * (h / 6), h * (kind === "cone" ? 0.45 : 0.72), { seg: 6, r2: 0.12 * (h / 6) });
   if (kind === "cone") {
     for (let k = 0; k < 3; k++) kit.cyl(k % 2 ? "leaf2" : "leaf1", [x, y + h * (0.3 + k * 0.2), z], (1.9 - k * 0.45) * (h / 6), h * 0.36, { seg: 7, r2: 0.05 });
     return kit;

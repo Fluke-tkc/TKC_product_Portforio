@@ -5,7 +5,7 @@ import { Environment, Lightformer, OrbitControls } from "@react-three/drei";
 import { Bloom, BrightnessContrast, EffectComposer, HueSaturation, N8AO, SMAA, ToneMapping, Vignette } from "@react-three/postprocessing";
 import { ToneMappingMode } from "postprocessing";
 import { HotspotPins } from "../HotspotPins";
-import { Showroom } from "./showroom";
+import { ThemedRoom } from "./rooms";
 import { prefersReducedMotion } from "../../components/ui/WebGLBoundary";
 
 // ---------- hotspot objects: hover outline + click to select ----------
@@ -275,7 +275,7 @@ export function ModelStage({ scene, hotspots, activeIndex, onSelect, isNarrow })
         <Lightformer form="ring" intensity={1.5} color="#5ee7ff" position={[0, 20, -140]} scale={40} />
       </Environment>
 
-      {baked && scene.base && <Showroom base={scene.base} reach={maxDistance} top={scene.standTop ?? -2.1} theme={scene.showroom} />}
+      {baked && scene.base && <ThemedRoom base={scene.base} reach={maxDistance} top={scene.standTop ?? -2.1} theme={scene.showroom} />}
 
       <group ref={group}>
         <Component onAnchors={setAnchors} activeId={activeId} />

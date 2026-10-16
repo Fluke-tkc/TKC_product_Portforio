@@ -1,0 +1,8 @@
+.git
+.claude
+.vscode
+node_modules
+dist
+# Blender sources and scripts (191 MB): the site only needs the exported models in public/models
+public/Blender
+*.local

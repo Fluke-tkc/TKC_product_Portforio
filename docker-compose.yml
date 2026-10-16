@@ -1,0 +1,28 @@
+# TKC Product Catalog (smart.tkc-services.com): the site built and served by nginx in one container,
+# on the old server's ports: 443 https, 8080 plain http (the main website proxies to it), 80 → https.
+#
+# On the server, first time (Docker installed, repo cloned from GitLab):
+#   git clone --depth 1 https://gitlab.tkc-services.com/itd/tkc_product_portforio.git /opt/productcatalog
+#   cd /opt/productcatalog
+# Try it beside the old site (the old nginx keeps 443 and 8080):
+#   HTTP_PORT=8081 HTTPS_PORT=8443 APP_PORT=8082 docker compose up -d --build
+# Switch over (stops the old nginx, runs this on 80 / 443 / 8080):
+#   sudo systemctl disable --now nginx && docker compose up -d
+# Roll back:
+#   docker compose down && sudo systemctl enable --now nginx
+# Deploy a new version later:
+#   git pull && docker compose up -d --build
+services:
+  web:
+    build: .
+    image: tkc-product-catalog
+    container_name: productcatalog
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+      - "${APP_PORT:-8080}:8080"
+    volumes:
+      # the certificate with its chain and the private key stay on the host: never in git or in the image
+      - ${SSL_CERT:-/etc/ssl/certs/STAR_tkc-services_com.pem}:/etc/nginx/certs/fullchain.pem:ro
+      - ${SSL_KEY:-/etc/ssl/private/private.key}:/etc/nginx/certs/private.key:ro

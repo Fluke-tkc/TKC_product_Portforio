@@ -1,6 +1,6 @@
-// Themed showrooms for the baked dioramas (scene.showroom): each scene sits on its stand inside a closed room like
-// 01's, but with its own architecture and fittings (a healing atrium, a library, a warehouse, a telecom cable hall, a robotics
-// lab, a SOC, an energy gallery, a round sky lounge). The walls keep the world small, so it stays light to render.
+// Showrooms for the baked dioramas (scene.showroom): each scene sits on its stand inside a closed room with its own
+// architecture and fittings (01's property gallery, a healing atrium, a library, a warehouse, a telecom cable hall, a
+// robotics lab, a SOC, an energy gallery, a round sky lounge). The walls keep the world small, so it stays light to render.
 // Static parts are merged per material (Kit); procedural shaders paint the fine detail (tiles, planks, books, screens,
 // LEDs, a glowing floor grid, a sky with drifting clouds) at no geometry cost. Room scale: about 30 units to a metre.
 // It is real-time lit; the baked diorama itself is unlit, so these lights never touch it.
@@ -242,6 +242,29 @@ function potted(k, [x, y, z], h, seed, pot = "pot") {
   k.cyl(pot, [x, y, z], 6.5, 10, { seg: 10, r2: 7.8 });
   tree(k, [x, y + 10, z], { h, seed });
 }
+// a white architect's massing model (tower on a podium, stepped terraces or twin slabs) with blue glass floor bands;
+// u: size of one unit (1 = a 24-unit footprint)
+function massing(k, [x, y, z], seed, u = 1) {
+  const r = rng(seed + 40);
+  const b = (mat, dx, dy, w, h, d) => k.box(mat, [x + dx * u, y + dy * u, z], [w * u, h * u, d * u]);
+  if (seed % 3 === 0) {
+    const h = 30 + r() * 18;
+    b("model", 0, 0, 24, 6, 24);
+    b("model", 0, 6, 12, h, 12);
+    for (let f = 4; f < h; f += 4) b("glassM", 0, 6 + f - 0.6, 12.4, 1.2, 12.4);
+  } else if (seed % 3 === 1) {
+    for (let s = 0; s < 4; s++) {
+      b("model", -s * 2, s * 7, 24 - s * 5, 7, 22 - s * 4);
+      b("glassM", -s * 2, s * 7 + 3, 24.4 - s * 5, 1.2, 22.4 - s * 4);
+    }
+  } else {
+    for (const dx of [-6.5, 6.5]) {
+      const h = 22 + r() * 16;
+      b("model", dx, 0, 9, h, 20);
+      for (let f = 4; f < h; f += 4) b("glassM", dx, f - 0.6, 9.4, 1.2, 20.4);
+    }
+  }
+}
 // a chair facing ry (seat, back, legs)
 function chair(k, [x, y, z], ry, seat = "seat", legs = "dark") {
   const p = frameAt(x, z, ry);
@@ -272,6 +295,67 @@ const homeSide = (x, z) => x > 20 && z > 20;
 // ---------- rooms ----------
 
 const ROOMS = {
+  // 01 building: the original showroom (warm plank floor, daylight windows north, timber slats east) as a property
+  // gallery: a lounge with sofas and floor lamps, a reception desk
+  // before a building-management display wall, a credenza of models under the windows, big plants in the corners
+  room: {
+    colors: {
+      floor: ["#b99e80", 0.75, 0, { fx: "tiles", size: [72, 12] }], rug: ["#3a3f47", 0.95], wall: ["#e9e4db", 0.92],
+      slats: ["#8c6546", 0.7, 0, { fx: "ribs", space: 7 }], mull: ["#2c3139", 0.45],
+      model: ["#fbfbfa", 0.6], glassM: ["#8fb4d6", 0.25, 0.3], wood: ["#9a6e4a", 0.6], desk: ["#f4f1ec", 0.4],
+      sofa: ["#4b5661", 0.85], seat: ["#4b5661", 0.85], cushion: ["#cdbb9f", 0.9], rug2: ["#d9d0c3", 0.95], shade: ["#efe6d6", 0.8],
+      display: ["#101a26", 0.6, 0, { fx: "screen", cell: [56, 34], glow: "#5fd0ff" }],
+    },
+    glow: { pane: ["#f2f6fa", 1.9], lamp: ["#ffe2b0", 1.5] },
+    hemi: ["#fff3e2", "#8a7a66"], sun: "#fff1dc",
+    build(k, c) {
+      const r = rng(11);
+      k.box("rug", [0, c.y, 0], [c.bx * 2 + 70, 0.1, c.bz * 2 + 60]);
+      walls(k, "wall", c);
+      const win = c.R * 0.55;
+      const [sill, head] = [c.y + 6, c.y + c.H - 22];
+      windowOn(k, c, "N", -win, win, sill, head, { cols: 6, rows: 3 });
+      // west: a building-management display wall between two windows, the reception desk in front of it
+      windowOn(k, c, "W", -c.R * 0.88, -c.R * 0.44, sill, head, { cols: 2, rows: 3 });
+      windowOn(k, c, "W", c.R * 0.44, c.R * 0.88, sill, head, { cols: 2, rows: 3 });
+      panel(k, "mull", "W", -c.R * 0.38, c.R * 0.38, c.y + 32, c.y + 160, c.R - 1.6, 2);
+      panel(k, "display", "W", -c.R * 0.36, c.R * 0.36, c.y + 34, c.y + 158, c.R - 2.8, 1);
+      const dx = -c.R + 72;
+      k.box("desk", [dx, c.y, 0], [24, 32, 110], { r: 2 });
+      k.box("wood", [dx, c.y + 32, 0], [28, 2.4, 114], { r: 0.8 });
+      chair(k, [dx - 22, c.y, 20], Math.PI / 2);
+      panel(k, "slats", "E", -c.R, c.R, c.y, c.y + c.H - 30, c.R - 1.5, 1.4);
+      // a credenza of small models under the north windows
+      k.box("wood", [0, c.y, -c.R + 20], [win * 1.4, 16, 24], { r: 1 });
+      k.box("desk", [0, c.y + 16, -c.R + 20], [win * 1.4 + 2, 1.6, 26]);
+      for (let i = 0; i < 6; i++) k.box("model", [(-0.5 + i / 5) * win * 1.2, c.y + 17.6, -c.R + 20], [9 + r() * 4, 8 + r() * 16, 9]);
+      // the lounge (north-west): rug, a sofa and two armchairs round a coffee table, floor lamps
+      const [lx, lz] = [-c.R * 0.5, -c.R * 0.52];
+      k.box("rug2", [lx, c.y, lz], [150, 0.2, 110]);
+      k.box("sofa", [lx, c.y, lz - 38], [96, 13, 30], { r: 2 });
+      k.box("sofa", [lx, c.y + 13, lz - 50], [96, 17, 8], { r: 2 });
+      for (const s of [-1, 1]) k.box("sofa", [lx + s * 47, c.y + 13, lz - 38], [6, 9, 30], { r: 2 });
+      for (const s of [-1, 0, 1]) k.box("cushion", [lx + s * 29, c.y + 13, lz - 36], [28, 3, 24], { r: 1.2 });
+      for (const s of [-1, 1]) {
+        const ax = lx + s * 72;
+        k.box("sofa", [ax, c.y, lz], [30, 13, 30], { r: 2 });
+        k.box("sofa", [ax + s * 12, c.y + 13, lz], [7, 16, 30], { r: 2 });
+        k.box("cushion", [ax - s * 2, c.y + 13, lz], [24, 3, 26], { r: 1.2 });
+      }
+      k.cyl("wood", [lx, c.y, lz], 20, 13, { seg: 28 });
+      massing(k, [lx, c.y + 13, lz], 7, 0.45);
+      for (const s of [-1, 1]) {
+        const [fx, fz] = [lx + s * 64, lz - 44];
+        k.cyl("dark", [fx, c.y, fz], 6, 1.2, { seg: 12 });
+        k.cyl("dark", [fx, c.y, fz], 0.9, 52, { seg: 6 });
+        k.cyl("shade", [fx, c.y + 48, fz], 8, 12, { seg: 16, r2: 5.5 });
+        k.cyl("lamp", [fx, c.y + 48.5, fz], 5.5, 1, { seg: 12 });
+      }
+      // big plants in the corners and by the desk
+      for (const [x, z, h, s] of [[-c.R + 42, -c.R + 42, 56, 3], [c.R - 42, -c.R + 42, 50, 5], [-c.R + 42, c.R - 42, 52, 7], [-c.R + 60, 74, 40, 9], [-c.R + 60, -74, 40, 2]]) potted(k, [x, c.y, z], h, s);
+    },
+  },
+
   // 02 hospital: a bright healing atrium: terrazzo, a still pool round the plinth, a glass north wall,
   // a living green west wall, white planters and lounge seats, a curved reception desk
   atrium: {
