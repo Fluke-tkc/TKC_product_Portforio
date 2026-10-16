@@ -3,3 +3,6 @@ node_modules/
 *.local
 .DS_Store
 npm-debug.log*
+
+# SSL certificate and private key for the Docker deploy (copied in on the server only)
+certs/

@@ -16,6 +16,7 @@ import { screenMaterial } from "./screens";
 import { addNormalMap, normalRule, normalUrl, sunDirection } from "./normalMaps";
 import { addInterior, isFacadeGlass } from "./interiors";
 import { glazeVehicles } from "./vehicleGlass";
+import { pickDetail, swapCars, VEHICLES_URL } from "./cars";
 
 const LED_COLORS = {
   led_cyan: ["#40b8ff", 3.2],
@@ -116,7 +117,9 @@ function useNormalMaps(gltf) {
 
 // Prepare the glTF: swap materials, group hotspot parts, collect pins and animated nodes.
 // Lightmaps and vertex light both store half the baked light, hence the factor 2 (= intensity).
-function prepare(scene, lightmaps, intensity, clip, normals, sun) {
+// source: the cached glTF scene `scene` was cloned from; vehicles: the detailed cars swapped in (cars.js).
+function prepare(scene, lightmaps, intensity, clip, normals, sun, source, vehicles) {
+  const lods = swapCars(scene, source, vehicles, clip);
   const cache = new Map();
   let movingGlass;
   const clearGlass = (moving) => (moving && clip ? (movingGlass ??= Object.assign(glassMaterial.clone(), { clippingPlanes: clip })) : glassMaterial); // cut off with a mover at the plinth edge
@@ -150,7 +153,7 @@ function prepare(scene, lightmaps, intensity, clip, normals, sun) {
     if (o.userData?.spin || "bob" in (o.userData || {}) || "blink" in (o.userData || {}) || "swing" in (o.userData || {})) anim.push(o);
     if (o.userData?.walk || o.userData?.drive) movers.push(o);
     if (o.userData?.slide || o.userData?.lift) sliders.push(o);
-    if (!o.isMesh) return;
+    if (!o.isMesh || o.userData.car) return; // the swapped-in cars bring their own materials
     const x = extras(o);
     const mat = o.material;
     const name = mat?.name || x.mat || "";
@@ -207,8 +210,10 @@ function prepare(scene, lightmaps, intensity, clip, normals, sun) {
         lamps.push(c);
       }
     });
+    const wheels = [];
+    o.traverse((c) => c.userData.wheel && wheels.push(c));
     const tl = u.stops && timeline(cum[cum.length - 1], u.walk || u.drive, u.stops, u.ease ?? 1);
-    u.run = { pts, cum, limbs: o.children.filter((c) => c.userData.limb), lamps, doors, tl };
+    u.run = { pts, cum, limbs: o.children.filter((c) => c.userData.limb), lamps, doors, tl, wheels, roll: 0, last: null };
     o.add(u.blob ? blob(u.blob[0], u.blob[1], clip) : u.walk ? blob(0.9, 0.9, clip) : blob(5.4, 2.5, clip));
   });
   anim.forEach((o) => {
@@ -220,7 +225,7 @@ function prepare(scene, lightmaps, intensity, clip, normals, sun) {
     o.userData.q0 = o.quaternion.clone();
     o.userData.open = 0;
   });
-  return { pins, hot, anim, movers, sliders, leds, materials: [...cache.values()] };
+  return { pins, hot, anim, movers, sliders, leds, lods, materials: [...cache.values()] };
 }
 
 // Put `out` at distance d along the path (wrapping) and return the yaw that faces along it.
@@ -309,7 +314,9 @@ const LIFT = new THREE.Quaternion();
 // reactions: optional scene-specific overlay shown for the selected hotspot (see reactions.jsx); sun: the bake's sun
 // ([elevation, x, y] from the Blender script's lighting()), which lights the normal maps. A scene may take a
 // mover over (userData.scripted: it positions it itself) or hold a door / barrier (userData.override = 0 | 1).
-export function BakedModel({ url, lightmaps: lightmapUrls, intensity = 1, clip: base, views, onAnchors, activeId, reactions: Reactions, sun }) {
+// tweak(root): a scene's own fix-up of the fresh clone before it is prepared (a module-level function, so it keeps its
+// identity); geometry is shared with the cached glTF, so swap in copies rather than editing it.
+export function BakedModel({ url, lightmaps: lightmapUrls, intensity = 1, clip: base, views, onAnchors, activeId, reactions: Reactions, sun, tweak }) {
   const gl = useThree((s) => s.gl);
   const clip = useMemo(
     () =>
@@ -327,15 +334,17 @@ export function BakedModel({ url, lightmaps: lightmapUrls, intensity = 1, clip: 
     raycaster.firstHitOnly = true; // pins only need to know whether anything is in front of them
   }, [gl, raycaster]);
   const gltf = useGLTF(url, "/draco/");
+  const vehicles = useGLTF(VEHICLES_URL, "/draco/");
   const lightmaps = useLightmaps(lightmapUrls);
   const normals = useNormalMaps(gltf);
   const sunU = useMemo(() => ({ value: new THREE.Vector3() }), []);
   sunDirection(sun, sunU.value);
   // prepare() regroups nodes, so work on a clone: the cached glTF stays intact for the next visit
-  const { root, pins, hot, anim, movers, sliders, leds, materials } = useMemo(() => {
+  const { root, pins, hot, anim, movers, sliders, leds, lods, materials } = useMemo(() => {
     const root = gltf.scene.clone(true);
-    return { root, ...prepare(root, lightmaps, intensity, clip, normals, sunU) };
-  }, [gltf, lightmaps, intensity, clip, normals, sunU]);
+    tweak?.(root);
+    return { root, ...prepare(root, lightmaps, intensity, clip, normals, sunU, gltf.scene, vehicles) };
+  }, [gltf, lightmaps, intensity, clip, normals, sunU, vehicles, tweak]);
   const t = useRef(0);
   const active = useRef(activeId);
   active.current = activeId;
@@ -358,8 +367,9 @@ export function BakedModel({ url, lightmaps: lightmapUrls, intensity = 1, clip: 
     onAnchors?.(anchors);
   }, [pins, views, onAnchors]);
 
-  useFrame((_, dt) => {
+  useFrame((state, dt) => {
     t.current += dt;
+    pickDetail(lods, state.camera);
     anim.forEach((o) => {
       const u = o.userData;
       const fast = (u.hot && u.hot === active.current ? 3 : 1) * (u.mult ?? 1); // demo: the selected system runs flat out; mult: set by a demo (wind)
@@ -404,6 +414,18 @@ export function BakedModel({ url, lightmaps: lightmapUrls, intensity = 1, clip: 
           l.rotation.x = l.name.includes("arm") ? -l.userData.limb * 2.4 * hop : 0;
         });
       } else if (p < 1.2) u.run.lamps.forEach((m) => m.material.color.copy(m.userData.c0).multiplyScalar(p < 1 && Math.sin(p * 30) > 0 ? 5 : 1));
+      if (u.run.wheels.length) {
+        // roll the wheels by the ground covered since the last frame (scripted cars too); skip jumps back to a lane start
+        const r = u.run;
+        if (r.last) {
+          const dx = o.position.x - r.last.x;
+          const dz = o.position.z - r.last.z;
+          const d = Math.hypot(dx, dz);
+          if (d < 3) r.roll += d * Math.sign(dx * Math.cos(o.rotation.y) - dz * Math.sin(o.rotation.y) || 1);
+        }
+        (r.last ??= new THREE.Vector3()).copy(o.position);
+        r.wheels.forEach((w) => (w.rotation.z = -r.roll / w.userData.wheel));
+      }
     });
     const pk = (t.current - poke.current.at) / 1.1;
     ring.visible = pk < 1;

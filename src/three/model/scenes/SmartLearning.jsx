@@ -9,6 +9,18 @@ const BASE = [42, 32]; // half size of the plinth: moving vehicles are cut off w
 
 const SUN = [30, 0.72, 0.62]; // the bake sun (elevation, Blender xy direction), lights the normal maps
 
+// The bus floor sits at the window sill and the roof slab starts at the window top, so the seated driver's and
+// students' heads reached into the roof: drop them 0.3 m (their legs go under the floor, out of sight).
+const PEOPLE = /^(skin|hair|cloth_|accent_blue|sky_blue)/;
+const lowered = new WeakMap();
+function tweak(root) {
+  root.getObjectByName("schoolbus")?.children.forEach((m) => {
+    if (!m.isMesh || !PEOPLE.test(m.material.name)) return;
+    if (!lowered.has(m.geometry)) lowered.set(m.geometry, m.geometry.clone().translate(0, -0.3, 0));
+    m.geometry = lowered.get(m.geometry);
+  });
+}
+
 // Camera for each hotspot (three.js axes: x right, y up, +z towards the street). The hall is lifted 7.2 m onto
 // the Learning Commons (learningNetworks HALL_Z) and now has a glass roof with a diagrid over joists at y 14.6, so the
 // hall cameras stay under the joists. The diagrid hides pins just below it from the overview, so those pins float
@@ -33,6 +45,7 @@ function SmartLearning({ onAnchors, activeId }) {
       onAnchors={onAnchors}
       activeId={activeId}
       reactions={LearningReactions}
+      tweak={tweak}
     />
   );
 }

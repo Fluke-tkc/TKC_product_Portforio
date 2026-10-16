@@ -8,6 +8,8 @@ const V = "?v=2"; // bump after every re-bake so open tabs and caches fetch the 
 const BASE = [44, 33]; // half size of the plinth: through traffic is cut off where it leaves it
 
 const SUN = [42, 0.55, -0.83]; // the bake sun (elevation, Blender xy direction), lights the normal maps
+// the badge floating high over the turbines read as a glitch (dropped from smart_utility.py too)
+const tweak = (root) => root.getObjectByName("icon_wind6")?.removeFromParent();
 
 // Camera for each hotspot (three.js axes: x right, y up, +z towards the street).
 const views = {
@@ -33,6 +35,7 @@ function SmartUtility({ onAnchors, activeId }) {
       onAnchors={onAnchors}
       activeId={activeId}
       reactions={UtilityReactions}
+      tweak={tweak}
     />
   );
 }

@@ -12,7 +12,7 @@ const SKIN = ["#e0b49a", "#b9805f", "#7a5440"].map((c) => new THREE.Color(c));
 const SHIRT = ["#3d6fb6", "#d8d8d8", "#c0504d", "#4f9a6a", "#2b2f36", "#e0a440"].map((c) => new THREE.Color(c));
 
 // triangles grouped into islands by shared (welded) corners
-function islands(geometry) {
+export function islands(geometry) {
   const pos = geometry.attributes.position;
   const index = geometry.index ? geometry.index.array : [...Array(pos.count).keys()];
   const weld = new Map();
@@ -40,7 +40,7 @@ function islands(geometry) {
 }
 
 // footprint frame of an island: centre, long axis u (forward +x when known), extents
-function frame(pos, tris, forwardX) {
+export function frame(pos, tris, forwardX) {
   const seen = new Set(tris);
   let n = 0, mx = 0, mz = 0, y0 = Infinity, y1 = -Infinity;
   seen.forEach((i) => {
