@@ -4,7 +4,7 @@ import { BakedModel } from "../baked";
 import { BuildingPanel, BuildingReactions } from "./buildingSystems";
 
 const DIR = "/models/baked/smart_building";
-const V = "?v=5"; // bump after every re-bake so open tabs and caches fetch the new model
+const V = "?v=12"; // bump after every re-bake so open tabs and caches fetch the new model
 const BASE = [44, 40]; // half size of the plinth: moving cars are cut off where they leave it
 
 const SUN = [24, -0.55, -0.8]; // the bake sun (elevation, Blender xy direction), lights the normal maps

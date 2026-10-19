@@ -18,6 +18,7 @@ from mathutils import Vector
 
 sys.path.append(os.path.dirname(__file__))
 import tkc_arch as A  # noqa: E402
+import tkc_edu as E  # noqa: E402
 import tkc_lib as L  # noqa: E402
 from tkc_lib import box, cyl, empty, group, sphere, upright_screen  # noqa: E402
 
@@ -153,10 +154,13 @@ def interior(name, raw, r, z, h, use, seed, avoid=None):
                 L.potted_plant(f"{name}_pl{i}", (x, y, z), h=1.8, seed=seed + i)
         elif use == "office":
             if roll < 0.55:
-                L.desk(f"{name}_d{i}", (x, y, z), rot_z=rnd.choice((0, math.pi)), monitors=rnd.choice((1, 2)))
-                L.office_chair(f"{name}_c{i}", (x, y - 0.7, z), rot_z=math.pi / 2)
+                # chair and sitter go on the desk's keyboard side (local -y), where its screens face
+                rz = rnd.choice((0, math.pi))
+                L.desk(f"{name}_d{i}", (x, y, z), rot_z=rz, monitors=rnd.choice((1, 2)))
+                sx, sy = math.sin(rz), -math.cos(rz)
+                L.office_chair(f"{name}_c{i}", (x + sx * 0.7, y + sy * 0.7, z), rot_z=rz + math.pi / 2)
                 if rnd.random() < 0.6:
-                    L.human(f"{name}_h{i}", (x, y - 0.75, z), rot_z=math.pi / 2, seed=seed + i, pose="sit")
+                    L.human(f"{name}_h{i}", (x + sx * 0.75, y + sy * 0.75, z), rot_z=rz + math.pi / 2, seed=seed + i, pose="sit")
             elif roll < 0.8:
                 L.human(f"{name}_h{i}", (x, y, z), rot_z=rot, seed=seed + i, pose=rnd.choice(("stand", "walk")))
             else:
@@ -171,6 +175,69 @@ def interior(name, raw, r, z, h, use, seed, avoid=None):
     for i, (x, y) in enumerate(A.grid_in_poly(A.outline(raw, r, 1.6), 3.0, 0.0, seed + 7)):
         if rnd.random() < 0.45 and not any(A.point_in_poly((x, y), a) for a in (avoid or ())):
             L.pendant(f"{name}_pd{i}", (x, y, z + h), drop=0.9, r=0.2, mat=rnd.choice(("copper", "black", "white")))
+    # along the glass: filing cabinets and open bookshelves, fronts to the room (outlines run CCW, so the room is
+    # on the left of the tangent); their own random stream keeps the layout above unchanged
+    if use in ("office", "lounge"):
+        rc = random.Random(seed + 99)
+        every = 2 if use == "office" else 3
+        has_cabinets = False
+        # no column check: the columns stand 2.2 m in from the glass, these units at most 1.15 m (their 2.6 m keep-clear
+        # boxes reach this line and used to leave pod A without a single cabinet)
+        for i, ((x, y), ang) in enumerate(A.stations(A.outline(raw, r, 0.9), 2.4, 0.5)):
+            if i % every:
+                continue
+            roll = rc.random()
+            if use == "office" and (roll < 0.6 or not has_cabinets):  # every office floor gets at least one run
+                has_cabinets = True
+                cabinets(f"{name}_fc{i}", (x, y, z), ang + math.pi, rc.choice((2, 3)), rc.choice((3, 4)), seed + i)
+            elif use == "office" and roll < 0.75:
+                cupboard(f"{name}_cb{i}", (x, y, z), ang + math.pi)
+            else:
+                E.bookshelf(f"{name}_bs{i}", (x, y, z), rot_z=ang + math.pi, w=1.4, h=1.8, depth=0.34, seed=seed + i)
+
+
+def _local(loc, rot_z):
+    x0, y0, z0 = loc
+    c, s = math.cos(rot_z), math.sin(rot_z)
+    return lambda dx, dy, dz: (x0 + c * dx - s * dy, y0 + s * dx + c * dy, z0 + dz)
+
+
+def cabinets(name, loc, rot_z, n, drawers, seed):
+    """A run of n steel filing cabinets, fronts facing local -y: recessed plinth, separate drawer fronts with a
+    handle and a label slot each, and binders or a box on top of the low (3-drawer) ones."""
+    rnd = random.Random(seed)
+    at = _local(loc, rot_z)
+    r = (0, 0, rot_z)
+    w, d, dh, foot = 0.47, 0.5, 0.31, 0.07
+    top = foot + drawers * dh
+    for k in range(n):
+        dx = (k - (n - 1) / 2) * (w + 0.01)
+        box(f"{name}_plinth{k}", (w - 0.04, d - 0.06, foot), at(dx, 0.02, 0), "darkgray", bevel=0, rot=r)
+        box(f"{name}_body{k}", (w, d, top - foot), at(dx, 0, foot), "frame_dark", bevel=0.008, rot=r)
+        for j in range(drawers):
+            zj = foot + j * dh
+            box(f"{name}_dr{k}{j}", (w - 0.03, 0.02, dh - 0.025), at(dx, -d / 2 - 0.01, zj + 0.0125), "midgray", bevel=0, rot=r)
+            box(f"{name}_h{k}{j}", (0.16, 0.03, 0.025), at(dx, -d / 2 - 0.03, zj + dh * 0.62), "aluminium", bevel=0, rot=r)
+            box(f"{name}_lb{k}{j}", (0.09, 0.012, 0.035), at(dx, -d / 2 - 0.022, zj + dh * 0.8), "offwhite", bevel=0, rot=r)
+    if drawers == 3:
+        span = n * (w + 0.01) - 0.1
+        for b in range(rnd.randint(4, 8)):
+            box(f"{name}_b{b}", (0.06, 0.28, 0.3), at(-span / 2 + 0.05 + b * 0.075, 0.04, top), rnd.choice(("accent_blue", "flower_red", "lime", "offwhite", "teal")), bevel=0, rot=r)
+        if n > 2 and rnd.random() < 0.6:
+            box(f"{name}_archive", (0.4, 0.32, 0.26), at(span / 2 - 0.25, 0.02, top), "cloth_beige", bevel=0.01, rot=r)
+
+
+def cupboard(name, loc, rot_z):
+    """Tall two-door steel storage cupboard, fronts facing local -y."""
+    at = _local(loc, rot_z)
+    r = (0, 0, rot_z)
+    w, d, h, foot = 0.92, 0.45, 1.95, 0.07
+    box(f"{name}_plinth", (w - 0.04, d - 0.06, foot), at(0, 0.02, 0), "darkgray", bevel=0, rot=r)
+    box(f"{name}_body", (w, d, h - foot), at(0, 0, foot), "frame_dark", bevel=0.008, rot=r)
+    for side in (-1, 1):
+        box(f"{name}_door{side}", (w / 2 - 0.02, 0.02, h - foot - 0.03), at(side * w / 4, -d / 2 - 0.01, foot + 0.015), "midgray", bevel=0, rot=r)
+        box(f"{name}_h{side}", (0.025, 0.03, 0.3), at(side * 0.05, -d / 2 - 0.03, 1.0), "aluminium", bevel=0, rot=r)
+        box(f"{name}_lb{side}", (0.12, 0.012, 0.05), at(side * w / 4, -d / 2 - 0.022, 1.55), "offwhite", bevel=0, rot=r)
 
 
 def terrace(name, raw, r, z, seed, trees=0, furniture=0, vines_len=2.4, avoid=None):
@@ -178,12 +245,23 @@ def terrace(name, raw, r, z, seed, trees=0, furniture=0, vines_len=2.4, avoid=No
     rnd = random.Random(seed)
     avoid = avoid or []
     A.solid(f"{name}_deck", A.outline(raw, r, 0.3), z, 0.04, "woodlight")
-    A.ring(f"{name}_planter", A.outline(raw, r, 0.3), A.outline(raw, r, 1.5), z, 0.6, "planter")
-    A.ring(f"{name}_soil", A.outline(raw, r, 0.35), A.outline(raw, r, 1.45), z + 0.6, 0.02, "soil")
+    # the planter as two thin walls with the soil between them: no planter top hides under the soil (a covered face
+    # bakes black, and that bled into the thin rim left showing as a dark line)
+    # The walls' 8 cm tops (and the 6 cm rail cap below) are narrower than a lightmap texel, so their texels were
+    # filled from the soil-covered sides next to them and showed as black lines: they are vertex-lit instead,
+    # standing on the deck rather than in it so no corner sits inside the slab.
+    rims = [
+        A.ring(f"{name}_planter", A.outline(raw, r, 0.3), A.outline(raw, r, 0.38), z + 0.04, 0.58, "planter"),
+        A.ring(f"{name}_planter_in", A.outline(raw, r, 1.42), A.outline(raw, r, 1.5), z + 0.04, 0.58, "planter"),
+    ]
+    A.ring(f"{name}_soil", A.outline(raw, r, 0.38), A.outline(raw, r, 1.42), z + 0.04, 0.54, "soil")
     A.bushes_along(f"{name}_bush", A.outline(raw, r, 0.9), spacing=0.95, z=z + 0.55, r=0.46, seed=seed, avoid=avoid)
-    A.bushes_along(f"{name}_bush2", A.outline(raw, r, 1.2), spacing=2.0, z=z + 0.8, r=0.55, seed=seed + 1, avoid=avoid)
+    # kept over the soil (inset 0.35 - 1.45): bushes through the planter's inner wall baked it black
+    A.bushes_along(f"{name}_bush2", A.outline(raw, r, 0.95), spacing=2.0, z=z + 0.8, r=0.5, seed=seed + 1, avoid=avoid)
     A.wall(f"{name}_rail", A.outline(raw, r, 0.18), z, 1.25, "glass")
-    A.ring(f"{name}_railcap", A.outline(raw, r, 0.15), A.outline(raw, r, 0.21), z + 1.25, 0.05, "frame")
+    rims.append(A.ring(f"{name}_railcap", A.outline(raw, r, 0.15), A.outline(raw, r, 0.21), z + 1.25, 0.05, "frame"))
+    for ob in rims:
+        ob["kind"] = "vbake"
     A.vines(f"{name}_vines", A.outline(raw, r, -0.05), spacing=1.1, z=z + 0.4, length=vines_len, seed=seed + 2, avoid=avoid)
     inner = A.outline(raw, r, 3.0)
     free = [q for q in A.grid_in_poly(inner, 5.5, 1.5, seed + 3) if not any(A.point_in_poly(q, a) for a in avoid)]

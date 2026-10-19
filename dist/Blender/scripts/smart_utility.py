@@ -477,7 +477,7 @@ def life():
 def icons():
     with group("move"):
         for i, (x, y, z, kind) in enumerate(((-34.4, -4.8, 6.4, "battery"), (-5.0, -9.8, 5.6, "ev"), (-14.0, -0.2, ROOF - 1.2, "chart"),
-                                             (28.0, -12.0, 11.0, "home"), (28.0, 4.6, 11.0, "meter"), (20.0, 16.0, 6.0, "sun"), (36.0, 21.0, 31.0, "wind"))):
+                                             (28.0, -12.0, 11.0, "home"), (28.0, 4.6, 11.0, "meter"), (20.0, 16.0, 6.0, "sun"))):  # no wind badge: high over the turbines it read as a glitch
             L.plane(f"icon_{kind}{i}", (1.1, 1.1), (x, y, z), f"screen_icon_{kind}", rot=(math.pi / 2, 0, math.pi))
             bpy.data.objects[f"icon_{kind}{i}"]["bob"] = i * 0.9
 

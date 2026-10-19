@@ -4,8 +4,13 @@
 // world metres, since UV0 holds the lightmap atlas.
 import * as THREE from "three";
 
-// material name -> [map, metres per tile, strength]; first match wins
+// material name -> [map, metres per tile, strength, floor pattern]; first match wins. The floor pattern adds colour on
+// faces that look up: planks (one tone per board), carpet (tiles laid quarter-turned) or terrazzo (stone chips).
+const PATTERNS = { planks: 1, carpet: 2, terrazzo: 3 };
 const RULES = [
+  [/^woodlight$/, "wood", 1.2, 1, "planks"],
+  [/^carpet$/, "fabric", 0.5, 0.6, "carpet"],
+  [/^terrazzo$/, "slab", 2.4, 0.6, "terrazzo"],
   [/^(asphalt|gravel|sand|soil|clay)$/, "grain", 2.5, 0.9],
   [/^paving/, "pavers", 2.4, 1],
   [/^(concrete_floor|floor_dark|cyber_floor)$/, "slab", 6, 1],
@@ -30,9 +35,9 @@ export function sunDirection([el, x, y], out) {
   return out.set((x / h) * Math.cos(a), Math.sin(a), (-y / h) * Math.cos(a));
 }
 
-export function addNormalMap(material, texture, tile, strength, sun) {
+export function addNormalMap(material, texture, tile, strength, sun, pattern) {
   material.onBeforeCompile = (shader) => {
-    Object.assign(shader.uniforms, { uNMap: { value: texture }, uNTile: { value: 1 / tile }, uNStrength: { value: strength }, uSun: sun });
+    Object.assign(shader.uniforms, { uNMap: { value: texture }, uNTile: { value: 1 / tile }, uNStrength: { value: strength }, uSun: sun, uPattern: { value: PATTERNS[pattern] || 0 } });
     shader.vertexShader = shader.vertexShader
       .replace("#include <common>", "#include <common>\nvarying vec3 vNP;\nvarying vec3 vNN;")
       .replace("#include <begin_vertex>", "#include <begin_vertex>\nvNP = (modelMatrix * vec4(transformed, 1.0)).xyz;\nvNN = normalize(mat3(modelMatrix) * normal);");
@@ -46,7 +51,9 @@ uniform sampler2D uNMap;
 uniform float uNTile;
 uniform float uNStrength;
 uniform vec3 uSun;
-float nLight(vec3 n) { return 0.65 * max(dot(n, uSun), 0.0) + 0.35 * (0.5 + 0.5 * n.y); }`
+uniform float uPattern;
+float nLight(vec3 n) { return 0.65 * max(dot(n, uSun), 0.0) + 0.35 * (0.5 + 0.5 * n.y); }
+float nHash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }`
       )
       .replace(
         "#include <color_fragment>",
@@ -63,6 +70,29 @@ float nLight(vec3 n) { return 0.65 * max(dot(n, uSun), 0.0) + 0.35 * (0.5 + 0.5 
   tz = vec3(tz.xy * uNStrength + gn.xy, abs(tz.z) * gn.z);
   vec3 bn = normalize(tx.zyx * bw.x + ty.xzy * bw.y + tz.xyz * bw.z);
   diffuseColor.rgb *= clamp(nLight(bn) / max(nLight(gn), 0.05), 0.6, 1.4);
+  // floor colour, faded out where its cells get under a few pixels (they would shimmer as the view moves); the
+  // derivatives are taken before any branch, where every pixel still runs them
+  float up = smoothstep(0.6, 0.85, gn.y);
+  vec2 nb = vec2(vNP.x * uNTile, vNP.z * uNTile * 4.0); // boards
+  vec2 nc = vNP.xz * uNTile; // carpet tiles
+  vec2 nt = vNP.xz * 40.0; // terrazzo chips
+  float fb = 1.0 - smoothstep(0.15, 0.5, max(fwidth(nb.x), fwidth(nb.y)));
+  float fc = 1.0 - smoothstep(0.15, 0.5, max(fwidth(nc.x), fwidth(nc.y)));
+  float ft = 1.0 - smoothstep(0.3, 0.8, max(fwidth(nt.x), fwidth(nt.y)));
+  if (uPattern > 0.5) {
+    float tone = 1.0;
+    if (uPattern < 1.5) { // boards as wide as the normal map's planks, running along x, ends staggered per row
+      float row = floor(nb.y);
+      tone = mix(1.0, 0.86 + 0.22 * nHash(vec2(floor(nb.x + nHash(vec2(row, 3.0))), row)), fb);
+    } else if (uPattern < 2.5) { // carpet tiles, every other one turned: a soft checker of tones
+      vec2 id = floor(nc);
+      tone = mix(1.0, 0.95 + 0.06 * mod(id.x + id.y, 2.0) + 0.04 * nHash(id), fc);
+    } else { // terrazzo: scattered chips of lighter and darker stone
+      float h = nHash(floor(nt));
+      tone = 1.0 + step(0.62, h) * (h > 0.85 ? -0.22 : 0.12) * step(length(fract(nt) - 0.5), 0.38) * ft;
+    }
+    diffuseColor.rgb *= mix(1.0, tone, up);
+  }
 }`
       );
   };

@@ -277,9 +277,10 @@ def school_bus(name, loc, rot_z=0.0):
             box(f"{name}_back{k}{side}", (0.08, 0.9, 0.52), at(x, side * 0.68, zs), "teal_dark", bevel=0.02, rot=r)
     box(f"{name}_dseat", (0.45, 0.5, 0.1), at(3.75, -0.6, zs), "black", bevel=0.02, rot=r)
     cyl(f"{name}_wheel", 0.2, 0.03, at(4.2, -0.6, 1.85), "black", verts=16, rot=(0, -1.1, rot_z))
-    L.human(f"{name}_driver", at(3.85, -0.6, zs + 0.1 - 0.44), rot_z=rot_z, seed=960, pose="sit", h=1.7, outfit="teacher")
+    # 0.3 m low: the floor is at the sill and the roof slab starts at the window top, so heads would reach into it
+    L.human(f"{name}_driver", at(3.85, -0.6, zs + 0.1 - 0.44 - 0.3), rot_z=rot_z, seed=960, pose="sit", h=1.7, outfit="teacher")
     for k, (row, side) in enumerate(((0, 1), (1, -1), (2, 1), (4, -1), (5, 1), (3, -1))):
-        L.human(f"{name}_pax{k}", at(-3.9 + row * 0.9 + 0.2, side * 0.68, zs + 0.1 - 0.44), rot_z=rot_z, seed=961 + k, pose="sit", h=1.45, outfit=("student", "student2")[k % 2])
+        L.human(f"{name}_pax{k}", at(-3.9 + row * 0.9 + 0.2, side * 0.68, zs + 0.1 - 0.44 - 0.3), rot_z=rot_z, seed=961 + k, pose="sit", h=1.45, outfit=("student", "student2")[k % 2])
     # folding door: two leaves hinged at the edges of the opening (3.32 and 4.18), dark glass in black frames
     for k, (hx, s) in enumerate(((3.32, 1), (4.18, -1))):
         c = hx + s * 0.215

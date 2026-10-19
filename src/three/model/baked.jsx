@@ -132,8 +132,8 @@ function prepare(scene, lightmaps, intensity, clip, normals, sun, source, vehicl
         ? new THREE.MeshBasicMaterial({ color: color.multiplyScalar(intensity), vertexColors: true, clippingPlanes: clipped ? clip : null })
         : new THREE.MeshBasicMaterial({ color, lightMap: lightmaps[atlas] || null, lightMapIntensity: Math.PI * intensity });
       m.userData = { atlas: vertexLit ? null : atlas, base: m.color.clone() }; // a demo may tint a whole atlas (lighting scenes)
-      const [map, tile, strength] = normalRule(name) || [];
-      if (normals[map] && !clipped) addNormalMap(m, normals[map], tile, strength, sun); // not on people / cars: they move
+      const [map, tile, strength, pattern] = normalRule(name) || [];
+      if (normals[map] && !clipped) addNormalMap(m, normals[map], tile, strength, sun, pattern); // not on people / cars: they move
       else if (isFacadeGlass(name) && !clipped) addInterior(m, vertexLit ? intensity : 1); // rooms behind the facade glass
       cache.set(key, m);
     }

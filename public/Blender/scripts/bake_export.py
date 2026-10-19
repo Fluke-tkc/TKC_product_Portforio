@@ -236,9 +236,17 @@ for a, objs in bake_sets.items():
         node.image = img
         nodes.active = node
         node.select = True
-    select_only(objs)
     log("baking", a, f"{RES}px", f"{SAMPLES} spp", len(objs), "objects ...")
+    # Objects are baked one after another, and each one's margin paints over every texel it does not own,
+    # including islands an earlier object already baked (a hot part's margin blacked out a planter wall).
+    # So the big static object goes first with the wide margin; the rest keep their margin inside the
+    # 4 px packing gap.
+    objs = sorted(objs, key=lambda o: len(o.data.polygons), reverse=True)
+    select_only(objs[:1])
     bpy.ops.object.bake(type="DIFFUSE", pass_filter={"DIRECT", "INDIRECT"}, margin=12, use_clear=True, target="IMAGE_TEXTURES")
+    if objs[1:]:
+        select_only(objs[1:])
+        bpy.ops.object.bake(type="DIFFUSE", pass_filter={"DIRECT", "INDIRECT"}, margin=2, use_clear=False, target="IMAGE_TEXTURES")
     img.filepath_raw = os.path.join(EXR, f"{NAME}_{a}.hdr")
     img.file_format = "HDR"  # Radiance: opencv reads it without the OpenEXR codec
     img.save()

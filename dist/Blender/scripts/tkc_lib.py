@@ -671,19 +671,33 @@ def pendant(name, loc, drop=0.9, r=0.22, mat="copper"):
 
 @lowpoly
 def shelf(name, loc, w=1.6, rot_z=0.0, seed=0):
+    """Open two-sided shop shelf (gondola): plinth, end panels, a centre back panel, four shelf boards a side with
+    goods standing on them, and a coloured header strip. (It used to be one solid box with the goods inside it.)"""
     rnd = random.Random(seed)
     x, y, z = loc
     c, s = math.cos(rot_z), math.sin(rot_z)
-    box(f"{name}_frame", (w, 0.45, 1.9), (x, y, z), "white", bevel=0.02, rot=(0, 0, rot_z))
-    for lvl in range(4):
-        zz = z + 0.25 + lvl * 0.42
-        n = int(w / 0.22)
-        for k in range(n):
-            if rnd.random() < 0.25:
-                continue
-            off = -w / 2 + 0.12 + k * (w - 0.2) / n
-            hh = 0.15 + rnd.random() * 0.18
-            box(f"{name}_g{lvl}{k}", (0.16, 0.3, hh), (x + c * off - s * 0.08, y + s * off + c * 0.08, zz), f"goods{rnd.randint(1, 4)}", bevel=0.01, rot=(0, 0, rot_z))
+    r = (0, 0, rot_z)
+
+    def at(dx, dy, dz):
+        return (x + c * dx - s * dy, y + s * dx + c * dy, z + dz)
+
+    d, h = 0.5, 1.8
+    box(f"{name}_plinth", (w, d - 0.06, 0.1), at(0, 0, 0), "frame_dark", bevel=0, rot=r)
+    box(f"{name}_back", (w - 0.06, 0.03, h - 0.1), at(0, 0, 0.1), "midgray", bevel=0, rot=r)
+    for sx in (-1, 1):
+        box(f"{name}_end{sx}", (0.04, d, h), at(sx * (w / 2 - 0.02), 0, 0), "frame_dark", bevel=0.005, rot=r)
+    box(f"{name}_header", (w, 0.06, 0.14), at(0, 0, h), "accent_blue", bevel=0.01, rot=r)
+    n = int((w - 0.1) / 0.2)
+    for side in (-1, 1):
+        for lvl in range(4):
+            zz = 0.1 + lvl * 0.42
+            box(f"{name}_board{side}{lvl}", (w - 0.08, d / 2 - 0.03, 0.025), at(0, side * d / 4, zz), "lightgray", bevel=0, rot=r)
+            for k in range(n):
+                if rnd.random() < 0.2:
+                    continue
+                off = -w / 2 + 0.06 + (k + 0.5) * (w - 0.12) / n
+                hh = 0.14 + rnd.random() * 0.2
+                box(f"{name}_g{side}{lvl}{k}", (0.15, 0.17, hh), at(off, side * (d / 4 + 0.01), zz + 0.025), f"goods{rnd.randint(1, 4)}", bevel=0, rot=r)
 
 
 def van(name, loc, rot_z=0.0, paint="white"):
