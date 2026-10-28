@@ -556,7 +556,10 @@ def street_level():
     for x in range(-40, 22, 8):
         box(f"grate_f{k}", (1.4, 1.4, 0.02), (x, -24.5, 0.16), "frame_dark", bevel=0)
         A.tree(f"stree_f{k}", (x, -24.5, 0.16), h=6.5 + rnd.random() * 1.5, spread=0.95, seed=100 + k)
-        L.street_light(f"slamp_f{k}", (x + 4, -27.6, 0.16), rot_z=-math.pi / 2, h=6.5)
+        lx = x + 4
+        if -31.6 < lx < -24.4:  # not up through the bus shelter roof (x -31 .. -25): stand just past its end
+            lx = -24.0
+        L.street_light(f"slamp_f{k}", (lx, -27.6, 0.16), rot_z=-math.pi / 2, h=6.5)
         k += 1
     for y in range(-14, 31, 8):  # along the walkway beside the car park
         box(f"grate_r{k}", (1.4, 1.4, 0.02), (25.8, y, 0.16), "frame_dark", bevel=0)
